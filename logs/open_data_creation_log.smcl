@@ -1,0 +1,1616 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/johniselin/finesandfees_baltimore/logs/open_data_creation_log.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}15 Apr 2019, 18:01:42
+{txt}
+{com}. 
+. 
+. * Run ECB Citation Code
+. do "do_files/do_file_ecb.do"
+{txt}
+{com}. 
+. /***********************************************************************
+> Author: John Iselin
+> Date: Spring 2019
+> 
+> Goldman School of Public Policy 
+> Masters in Public Policy Program
+> Introduction to Policy Analysis 
+> Fines and Fees in Baltimore
+> 
+> This do-file downloads, cleans, and uses data from Baltimore's Open data system.
+> https://data.baltimorecity.gov/
+> 
+> In particular, this do file downloads the dataset "Environmental Citations" 
+> From: https://data.baltimorecity.gov/City-Services/ECB-Citations/ywty-nmtg  
+> **************************************************************************/
+. 
+. /*
+> *** Set-Up
+> capture log close
+> clear matrix
+> clear all
+> set more off
+> 
+> 
+> cd "/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/"
+> 
+> log using "open_data_ecb_log", replace
+> 
+> */
+. 
+. import delimited "raw_data/Environmental_Citations.csv", bindquote(strict) 
+{res}{text}(29 vars, 131,613 obs)
+
+{com}. 
+. sum
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 2}citationno {c |}{res}    131,613    5.17e+07    1.06e+07    2313252   5.55e+07
+{txt}{space 4}liencode {c |}{res}          0
+{txt}violationd~e {c |}{res}          0
+{txt}{space 5}duedate {c |}{res}          0
+{txt}{space 6}agency {c |}{res}          0
+{txt}{hline 13}{c +}{hline 57}
+{space 2}fineamount {c |}{res}    131,613    174.9518    218.7131         25       8000
+{txt}{space 1}description {c |}{res}          0
+{txt}{space 5}balance {c |}{res}    131,613    324.3866    444.2663          0       8000
+{txt}lastpaiddate {c |}{res}          0
+{txt}lastpaidam~t {c |}{res}    131,613    48.77224    175.6138          0       2500
+{txt}{hline 13}{c +}{hline 57}
+{space 1}hearingdate {c |}{res}          0
+{txt}hearingreq~e {c |}{res}          0
+{txt}citationst~s {c |}{res}          0
+{txt}violationc~e {c |}{res}          0
+{txt}violationc~n {c |}{res}          0
+{txt}{hline 13}{c +}{hline 57}
+violationl~n {c |}{res}          0
+{txt}{space 7}block {c |}{res}          0
+{txt}{space 9}lot {c |}{res}          0
+{txt}{space 3}officerid {c |}{res}          0
+{txt}officerpre~d {c |}{res}          0
+{txt}{hline 13}{c +}{hline 57}
+hearingsta~s {c |}{res}          0
+{txt}{space 4}heartime {c |}{res}          0
+{txt}{space 3}totalpaid {c |}{res}    131,613    53.85333    199.4859          0       5700
+{txt}{space 1}totalabated {c |}{res}    131,613    33.30557    164.9299          0       4000
+{txt}{space 1}totalvoided {c |}{res}    131,613    8.448263    103.1888          0       8000
+{txt}{hline 13}{c +}{hline 57}
+neighborhood {c |}{res}          0
+{txt}policedist~t {c |}{res}          0
+{txt}councildis~t {c |}{res}    130,734    8.546438    3.764047          1         14
+{txt}{space 4}location {c |}{res}          0
+{txt}
+{com}. de
+
+{txt}Contains data
+  obs:{res}       131,613                          
+{txt} vars:{res}            29                          
+{txt} size:{res}    56,067,138                          
+{txt}{hline}
+              storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:citationno     }{txt}{bind: long    }{bind:{txt}%12.0g    }{space 1}{bind:         }{bind:  }{res}{res}CitationNo{p_end}
+{p 0 48}{bind:liencode       }{txt}{bind: str1    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}LienCode{p_end}
+{p 0 48}{bind:violationdate  }{txt}{bind: str22   }{bind:{txt}%22s      }{space 1}{bind:         }{bind:  }{res}{res}ViolationDate{p_end}
+{p 0 48}{bind:duedate        }{txt}{bind: str22   }{bind:{txt}%22s      }{space 1}{bind:         }{bind:  }{res}{res}DueDate{p_end}
+{p 0 48}{bind:agency         }{txt}{bind: str50   }{bind:{txt}%50s      }{space 1}{bind:         }{bind:  }{res}{res}Agency{p_end}
+{p 0 48}{bind:fineamount     }{txt}{bind: int     }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}FineAmount{p_end}
+{p 0 48}{bind:description    }{txt}{bind: str60   }{bind:{txt}%60s      }{space 1}{bind:         }{bind:  }{res}{res}Description{p_end}
+{p 0 48}{bind:balance        }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}Balance{p_end}
+{p 0 48}{bind:lastpaiddate   }{txt}{bind: str22   }{bind:{txt}%22s      }{space 1}{bind:         }{bind:  }{res}{res}LastPaidDate{p_end}
+{p 0 48}{bind:lastpaidamount }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}LastPaidAmount{p_end}
+{p 0 48}{bind:hearingdate    }{txt}{bind: str22   }{bind:{txt}%22s      }{space 1}{bind:         }{bind:  }{res}{res}HearingDate{p_end}
+{p 0 48}{bind:hearingreques~e}{txt}{bind: str10   }{bind:{txt}%10s      }{space 1}{bind:         }{bind:  }{res}{res}HearingRequestReceivedDate{p_end}
+{p 0 48}{bind:citationstatus }{txt}{bind: str8    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}CitationStatus{p_end}
+{p 0 48}{bind:violationcode~e}{txt}{bind: str8    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}ViolationCodeArticle{p_end}
+{p 0 48}{bind:violationcode~n}{txt}{bind: str10   }{bind:{txt}%10s      }{space 1}{bind:         }{bind:  }{res}{res}ViolationCodeSection{p_end}
+{p 0 48}{bind:violationloca~n}{txt}{bind: str30   }{bind:{txt}%30s      }{space 1}{bind:         }{bind:  }{res}{res}ViolationLocation{p_end}
+{p 0 48}{bind:block          }{txt}{bind: str5    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}Block{p_end}
+{p 0 48}{bind:lot            }{txt}{bind: str4    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}Lot{p_end}
+{p 0 48}{bind:officerid      }{txt}{bind: str4    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}OfficerID{p_end}
+{p 0 48}{bind:officerpresen~d}{txt}{bind: str1    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}OfficerPresenceRequested{p_end}
+{p 0 48}{bind:hearingstatus  }{txt}{bind: str2    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}HearingStatus{p_end}
+{p 0 48}{bind:heartime       }{txt}{bind: str5    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}HearTime{p_end}
+{p 0 48}{bind:totalpaid      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}TotalPaid{p_end}
+{p 0 48}{bind:totalabated    }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}TotalAbated{p_end}
+{p 0 48}{bind:totalvoided    }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}TotalVoided{p_end}
+{p 0 48}{bind:neighborhood   }{txt}{bind: str33   }{bind:{txt}%33s      }{space 1}{bind:         }{bind:  }{res}{res}Neighborhood{p_end}
+{p 0 48}{bind:policedistrict }{txt}{bind: str12   }{bind:{txt}%12s      }{space 1}{bind:         }{bind:  }{res}{res}PoliceDistrict{p_end}
+{p 0 48}{bind:councildistrict}{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}CouncilDistrict{p_end}
+{p 0 48}{bind:location       }{txt}{bind: str68   }{bind:{txt}%68s      }{space 1}{bind:         }{bind:  }{res}{res}Location{p_end}
+{txt}{hline}
+Sorted by: 
+{res}     Note: Dataset has changed since last saved.
+{txt}
+{com}. 
+. * Re-format dates
+. 
+. 
+. gen viol_date = substr(violationdate,1,10)
+{txt}
+{com}. gen viol_time = substr(violationdate, 12, 10) 
+{txt}
+{com}. gen due_date = substr(duedate,1,10) 
+{txt}
+{com}. gen lastpaid_date = substr(lastpaiddate,1,10) 
+{txt}(98,499 missing values generated)
+
+{com}. gen hearing_date = substr(hearingdate,1,10) 
+{txt}(117,657 missing values generated)
+
+{com}. gen hearreq_date = substr(hearingrequestreceiveddate,1,10) 
+{txt}(119,392 missing values generated)
+
+{com}. 
+. 
+. foreach var of varlist ///
+> viol_date due_date lastpaid_date hearing_date hearreq_date {c -(}
+{txt}  2{com}.         gen test = date(`var' , "MDY")
+{txt}  3{com}.         drop `var'
+{txt}  4{com}.         gen `var' = test
+{txt}  5{com}.         format `var'  %td
+{txt}  6{com}.         drop test
+{txt}  7{com}. {c )-}
+{txt}(98,499 missing values generated)
+(98,499 missing values generated)
+(117,657 missing values generated)
+(117,657 missing values generated)
+(119,392 missing values generated)
+(119,392 missing values generated)
+
+{com}. 
+. 
+. * Clean / rename other vars
+. gen dataset = "ecd_citations"
+{txt}
+{com}. drop block lot officerpresencerequested heartime location viol_time                     ///
+>         violationdate duedate lastpaiddate hearingdate hearingrequestreceiveddate
+{txt}
+{com}. 
+. 
+. rename citationno citation_id
+{res}{txt}
+{com}. rename liencode lien_code
+{res}{txt}
+{com}. rename fineamount fine_amt
+{res}{txt}
+{com}. rename balance bal_amt
+{res}{txt}
+{com}. rename lastpaidamount lastpaid_amt
+{res}{txt}
+{com}. rename totalpaid total_paid_amt
+{res}{txt}
+{com}. rename totalabated total_abated_amt
+{res}{txt}
+{com}. rename totalvoided total_voided_amt
+{res}{txt}
+{com}. rename citationstatus citation_stat
+{res}{txt}
+{com}. rename officerid officer_id
+{res}{txt}
+{com}. 
+. order citation_id *_date *_amt 
+{txt}
+{com}. 
+. save "data_cleaned/ecb_citations_cleaned.dta", replace
+{txt}file data_cleaned/ecb_citations_cleaned.dta saved
+
+{com}. clear
+{txt}
+{com}. 
+. *log close
+. 
+. 
+. 
+{txt}end of do-file
+
+{com}. 
+. * Run Parking Citation Code
+. do "do_files/do_file_parking.do"
+{txt}
+{com}. 
+. /***********************************************************************
+> Author: Sarah Edwards
+> Date: Spring 2019
+> 
+> Goldman School of Public Policy 
+> Masters in Public Policy Program
+> Introduction to Policy Analysis 
+> Fines and Fees in Baltimore
+> 
+> This do-file downloads, cleans, and uses data from Baltimore's Open data system.
+> https://data.baltimorecity.gov/
+> 
+> 
+> In particular, this do file downloads the dataset "Parking_Citations" 
+> From: https://data.baltimorecity.gov/Transportation/Parking-Citations/n4ma-fj3m
+> 
+> **************************************************************************/
+. 
+. clear
+{txt}
+{com}. 
+. import delimited "raw_data/Parking_Citations.csv", bindquote(strict) 
+{res}{text}(21 vars, 3,062,330 obs)
+
+{com}. 
+. sum
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 4}citation {c |}{res}  3,062,330    7.29e+07    2.37e+07         91   1.00e+08
+{txt}{space 9}tag {c |}{res}          0
+{txt}{space 7}expmm {c |}{res}          0
+{txt}{space 7}expyy {c |}{res}  3,062,312    16.17098    5.544997          0         99
+{txt}{space 7}state {c |}{res}          0
+{txt}{hline 13}{c +}{hline 57}
+{space 8}make {c |}{res}          0
+{txt}{space 5}address {c |}{res}          0
+{txt}{space 4}violcode {c |}{res}  3,062,330    25.03716     14.7023          1         99
+{txt}{space 1}description {c |}{res}          0
+{txt}{space 4}violfine {c |}{res}  3,062,330    49.50618     41.6612         17        502
+{txt}{hline 13}{c +}{hline 57}
+{space 4}violdate {c |}{res}          0
+{txt}{space 5}balance {c |}{res}  3,062,330    44.76454     123.564          0       2816
+{txt}{space 1}penaltydate {c |}{res}          0
+{txt}{space 4}openfine {c |}{res}  3,062,330    24.21725    42.58846          0        502
+{txt}{space 1}openpenalty {c |}{res}  3,062,330    19.48939    86.39285          0       3120
+{txt}{hline 13}{c +}{hline 57}
+{space 2}noticedate {c |}{res}          0
+{txt}{space 2}importdate {c |}{res}          0
+{txt}neighborhood {c |}{res}          0
+{txt}policedist~t {c |}{res}          0
+{txt}councildis~t {c |}{res}    335,140    8.366417    4.390937          1         14
+{txt}{hline 13}{c +}{hline 57}
+{space 4}location {c |}{res}          0
+{txt}
+{com}. de
+
+{txt}Contains data
+  obs:{res}     3,062,330                          
+{txt} vars:{res}            21                          
+{txt} size:{res}   903,387,350                          
+{txt}{hline}
+              storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:citation       }{txt}{bind: long    }{bind:{txt}%12.0g    }{space 1}{bind:         }{bind:  }{res}{res}Citation{p_end}
+{p 0 48}{bind:tag            }{txt}{bind: str8    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}Tag{p_end}
+{p 0 48}{bind:expmm          }{txt}{bind: str3    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}ExpMM{p_end}
+{p 0 48}{bind:expyy          }{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}ExpYY{p_end}
+{p 0 48}{bind:state          }{txt}{bind: str2    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}State{p_end}
+{p 0 48}{bind:make           }{txt}{bind: str5    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}Make{p_end}
+{p 0 48}{bind:address        }{txt}{bind: str30   }{bind:{txt}%30s      }{space 1}{bind:         }{bind:  }{res}{res}Address{p_end}
+{p 0 48}{bind:violcode       }{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}ViolCode{p_end}
+{p 0 48}{bind:description    }{txt}{bind: str63   }{bind:{txt}%63s      }{space 1}{bind:         }{bind:  }{res}{res}Description{p_end}
+{p 0 48}{bind:violfine       }{txt}{bind: int     }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}ViolFine{p_end}
+{p 0 48}{bind:violdate       }{txt}{bind: str22   }{bind:{txt}%22s      }{space 1}{bind:         }{bind:  }{res}{res}ViolDate{p_end}
+{p 0 48}{bind:balance        }{txt}{bind: int     }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}Balance{p_end}
+{p 0 48}{bind:penaltydate    }{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}PenaltyDate{p_end}
+{p 0 48}{bind:openfine       }{txt}{bind: int     }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}OpenFine{p_end}
+{p 0 48}{bind:openpenalty    }{txt}{bind: int     }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}OpenPenalty{p_end}
+{p 0 48}{bind:noticedate     }{txt}{bind: str10   }{bind:{txt}%10s      }{space 1}{bind:         }{bind:  }{res}{res}NoticeDate{p_end}
+{p 0 48}{bind:importdate     }{txt}{bind: str22   }{bind:{txt}%22s      }{space 1}{bind:         }{bind:  }{res}{res}ImportDate{p_end}
+{p 0 48}{bind:neighborhood   }{txt}{bind: str33   }{bind:{txt}%33s      }{space 1}{bind:         }{bind:  }{res}{res}Neighborhood{p_end}
+{p 0 48}{bind:policedistrict }{txt}{bind: str12   }{bind:{txt}%12s      }{space 1}{bind:         }{bind:  }{res}{res}PoliceDistrict{p_end}
+{p 0 48}{bind:councildistrict}{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}CouncilDistrict{p_end}
+{p 0 48}{bind:location       }{txt}{bind: str69   }{bind:{txt}%69s      }{space 1}{bind:         }{bind:  }{res}{res}Location{p_end}
+{txt}{hline}
+Sorted by: 
+{res}     Note: Dataset has changed since last saved.
+{txt}
+{com}. 
+. * Re-format dates
+. 
+. 
+. gen viol_date = substr(violdate,1,10) 
+{txt}(4,530 missing values generated)
+
+{com}. rename noticedate notice_date
+{res}{txt}
+{com}. foreach var of varlist ///
+> viol_date notice_date {c -(}
+{txt}  2{com}.         gen test = date(`var' , "MDY")
+{txt}  3{com}.         drop `var'
+{txt}  4{com}.         gen `var' = test
+{txt}  5{com}.         format `var'  %td
+{txt}  6{com}.         drop test
+{txt}  7{com}. {c )-}
+{txt}(4,530 missing values generated)
+(4,530 missing values generated)
+(2,267,418 missing values generated)
+(2,267,418 missing values generated)
+
+{com}. 
+. * Clean Dataset
+. 
+. drop violdate importdate penaltydate 
+{txt}
+{com}. 
+. rename violcode viol_code
+{res}{txt}
+{com}. rename violfine viol_fine_amt
+{res}{txt}
+{com}. rename balance bal_amt
+{res}{txt}
+{com}. rename openfine open_fine_amt
+{res}{txt}
+{com}. rename openpenalty      open_penalty_amt
+{res}{txt}
+{com}. rename citation citation_id
+{res}{txt}
+{com}. 
+. gen dataset = "parking_citations"
+{txt}
+{com}. 
+. save "data_cleaned/parking_citations_cleaned.dta", replace
+{txt}file data_cleaned/parking_citations_cleaned.dta saved
+
+{com}. clear
+{txt}
+{com}. 
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+{txt}end of do-file
+
+{com}. 
+. * Run DOT Towing Code
+. do "do_files/do_file_towing.do"
+{txt}
+{com}. /***********************************************************************
+> Author: John Iselin
+> Date: Spring 2019
+> 
+> Goldman School of Public Policy 
+> Masters in Public Policy Program
+> Introduction to Policy Analysis 
+> Fines and Fees in Baltimore
+> 
+> This do-file downloads, cleans, and uses data from Baltimore's Open data system.
+> https://data.baltimorecity.gov/
+> 
+> In this case, this do-file cleans the dataset "Baltimore DOT Towing"
+> From: https://data.baltimorecity.gov/Transportation/DOT-Towing/k78j-azhn
+> **************************************************************************/
+. 
+. clear
+{txt}
+{com}. 
+. import delimited "raw_data/DOT_Towing.csv", bindquote(strict) 
+{res}{text}(36 vars, 61,316 obs)
+
+{com}. 
+. sum
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+propertynu~r {c |}{res}          0
+{txt}toweddatet~e {c |}{res}          0
+{txt}{space 1}vehicletype {c |}{res}          0
+{txt}{space 1}vehicleyear {c |}{res}          0
+{txt}{space 1}vehiclemake {c |}{res}          0
+{txt}{hline 13}{c +}{hline 57}
+vehiclemodel {c |}{res}          0
+{txt}vehiclecolor {c |}{res}          0
+{txt}{space 3}tagnumber {c |}{res}          0
+{txt}{space 2}towcompany {c |}{res}          0
+{txt}{space 3}towcharge {c |}{res}     61,311    136.5881    531.2425          0     130000
+{txt}{hline 13}{c +}{hline 57}
+towedfroml~n {c |}{res}          0
+{txt}{space 4}howtowed {c |}{res}          0
+{txt}{space 3}slingused {c |}{res}          0
+{txt}{space 3}dollyused {c |}{res}          0
+{txt}rollbackused {c |}{res}          0
+{txt}{hline 13}{c +}{hline 57}
+{space 3}pinpulled {c |}{res}          0
+{txt}{space 1}pinreplaced {c |}{res}          0
+{txt}{space 3}wheellift {c |}{res}          0
+{txt}{space 5}stinger {c |}{res}          0
+{txt}receivingd~e {c |}{res}          0
+{txt}{hline 13}{c +}{hline 57}
+{space 1}storageyard {c |}{res}          0
+{txt}storageloc~n {c |}{res}          0
+{txt}storagetel~e {c |}{res}          0
+{txt}titlerenou~n {c |}{res}     44,193    .0060869    .0777819          0          1
+{txt}{space 2}trdatetime {c |}{res}          0
+{txt}{hline 13}{c +}{hline 57}
+personalpr~d {c |}{res}          0
+{txt}personalpr~e {c |}{res}          0
+{txt}holddatetime {c |}{res}          0
+{txt}holdrelea~me {c |}{res}          0
+{txt}holdrelea~te {c |}{res}          0
+{txt}{hline 13}{c +}{hline 57}
+removedfro~e {c |}{res}          0
+{txt}stolenvehi~g {c |}{res}     44,186    .1312633    .3376919          0          1
+{txt}{space 6}status {c |}{res}          0
+{txt}releasedat~e {c |}{res}          0
+{txt}{space 1}releasetype {c |}{res}          0
+{txt}{hline 13}{c +}{hline 57}
+{space 3}totalpaid {c |}{res}     61,309    243.1795    226.9702          0       4832
+{txt}
+{com}. de
+
+{txt}Contains data
+  obs:{res}        61,316                          
+{txt} vars:{res}            36                          
+{txt} size:{res}    34,214,328                          
+{txt}{hline}
+              storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:propertynumber }{txt}{bind: str7    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:toweddatetime  }{txt}{bind: str22   }{bind:{txt}%22s      }{space 1}{bind:         }{bind:  }{res}{res}towedDateTime{p_end}
+{p 0 48}{bind:vehicletype    }{txt}{bind: str41   }{bind:{txt}%41s      }{space 1}{bind:         }{bind:  }{res}{res}vehicleType{p_end}
+{p 0 48}{bind:vehicleyear    }{txt}{bind: str2    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}vehicleYear{p_end}
+{p 0 48}{bind:vehiclemake    }{txt}{bind: str15   }{bind:{txt}%15s      }{space 1}{bind:         }{bind:  }{res}{res}vehicleMake{p_end}
+{p 0 48}{bind:vehiclemodel   }{txt}{bind: str15   }{bind:{txt}%15s      }{space 1}{bind:         }{bind:  }{res}{res}vehicleModel{p_end}
+{p 0 48}{bind:vehiclecolor   }{txt}{bind: str10   }{bind:{txt}%10s      }{space 1}{bind:         }{bind:  }{res}{res}vehicleColor{p_end}
+{p 0 48}{bind:tagnumber      }{txt}{bind: str10   }{bind:{txt}%10s      }{space 1}{bind:         }{bind:  }{res}{res}tagNumber{p_end}
+{p 0 48}{bind:towcompany     }{txt}{bind: str49   }{bind:{txt}%49s      }{space 1}{bind:         }{bind:  }{res}{res}towCompany{p_end}
+{p 0 48}{bind:towcharge      }{txt}{bind: float   }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}towCharge{p_end}
+{p 0 48}{bind:towedfromloca~n}{txt}{bind: str50   }{bind:{txt}%50s      }{space 1}{bind:         }{bind:  }{res}{res}towedFromLocation{p_end}
+{p 0 48}{bind:howtowed       }{txt}{bind: str16   }{bind:{txt}%16s      }{space 1}{bind:         }{bind:  }{res}{res}howTowed{p_end}
+{p 0 48}{bind:slingused      }{txt}{bind: str3    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}slingUsed{p_end}
+{p 0 48}{bind:dollyused      }{txt}{bind: str3    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}dollyUsed{p_end}
+{p 0 48}{bind:rollbackused   }{txt}{bind: str3    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}rollBackUsed{p_end}
+{p 0 48}{bind:pinpulled      }{txt}{bind: str3    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}pinPulled{p_end}
+{p 0 48}{bind:pinreplaced    }{txt}{bind: str3    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}pinReplaced{p_end}
+{p 0 48}{bind:wheellift      }{txt}{bind: str3    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}wheelLift{p_end}
+{p 0 48}{bind:stinger        }{txt}{bind: str3    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:receivingdate~e}{txt}{bind: str22   }{bind:{txt}%22s      }{space 1}{bind:         }{bind:  }{res}{res}receivingDateTime{p_end}
+{p 0 48}{bind:storageyard    }{txt}{bind: str20   }{bind:{txt}%20s      }{space 1}{bind:         }{bind:  }{res}{res}storageYard{p_end}
+{p 0 48}{bind:storagelocation}{txt}{bind: str46   }{bind:{txt}%46s      }{space 1}{bind:         }{bind:  }{res}{res}storageLocation{p_end}
+{p 0 48}{bind:storageteleph~e}{txt}{bind: str14   }{bind:{txt}%14s      }{space 1}{bind:         }{bind:  }{res}{res}storageTelephone{p_end}
+{p 0 48}{bind:titlerenounci~n}{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}titleRenounciation{p_end}
+{p 0 48}{bind:trdatetime     }{txt}{bind: str22   }{bind:{txt}%22s      }{space 1}{bind:         }{bind:  }{res}{res}trDateTime{p_end}
+{p 0 48}{bind:personalpropr~d}{txt}{bind: str1    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}personalPropRemoved{p_end}
+{p 0 48}{bind:personalpropl~e}{txt}{bind: str1    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}personalPropLeftInVehicle{p_end}
+{p 0 48}{bind:holddatetime   }{txt}{bind: str22   }{bind:{txt}%22s      }{space 1}{bind:         }{bind:  }{res}{res}holdDateTime{p_end}
+{p 0 48}{bind:holdreleasedd~e}{txt}{bind: str22   }{bind:{txt}%22s      }{space 1}{bind:         }{bind:  }{res}{res}holdReleasedDateTime{p_end}
+{p 0 48}{bind:holdreleasedn~e}{txt}{bind: str22   }{bind:{txt}%22s      }{space 1}{bind:         }{bind:  }{res}{res}holdReleasedNotifyDate{p_end}
+{p 0 48}{bind:removedfromya~e}{txt}{bind: str22   }{bind:{txt}%22s      }{space 1}{bind:         }{bind:  }{res}{res}removedFromYardDate{p_end}
+{p 0 48}{bind:stolenvehicle~g}{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}stolenVehicleFlag{p_end}
+{p 0 48}{bind:status         }{txt}{bind: str25   }{bind:{txt}%25s      }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:releasedatetime}{txt}{bind: str22   }{bind:{txt}%22s      }{space 1}{bind:         }{bind:  }{res}{res}releaseDateTime{p_end}
+{p 0 48}{bind:releasetype    }{txt}{bind: str29   }{bind:{txt}%29s      }{space 1}{bind:         }{bind:  }{res}{res}releaseType{p_end}
+{p 0 48}{bind:totalpaid      }{txt}{bind: float   }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}totalPaid{p_end}
+{txt}{hline}
+Sorted by: 
+{res}     Note: Dataset has changed since last saved.
+{txt}
+{com}. 
+. 
+. * Re-format dates
+. 
+. gen recieve_date = substr(receivingdatetime,1,10)
+{txt}
+{com}. gen hold_release_date = substr(holdreleaseddatetime,1,10) 
+{txt}(59,135 missing values generated)
+
+{com}. gen release_date = substr(releasedatetime,1,10) 
+{txt}(6,442 missing values generated)
+
+{com}. gen tow_date = substr(toweddatetime,1,10)
+{txt}(80 missing values generated)
+
+{com}. 
+. foreach var of varlist ///
+> recieve_date hold_release_date release_date tow_date {c -(}
+{txt}  2{com}.         gen test = date(`var' , "MDY")
+{txt}  3{com}.         drop `var'
+{txt}  4{com}.         gen `var' = test
+{txt}  5{com}.         format `var'  %td
+{txt}  6{com}.         drop test
+{txt}  7{com}. {c )-}
+{txt}(59,135 missing values generated)
+(59,135 missing values generated)
+(6,442 missing values generated)
+(6,442 missing values generated)
+(80 missing values generated)
+(80 missing values generated)
+
+{com}. 
+. drop receivingdatetime holdreleaseddatetime releasedatetime ///
+>          holdreleasednotifydate removedfromyarddate vehiclemake ///
+>          vehiclemodel vehiclecolor towcompany howtowed slingused dollyused ///
+>          rollbackused pinpulled pinreplaced wheellift storagelocation ///
+>          storagetelephone personalpropremoved personalpropleftinvehicle ///
+>          trdatetime holddatetime toweddatetime stinger
+{txt}
+{com}.          
+. rename totalpaid total_paid_amt
+{res}{txt}
+{com}. rename towcharge tow_chg_amt
+{res}{txt}
+{com}. rename propertynumber prop_id
+{res}{txt}
+{com}. gen dataset = "towing"
+{txt}
+{com}. 
+. order prop_id *_date *_amt
+{txt}
+{com}. 
+. save "data_cleaned/dot_towing_cleaned.dta", replace
+{txt}file data_cleaned/dot_towing_cleaned.dta saved
+
+{com}. clear
+{txt}
+{com}. 
+. *log close
+. 
+{txt}end of do-file
+
+{com}. 
+. * Run Vacant Lot Code
+. do "do_files/do_file_vacant.do"
+{txt}
+{com}. 
+. /***********************************************************************
+> Author: John Iselin
+> Date: Spring 2019
+> 
+> Goldman School of Public Policy 
+> Masters in Public Policy Program
+> Introduction to Policy Analysis 
+> Fines and Fees in Baltimore
+> 
+> This do-file downloads, cleans, and uses data from Baltimore's Open data system.
+> https://data.baltimorecity.gov/
+> 
+> In this case, this do-file cleans the dataset "Vacant_Buildings"
+> From: https://data.baltimorecity.gov/Housing-Development/Vacant-Buildings/qqcv-ihn5
+> 
+> **************************************************************************/
+. 
+. clear
+{txt}
+{com}. 
+. import delimited "raw_data/Vacant_Buildings.csv" , varnames(1) 
+{res}{text}(11 vars, 16,762 obs)
+
+{com}. 
+. sum
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 1}referenceid {c |}{res}          0
+{txt}{space 7}block {c |}{res}          0
+{txt}{space 9}lot {c |}{res}          0
+{txt}buildingad~s {c |}{res}          0
+{txt}{space 2}noticedate {c |}{res}          0
+{txt}{hline 13}{c +}{hline 57}
+neighborhood {c |}{res}          0
+{txt}policedist~t {c |}{res}          0
+{txt}councildis~t {c |}{res}     16,762    9.370779    2.787168          1         14
+{txt}{space 4}location {c |}{res}          0
+{txt}{space 4}zipcodes {c |}{res}     16,762    25732.25    4450.021      13642      28564
+{txt}{hline 13}{c +}{hline 57}
+censusneig~s {c |}{res}     16,762    125.4953      79.943          1        278
+{txt}
+{com}. de
+
+{txt}Contains data
+  obs:{res}        16,762                          
+{txt} vars:{res}            11                          
+{txt} size:{res}     2,346,680                          
+{txt}{hline}
+              storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:referenceid    }{txt}{bind: str16   }{bind:{txt}%16s      }{space 1}{bind:         }{bind:  }{res}{res}ReferenceID{p_end}
+{p 0 48}{bind:block          }{txt}{bind: str5    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}Block{p_end}
+{p 0 48}{bind:lot            }{txt}{bind: str4    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}Lot{p_end}
+{p 0 48}{bind:buildingaddress}{txt}{bind: str28   }{bind:{txt}%28s      }{space 1}{bind:         }{bind:  }{res}{res}BuildingAddress{p_end}
+{p 0 48}{bind:noticedate     }{txt}{bind: str10   }{bind:{txt}%10s      }{space 1}{bind:         }{bind:  }{res}{res}NoticeDate{p_end}
+{p 0 48}{bind:neighborhood   }{txt}{bind: str33   }{bind:{txt}%33s      }{space 1}{bind:         }{bind:  }{res}{res}Neighborhood{p_end}
+{p 0 48}{bind:policedistrict }{txt}{bind: str12   }{bind:{txt}%12s      }{space 1}{bind:         }{bind:  }{res}{res}PoliceDistrict{p_end}
+{p 0 48}{bind:councildistrict}{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}CouncilDistrict{p_end}
+{p 0 48}{bind:location       }{txt}{bind: str27   }{bind:{txt}%27s      }{space 1}{bind:         }{bind:  }{res}{res}Location{p_end}
+{p 0 48}{bind:zipcodes       }{txt}{bind: int     }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}Zip Codes{p_end}
+{p 0 48}{bind:censusneighbo~s}{txt}{bind: int     }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}2010 Census Neighborhoods{p_end}
+{txt}{hline}
+Sorted by: 
+{res}     Note: Dataset has changed since last saved.
+{txt}
+{com}. 
+. replace buildingaddress = strtrim(buildingaddress)
+{txt}(183 real changes made)
+
+{com}. replace buildingaddress = strlower(buildingaddress)
+{txt}(16,747 real changes made)
+
+{com}. 
+. rename noticedate notice_date
+{res}{txt}
+{com}. drop censusneighborhoods neighborhood 
+{txt}
+{com}. 
+. foreach var of varlist ///
+> notice_date {c -(}
+{txt}  2{com}.         gen test = date(`var' , "MDY")
+{txt}  3{com}.         drop `var'
+{txt}  4{com}.         gen `var' = test
+{txt}  5{com}.         format `var'  %td
+{txt}  6{com}.         drop test
+{txt}  7{com}. {c )-}
+{txt}
+{com}. 
+. gen dataset = "vacant_lots"
+{txt}
+{com}. 
+. save "data_cleaned/vacant_lots_cleaned.dta", replace
+{txt}file data_cleaned/vacant_lots_cleaned.dta saved
+
+{com}. clear 
+{txt}
+{com}. 
+. *log close
+. 
+. 
+. 
+{txt}end of do-file
+
+{com}. 
+. * Run Census Data Code
+. do "do_files/do_file_census.do"
+{txt}
+{com}. 
+. /***********************************************************************
+> Author: Sarah Edwards
+> Date: Spring 2019
+> 
+> Goldman School of Public Policy 
+> Masters in Public Policy Program
+> Introduction to Policy Analysis 
+> Fines and Fees in Baltimore
+> 
+> This do-file downloads, cleans, and uses data from Baltimore's Open data system.
+> https://data.baltimorecity.gov/
+> 
+> In this case, this do-file cleans the dataset "Vital_Signs_16_Census_Demographics"
+> 
+> 
+> **************************************************************************/
+. 
+. clear
+{txt}
+{com}. 
+. import delimited "raw_data/Vital_Signs_16_Census_Demographics.csv", bindquote(strict) 
+{res}{text}(31 vars, 55 obs)
+
+{com}. 
+. sum
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 3}ïobjectid {c |}{res}         55          28    16.02082          1         55
+{txt}{space 5}csa2010 {c |}{res}          0
+{txt}{space 6}tpop10 {c |}{res}         55    11194.98    4317.112       4101      23557
+{txt}{space 6}male10 {c |}{res}         55    5221.273    2021.654       1733      10788
+{txt}{space 4}female10 {c |}{res}         55    5973.709     2328.59       2368      12769
+{txt}{hline 13}{c +}{hline 57}
+{space 7}paa16 {c |}{res}         55    61.35085    32.38729   1.726247   96.61292
+{txt}{space 4}pwhite16 {c |}{res}         55    28.41151    27.50179   .8276141   89.65611
+{txt}{space 6}pasi16 {c |}{res}         55    2.490421    3.051324          0   14.49897
+{txt}{space 4}p2more16 {c |}{res}         55    1.960067    1.320847   .1109139   6.876228
+{txt}{space 6}ppac16 {c |}{res}         55    .6556527    .8898557          0    5.22471
+{txt}{hline 13}{c +}{hline 57}
+{space 5}phisp16 {c |}{res}         55    5.131495    6.144489      .1413   35.06672
+{txt}{space 4}racdiv16 {c |}{res}         55    38.16593    20.51653   6.995057   78.33887
+{txt}{space 5}age5_16 {c |}{res}         55    6.856355    2.200031   2.080356   11.95622
+{txt}{space 4}age18_16 {c |}{res}         55    14.58097    5.377779   2.847714   26.57758
+{txt}{space 4}age24_16 {c |}{res}         55    10.25967    4.981449    2.90116   30.07569
+{txt}{hline 13}{c +}{hline 57}
+{space 4}age64_16 {c |}{res}         55    56.04573    7.751083   42.09673   77.19891
+{txt}{space 4}age65_16 {c |}{res}         55    12.25727    4.204713   4.716532    24.9259
+{txt}{space 7}hhs16 {c |}{res}         55    4407.564    1730.882       1664       9289
+{txt}{space 4}femhhs16 {c |}{res}         55    51.50703    22.44706   9.090909   91.75662
+{txt}{space 7}fam16 {c |}{res}         55      26.764    8.133527   5.678579   41.12735
+{txt}{hline 13}{c +}{hline 57}
+{space 4}hhsize16 {c |}{res}         55    2.494432    .3339673   1.513333   3.236667
+{txt}{space 6}mhhi16 {c |}{res}         55     47110.1    22418.57   15467.82     109518
+{txt}{space 3}hh25inc16 {c |}{res}         55    32.21019    13.11253    7.73447   62.35203
+{txt}{space 3}hh40inc16 {c |}{res}         55    14.92043    4.275957    5.45067   25.05991
+{txt}{space 3}hh60inc16 {c |}{res}         55    16.31686    3.913073   9.244445   25.02568
+{txt}{hline 13}{c +}{hline 57}
+{space 3}hh75inc16 {c |}{res}         55     8.71461    2.642202   3.496732   15.69024
+{txt}{space 5}hhm7516 {c |}{res}         55     27.8379    15.38537    9.15212   67.75274
+{txt}{space 5}hhpov16 {c |}{res}         55    18.82494     11.5473    .811908   47.65458
+{txt}{space 3}hhchpov16 {c |}{res}         55      31.482    17.39428   .1230012   65.25423
+{txt}{space 1}shape__area {c |}{res}         55    4.12e+07    2.84e+07    8897845   1.76e+08
+{txt}{hline 13}{c +}{hline 57}
+shape__len~h {c |}{res}         55     34185.7    21441.07   12334.03   150987.7
+{txt}
+{com}. de
+
+{txt}Contains data
+  obs:{res}            55                          
+{txt} vars:{res}            31                          
+{txt} size:{res}         8,030                          
+{txt}{hline}
+              storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:ïobjectid      }{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}ï»¿OBJECTID{p_end}
+{p 0 48}{bind:csa2010        }{txt}{bind: str37   }{bind:{txt}%37s      }{space 1}{bind:         }{bind:  }{res}{res}CSA2010{p_end}
+{p 0 48}{bind:tpop10         }{txt}{bind: int     }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:male10         }{txt}{bind: int     }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:female10       }{txt}{bind: int     }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:paa16          }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:pwhite16       }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:pasi16         }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:p2more16       }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:ppac16         }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:phisp16        }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:racdiv16       }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:age5_16        }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:age18_16       }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:age24_16       }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:age64_16       }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:age65_16       }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:hhs16          }{txt}{bind: int     }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:femhhs16       }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:fam16          }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:hhsize16       }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:mhhi16         }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:hh25inc16      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:hh40inc16      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:hh60inc16      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:hh75inc16      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:hhm7516        }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:hhpov16        }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:hhchpov16      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:shape__area    }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}Shape__Area{p_end}
+{p 0 48}{bind:shape__length  }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}Shape__Length{p_end}
+{txt}{hline}
+Sorted by: 
+{res}     Note: Dataset has changed since last saved.
+{txt}
+{com}. 
+. 
+. rename csa2010 neighborhoods_csa
+{res}{txt}
+{com}. rename tpop10 total_pop_2010
+{res}{txt}
+{com}. rename male10 male_pop_2010
+{res}{txt}
+{com}. rename female10 female_pop2010
+{res}{txt}
+{com}. rename paa16 perc_black_16
+{res}{txt}
+{com}. rename pwhite16 perc_white_16
+{res}{txt}
+{com}. rename pasi16 perc_asian_16
+{res}{txt}
+{com}. rename p2more16 perc_twoplus_16
+{res}{txt}
+{com}. rename ppac16 perc_pacificislander_16
+{res}{txt}
+{com}. rename phisp16 perc_hispanic_16
+{res}{txt}
+{com}. rename racdiv16 racial_diversity_index
+{res}{txt}
+{com}. rename hhs16 total_households
+{res}{txt}
+{com}. rename femhhs16 female_head_16
+{res}{txt}
+{com}. rename fam16 families_with_children_16
+{res}{txt}
+{com}. rename mhhi16 median_household_inc
+{res}{txt}
+{com}. rename hh25inc16 perc_households_under_25k
+{res}{txt}
+{com}. rename hh40inc16 perc_households_25to40k
+{res}{txt}
+{com}. rename hh60inc16 perc_households_40to60k
+{res}{txt}
+{com}. rename hh75inc16 perc_households_60to75k
+{res}{txt}
+{com}. rename hhm7516 perc_households_over75k
+{res}{txt}
+{com}. rename hhpov16 perc_households_below_pov
+{res}{txt}
+{com}. rename hhchpov16 perc_childern_below_pov
+{res}{txt}
+{com}. 
+. drop racial_diversity_index perc_childern_below_pov median_household_inc                ///
+>                 male_pop_2010 female_pop2010 families_with_children_16 ïobjectid
+{txt}
+{com}. 
+. gen young_16 = age5_16 + age18_16 + age24_16
+{txt}
+{com}. gen working_16 = age64_16
+{txt}
+{com}. gen old_16 = age65_16
+{txt}
+{com}. 
+. gen perc_households_25to60k = perc_households_25to40k + perc_households_40to60k
+{txt}
+{com}. replace perc_households_over75k = perc_households_60to75k + perc_households_over75k
+{txt}(55 real changes made)
+
+{com}. 
+. drop age5_16 age18_16 age24_16 age64_16 age65_16 perc_households_25to40k                ///
+>         perc_households_40to60k perc_households_60to75k shape__area shape__length 
+{txt}
+{com}. 
+. xtile quint_female_head = female_head_16 [fw = total_pop_2010], n(5)
+{txt}
+{com}. xtile quint_workingage = working_16 [fw = total_pop_2010], n(5)
+{txt}
+{com}. xtile quint_black = perc_black_16 [fw = total_pop_2010], n(5)
+{txt}
+{com}. xtile quint_poverty = perc_households_below_pov [fw = total_pop_2010], n(5)
+{txt}
+{com}. 
+. save "data_cleaned/census_data_cleaned.dta", replace
+{txt}file data_cleaned/census_data_cleaned.dta saved
+
+{com}. clear 
+{txt}
+{com}. 
+. 
+. 
+. 
+{txt}end of do-file
+
+{com}. 
+. * Run Property Tax Code
+. do "do_files/do_file_propertytaxes.do"
+{txt}
+{com}. 
+. /***********************************************************************
+> Author: Sarah Edwards
+> Date: Spring 2019
+> 
+> Goldman School of Public Policy 
+> Masters in Public Policy Program
+> Introduction to Policy Analysis 
+> Fines and Fees in Baltimore
+> 
+> This do-file downloads, cleans, and uses data from Baltimore's Open data system.
+> https://data.baltimorecity.gov/
+> 
+> 
+> **************************************************************************/
+. 
+. 
+. clear
+{txt}
+{com}. 
+. import delimited "raw_data/Real_Property_Taxes", bindquote(strict) 
+{res}{text}(16 vars, 238,592 obs)
+
+{com}. 
+. sum
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 2}propertyid {c |}{res}          0
+{txt}{space 7}block {c |}{res}          0
+{txt}{space 9}lot {c |}{res}          0
+{txt}{space 8}ward {c |}{res}    238,592    18.66182    8.197495          1         50
+{txt}{space 8}sect {c |}{res}    238,592    145.0483    133.9116          0        690
+{txt}{hline 13}{c +}{hline 57}
+propertyad~s {c |}{res}          0
+{txt}{space 5}lotsize {c |}{res}          0
+{txt}{space 5}citytax {c |}{res}    219,542    4047.752    35242.42       2.25    6276443
+{txt}{space 4}statetax {c |}{res}    219,740     204.741    1815.011        .11   312705.3
+{txt}{space 5}rescode {c |}{res}          0
+{txt}{hline 13}{c +}{hline 57}
+{space 3}amountdue {c |}{res}    138,655    3248.669    28349.05        .01    3983104
+{txt}{space 4}asofdate {c |}{res}          0
+{txt}neighborhood {c |}{res}          0
+{txt}policedist~t {c |}{res}          0
+{txt}councildis~t {c |}{res}    222,415     7.59429    4.043136          1         14
+{txt}{hline 13}{c +}{hline 57}
+{space 4}location {c |}{res}          0
+{txt}
+{com}. de
+
+{txt}Contains data
+  obs:{res}       238,592                          
+{txt} vars:{res}            16                          
+{txt} size:{res}    45,571,072                          
+{txt}{hline}
+              storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:propertyid     }{txt}{bind: str9    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}PropertyID{p_end}
+{p 0 48}{bind:block          }{txt}{bind: str5    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}Block{p_end}
+{p 0 48}{bind:lot            }{txt}{bind: str4    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}Lot{p_end}
+{p 0 48}{bind:ward           }{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}Ward{p_end}
+{p 0 48}{bind:sect           }{txt}{bind: int     }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}Sect{p_end}
+{p 0 48}{bind:propertyaddress}{txt}{bind: str33   }{bind:{txt}%33s      }{space 1}{bind:         }{bind:  }{res}{res}PropertyAddress{p_end}
+{p 0 48}{bind:lotsize        }{txt}{bind: str17   }{bind:{txt}%17s      }{space 1}{bind:         }{bind:  }{res}{res}LotSize{p_end}
+{p 0 48}{bind:citytax        }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}CityTax{p_end}
+{p 0 48}{bind:statetax       }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}StateTax{p_end}
+{p 0 48}{bind:rescode        }{txt}{bind: str25   }{bind:{txt}%25s      }{space 1}{bind:         }{bind:  }{res}{res}ResCode{p_end}
+{p 0 48}{bind:amountdue      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}AmountDue{p_end}
+{p 0 48}{bind:asofdate       }{txt}{bind: str10   }{bind:{txt}%10s      }{space 1}{bind:         }{bind:  }{res}{res}AsOfDate{p_end}
+{p 0 48}{bind:neighborhood   }{txt}{bind: str33   }{bind:{txt}%33s      }{space 1}{bind:         }{bind:  }{res}{res}Neighborhood{p_end}
+{p 0 48}{bind:policedistrict }{txt}{bind: str12   }{bind:{txt}%12s      }{space 1}{bind:         }{bind:  }{res}{res}PoliceDistrict{p_end}
+{p 0 48}{bind:councildistrict}{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}CouncilDistrict{p_end}
+{p 0 48}{bind:location       }{txt}{bind: str27   }{bind:{txt}%27s      }{space 1}{bind:         }{bind:  }{res}{res}Location{p_end}
+{txt}{hline}
+Sorted by: 
+{res}     Note: Dataset has changed since last saved.
+{txt}
+{com}. 
+. replace propertyaddress = strtrim(propertyaddress)
+{txt}(0 real changes made)
+
+{com}. replace propertyaddress = strlower(propertyaddress)
+{txt}(238,587 real changes made)
+
+{com}. rename propertyaddress address
+{res}{txt}
+{com}. 
+. replace address = strlower(address)
+{txt}(0 real changes made)
+
+{com}. replace address = subinstr(address, ".", "",.) 
+{txt}(392 real changes made)
+
+{com}. replace address = strtrim(address)
+{txt}(0 real changes made)
+
+{com}. replace address = regexr(address, "street", "st")
+{txt}(38 real changes made)
+
+{com}. replace address = subinstr(address, "  ", " ",.)
+{txt}(1 real change made)
+
+{com}. replace address = regexr(address, "place", "pl")
+{txt}(28 real changes made)
+
+{com}. replace address = regexr(address, "avenue", "ave")
+{txt}(2 real changes made)
+
+{com}. replace address = regexr(address, "rd", "road")
+{txt}variable {bf}address{sf} was {bf}{res}str33{sf}{txt} now {bf}{res}str35{sf}
+{txt}(10,579 real changes made)
+
+{com}. 
+. drop lotsize lot block statetax
+{txt}
+{com}. 
+. rename citytax city_tax_amt
+{res}{txt}
+{com}. rename amountdue amt_due_amt
+{res}{txt}
+{com}. 
+. keep address neighborhood policedistrict councildistrict location
+{txt}
+{com}. 
+. rename neighborhood neighborhoods_city
+{res}{txt}
+{com}. 
+. save "data_cleaned/address_file.dta", replace
+{txt}file data_cleaned/address_file.dta saved
+
+{com}. 
+. clear
+{txt}
+{com}. 
+. 
+. 
+{txt}end of do-file
+
+{com}. 
+. * Run BPD Arrests Code
+. do "do_files/do_file_arrest.do"
+{txt}
+{com}. 
+. /***********************************************************************
+> Author: John Iselin
+> Date: Spring 2019
+> 
+> Goldman School of Public Policy 
+> Masters in Public Policy Program
+> Introduction to Policy Analysis 
+> Fines and Fees in Baltimore
+> 
+> This do-file downloads, cleans, and uses data from Baltimore's Open data system.
+> https://data.baltimorecity.gov/
+> 
+> 
+> Downloaded from: https://data.baltimorecity.gov/Public-Safety/BPD-Arrests/3i3v-ibrt
+> 
+> Note: Commas in the dollar amounts in theft cases of "charge_desc" mean that 
+>                 in some cases the columns are offset, shoudl fix in a later version 
+> **************************************************************************/
+. 
+. clear
+{txt}
+{com}. 
+. import delimited "raw_data/BPD_Arrests.csv", bindquote(strict) 
+{res}{text}(20 vars, 138,016 obs)
+
+{com}. 
+. sum
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 6}arrest {c |}{res}    131,290    1.59e+07     1512098   1.40e+07   1.90e+07
+{txt}{space 9}age {c |}{res}    137,976    32.89416    11.45099         14        100
+{txt}{space 9}sex {c |}{res}          0
+{txt}{space 8}race {c |}{res}          0
+{txt}{space 2}arrestdate {c |}{res}          0
+{txt}{hline 13}{c +}{hline 57}
+{space 2}arresttime {c |}{res}          0
+{txt}arrestloca~n {c |}{res}          0
+{txt}incidentof~e {c |}{res}          0
+{txt}incidentlo~n {c |}{res}          0
+{txt}{space 6}charge {c |}{res}          0
+{txt}{hline 13}{c +}{hline 57}
+chargedesc~n {c |}{res}          0
+{txt}{space 4}district {c |}{res}          0
+{txt}{space 8}post {c |}{res}          0
+{txt}neighborhood {c |}{res}          0
+{txt}{space 3}longitude {c |}{res}          0
+{txt}{hline 13}{c +}{hline 57}
+{space 4}latitude {c |}{res}          0
+{txt}{space 3}location1 {c |}{res}          0
+{txt}censusneig~s {c |}{res}          0
+{txt}censusward~s {c |}{res}          0
+{txt}{space 4}zipcodes {c |}{res}          0
+{txt}
+{com}. de
+
+{txt}Contains data
+  obs:{res}       138,016                          
+{txt} vars:{res}            20                          
+{txt} size:{res}    38,368,448                          
+{txt}{hline}
+              storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:arrest         }{txt}{bind: long    }{bind:{txt}%12.0g    }{space 1}{bind:         }{bind:  }{res}{res}Arrest{p_end}
+{p 0 48}{bind:age            }{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}Age{p_end}
+{p 0 48}{bind:sex            }{txt}{bind: str1    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}Sex{p_end}
+{p 0 48}{bind:race           }{txt}{bind: str1    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}Race{p_end}
+{p 0 48}{bind:arrestdate     }{txt}{bind: str10   }{bind:{txt}%10s      }{space 1}{bind:         }{bind:  }{res}{res}ArrestDate{p_end}
+{p 0 48}{bind:arresttime     }{txt}{bind: str5    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}ArrestTime{p_end}
+{p 0 48}{bind:arrestlocation }{txt}{bind: str30   }{bind:{txt}%30s      }{space 1}{bind:         }{bind:  }{res}{res}ArrestLocation{p_end}
+{p 0 48}{bind:incidentoffense}{txt}{bind: str41   }{bind:{txt}%41s      }{space 1}{bind:         }{bind:  }{res}{res}IncidentOffense{p_end}
+{p 0 48}{bind:incidentlocat~n}{txt}{bind: str30   }{bind:{txt}%30s      }{space 1}{bind:         }{bind:  }{res}{res}IncidentLocation{p_end}
+{p 0 48}{bind:charge         }{txt}{bind: str24   }{bind:{txt}%24s      }{space 1}{bind:         }{bind:  }{res}{res}Charge{p_end}
+{p 0 48}{bind:chargedescrip~n}{txt}{bind: str30   }{bind:{txt}%30s      }{space 1}{bind:         }{bind:  }{res}{res}ChargeDescription{p_end}
+{p 0 48}{bind:district       }{txt}{bind: str21   }{bind:{txt}%21s      }{space 1}{bind:         }{bind:  }{res}{res}District{p_end}
+{p 0 48}{bind:post           }{txt}{bind: str20   }{bind:{txt}%20s      }{space 1}{bind:         }{bind:  }{res}{res}Post{p_end}
+{p 0 48}{bind:neighborhood   }{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}Neighborhood{p_end}
+{p 0 48}{bind:longitude      }{txt}{bind: str32   }{bind:{txt}%32s      }{space 1}{bind:         }{bind:  }{res}{res}Longitude{p_end}
+{p 0 48}{bind:latitude       }{txt}{bind: str23   }{bind:{txt}%23s      }{space 1}{bind:         }{bind:  }{res}{res}Latitude{p_end}
+{p 0 48}{bind:location1      }{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}Location 1{p_end}
+{p 0 48}{bind:censusneighbo~s}{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}2010 Census Neighborhoods{p_end}
+{p 0 48}{bind:censuswardspr~s}{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}2010 Census Wards Precincts{p_end}
+{p 0 48}{bind:zipcodes       }{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}Zip Codes{p_end}
+{txt}{hline}
+Sorted by: 
+{res}     Note: Dataset has changed since last saved.
+{txt}
+{com}. 
+. * Re-format dates
+. 
+. foreach var of varlist ///
+> arrestdate  {c -(}
+{txt}  2{com}.         gen test = date(`var' , "MDY")
+{txt}  3{com}.         drop `var'
+{txt}  4{com}.         gen `var' = test
+{txt}  5{com}.         format `var'  %td
+{txt}  6{com}.         drop test
+{txt}  7{com}. {c )-}
+{txt}
+{com}. 
+. * Clean / rename other vars
+. drop location1 neighborhood censusneighborhoods censuswardsprecincts zipcodes   ///
+>                 arresttime 
+{txt}
+{com}. 
+. 
+. rename arrestdate arrest_date
+{res}{txt}
+{com}. rename arrestlocation arrest_location
+{res}{txt}
+{com}. rename incidentlocation incident_location
+{res}{txt}
+{com}. rename arrest arrest_id
+{res}{txt}
+{com}. rename incidentoffense incident_offense
+{res}{txt}
+{com}. rename chargedescription charge_desc
+{res}{txt}
+{com}. 
+. replace arrest_location = strlower(arrest_location)
+{txt}(75,017 real changes made)
+
+{com}. replace incident_location = strlower(incident_location)
+{txt}(75,017 real changes made)
+
+{com}. replace arrest_location = strtrim(arrest_location)
+{txt}(0 real changes made)
+
+{com}. replace incident_location = strtrim(incident_location)
+{txt}(0 real changes made)
+
+{com}. 
+. order arrest_id arrest_date 
+{txt}
+{com}. 
+. save "data_cleaned/bpd_arrests_cleaned.dta", replace
+{txt}file data_cleaned/bpd_arrests_cleaned.dta saved
+
+{com}. clear
+{txt}
+{com}. 
+. 
+. 
+. 
+. 
+{txt}end of do-file
+
+{com}. 
+. * Run Address Merge Code
+. do "do_files/do_file_address_merge.do"
+{txt}
+{com}. /***********************************************************************
+> Author: John Iselin
+> Date: Spring 2019
+> 
+> Goldman School of Public Policy 
+> Masters in Public Policy Program
+> Introduction to Policy Analysis 
+> Fines and Fees in Baltimore
+> 
+> This do-file takes cleaned data from prior do-files, and (when possible) maps 
+> addresses to neighborhoods, and then neighborhoods to city CSA neighborhoods, 
+> about which we have Census demographics. 
+> 
+> **************************************************************************/
+. 
+. ** Merging with property tax data for addresses
+. 
+. * Vacant Lots
+. 
+. use "data_cleaned/vacant_lots_cleaned.dta"
+{txt}
+{com}. rename buildingaddress address 
+{res}{txt}
+{com}. 
+. replace address = strlower(address)
+{txt}(0 real changes made)
+
+{com}. replace address = subinstr(address, ".", "",.) 
+{txt}(1 real change made)
+
+{com}. replace address = strtrim(address)
+{txt}(0 real changes made)
+
+{com}. replace address = regexr(address, "street", "st")
+{txt}(0 real changes made)
+
+{com}. replace address = subinstr(address, "  ", " ",.)
+{txt}(0 real changes made)
+
+{com}. replace address = regexr(address, "place", "pl")
+{txt}(0 real changes made)
+
+{com}. replace address = regexr(address, "avenue", "ave")
+{txt}(0 real changes made)
+
+{com}. replace address = regexr(address, "rd", "road")
+{txt}(626 real changes made)
+
+{com}. 
+. merge m:m address using "data_cleaned/address_file.dta"
+{res}{txt}{p 0 7 2}
+(note: variable
+address was 
+str28, now str35 to accommodate using data's values)
+{p_end}
+
+{col 5}Result{col 38}# of obs.
+{col 5}{hline 41}
+{col 5}not matched{col 30}{res}         222,293
+{txt}{col 9}from master{col 30}{res}             224{txt}  (_merge==1)
+{col 9}from using{col 30}{res}         222,069{txt}  (_merge==2)
+
+{col 5}matched{col 30}{res}          16,543{txt}  (_merge==3)
+{col 5}{hline 41}
+
+{com}. 
+. tab _merge
+
+                 {txt}_merge {c |}      Freq.     Percent        Cum.
+{hline 24}{c +}{hline 35}
+        master only (1) {c |}{res}        224        0.09        0.09
+{txt}         using only (2) {c |}{res}    222,069       92.98       93.07
+{txt}            matched (3) {c |}{res}     16,543        6.93      100.00
+{txt}{hline 24}{c +}{hline 35}
+                  Total {c |}{res}    238,836      100.00
+{txt}
+{com}. drop if _merge == 2
+{txt}(222,069 observations deleted)
+
+{com}. tab _merge
+
+                 {txt}_merge {c |}      Freq.     Percent        Cum.
+{hline 24}{c +}{hline 35}
+        master only (1) {c |}{res}        224        1.34        1.34
+{txt}            matched (3) {c |}{res}     16,543       98.66      100.00
+{txt}{hline 24}{c +}{hline 35}
+                  Total {c |}{res}     16,767      100.00
+{txt}
+{com}. drop _merge 
+{txt}
+{com}. 
+. save "data_cleaned/vacant_lots_cleaned_merge.dta", replace
+{txt}file data_cleaned/vacant_lots_cleaned_merge.dta saved
+
+{com}. 
+. clear
+{txt}
+{com}. 
+. * Towing
+. 
+. use "data_cleaned/dot_towing_cleaned.dta", clear
+{txt}
+{com}. rename towedfromlocation address
+{res}{txt}
+{com}. 
+. replace address = strlower(address)
+{txt}(60,965 real changes made)
+
+{com}. replace address = subinstr(address, ".", "",.) 
+{txt}(1,633 real changes made)
+
+{com}. replace address = strtrim(address)
+{txt}(25,990 real changes made)
+
+{com}. replace address = regexr(address, "street", "st")
+{txt}(8,323 real changes made)
+
+{com}. replace address = subinstr(address, "  ", " ",.)
+{txt}(30,384 real changes made)
+
+{com}. replace address = regexr(address, "place", "pl")
+{txt}(172 real changes made)
+
+{com}. replace address = regexr(address, "avenue", "ave")
+{txt}(80 real changes made)
+
+{com}. replace address = regexr(address, "rd", "road")
+{txt}(8,166 real changes made)
+
+{com}. 
+. merge m:m address using "data_cleaned/address_file.dta"
+{res}
+{txt}{col 5}Result{col 38}# of obs.
+{col 5}{hline 41}
+{col 5}not matched{col 30}{res}         274,379
+{txt}{col 9}from master{col 30}{res}          43,192{txt}  (_merge==1)
+{col 9}from using{col 30}{res}         231,187{txt}  (_merge==2)
+
+{col 5}matched{col 30}{res}          18,135{txt}  (_merge==3)
+{col 5}{hline 41}
+
+{com}. 
+. tab _merge
+
+                 {txt}_merge {c |}      Freq.     Percent        Cum.
+{hline 24}{c +}{hline 35}
+        master only (1) {c |}{res}     43,192       14.77       14.77
+{txt}         using only (2) {c |}{res}    231,187       79.03       93.80
+{txt}            matched (3) {c |}{res}     18,135        6.20      100.00
+{txt}{hline 24}{c +}{hline 35}
+                  Total {c |}{res}    292,514      100.00
+{txt}
+{com}. 
+. *We have a low match rate therefore we are not going to attempt to look at
+. *neighborhood level statistics for towing data. See report for discussion for
+. *future research.
+. 
+. drop _merge
+{txt}
+{com}. drop address dataset
+{txt}
+{com}. 
+. save "data_cleaned/dot_towing_cleaned.dta", replace
+{txt}file data_cleaned/dot_towing_cleaned.dta saved
+
+{com}. clear
+{txt}
+{com}. 
+. * Parking Citations
+. 
+. use "data_cleaned/parking_citations_cleaned.dta", clear
+{txt}
+{com}. 
+. replace address = strlower(address)
+{txt}(3,061,816 real changes made)
+
+{com}. replace address = subinstr(address, ".", "",.) 
+{txt}(48,354 real changes made)
+
+{com}. replace address = strtrim(address)
+{txt}(135 real changes made)
+
+{com}. replace address = regexr(address, "street", "st")
+{txt}(548 real changes made)
+
+{com}. replace address = subinstr(address, "  ", " ",.)
+{txt}(675 real changes made)
+
+{com}. replace address = regexr(address, "place", "pl")
+{txt}(568 real changes made)
+
+{com}. replace address = regexr(address, "avenue", "ave")
+{txt}(4,494 real changes made)
+
+{com}. replace address = regexr(address, "rd", "road")
+{txt}variable {bf}address{sf} was {bf}{res}str30{sf}{txt} now {bf}{res}str32{sf}
+{txt}(480,468 real changes made)
+
+{com}. 
+. merge m:m address using "data_cleaned/address_file.dta"
+{res}{txt}{p 0 7 2}
+(note: variable
+address was 
+str32, now str35 to accommodate using data's values)
+{p_end}
+
+{col 5}Result{col 38}# of obs.
+{col 5}{hline 41}
+{col 5}not matched{col 30}{res}       2,903,245
+{txt}{col 9}from master{col 30}{res}       2,685,707{txt}  (_merge==1)
+{col 9}from using{col 30}{res}         217,538{txt}  (_merge==2)
+
+{col 5}matched{col 30}{res}         376,635{txt}  (_merge==3)
+{col 5}{hline 41}
+
+{com}. 
+. tab _merge
+
+                 {txt}_merge {c |}      Freq.     Percent        Cum.
+{hline 24}{c +}{hline 35}
+        master only (1) {c |}{res}  2,685,707       81.88       81.88
+{txt}         using only (2) {c |}{res}    217,538        6.63       88.52
+{txt}            matched (3) {c |}{res}    376,635       11.48      100.00
+{txt}{hline 24}{c +}{hline 35}
+                  Total {c |}{res}  3,279,880      100.00
+{txt}
+{com}. 
+. *We have a low match rate (11.48%) therefore we are not going to attempt to look at
+. *neighborhood level statistics for towing data. See report for discussion for
+. *future research.
+. 
+. drop _merge
+{txt}
+{com}. drop address neighborhood policedistrict councildistrict location dataset
+{txt}
+{com}. 
+. save "data_cleaned/parking_citations_cleaned.dta", replace
+{txt}file data_cleaned/parking_citations_cleaned.dta saved
+
+{com}. clear
+{txt}
+{com}. 
+. * Arrests
+. 
+. use "data_cleaned/bpd_arrests_cleaned.dta", clear
+{txt}
+{com}. rename arrest_location address
+{res}{txt}
+{com}. 
+. replace address = strlower(address)
+{txt}(0 real changes made)
+
+{com}. replace address = subinstr(address, ".", "",.) 
+{txt}(1,306 real changes made)
+
+{com}. replace address = strtrim(address)
+{txt}(0 real changes made)
+
+{com}. replace address = regexr(address, "street", "st")
+{txt}(90 real changes made)
+
+{com}. replace address = subinstr(address, "  ", " ",.)
+{txt}(27 real changes made)
+
+{com}. replace address = regexr(address, "place", "pl")
+{txt}(15 real changes made)
+
+{com}. replace address = regexr(address, "avenue", "ave")
+{txt}(32 real changes made)
+
+{com}. replace address = regexr(address, "rd", "road")
+{txt}(10,425 real changes made)
+
+{com}. 
+. *drop if missing(address)
+. *We dropped any observation that did not have a location associated with it.
+. 
+. merge m:m address using "data_cleaned/address_file.dta"
+{res}{txt}{p 0 7 2}
+(note: variable
+address was 
+str30, now str35 to accommodate using data's values)
+{p_end}
+
+{col 5}Result{col 38}# of obs.
+{col 5}{hline 41}
+{col 5}not matched{col 30}{res}         291,267
+{txt}{col 9}from master{col 30}{res}          55,861{txt}  (_merge==1)
+{col 9}from using{col 30}{res}         235,406{txt}  (_merge==2)
+
+{col 5}matched{col 30}{res}          82,158{txt}  (_merge==3)
+{col 5}{hline 41}
+
+{com}. tab _merge
+
+                 {txt}_merge {c |}      Freq.     Percent        Cum.
+{hline 24}{c +}{hline 35}
+        master only (1) {c |}{res}     55,861       14.96       14.96
+{txt}         using only (2) {c |}{res}    235,406       63.04       78.00
+{txt}            matched (3) {c |}{res}     82,158       22.00      100.00
+{txt}{hline 24}{c +}{hline 35}
+                  Total {c |}{res}    373,425      100.00
+{txt}
+{com}. *We have a low match rate (6.17%) therefore we are not going to attempt to look at
+. *neighborhood level statistics for towing data. See report for discussion for
+. *future research.
+. 
+. drop _merge
+{txt}
+{com}. drop latitude longitude post district address incident_location
+{txt}
+{com}. 
+. save "data_cleaned/bpd_arrests_cleaned.dta", replace
+{txt}file data_cleaned/bpd_arrests_cleaned.dta saved
+
+{com}. 
+. clear
+{txt}
+{com}. 
+. 
+. *ECB Citations - Has city neighborhood data already included
+. 
+. use "data_cleaned/ecb_citations_cleaned.dta", clear
+{txt}
+{com}. rename neighborhood neighborhoods_city
+{res}{txt}
+{com}. save "data_cleaned/ecb_citations_cleaned_merge.dta", replace
+{txt}file data_cleaned/ecb_citations_cleaned_merge.dta saved
+
+{com}. 
+. clear
+{txt}
+{com}. 
+. *99.79% match rate*
+. 
+. 
+. 
+. ** NOTE: Not enough data on: dot_towing_cleaned, parking_citations_cleaned, bpd_arrests
+. 
+. * Create neighborhood dta file
+. clear
+{txt}
+{com}. import delimited "raw_data/neighborhood_crosswalk.csv", varnames(1) 
+{res}{text}(2 vars, 263 obs)
+
+{com}. 
+. save "data_cleaned/neighborhood_crosswalk.dta", replace
+{txt}file data_cleaned/neighborhood_crosswalk.dta saved
+
+{com}. 
+. clear
+{txt}
+{com}. 
+. * For vacant_lots and ecb_citations use neighborhood designation
+. * from address match derived from property tax data to matched neighbor-
+. * hood (small) to neighborhood (large) to merge with census data. 
+. 
+. foreach dataset in vacant_lots_cleaned_merge ecb_citations_cleaned_merge {c -(}
+{txt}  2{com}.         use "data_cleaned/`dataset'.dta", clear
+{txt}  3{com}.         drop if neighborhoods_city == ""
+{txt}  4{com}.         
+.         merge m:1 neighborhoods_city using "data_cleaned/neighborhood_crosswalk.dta"
+{txt}  5{com}.         tab _merge
+{txt}  6{com}.         keep if _merge == 3
+{txt}  7{com}.         drop _merge
+{txt}  8{com}.         
+.         merge m:1 neighborhoods_csa using "data_cleaned/census_data_cleaned.dta"
+{txt}  9{com}.         drop _merge
+{txt} 10{com}. 
+.         save "data_cleaned/`dataset'.dta", replace
+{txt} 11{com}.         clear
+{txt} 12{com}.         
+. 
+. {c )-}
+{txt}(229 observations deleted)
+{res}
+{txt}{col 5}Result{col 38}# of obs.
+{col 5}{hline 41}
+{col 5}not matched{col 30}{res}              41
+{txt}{col 9}from master{col 30}{res}               0{txt}  (_merge==1)
+{col 9}from using{col 30}{res}              41{txt}  (_merge==2)
+
+{col 5}matched{col 30}{res}          16,538{txt}  (_merge==3)
+{col 5}{hline 41}
+
+                 _merge {c |}      Freq.     Percent        Cum.
+{hline 24}{c +}{hline 35}
+         using only (2) {c |}{res}         41        0.25        0.25
+{txt}            matched (3) {c |}{res}     16,538       99.75      100.00
+{txt}{hline 24}{c +}{hline 35}
+                  Total {c |}{res}     16,579      100.00
+{txt}(41 observations deleted)
+{res}
+{txt}{col 5}Result{col 38}# of obs.
+{col 5}{hline 41}
+{col 5}not matched{col 30}{res}               2
+{txt}{col 9}from master{col 30}{res}               2{txt}  (_merge==1)
+{col 9}from using{col 30}{res}               0{txt}  (_merge==2)
+
+{col 5}matched{col 30}{res}          16,536{txt}  (_merge==3)
+{col 5}{hline 41}
+file data_cleaned/vacant_lots_cleaned_merge.dta saved
+(881 observations deleted)
+{res}
+{txt}{col 5}Result{col 38}# of obs.
+{col 5}{hline 41}
+{col 5}not matched{col 30}{res}               2
+{txt}{col 9}from master{col 30}{res}               2{txt}  (_merge==1)
+{col 9}from using{col 30}{res}               0{txt}  (_merge==2)
+
+{col 5}matched{col 30}{res}         130,730{txt}  (_merge==3)
+{col 5}{hline 41}
+
+                 _merge {c |}      Freq.     Percent        Cum.
+{hline 24}{c +}{hline 35}
+        master only (1) {c |}{res}          2        0.00        0.00
+{txt}            matched (3) {c |}{res}    130,730      100.00      100.00
+{txt}{hline 24}{c +}{hline 35}
+                  Total {c |}{res}    130,732      100.00
+{txt}(2 observations deleted)
+{res}
+{txt}{col 5}Result{col 38}# of obs.
+{col 5}{hline 41}
+{col 5}not matched{col 30}{res}              71
+{txt}{col 9}from master{col 30}{res}              71{txt}  (_merge==1)
+{col 9}from using{col 30}{res}               0{txt}  (_merge==2)
+
+{col 5}matched{col 30}{res}         130,659{txt}  (_merge==3)
+{col 5}{hline 41}
+file data_cleaned/ecb_citations_cleaned_merge.dta saved
+
+{com}. 
+. 
+. 
+{txt}end of do-file
+
+{com}.  
+. log close 
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}/Users/johniselin/finesandfees_baltimore/logs/open_data_creation_log.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}15 Apr 2019, 18:05:29
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

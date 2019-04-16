@@ -1,0 +1,18 @@
+{smcl}
+{txt}{sf}{ul off}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/johniselin/finesandfees_baltimore/logs/bpd_results_log.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}15 Apr 2019, 18:05:33
+{txt}
+{com}. 
+. clear
+{txt}
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}/Users/johniselin/finesandfees_baltimore/logs/bpd_results_log.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}15 Apr 2019, 18:05:33
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

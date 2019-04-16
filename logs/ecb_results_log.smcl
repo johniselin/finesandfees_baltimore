@@ -1,0 +1,521 @@
+{smcl}
+{txt}{sf}{ul off}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/johniselin/finesandfees_baltimore/logs/ecb_results_log.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}15 Apr 2019, 18:05:29
+{txt}
+{com}. 
+. use "data_cleaned/ecb_citations_cleaned_merge.dta", clear
+{txt}
+{com}. 
+. gen year = year(viol_date)
+{txt}
+{com}. bysort description year : gen freq = _N
+{txt}
+{com}. gen common = 1 if freq > 1000
+{txt}(74,635 missing values generated)
+
+{com}. replace common = 0 if common == .
+{txt}(74,635 real changes made)
+
+{com}. drop freq 
+{txt}
+{com}. 
+. rename hearingstatus hearing_status
+{res}{txt}
+{com}. replace hearing_status = "NA" if hearing_status == "  "
+{txt}(116,876 real changes made)
+
+{com}. replace hearing_status = "Hearing Scheduled" if hearing_status == "HR"
+{txt}variable {bf}hearing_status{sf} was {bf}{res}str2{sf}{txt} now {bf}{res}str17{sf}
+{txt}(1,197 real changes made)
+
+{com}. replace hearing_status = "Guilty" if hearing_status == "GU"
+{txt}(459 real changes made)
+
+{com}. replace hearing_status = "Guilty Reduced" if hearing_status == "GR"
+{txt}(6,545 real changes made)
+
+{com}. replace hearing_status = "Default, No Show" if hearing_status == "DF"
+{txt}(4,196 real changes made)
+
+{com}. replace hearing_status = "Default, Behavior" if hearing_status == "DB"
+{txt}(21 real changes made)
+
+{com}. replace hearing_status = "Dismissed" if hearing_status == "DI"
+{txt}(670 real changes made)
+
+{com}. replace hearing_status = "Default, Abated" if hearing_status == "DA"
+{txt}(742 real changes made)
+
+{com}. 
+. tab description if year == 2018, sort
+
+                            {txt}Description {c |}      Freq.     Percent        Cum.
+{hline 40}{c +}{hline 35}
+HIGH GRASS AND WEEDS                 .. {c |}{res}      7,034       20.31       20.31
+{txt}TRASH ACCUMULATION                   .. {c |}{res}      6,026       17.40       37.71
+{txt}FAILURE TO FILE A COMPLETED ANNUAL RE.. {c |}{res}      3,145        9.08       46.79
+{txt}BULK TRASH                           .. {c |}{res}      2,943        8.50       55.29
+{txt}FAILED TO ABATE VIOLATION NOTICE AND .. {c |}{res}      2,082        6.01       61.30
+{txt}CONSTRUCTION AND MAINTENANCE OF STORA.. {c |}{res}      1,586        4.58       65.88
+{txt}UNREGISTERED OR INOPERABLE VEHICLE   .. {c |}{res}      1,573        4.54       70.43
+{txt}EXTERIOR SANITARY MAINTENANCE - GENER.. {c |}{res}      1,228        3.55       73.97
+{txt}FAILED TO ABATE UNSAFE STRUCTURE NOTI.. {c |}{res}      1,153        3.33       77.30
+{txt}FAILURE TO FILE ANNUAL VACANT BUILDIN.. {c |}{res}      1,050        3.03       80.33
+{txt}FAILURE TO KEEP STORAGE RECEPTACLE IN.. {c |}{res}        808        2.33       82.67
+{txt}IMPROPER SURFACE FOR PARKING OR STORA.. {c |}{res}        720        2.08       84.74
+{txt}FAILURE TO PROVIDE SUFFICIENT NUMBER .. {c |}{res}        683        1.97       86.72
+{txt}DUMPING UNDER 25 LBS OF WASTE ON PUBL.. {c |}{res}        604        1.74       88.46
+{txt}WORK WITHOUT OR BEYOND THE SCOPE OF P.. {c |}{res}        464        1.34       89.80
+{txt}PROHIBITED POSTING OF SIGNS ON PUBLIC.. {c |}{res}        396        1.14       90.94
+{txt}TREES AND SHRUBS - FAILURE TO PREVENT.. {c |}{res}        348        1.00       91.95
+{txt}PLACEMENT FOR COLLECTION STORAGE ON N.. {c |}{res}        295        0.85       92.80
+{txt}VIOLATION OF ZONING CODE             .. {c |}{res}        254        0.73       93.53
+{txt}DUMPING UNDER 25 LBS OF WASTE ON PRIV.. {c |}{res}        179        0.52       94.05
+{txt}EXTERIOR SANITARY MAINTENANCE - TRASH.. {c |}{res}        137        0.40       94.45
+{txt}ANIMAL WASTE - FAILURE TO CLEAN UP AF.. {c |}{res}        136        0.39       94.84
+{txt}UNLAWFUL DISTRIBUTION OF TOBACCO TO M.. {c |}{res}        133        0.38       95.22
+{txt}UNLICENSED OR MISUSE OF LICENSE FOR D.. {c |}{res}        131        0.38       95.60
+{txt}HUMANE CARE REQUIRED - FOOD/SHELTER/V.. {c |}{res}        119        0.34       95.95
+{txt}OUTDOOR STORAGE - FAILURE TO KEEP MAT.. {c |}{res}        110        0.32       96.26
+{txt}FAILURE TO VACCINATE OR PROVIDE CERTI.. {c |}{res}        102        0.29       96.56
+{txt}PARKING WHERE PROHIBITED             .. {c |}{res}         74        0.21       96.77
+{txt}DUMPING OVER 25 LBS OF WASTE ON PUBLI.. {c |}{res}         72        0.21       96.98
+{txt}RESTRAINTS REQUIRED OR RESTRAINTS IMP.. {c |}{res}         66        0.19       97.17
+{txt}ALARM MONITOR FAILED TO COMP. TWO CAL.. {c |}{res}         60        0.17       97.34
+{txt}PLACING/AFFIXING ADVERTISING CIRCULAR.. {c |}{res}         55        0.16       97.50
+{txt}COMPLIANCE WITH HEALTH LAWS REQUIRED .. {c |}{res}         49        0.14       97.64
+{txt}MARYLAND FRESHWATER SPORTFISHING REGS.. {c |}{res}         47        0.14       97.78
+{txt}SWIMMING PROHIBITED                  .. {c |}{res}         43        0.12       97.90
+{txt}FAILURE TO KEEP FREE OF NUISANCE/HAZA.. {c |}{res}         42        0.12       98.02
+{txt}FAILED TO OBTAIN LICENSE TO OPERATE A.. {c |}{res}         41        0.12       98.14
+{txt}EXTERIOR PEST CONTROL                .. {c |}{res}         40        0.12       98.26
+{txt}DUMPING OVER 25 LBS OF WASTE ON PRIVA.. {c |}{res}         39        0.11       98.37
+{txt}INOPERABLE VEHICLE                   .. {c |}{res}         37        0.11       98.48
+{txt}UNSAFE CONDITIONS                    .. {c |}{res}         34        0.10       98.58
+{txt}FAILURE TO PAY FALSE ALARM FEE.      .. {c |}{res}         33        0.10       98.67
+{txt}VALETED VEHICLE PARKED/STOPPED OR LEF.. {c |}{res}         32        0.09       98.76
+{txt}NEGLECT OF ANIMAL                    .. {c |}{res}         24        0.07       98.83
+{txt}USER FAILED TO REGISTER BURGLAR ALARM.. {c |}{res}         22        0.06       98.90
+{txt}OPERATING OUTSIDE OF APPROVED VALET P.. {c |}{res}         21        0.06       98.96
+{txt}SANITARY MAINTENANCE - EXTERIOR, MORE.. {c |}{res}         20        0.06       99.02
+{txt}ALARM MONITOR FAILED TO REPORT ACTIVA.. {c |}{res}         17        0.05       99.06
+{txt}SMOKING INDOORS, PROHIBITED          .. {c |}{res}         17        0.05       99.11
+{txt}FAILURE TO RAT PROOF                 .. {c |}{res}         16        0.05       99.16
+{txt}SANITARY MAINTENANCE - OCCUPANT  EXTE.. {c |}{res}         16        0.05       99.21
+{txt}VALET PARKING SERVICES ENDANGERING PU.. {c |}{res}         16        0.05       99.25
+{txt}PERMITS REQUIRED                     .. {c |}{res}         15        0.04       99.30
+{txt}SANITARY MAINTENANCE - WHEN PROPERTY .. {c |}{res}         14        0.04       99.34
+{txt}FAILURE TO REMOVE OR ABATE ALL NUISAN.. {c |}{res}         13        0.04       99.37
+{txt}SANITARY MAINTENANCE - OCCUPANT TRASH.. {c |}{res}         12        0.03       99.41
+{txt}TRESPASSING SUNSET TO SUNRISE        .. {c |}{res}         12        0.03       99.44
+{txt}REMOVAL OF HEALTH DEPARTMENT CLOSURE .. {c |}{res}         11        0.03       99.47
+{txt}DISCHARGE UNDER 25 LBS OF OFFENSIVE L.. {c |}{res}          9        0.03       99.50
+{txt}EGRESS DOORS - OPEN ABLE             .. {c |}{res}          9        0.03       99.53
+{txt}HAULING SOLID WASTE WITHOUT PROPER LI.. {c |}{res}          9        0.03       99.55
+{txt}SNOW - FAILURE TO REMOVE SNOW AND ICE.. {c |}{res}          9        0.03       99.58
+{txt}USE/POSSESSION OF ALOHOLIC BEVERAGES .. {c |}{res}          9        0.03       99.60
+{txt}FAILURE TO COOPERATE WITH HEALTH INSP.. {c |}{res}          8        0.02       99.63
+{txt}PERMITS - FOOD OPERATION WITHOUT PERM.. {c |}{res}          8        0.02       99.65
+{txt}INTERIOR SANITARY MAINTENANCE        .. {c |}{res}          7        0.02       99.67
+{txt}VIOLATION OF CORRECTIVE ACTIONS      .. {c |}{res}          7        0.02       99.69
+{txt}BOAT PERMIT VIOLATION                .. {c |}{res}          6        0.02       99.71
+{txt}OBSTRUCTING DEPARTMENTAL PERSONNEL   .. {c |}{res}          6        0.02       99.73
+{txt}PERSON IN CHARGE ALLOWING VIOLATION O.. {c |}{res}          6        0.02       99.74
+{txt}COMPLIANCE WITH PARK RULES           .. {c |}{res}          5        0.01       99.76
+{txt}FAILURE TO COMPLY                    .. {c |}{res}          5        0.01       99.77
+{txt}FISHING BY ROD, HOOK, LINE ONLY      .. {c |}{res}          5        0.01       99.79
+{txt}WADING PROHIBITED                    .. {c |}{res}          5        0.01       99.80
+{txt}EXCESSIVE NOISE                      .. {c |}{res}          4        0.01       99.81
+{txt}OWNER TO PREVENT ANIMAL NUISANCE     .. {c |}{res}          4        0.01       99.82
+{txt}ABANDONMENT OF ANIMAL                .. {c |}{res}          3        0.01       99.83
+{txt}ABUSE OF ANIMAL                      .. {c |}{res}          3        0.01       99.84
+{txt}CONTRACTOR FAILED TO REGISTER BURGLAR.. {c |}{res}          3        0.01       99.85
+{txt}FIRE VIOLATION                       .. {c |}{res}          3        0.01       99.86
+{txt}LITTERING                            .. {c |}{res}          3        0.01       99.87
+{txt}MOTORIZED VECHICLE OFF ROADWAY VIOLAT.. {c |}{res}          3        0.01       99.88
+{txt}TRESPASSING IN RESTRICTED AREA       .. {c |}{res}          3        0.01       99.88
+{txt}UNCLEAN INTERIOR - PEST CONTROL      .. {c |}{res}          3        0.01       99.89
+{txt}VALETED VEHICLE PARKED, STOPPED OR LE.. {c |}{res}          3        0.01       99.90
+{txt}CAMPING OR ERECTING TENTS            .. {c |}{res}          2        0.01       99.91
+{txt}CONTRACTED OR HIRED UNLICENSED HAULER.. {c |}{res}          2        0.01       99.91
+{txt}LICENSE REQUIRED FOR ANIMAL CLINIC/SH.. {c |}{res}          2        0.01       99.92
+{txt}MOBILE VENDING ZONES VIOLATION       .. {c |}{res}          2        0.01       99.92
+{txt}NO PERSON MAY DISTRIBUTE A PSYCHOACTI.. {c |}{res}          2        0.01       99.93
+{txt}OCCUPANCY PROHIBITED BEFORE APPROVAL .. {c |}{res}          2        0.01       99.94
+{txt}OVERCROWDING CONDITIONS - GENERAL    .. {c |}{res}          2        0.01       99.94
+{txt}SANITARY MAINTENANCE - OCCUPANT  INTE.. {c |}{res}          2        0.01       99.95
+{txt}UNLAWFUL ACTS                        .. {c |}{res}          2        0.01       99.95
+{txt}UNSAFE CONDITIONS - ACCUMULATION OF D.. {c |}{res}          2        0.01       99.96
+{txt}DANGEROUS ANIMALS                    .. {c |}{res}          1        0.00       99.96
+{txt}FAIL TO OBEY A LAWFUL ORDER          .. {c |}{res}          1        0.00       99.97
+{txt}FAIL TO PROPERLY DISPOSE OF ALL BOTTL.. {c |}{res}          1        0.00       99.97
+{txt}FAILURE TO POST PUBLIC NOTICE OF SUSP.. {c |}{res}          1        0.00       99.97
+{txt}FEEDING WILDLIFE                     .. {c |}{res}          1        0.00       99.97
+{txt}FENCE OR WALL REQUIRED               .. {c |}{res}          1        0.00       99.98
+{txt}FIREARMS VIOLATION                   .. {c |}{res}          1        0.00       99.98
+{txt}OPERATING A MOTOR VEHICLE THAT IS NOT.. {c |}{res}          1        0.00       99.98
+{txt}OPERATING WITHOUT VALID VALET PARKING.. {c |}{res}          1        0.00       99.99
+{txt}OVERCROWDING 200 OR MORE PEOPLE      .. {c |}{res}          1        0.00       99.99
+{txt}OWNER TO PREVENT ANIMAL NUISANCE, BAR.. {c |}{res}          1        0.00       99.99
+{txt}PORTABLE GASOLINE-POWERED GENERATORS... {c |}{res}          1        0.00       99.99
+{txt}STREET VENDORS/TRASH RECEPTACLES REQU.. {c |}{res}          1        0.00      100.00
+{txt}UNSAFE BUILING                       .. {c |}{res}          1        0.00      100.00
+{txt}{hline 40}{c +}{hline 35}
+                                  Total {c |}{res}     34,631      100.00
+{txt}
+{com}. 
+. tab neighborhoods_csa if year == 2018, sort plot
+
+                    {txt}neighborhoods_csa {c |}      Freq.
+{hline 38}{c +}{hline 12}{c +}{hline 27}
+                      Greenmount East {c |}{res}      2,679 {txt}{c |}***************************
+                        Belair-Edison {c |}{res}      2,223 {txt}{c |}**********************
+        Allendale/Irvington/S. Hilton {c |}{res}      1,292 {txt}{c |}*************
+                    Midway/Coldstream {c |}{res}      1,258 {txt}{c |}*************
+        Orangeville/East Highlandtown {c |}{res}      1,073 {txt}{c |}***********
+                  Southwest Baltimore {c |}{res}      1,070 {txt}{c |}***********
+      Sandtown-Winchester/Harlem Park {c |}{res}      1,021 {txt}{c |}**********
+             Morrell Park/Violetville {c |}{res}        992 {txt}{c |}**********
+                     Greater Rosemont {c |}{res}        923 {txt}{c |}*********
+                Southern Park Heights {c |}{res}        915 {txt}{c |}*********
+    Brooklyn/Curtis Bay/Hawkins Point {c |}{res}        850 {txt}{c |}*********
+                 Forest Park/Walbrook {c |}{res}        824 {txt}{c |}********
+                     Madison/East End {c |}{res}        795 {txt}{c |}********
+                          Fells Point {c |}{res}        731 {txt}{c |}*******
+                    Cedonia/Frankford {c |}{res}        724 {txt}{c |}*******
+                        Clifton-Berea {c |}{res}        720 {txt}{c |}*******
+                       Greater Govans {c |}{res}        717 {txt}{c |}*******
+                  Oldtown/Middle East {c |}{res}        717 {txt}{c |}*******
+                            Northwood {c |}{res}        712 {txt}{c |}*******
+ Medfield/Hampden/Woodberry/Remington {c |}{res}        711 {txt}{c |}*******
+                           Lauraville {c |}{res}        710 {txt}{c |}*******
+      Greater Charles Village/Barclay {c |}{res}        686 {txt}{c |}*******
+                        The Waverlies {c |}{res}        677 {txt}{c |}*******
+                             Hamilton {c |}{res}        672 {txt}{c |}*******
+            Penn North/Reservoir Hill {c |}{res}        648 {txt}{c |}*******
+            Pimlico/Arlington/Hilltop {c |}{res}        631 {txt}{c |}******
+                    Greater Mondawmin {c |}{res}        629 {txt}{c |}******
+                       Glen-Fallstaff {c |}{res}        611 {txt}{c |}******
+                 Dorchester/Ashburton {c |}{res}        557 {txt}{c |}******
+                    Edmondson Village {c |}{res}        549 {txt}{c |}******
+      Beechfield/Ten Hills/West Hills {c |}{res}        525 {txt}{c |}*****
+                         Southeastern {c |}{res}        525 {txt}{c |}*****
+          Patterson Park North & East {c |}{res}        505 {txt}{c |}*****
+       Westport/Mount Winans/Lakeland {c |}{res}        501 {txt}{c |}*****
+                           Loch Raven {c |}{res}        493 {txt}{c |}*****
+           Washington Village/Pigtown {c |}{res}        479 {txt}{c |}*****
+                     Harford/Echodale {c |}{res}        456 {txt}{c |}*****
+           Howard Park/West Arlington {c |}{res}        455 {txt}{c |}*****
+                               Canton {c |}{res}        407 {txt}{c |}****
+                      South Baltimore {c |}{res}        392 {txt}{c |}****
+                  Downtown/Seton Hill {c |}{res}        373 {txt}{c |}****
+            Chinquapin Park/Belvedere {c |}{res}        323 {txt}{c |}***
+                  Upton/Druid Heights {c |}{res}        312 {txt}{c |}***
+             Harbor East/Little Italy {c |}{res}        213 {txt}{c |}**
+Poppleton/The Terraces/Hollins Market {c |}{res}        196 {txt}{c |}**
+    North Baltimore/Guilford/Homeland {c |}{res}        182 {txt}{c |}**
+                         Highlandtown {c |}{res}        175 {txt}{c |}**
+                              Midtown {c |}{res}        169 {txt}{c |}**
+            Inner Harbor/Federal Hill {c |}{res}        167 {txt}{c |}**
+             Dickeyville/Franklintown {c |}{res}        153 {txt}{c |}**
+                          Cherry Hill {c |}{res}        110 {txt}{c |}*
+      Greater Roland Park/Poplar Hill {c |}{res}         66 {txt}{c |}*
+          Mount Washington/Coldspring {c |}{res}         43 {txt}{c |}
+              Cross-Country/Cheswolde {c |}{res}         42 {txt}{c |}
+                  Claremont/Armistead {c |}{res}         30 {txt}{c |}
+              Morell Park/Violetville {c |}{res}         20 {txt}{c |}
+                 Old Town/Middle East {c |}{res}          2 {txt}{c |}
+{hline 38}{c +}{hline 12}{c +}{hline 27}
+                                Total {c |}{res}     34,631 
+{txt}
+{com}. tab neighborhoods_csa if year == 2018, summarize(fine_amt)   
+
+                                  {txt}{c |}        Summary of FineAmount
+                neighborhoods_csa {c |}        Mean   Std. Dev.       Freq.
+{hline 34}{c +}{hline 36}
+    Allendale/Irvington/S. Hilton {c |}  {res} 102.74768    167.5396       1,292
+{txt}  Beechfield/Ten Hills/West Hills {c |}  {res} 94.380952   137.35453         525
+{txt}                    Belair-Edison {c |}  {res} 125.01125   196.76087       2,223
+{txt}Brooklyn/Curtis Bay/Hawkins Point {c |}  {res} 96.588235   128.29913         850
+{txt}                           Canton {c |}  {res} 83.906634    96.45296         407
+{txt}                Cedonia/Frankford {c |}  {res} 116.85083    165.7141         724
+{txt}                      Cherry Hill {c |}  {res} 219.09091   229.67686         110
+{txt}        Chinquapin Park/Belvedere {c |}  {res} 136.53251     191.382         323
+{txt}              Claremont/Armistead {c |}  {res}       295   249.60313          30
+{txt}                    Clifton-Berea {c |}  {res} 143.88889   196.78611         720
+{txt}          Cross-Country/Cheswolde {c |}  {res} 157.14286   228.61498          42
+{txt}         Dickeyville/Franklintown {c |}  {res} 147.38562   158.30006         153
+{txt}             Dorchester/Ashburton {c |}  {res}  205.6553   273.97515         557
+{txt}              Downtown/Seton Hill {c |}  {res} 167.69437   215.29685         373
+{txt}                Edmondson Village {c |}  {res} 143.80692   210.87645         549
+{txt}                      Fells Point {c |}  {res}  94.93844   132.65607         731
+{txt}             Forest Park/Walbrook {c |}  {res} 200.91019   264.88911         824
+{txt}                   Glen-Fallstaff {c |}  {res} 110.22913   189.47108         611
+{txt}  Greater Charles Village/Barclay {c |}  {res} 141.61808   171.44429         686
+{txt}                   Greater Govans {c |}  {res} 157.32218   233.60802         717
+{txt}                Greater Mondawmin {c |}  {res} 162.48013   233.39618         629
+{txt}  Greater Roland Park/Poplar Hill {c |}  {res}  153.0303   121.49036          66
+{txt}                 Greater Rosemont {c |}  {res} 152.16685   211.90354         923
+{txt}                  Greenmount East {c |}  {res} 359.38783   252.99358       2,679
+{txt}                         Hamilton {c |}  {res} 118.52679   174.54152         672
+{txt}         Harbor East/Little Italy {c |}  {res} 94.366197   113.54576         213
+{txt}                 Harford/Echodale {c |}  {res} 94.627193   124.25016         456
+{txt}                     Highlandtown {c |}  {res} 193.71429   242.62792         175
+{txt}       Howard Park/West Arlington {c |}  {res} 167.25275   226.98981         455
+{txt}        Inner Harbor/Federal Hill {c |}  {res} 130.53892   149.28043         167
+{txt}                       Lauraville {c |}  {res} 118.09859   177.54768         710
+{txt}                       Loch Raven {c |}  {res} 63.590264   54.454897         493
+{txt}                 Madison/East End {c |}  {res} 136.03774   188.00631         795
+{txt}Medfield/Hampden/Woodberry/Remi.. {c |}  {res} 104.07876   150.97417         711
+{txt}                          Midtown {c |}  {res} 155.91716   119.99709         169
+{txt}                Midway/Coldstream {c |}  {res} 156.43879   208.21025       1,258
+{txt}          Morell Park/Violetville {c |}  {res}        80   100.52494          20
+{txt}         Morrell Park/Violetville {c |}  {res} 115.47379   190.63592         992
+{txt}      Mount Washington/Coldspring {c |}  {res} 101.16279   147.79666          43
+{txt}North Baltimore/Guilford/Homeland {c |}  {res} 177.74725   213.84892         182
+{txt}                        Northwood {c |}  {res} 78.651685   101.78095         712
+{txt}             Old Town/Middle East {c |}  {res}        50           0           2
+{txt}              Oldtown/Middle East {c |}  {res} 175.17434   234.14263         717
+{txt}    Orangeville/East Highlandtown {c |}  {res} 92.730662       142.5       1,073
+{txt}      Patterson Park North & East {c |}  {res} 125.24752   181.76054         505
+{txt}        Penn North/Reservoir Hill {c |}  {res} 141.12654   147.94563         648
+{txt}        Pimlico/Arlington/Hilltop {c |}  {res} 167.98732   260.18413         631
+{txt}Poppleton/The Terraces/Hollins .. {c |}  {res} 99.234694   121.26228         196
+{txt}  Sandtown-Winchester/Harlem Park {c |}  {res}  166.5524   202.81177       1,021
+{txt}                  South Baltimore {c |}  {res} 92.091837   117.63314         392
+{txt}                     Southeastern {c |}  {res} 88.952381   139.62821         525
+{txt}            Southern Park Heights {c |}  {res} 130.54645   190.05276         915
+{txt}              Southwest Baltimore {c |}  {res} 167.99065   191.76493       1,070
+{txt}                    The Waverlies {c |}  {res} 167.72526   247.83768         677
+{txt}              Upton/Druid Heights {c |}  {res} 179.00641   188.28206         312
+{txt}       Washington Village/Pigtown {c |}  {res} 139.14405   183.94531         479
+{txt}   Westport/Mount Winans/Lakeland {c |}  {res} 112.97405    184.9901         501
+{txt}{hline 34}{c +}{hline 36}
+                            Total {c |}  {res} 150.40859   205.77061      34,631
+{txt}
+{com}. 
+. ** Count of citations and sum/mean fine amount by poverty share quintile for 2018
+. table quint_poverty if year == 2018,                                                                                    ///
+>         c(n citation_id sum fine_amt mean fine_amt)  format(%12.0fc)
+
+{txt}{hline 10}{c TT}{hline 41}
+5         {c |}
+quantiles {c |}
+of        {c |}
+perc_hous {c |}
+eholds_be {c |}
+low_pov   {c |} N(citatio~d)  sum(fine_~t)  mean(fine~t)
+{hline 10}{c +}{hline 41}
+        1 {c |}        {res}3,995       433,750           109
+        {txt}2 {c |}        {res}6,692       743,150           111
+        {txt}3 {c |}        {res}7,367     1,147,800           156
+        {txt}4 {c |}        {res}9,313     1,818,150           195
+        {txt}5 {c |}        {res}7,242     1,064,250           147
+{txt}{hline 10}{c BT}{hline 41}
+
+{com}. 
+. ** Count of citations and sum/mean fine amount by black share quintile for 2018
+. 
+. table quint_black if year == 2018,                                                                                              ///
+>         c(n citation_id sum fine_amt mean fine_amt)  format(%12.0fc)
+
+{txt}{hline 10}{c TT}{hline 41}
+5         {c |}
+quantiles {c |}
+of        {c |}
+perc_blac {c |}
+k_16      {c |} N(citatio~d)  sum(fine_~t)  mean(fine~t)
+{hline 10}{c +}{hline 41}
+        1 {c |}        {res}5,354       599,350           112
+        {txt}2 {c |}        {res}5,234       605,500           116
+        {txt}3 {c |}        {res}5,553       705,800           127
+        {txt}4 {c |}        {res}9,020     1,232,850           137
+        {txt}5 {c |}        {res}9,448     2,063,600           218
+{txt}{hline 10}{c BT}{hline 41}
+
+{com}. 
+. ** Count of citations and sum/mean voided amount by black share quintile for 2018
+. 
+. table quint_black if year == 2018 & total_voided_amt != 0,                                                                                              ///
+>         c(n citation_id sum total_voided_amt mean total_voided_amt)  format(%12.0fc)
+
+{txt}{hline 10}{c TT}{hline 41}
+5         {c |}
+quantiles {c |}
+of        {c |}
+perc_blac {c |}
+k_16      {c |} N(citatio~d)  sum(total~t)  mean(tota~t)
+{hline 10}{c +}{hline 41}
+        1 {c |}          {res}169        33,966           201
+        {txt}2 {c |}          {res}168        37,790           225
+        {txt}3 {c |}          {res}107        33,720           315
+        {txt}4 {c |}          {res}154        47,740           310
+        {txt}5 {c |}          {res}242       113,680           470
+{txt}{hline 10}{c BT}{hline 41}
+
+{com}. 
+. ** Count of citations and sum/mean abated amount by black share quintile for 2018
+. 
+. table quint_black if year == 2018 & total_abated_amt != 0,                                                                                              ///
+>         c(n citation_id sum total_abated_amt mean total_abated_amt)  format(%12.0fc)
+
+{txt}{hline 10}{c TT}{hline 41}
+5         {c |}
+quantiles {c |}
+of        {c |}
+perc_blac {c |}
+k_16      {c |} N(citatio~d)  sum(total~t)  mean(tota~t)
+{hline 10}{c +}{hline 41}
+        1 {c |}          {res}570       106,205           186
+        {txt}2 {c |}          {res}742       137,950           186
+        {txt}3 {c |}          {res}763       161,200           211
+        {txt}4 {c |}        {res}1,157       268,564           232
+        {txt}5 {c |}        {res}1,724       643,478           373
+{txt}{hline 10}{c BT}{hline 41}
+
+{com}. 
+. ** Count by black share quintile and common citation types for 2018     
+. tab description quint_black if year == 2018 & common == 1 
+
+                      {txt}{c |}             5 quantiles of perc_black_16 
+          Description {c |}         1          2          3          4          5 {c |}     Total
+{hline 22}{c +}{hline 55}{c +}{hline 10}
+BULK TRASH         .. {c |}{res}       573        511        599        752        505 {txt}{c |}{res}     2,940 
+{txt}CONSTRUCTION AND MA.. {c |}{res}       286        209        294        515        280 {txt}{c |}{res}     1,584 
+{txt}EXTERIOR SANITARY M.. {c |}{res}        71        259        349        316        233 {txt}{c |}{res}     1,228 
+{txt}FAILED TO ABATE UNS.. {c |}{res}       123        111        145        350        424 {txt}{c |}{res}     1,153 
+{txt}FAILED TO ABATE VIO.. {c |}{res}       272        284        371        592        563 {txt}{c |}{res}     2,082 
+{txt}FAILURE TO FILE A C.. {c |}{res}       448        437        482        871        904 {txt}{c |}{res}     3,142 
+{txt}FAILURE TO FILE ANN.. {c |}{res}        53         73        164        353        406 {txt}{c |}{res}     1,049 
+{txt}HIGH GRASS AND WEED.. {c |}{res}     1,261      1,077      1,209      1,957      1,523 {txt}{c |}{res}     7,027 
+{txt}TRASH ACCUMULATION .. {c |}{res}       961      1,006        787      1,874      1,394 {txt}{c |}{res}     6,022 
+{txt}UNREGISTERED OR INO.. {c |}{res}       117        371        322        360        403 {txt}{c |}{res}     1,573 
+{txt}{hline 22}{c +}{hline 55}{c +}{hline 10}
+                Total {c |}{res}     4,165      4,338      4,722      7,940      6,635 {txt}{c |}{res}    27,800 
+{txt}
+{com}. 
+. ** Count by black share quintile and common citation types for 2018     
+. table description quint_black if year == 2018 & common == 1, c(n citation_id) format(%12.0fc)
+
+{txt}{hline 41}{c TT}{hline 52}
+                                         {c |}            5 quantiles of perc_black_16            
+                             Description {c |}            1            2            3            4
+{hline 41}{c +}{hline 52}
+BULK TRASH                               {c |}          {res}573          511          599          752
+{txt}CONSTRUCTION AND MAINTENANCE OF STORAGE  {c |}          {res}286          209          294          515
+{txt}EXTERIOR SANITARY MAINTENANCE - GENERAL  {c |}           {res}71          259          349          316
+{txt}FAILED TO ABATE UNSAFE STRUCTURE NOTICE  {c |}          {res}123          111          145          350
+{txt}FAILED TO ABATE VIOLATION NOTICE AND ORD {c |}          {res}272          284          371          592
+{txt}FAILURE TO FILE A COMPLETED ANNUAL REGIS {c |}          {res}448          437          482          871
+{txt}FAILURE TO FILE ANNUAL VACANT BUILDING R {c |}           {res}53           73          164          353
+{txt}HIGH GRASS AND WEEDS                     {c |}        {res}1,261        1,077        1,209        1,957
+{txt}TRASH ACCUMULATION                       {c |}          {res}961        1,006          787        1,874
+{txt}UNREGISTERED OR INOPERABLE VEHICLE       {c |}          {res}117          371          322          360
+{txt}{hline 41}{c BT}{hline 52}
+
+{hline 41}{c TT}{hline 13}
+                                         {c |} 5 quantiles 
+                                         {c |}      of     
+                                         {c |}perc_black_16
+                             Description {c |}            5
+{hline 41}{c +}{hline 13}
+BULK TRASH                               {c |}          {res}505
+{txt}CONSTRUCTION AND MAINTENANCE OF STORAGE  {c |}          {res}280
+{txt}EXTERIOR SANITARY MAINTENANCE - GENERAL  {c |}          {res}233
+{txt}FAILED TO ABATE UNSAFE STRUCTURE NOTICE  {c |}          {res}424
+{txt}FAILED TO ABATE VIOLATION NOTICE AND ORD {c |}          {res}563
+{txt}FAILURE TO FILE A COMPLETED ANNUAL REGIS {c |}          {res}904
+{txt}FAILURE TO FILE ANNUAL VACANT BUILDING R {c |}          {res}406
+{txt}HIGH GRASS AND WEEDS                     {c |}        {res}1,523
+{txt}TRASH ACCUMULATION                       {c |}        {res}1,394
+{txt}UNREGISTERED OR INOPERABLE VEHICLE       {c |}          {res}403
+{txt}{hline 41}{c BT}{hline 13}
+
+{com}. 
+. 
+. ** Hearing statistics
+. 
+. tab hearing_status if year == 2018
+
+    {txt}HearingStatus {c |}      Freq.     Percent        Cum.
+{hline 18}{c +}{hline 35}
+  Default, Abated {c |}{res}        689        1.99        1.99
+{txt} Default, No Show {c |}{res}        609        1.76        3.75
+{txt}        Dismissed {c |}{res}        436        1.26        5.01
+{txt}           Guilty {c |}{res}         22        0.06        5.07
+{txt}   Guilty Reduced {c |}{res}      2,852        8.24       13.31
+{txt}Hearing Scheduled {c |}{res}        379        1.09       14.40
+{txt}               NA {c |}{res}     29,644       85.60      100.00
+{txt}{hline 18}{c +}{hline 35}
+            Total {c |}{res}     34,631      100.00
+{txt}
+{com}. 
+. gen fine_abated_share = total_abated_amt / bal_amt
+{txt}(58 missing values generated)
+
+{com}. 
+. table hearing_status quint_black if year == 2018 & hearing_status != "NA"               ///
+>          , c(n fine_amt) format(%12.0fc)
+
+{txt}{hline 18}{c TT}{hline 69}
+                  {c |}                     5 quantiles of perc_black_16                    
+    HearingStatus {c |}            1             2             3             4             5
+{hline 18}{c +}{hline 69}
+  Default, Abated {c |}          {res}101           122            94           130           242
+ {txt}Default, No Show {c |}           {res}66           105            83           166           188
+        {txt}Dismissed {c |}           {res}50            54            75            94           163
+           {txt}Guilty {c |}            {res}2                           5             5            10
+   {txt}Guilty Reduced {c |}          {res}282           431           428           664         1,046
+{txt}Hearing Scheduled {c |}           {res}56            47            94            72           110
+{txt}{hline 18}{c BT}{hline 69}
+
+{com}.         
+. table hearing_status quint_black if year == 2018 & hearing_status != "NA"               ///
+>         , c(sum fine_amt) format(%12.0fc)
+
+{txt}{hline 18}{c TT}{hline 69}
+                  {c |}                     5 quantiles of perc_black_16                    
+    HearingStatus {c |}            1             2             3             4             5
+{hline 18}{c +}{hline 69}
+  Default, Abated {c |}       {res}17,000        21,250        15,350        17,900        94,300
+ {txt}Default, No Show {c |}       {res}10,000        16,800        15,150        37,400        63,200
+        {txt}Dismissed {c |}        {res}8,650         9,650        13,850        23,200        74,800
+           {txt}Guilty {c |}          {res}300                       2,150         2,000         3,850
+   {txt}Guilty Reduced {c |}       {res}74,350        85,000       103,050       179,200       404,900
+{txt}Hearing Scheduled {c |}       {res}10,600        11,750        11,150        15,250        36,150
+{txt}{hline 18}{c BT}{hline 69}
+
+{com}.         
+. table hearing_status quint_black if year == 2018 & hearing_status != "NA"               ///
+>         , c(mean fine_abated_share ) format(%12.2fc)    
+
+{txt}{hline 18}{c TT}{hline 69}
+                  {c |}                     5 quantiles of perc_black_16                    
+    HearingStatus {c |}            1             2             3             4             5
+{hline 18}{c +}{hline 69}
+  Default, Abated {c |}         {res}1.22          1.18          1.27          1.22          1.14
+ {txt}Default, No Show {c |}         {res}0.21          0.17          0.19          0.19          0.36
+        {txt}Dismissed {c |}         {res}1.06          1.02          1.10          1.05          1.08
+           {txt}Guilty {c |}         {res}0.00                        0.00          0.01          0.61
+   {txt}Guilty Reduced {c |}         {res}0.86          0.91          0.91          0.88          0.86
+{txt}Hearing Scheduled {c |}         {res}0.12          0.07          0.12          0.20          0.35
+{txt}{hline 18}{c BT}{hline 69}
+
+{com}. 
+. 
+. 
+. 
+. clear
+{txt}
+{com}. 
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}/Users/johniselin/finesandfees_baltimore/logs/ecb_results_log.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}15 Apr 2019, 18:05:33
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}
