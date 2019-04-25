@@ -11,152 +11,67 @@ This do-file takes cleaned data from prior do-files, and (when possible) maps
 addresses to neighborhoods, and then neighborhoods to city CSA neighborhoods, 
 about which we have Census demographics. 
 
+We do not have enough information to merge data on towing, parking, 
+
+Towing -> 29.57 percent of our data can be merged
+Parking -> 11.48 percent of our data can be merged 
+
 **************************************************************************/
-
-** Merging with property tax data for addresses
-
-* Vacant Lots
-
-use "data_cleaned/vacant_lots_cleaned.dta"
-rename buildingaddress address 
-
-replace address = strlower(address)
-replace address = subinstr(address, ".", "",.) 
-replace address = strtrim(address)
-replace address = regexr(address, "street", "st")
-replace address = subinstr(address, "  ", " ",.)
-replace address = regexr(address, "place", "pl")
-replace address = regexr(address, "avenue", "ave")
-replace address = regexr(address, "rd", "road")
-
-merge m:m address using "data_cleaned/address_file.dta"
-
-tab _merge
-drop if _merge == 2
-tab _merge
-drop _merge 
-
-save "data_cleaned/vacant_lots_cleaned_merge.dta", replace
-
-clear
-
-* Towing
-
-use "data_cleaned/dot_towing_cleaned.dta", clear
-rename towedfromlocation address
-
-replace address = strlower(address)
-replace address = subinstr(address, ".", "",.) 
-replace address = strtrim(address)
-replace address = regexr(address, "street", "st")
-replace address = subinstr(address, "  ", " ",.)
-replace address = regexr(address, "place", "pl")
-replace address = regexr(address, "avenue", "ave")
-replace address = regexr(address, "rd", "road")
-
-merge m:m address using "data_cleaned/address_file.dta"
-
-tab _merge
-
-*We have a low match rate therefore we are not going to attempt to look at
-*neighborhood level statistics for towing data. See report for discussion for
-*future research.
-
-drop _merge
-drop address dataset
-
-save "data_cleaned/dot_towing_cleaned.dta", replace
-clear
-
-* Parking Citations
-
-use "data_cleaned/parking_citations_cleaned.dta", clear
-
-replace address = strlower(address)
-replace address = subinstr(address, ".", "",.) 
-replace address = strtrim(address)
-replace address = regexr(address, "street", "st")
-replace address = subinstr(address, "  ", " ",.)
-replace address = regexr(address, "place", "pl")
-replace address = regexr(address, "avenue", "ave")
-replace address = regexr(address, "rd", "road")
-
-merge m:m address using "data_cleaned/address_file.dta"
-
-tab _merge
-
-*We have a low match rate (11.48%) therefore we are not going to attempt to look at
-*neighborhood level statistics for towing data. See report for discussion for
-*future research.
-
-drop _merge
-drop address neighborhood policedistrict councildistrict location dataset
-
-save "data_cleaned/parking_citations_cleaned.dta", replace
-clear
-
-* Arrests
-
-use "data_cleaned/bpd_arrests_cleaned.dta", clear
-rename arrest_location address
-
-replace address = strlower(address)
-replace address = subinstr(address, ".", "",.) 
-replace address = strtrim(address)
-replace address = regexr(address, "street", "st")
-replace address = subinstr(address, "  ", " ",.)
-replace address = regexr(address, "place", "pl")
-replace address = regexr(address, "avenue", "ave")
-replace address = regexr(address, "rd", "road")
-
-*drop if missing(address)
-*We dropped any observation that did not have a location associated with it.
-
-merge m:m address using "data_cleaned/address_file.dta"
-tab _merge
-*We have a low match rate (6.17%) therefore we are not going to attempt to look at
-*neighborhood level statistics for towing data. See report for discussion for
-*future research.
-
-drop _merge
-drop latitude longitude post district address incident_location
-
-save "data_cleaned/bpd_arrests_cleaned.dta", replace
-
-clear
-
-
-*ECB Citations - Has city neighborhood data already included
-
-use "data_cleaned/ecb_citations_cleaned.dta", clear
-rename neighborhood neighborhoods_city
-save "data_cleaned/ecb_citations_cleaned_merge.dta", replace
-
-clear
-
-*99.79% match rate*
-
-
-
-** NOTE: Not enough data on: dot_towing_cleaned, parking_citations_cleaned, bpd_arrests
 
 * Create neighborhood dta file
 clear
-import delimited "raw_data/neighborhood_crosswalk.csv", varnames(1) 
+import delimited "raw_data/csa-to-nsa-2010.csv", varnames(1) 
+rename ïcsa2010 neighborhoods_csa
+rename nsa2010 neighborhoods_nsa
 
 save "data_cleaned/neighborhood_crosswalk.dta", replace
 
 clear
 
+
+
+*ECB Citations - Has city neighborhood data already included
+
+use "data_cleaned/ecb_citations_cleaned.dta", clear
+rename neighborhood neighborhoods_nsa
+save "data_cleaned/ecb_citations_cleaned_merge.dta", replace
+
+clear
+
+* For Vacant Lots And Arrests 
+
+
+foreach dataset in vacant_lots_cleaned bpd_arrests {
+	use "data_cleaned/`dataset'.dta", clear
+	
+	merge m:m address using "data_cleaned/address_file.dta"
+
+	tab _merge
+	drop if _merge == 2
+	tab _merge
+	rename _merge address_match
+	replace address_match = 1 if address_match == 3
+	replace address_match = 0 if address_match == 1
+	
+	rename neighborhoods_city neighborhoods_nsa
+
+	save "data_cleaned/`dataset'_merge.dta", replace
+	clear
+	
+
+}
+
+
 * For vacant_lots and ecb_citations use neighborhood designation
 * from address match derived from property tax data to matched neighbor-
 * hood (small) to neighborhood (large) to merge with census data. 
 
-foreach dataset in vacant_lots_cleaned_merge ecb_citations_cleaned_merge {
+foreach dataset in 																///
+	vacant_lots_cleaned_merge ecb_citations_cleaned_merge bpd_arrests_merge {
 	use "data_cleaned/`dataset'.dta", clear
-	drop if neighborhoods_city == ""
+	drop if neighborhoods_nsa == ""
 	
-	merge m:1 neighborhoods_city using "data_cleaned/neighborhood_crosswalk.dta"
+	merge m:1 neighborhoods_nsa using "data_cleaned/neighborhood_crosswalk.dta"
 	tab _merge
 	keep if _merge == 3
 	drop _merge

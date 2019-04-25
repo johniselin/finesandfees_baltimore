@@ -21,6 +21,19 @@ import delimited "raw_data/DOT_Towing.csv", bindquote(strict)
 sum
 de
 
+* Re-format address
+
+rename towedfromlocation address
+replace address = strlower(address)
+replace address = subinstr(address, ".", "",.) 
+replace address = strtrim(address)
+replace address = regexr(address, "street", "st")
+replace address = subinstr(address, "  ", " ",.)
+replace address = regexr(address, "place", "pl")
+replace address = regexr(address, "avenue", "ave")
+replace address = regexr(address, "rd", "road")
+
+
 
 * Re-format dates
 
@@ -44,7 +57,9 @@ drop receivingdatetime holdreleaseddatetime releasedatetime ///
 	 rollbackused pinpulled pinreplaced wheellift storagelocation ///
 	 storagetelephone personalpropremoved personalpropleftinvehicle ///
 	 trdatetime holddatetime toweddatetime stinger
+
 	 
+* Other cleaning	 
 rename totalpaid total_paid_amt
 rename towcharge tow_chg_amt
 rename propertynumber prop_id

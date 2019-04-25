@@ -1,9 +1,9 @@
 {smcl}
 {com}{sf}{ul off}{txt}{.-}
       name:  {res}<unnamed>
-       {txt}log:  {res}/Users/johniselin/finesandfees_baltimore/logs/open_data_creation_log.smcl
+       {txt}log:  {res}/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/logs/open_data_creation_log.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res}15 Apr 2019, 18:01:42
+ {txt}opened on:  {res}24 Apr 2019, 17:40:44
 {txt}
 {com}. 
 . 
@@ -129,8 +129,6 @@ Sorted by:
 {txt}
 {com}. 
 . * Re-format dates
-. 
-. 
 . gen viol_date = substr(violationdate,1,10)
 {txt}
 {com}. gen viol_time = substr(violationdate, 12, 10) 
@@ -307,7 +305,6 @@ Sorted by:
 {com}. 
 . * Re-format dates
 . 
-. 
 . gen viol_date = substr(violdate,1,10) 
 {txt}(4,530 missing values generated)
 
@@ -327,9 +324,38 @@ Sorted by:
 (2,267,418 missing values generated)
 
 {com}. 
+. * Re-format address
+. 
+. replace address = strlower(address)
+{txt}(3,061,816 real changes made)
+
+{com}. replace address = subinstr(address, ".", "",.) 
+{txt}(48,354 real changes made)
+
+{com}. replace address = strtrim(address)
+{txt}(135 real changes made)
+
+{com}. replace address = regexr(address, "street", "st")
+{txt}(548 real changes made)
+
+{com}. replace address = subinstr(address, "  ", " ",.)
+{txt}(675 real changes made)
+
+{com}. replace address = regexr(address, "place", "pl")
+{txt}(568 real changes made)
+
+{com}. replace address = regexr(address, "avenue", "ave")
+{txt}(4,494 real changes made)
+
+{com}. replace address = regexr(address, "rd", "road")
+{txt}variable {bf}address{sf} was {bf}{res}str30{sf}{txt} now {bf}{res}str32{sf}
+{txt}(480,468 real changes made)
+
+{com}. 
+. 
 . * Clean Dataset
 . 
-. drop violdate importdate penaltydate 
+. drop importdate penaltydate neighborhood policedistrict councildistrict location
 {txt}
 {com}. 
 . rename violcode viol_code
@@ -494,6 +520,36 @@ Sorted by:
 {res}     Note: Dataset has changed since last saved.
 {txt}
 {com}. 
+. * Re-format address
+. 
+. rename towedfromlocation address
+{res}{txt}
+{com}. replace address = strlower(address)
+{txt}(60,965 real changes made)
+
+{com}. replace address = subinstr(address, ".", "",.) 
+{txt}(1,633 real changes made)
+
+{com}. replace address = strtrim(address)
+{txt}(25,990 real changes made)
+
+{com}. replace address = regexr(address, "street", "st")
+{txt}(8,323 real changes made)
+
+{com}. replace address = subinstr(address, "  ", " ",.)
+{txt}(30,384 real changes made)
+
+{com}. replace address = regexr(address, "place", "pl")
+{txt}(172 real changes made)
+
+{com}. replace address = regexr(address, "avenue", "ave")
+{txt}(80 real changes made)
+
+{com}. replace address = regexr(address, "rd", "road")
+{txt}(8,166 real changes made)
+
+{com}. 
+. 
 . 
 . * Re-format dates
 . 
@@ -532,7 +588,9 @@ Sorted by:
 >          storagetelephone personalpropremoved personalpropleftinvehicle ///
 >          trdatetime holddatetime toweddatetime stinger
 {txt}
-{com}.          
+{com}. 
+.          
+. * Other cleaning         
 . rename totalpaid total_paid_amt
 {res}{txt}
 {com}. rename towcharge tow_chg_amt
@@ -628,17 +686,40 @@ Sorted by:
 {res}     Note: Dataset has changed since last saved.
 {txt}
 {com}. 
-. replace buildingaddress = strtrim(buildingaddress)
-{txt}(183 real changes made)
-
-{com}. replace buildingaddress = strlower(buildingaddress)
+. * Clean Address Var
+. 
+. rename buildingaddress address  
+{res}{txt}
+{com}. replace address = strlower(address)
 {txt}(16,747 real changes made)
 
+{com}. replace address = subinstr(address, ".", "",.) 
+{txt}(1 real change made)
+
+{com}. replace address = strtrim(address)
+{txt}(183 real changes made)
+
+{com}. replace address = regexr(address, "street", "st")
+{txt}(0 real changes made)
+
+{com}. replace address = subinstr(address, "  ", " ",.)
+{txt}(0 real changes made)
+
+{com}. replace address = regexr(address, "place", "pl")
+{txt}(0 real changes made)
+
+{com}. replace address = regexr(address, "avenue", "ave")
+{txt}(0 real changes made)
+
+{com}. replace address = regexr(address, "rd", "road")
+{txt}(626 real changes made)
+
 {com}. 
+. 
+. * Clean Date Var
+. 
 . rename noticedate notice_date
 {res}{txt}
-{com}. drop censusneighborhoods neighborhood 
-{txt}
 {com}. 
 . foreach var of varlist ///
 > notice_date {c -(}
@@ -650,7 +731,11 @@ Sorted by:
 {txt}  7{com}. {c )-}
 {txt}
 {com}. 
+. * Other Cleaning
+. 
 . gen dataset = "vacant_lots"
+{txt}
+{com}. drop censusneighborhoods  
 {txt}
 {com}. 
 . save "data_cleaned/vacant_lots_cleaned.dta", replace
@@ -851,11 +936,98 @@ Sorted by:
 {com}. 
 . xtile quint_female_head = female_head_16 [fw = total_pop_2010], n(5)
 {txt}
-{com}. xtile quint_workingage = working_16 [fw = total_pop_2010], n(5)
+{com}. table quint_female_head, c(max female_head_16 min female_head_16)
+
+{txt}{hline 10}{c TT}{hline 29}
+5         {c |}
+quantiles {c |}
+of        {c |}
+female_he {c |}
+ad_16     {c |} max(femal~16)  min(femal~16)
+{hline 10}{c +}{hline 29}
+        1 {c |}      {res}34.21384       9.090909
+        {txt}2 {c |}      {res}45.86666       35.50835
+        {txt}3 {c |}      {res}59.11745       46.88581
+        {txt}4 {c |}      {res}69.74384       59.72222
+        {txt}5 {c |}      {res}91.75662       72.98578
+{txt}{hline 10}{c BT}{hline 29}
+
+{com}. 
+. xtile quint_workingage = working_16 [fw = total_pop_2010], n(5)
 {txt}
-{com}. xtile quint_black = perc_black_16 [fw = total_pop_2010], n(5)
+{com}. table quint_workingage, c(max working_16 min working_16)
+
+{txt}{hline 10}{c TT}{hline 29}
+5         {c |}
+quantiles {c |}
+of        {c |}
+working_1 {c |}
+6         {c |} max(worki~16)  min(worki~16)
+{hline 10}{c +}{hline 29}
+        1 {c |}      {res}50.32619       42.09673
+        {txt}2 {c |}      {res}52.78714       50.48422
+        {txt}3 {c |}      {res}56.02241       53.42604
+        {txt}4 {c |}       {res}61.4264       56.03173
+        {txt}5 {c |}      {res}77.19891       62.68954
+{txt}{hline 10}{c BT}{hline 29}
+
+{com}. 
+. xtile quint_black = perc_black_16 [fw = total_pop_2010], n(5)
 {txt}
-{com}. xtile quint_poverty = perc_households_below_pov [fw = total_pop_2010], n(5)
+{com}. table quint_black, c(max perc_black_16 min perc_black_16)
+
+{txt}{hline 10}{c TT}{hline 29}
+5         {c |}
+quantiles {c |}
+of        {c |}
+perc_blac {c |}
+k_16      {c |} max(perc_~16)  min(perc_~16)
+{hline 10}{c +}{hline 29}
+        1 {c |}      {res}29.77608       1.726247
+        {txt}2 {c |}      {res}63.12074       31.23338
+        {txt}3 {c |}      {res}84.55836        63.1395
+        {txt}4 {c |}      {res}93.46054       84.93204
+        {txt}5 {c |}      {res}96.61292       93.83085
+{txt}{hline 10}{c BT}{hline 29}
+
+{com}. label define pct_black 1 "1.7% to 29.8%" 2 "31.2% to 63.1%" 3 "63.1% to 84.6%"  ///
+>         4 "84.9% to 93.5%" 5 "93.8% to 96.6%"
+{txt}
+{com}. label values quint_black pct_black
+{txt}
+{com}. label variable quint_black "Quintiles by Black Share of Residents"
+{txt}
+{com}. 
+. 
+. xtile quint_poverty = perc_households_below_pov [fw = total_pop_2010], n(5)
+{txt}
+{com}. table quint_poverty, c(max perc_households_below_pov min perc_households_below_pov)
+
+{txt}{hline 10}{c TT}{hline 29}
+5         {c |}
+quantiles {c |}
+of        {c |}
+perc_hous {c |}
+eholds_be {c |}
+low_pov   {c |} max(perc_h~v)  min(perc_h~v)
+{hline 10}{c +}{hline 29}
+        1 {c |}      {res}8.064516        .811908
+        {txt}2 {c |}      {res}15.10778       8.983385
+        {txt}3 {c |}      {res}19.85019       15.35494
+        {txt}4 {c |}      {res}26.33375       20.29574
+        {txt}5 {c |}      {res}47.65458       29.24208
+{txt}{hline 10}{c BT}{hline 29}
+
+{com}. label define pct_poverty 1 "0.8% to 8.1%" 2 "10.0% to 15.1%" 3 "15.4% to 19.9%" ///
+>         4 "20.3% to 26.3%" 5 "29.2% to 47.7%"
+{txt}
+{com}. label values quint_poverty pct_poverty
+{txt}
+{com}. label variable quint_poverty "Quintiles by Share of Residents in Poverty"
+{txt}
+{com}. 
+. 
+. label data
 {txt}
 {com}. 
 . save "data_cleaned/census_data_cleaned.dta", replace
@@ -864,6 +1036,173 @@ Sorted by:
 {com}. clear 
 {txt}
 {com}. 
+. 
+. 
+. 
+{txt}end of do-file
+
+{com}. 
+. * Run BPD Data code 
+. do "do_files/do_file_arrest.do"
+{txt}
+{com}. 
+. /***********************************************************************
+> Author: John Iselin
+> Date: Spring 2019
+> 
+> Goldman School of Public Policy 
+> Masters in Public Policy Program
+> Introduction to Policy Analysis 
+> Fines and Fees in Baltimore
+> 
+> This do-file downloads, cleans, and uses data from Baltimore's Open data system.
+> https://data.baltimorecity.gov/
+> 
+> 
+> Downloaded from: https://data.baltimorecity.gov/Public-Safety/BPD-Arrests/3i3v-ibrt
+> 
+> Note: Commas in the dollar amounts in theft cases of "charge_desc" mean that 
+>                 in some cases the columns are offset, shoudl fix in a later version 
+> **************************************************************************/
+. 
+. clear
+{txt}
+{com}. 
+. import delimited "raw_data/BPD_Arrests.csv", bindquote(strict) 
+{res}{text}(20 vars, 138,016 obs)
+
+{com}. 
+. sum
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 6}arrest {c |}{res}    131,290    1.59e+07     1512098   1.40e+07   1.90e+07
+{txt}{space 9}age {c |}{res}    137,976    32.89416    11.45099         14        100
+{txt}{space 9}sex {c |}{res}          0
+{txt}{space 8}race {c |}{res}          0
+{txt}{space 2}arrestdate {c |}{res}          0
+{txt}{hline 13}{c +}{hline 57}
+{space 2}arresttime {c |}{res}          0
+{txt}arrestloca~n {c |}{res}          0
+{txt}incidentof~e {c |}{res}          0
+{txt}incidentlo~n {c |}{res}          0
+{txt}{space 6}charge {c |}{res}          0
+{txt}{hline 13}{c +}{hline 57}
+chargedesc~n {c |}{res}          0
+{txt}{space 4}district {c |}{res}          0
+{txt}{space 8}post {c |}{res}          0
+{txt}neighborhood {c |}{res}          0
+{txt}{space 3}longitude {c |}{res}          0
+{txt}{hline 13}{c +}{hline 57}
+{space 4}latitude {c |}{res}          0
+{txt}{space 3}location1 {c |}{res}          0
+{txt}censusneig~s {c |}{res}          0
+{txt}censusward~s {c |}{res}          0
+{txt}{space 4}zipcodes {c |}{res}          0
+{txt}
+{com}. de
+
+{txt}Contains data
+  obs:{res}       138,016                          
+{txt} vars:{res}            20                          
+{txt} size:{res}    38,368,448                          
+{txt}{hline}
+              storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:arrest         }{txt}{bind: long    }{bind:{txt}%12.0g    }{space 1}{bind:         }{bind:  }{res}{res}Arrest{p_end}
+{p 0 48}{bind:age            }{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}Age{p_end}
+{p 0 48}{bind:sex            }{txt}{bind: str1    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}Sex{p_end}
+{p 0 48}{bind:race           }{txt}{bind: str1    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}Race{p_end}
+{p 0 48}{bind:arrestdate     }{txt}{bind: str10   }{bind:{txt}%10s      }{space 1}{bind:         }{bind:  }{res}{res}ArrestDate{p_end}
+{p 0 48}{bind:arresttime     }{txt}{bind: str5    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}ArrestTime{p_end}
+{p 0 48}{bind:arrestlocation }{txt}{bind: str30   }{bind:{txt}%30s      }{space 1}{bind:         }{bind:  }{res}{res}ArrestLocation{p_end}
+{p 0 48}{bind:incidentoffense}{txt}{bind: str41   }{bind:{txt}%41s      }{space 1}{bind:         }{bind:  }{res}{res}IncidentOffense{p_end}
+{p 0 48}{bind:incidentlocat~n}{txt}{bind: str30   }{bind:{txt}%30s      }{space 1}{bind:         }{bind:  }{res}{res}IncidentLocation{p_end}
+{p 0 48}{bind:charge         }{txt}{bind: str24   }{bind:{txt}%24s      }{space 1}{bind:         }{bind:  }{res}{res}Charge{p_end}
+{p 0 48}{bind:chargedescrip~n}{txt}{bind: str30   }{bind:{txt}%30s      }{space 1}{bind:         }{bind:  }{res}{res}ChargeDescription{p_end}
+{p 0 48}{bind:district       }{txt}{bind: str21   }{bind:{txt}%21s      }{space 1}{bind:         }{bind:  }{res}{res}District{p_end}
+{p 0 48}{bind:post           }{txt}{bind: str20   }{bind:{txt}%20s      }{space 1}{bind:         }{bind:  }{res}{res}Post{p_end}
+{p 0 48}{bind:neighborhood   }{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}Neighborhood{p_end}
+{p 0 48}{bind:longitude      }{txt}{bind: str32   }{bind:{txt}%32s      }{space 1}{bind:         }{bind:  }{res}{res}Longitude{p_end}
+{p 0 48}{bind:latitude       }{txt}{bind: str23   }{bind:{txt}%23s      }{space 1}{bind:         }{bind:  }{res}{res}Latitude{p_end}
+{p 0 48}{bind:location1      }{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}Location 1{p_end}
+{p 0 48}{bind:censusneighbo~s}{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}2010 Census Neighborhoods{p_end}
+{p 0 48}{bind:censuswardspr~s}{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}2010 Census Wards Precincts{p_end}
+{p 0 48}{bind:zipcodes       }{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}Zip Codes{p_end}
+{txt}{hline}
+Sorted by: 
+{res}     Note: Dataset has changed since last saved.
+{txt}
+{com}. 
+. * Re-format dates
+. rename arrestdate arrest_date
+{res}{txt}
+{com}. foreach var of varlist ///
+> arrest_date  {c -(}
+{txt}  2{com}.         gen test = date(`var' , "MDY")
+{txt}  3{com}.         drop `var'
+{txt}  4{com}.         gen `var' = test
+{txt}  5{com}.         format `var'  %td
+{txt}  6{com}.         drop test
+{txt}  7{com}. {c )-}
+{txt}
+{com}. 
+. * Re-format location
+. * Note incidentlocation == arrestlocation
+. 
+. rename arrestlocation arrest_address
+{res}{txt}
+{com}. replace arrest_address = strlower(arrest_address)
+{txt}(75,017 real changes made)
+
+{com}. replace arrest_address = subinstr(arrest_address, ".", "",.) 
+{txt}(1,306 real changes made)
+
+{com}. replace arrest_address = strtrim(arrest_address)
+{txt}(0 real changes made)
+
+{com}. replace arrest_address = regexr(arrest_address, "street", "st")
+{txt}(90 real changes made)
+
+{com}. replace arrest_address = subinstr(arrest_address, "  ", " ",.)
+{txt}(27 real changes made)
+
+{com}. replace arrest_address = regexr(arrest_address, "place", "pl")
+{txt}(15 real changes made)
+
+{com}. replace arrest_address = regexr(arrest_address, "avenue", "ave")
+{txt}(32 real changes made)
+
+{com}. replace arrest_address = regexr(arrest_address, "rd", "road")
+{txt}(10,425 real changes made)
+
+{com}. rename arrest_address address
+{res}{txt}
+{com}. 
+. * Clean / rename other vars
+. drop location1 censuswardsprecincts zipcodes arresttime incidentlocation
+{txt}
+{com}. drop latitude longitude post district  
+{txt}
+{com}. 
+. rename arrest arrest_id
+{res}{txt}
+{com}. rename incidentoffense incident_offense
+{res}{txt}
+{com}. rename chargedescription charge_desc
+{res}{txt}
+{com}. 
+. order arrest_id arrest_date 
+{txt}
+{com}. 
+. save "data_cleaned/bpd_arrests.dta", replace
+{txt}file data_cleaned/bpd_arrests.dta saved
+
+{com}. clear
+{txt}
+{com}. 
+. 
 . 
 . 
 . 
@@ -1013,159 +1352,6 @@ Sorted by:
 {txt}end of do-file
 
 {com}. 
-. * Run BPD Arrests Code
-. do "do_files/do_file_arrest.do"
-{txt}
-{com}. 
-. /***********************************************************************
-> Author: John Iselin
-> Date: Spring 2019
-> 
-> Goldman School of Public Policy 
-> Masters in Public Policy Program
-> Introduction to Policy Analysis 
-> Fines and Fees in Baltimore
-> 
-> This do-file downloads, cleans, and uses data from Baltimore's Open data system.
-> https://data.baltimorecity.gov/
-> 
-> 
-> Downloaded from: https://data.baltimorecity.gov/Public-Safety/BPD-Arrests/3i3v-ibrt
-> 
-> Note: Commas in the dollar amounts in theft cases of "charge_desc" mean that 
->                 in some cases the columns are offset, shoudl fix in a later version 
-> **************************************************************************/
-. 
-. clear
-{txt}
-{com}. 
-. import delimited "raw_data/BPD_Arrests.csv", bindquote(strict) 
-{res}{text}(20 vars, 138,016 obs)
-
-{com}. 
-. sum
-
-{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
-{hline 13}{c +}{hline 57}
-{space 6}arrest {c |}{res}    131,290    1.59e+07     1512098   1.40e+07   1.90e+07
-{txt}{space 9}age {c |}{res}    137,976    32.89416    11.45099         14        100
-{txt}{space 9}sex {c |}{res}          0
-{txt}{space 8}race {c |}{res}          0
-{txt}{space 2}arrestdate {c |}{res}          0
-{txt}{hline 13}{c +}{hline 57}
-{space 2}arresttime {c |}{res}          0
-{txt}arrestloca~n {c |}{res}          0
-{txt}incidentof~e {c |}{res}          0
-{txt}incidentlo~n {c |}{res}          0
-{txt}{space 6}charge {c |}{res}          0
-{txt}{hline 13}{c +}{hline 57}
-chargedesc~n {c |}{res}          0
-{txt}{space 4}district {c |}{res}          0
-{txt}{space 8}post {c |}{res}          0
-{txt}neighborhood {c |}{res}          0
-{txt}{space 3}longitude {c |}{res}          0
-{txt}{hline 13}{c +}{hline 57}
-{space 4}latitude {c |}{res}          0
-{txt}{space 3}location1 {c |}{res}          0
-{txt}censusneig~s {c |}{res}          0
-{txt}censusward~s {c |}{res}          0
-{txt}{space 4}zipcodes {c |}{res}          0
-{txt}
-{com}. de
-
-{txt}Contains data
-  obs:{res}       138,016                          
-{txt} vars:{res}            20                          
-{txt} size:{res}    38,368,448                          
-{txt}{hline}
-              storage   display    value
-variable name   type    format     label      variable label
-{hline}
-{p 0 48}{res}{bind:arrest         }{txt}{bind: long    }{bind:{txt}%12.0g    }{space 1}{bind:         }{bind:  }{res}{res}Arrest{p_end}
-{p 0 48}{bind:age            }{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}Age{p_end}
-{p 0 48}{bind:sex            }{txt}{bind: str1    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}Sex{p_end}
-{p 0 48}{bind:race           }{txt}{bind: str1    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}Race{p_end}
-{p 0 48}{bind:arrestdate     }{txt}{bind: str10   }{bind:{txt}%10s      }{space 1}{bind:         }{bind:  }{res}{res}ArrestDate{p_end}
-{p 0 48}{bind:arresttime     }{txt}{bind: str5    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}ArrestTime{p_end}
-{p 0 48}{bind:arrestlocation }{txt}{bind: str30   }{bind:{txt}%30s      }{space 1}{bind:         }{bind:  }{res}{res}ArrestLocation{p_end}
-{p 0 48}{bind:incidentoffense}{txt}{bind: str41   }{bind:{txt}%41s      }{space 1}{bind:         }{bind:  }{res}{res}IncidentOffense{p_end}
-{p 0 48}{bind:incidentlocat~n}{txt}{bind: str30   }{bind:{txt}%30s      }{space 1}{bind:         }{bind:  }{res}{res}IncidentLocation{p_end}
-{p 0 48}{bind:charge         }{txt}{bind: str24   }{bind:{txt}%24s      }{space 1}{bind:         }{bind:  }{res}{res}Charge{p_end}
-{p 0 48}{bind:chargedescrip~n}{txt}{bind: str30   }{bind:{txt}%30s      }{space 1}{bind:         }{bind:  }{res}{res}ChargeDescription{p_end}
-{p 0 48}{bind:district       }{txt}{bind: str21   }{bind:{txt}%21s      }{space 1}{bind:         }{bind:  }{res}{res}District{p_end}
-{p 0 48}{bind:post           }{txt}{bind: str20   }{bind:{txt}%20s      }{space 1}{bind:         }{bind:  }{res}{res}Post{p_end}
-{p 0 48}{bind:neighborhood   }{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}Neighborhood{p_end}
-{p 0 48}{bind:longitude      }{txt}{bind: str32   }{bind:{txt}%32s      }{space 1}{bind:         }{bind:  }{res}{res}Longitude{p_end}
-{p 0 48}{bind:latitude       }{txt}{bind: str23   }{bind:{txt}%23s      }{space 1}{bind:         }{bind:  }{res}{res}Latitude{p_end}
-{p 0 48}{bind:location1      }{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}Location 1{p_end}
-{p 0 48}{bind:censusneighbo~s}{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}2010 Census Neighborhoods{p_end}
-{p 0 48}{bind:censuswardspr~s}{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}2010 Census Wards Precincts{p_end}
-{p 0 48}{bind:zipcodes       }{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}Zip Codes{p_end}
-{txt}{hline}
-Sorted by: 
-{res}     Note: Dataset has changed since last saved.
-{txt}
-{com}. 
-. * Re-format dates
-. 
-. foreach var of varlist ///
-> arrestdate  {c -(}
-{txt}  2{com}.         gen test = date(`var' , "MDY")
-{txt}  3{com}.         drop `var'
-{txt}  4{com}.         gen `var' = test
-{txt}  5{com}.         format `var'  %td
-{txt}  6{com}.         drop test
-{txt}  7{com}. {c )-}
-{txt}
-{com}. 
-. * Clean / rename other vars
-. drop location1 neighborhood censusneighborhoods censuswardsprecincts zipcodes   ///
->                 arresttime 
-{txt}
-{com}. 
-. 
-. rename arrestdate arrest_date
-{res}{txt}
-{com}. rename arrestlocation arrest_location
-{res}{txt}
-{com}. rename incidentlocation incident_location
-{res}{txt}
-{com}. rename arrest arrest_id
-{res}{txt}
-{com}. rename incidentoffense incident_offense
-{res}{txt}
-{com}. rename chargedescription charge_desc
-{res}{txt}
-{com}. 
-. replace arrest_location = strlower(arrest_location)
-{txt}(75,017 real changes made)
-
-{com}. replace incident_location = strlower(incident_location)
-{txt}(75,017 real changes made)
-
-{com}. replace arrest_location = strtrim(arrest_location)
-{txt}(0 real changes made)
-
-{com}. replace incident_location = strtrim(incident_location)
-{txt}(0 real changes made)
-
-{com}. 
-. order arrest_id arrest_date 
-{txt}
-{com}. 
-. save "data_cleaned/bpd_arrests_cleaned.dta", replace
-{txt}file data_cleaned/bpd_arrests_cleaned.dta saved
-
-{com}. clear
-{txt}
-{com}. 
-. 
-. 
-. 
-. 
-{txt}end of do-file
-
-{com}. 
 . * Run Address Merge Code
 . do "do_files/do_file_address_merge.do"
 {txt}
@@ -1182,43 +1368,68 @@ Sorted by:
 > addresses to neighborhoods, and then neighborhoods to city CSA neighborhoods, 
 > about which we have Census demographics. 
 > 
+> We do not have enough information to merge data on towing, parking, 
+> 
+> Towing -> 29.57 percent of our data can be merged
+> Parking -> 11.48 percent of our data can be merged 
+> 
 > **************************************************************************/
 . 
-. ** Merging with property tax data for addresses
-. 
-. * Vacant Lots
-. 
-. use "data_cleaned/vacant_lots_cleaned.dta"
+. * Create neighborhood dta file
+. clear
 {txt}
-{com}. rename buildingaddress address 
+{com}. import delimited "raw_data/csa-to-nsa-2010.csv", varnames(1) 
+{res}{text}(2 vars, 277 obs)
+
+{com}. rename ïcsa2010 neighborhoods_csa
+{res}{txt}
+{com}. rename nsa2010 neighborhoods_nsa
 {res}{txt}
 {com}. 
-. replace address = strlower(address)
-{txt}(0 real changes made)
-
-{com}. replace address = subinstr(address, ".", "",.) 
-{txt}(1 real change made)
-
-{com}. replace address = strtrim(address)
-{txt}(0 real changes made)
-
-{com}. replace address = regexr(address, "street", "st")
-{txt}(0 real changes made)
-
-{com}. replace address = subinstr(address, "  ", " ",.)
-{txt}(0 real changes made)
-
-{com}. replace address = regexr(address, "place", "pl")
-{txt}(0 real changes made)
-
-{com}. replace address = regexr(address, "avenue", "ave")
-{txt}(0 real changes made)
-
-{com}. replace address = regexr(address, "rd", "road")
-{txt}(626 real changes made)
+. save "data_cleaned/neighborhood_crosswalk.dta", replace
+{txt}file data_cleaned/neighborhood_crosswalk.dta saved
 
 {com}. 
-. merge m:m address using "data_cleaned/address_file.dta"
+. clear
+{txt}
+{com}. 
+. 
+. 
+. *ECB Citations - Has city neighborhood data already included
+. 
+. use "data_cleaned/ecb_citations_cleaned.dta", clear
+{txt}
+{com}. rename neighborhood neighborhoods_nsa
+{res}{txt}
+{com}. save "data_cleaned/ecb_citations_cleaned_merge.dta", replace
+{txt}file data_cleaned/ecb_citations_cleaned_merge.dta saved
+
+{com}. 
+. clear
+{txt}
+{com}. 
+. * For Vacant Lots And Arrests 
+. 
+. 
+. foreach dataset in vacant_lots_cleaned bpd_arrests {c -(}
+{txt}  2{com}.         use "data_cleaned/`dataset'.dta", clear
+{txt}  3{com}.         
+.         merge m:m address using "data_cleaned/address_file.dta"
+{txt}  4{com}. 
+.         tab _merge
+{txt}  5{com}.         drop if _merge == 2
+{txt}  6{com}.         tab _merge
+{txt}  7{com}.         rename _merge address_match
+{txt}  8{com}.         replace address_match = 1 if address_match == 3
+{txt}  9{com}.         replace address_match = 0 if address_match == 1
+{txt} 10{com}.         
+.         rename neighborhoods_city neighborhoods_nsa
+{txt} 11{com}. 
+.         save "data_cleaned/`dataset'_merge.dta", replace
+{txt} 12{com}.         clear
+{txt} 13{com}.         
+. 
+. {c )-}
 {res}{txt}{p 0 7 2}
 (note: variable
 address was 
@@ -1234,219 +1445,24 @@ str28, now str35 to accommodate using data's values)
 {col 5}matched{col 30}{res}          16,543{txt}  (_merge==3)
 {col 5}{hline 41}
 
-{com}. 
-. tab _merge
-
-                 {txt}_merge {c |}      Freq.     Percent        Cum.
+                 _merge {c |}      Freq.     Percent        Cum.
 {hline 24}{c +}{hline 35}
         master only (1) {c |}{res}        224        0.09        0.09
 {txt}         using only (2) {c |}{res}    222,069       92.98       93.07
 {txt}            matched (3) {c |}{res}     16,543        6.93      100.00
 {txt}{hline 24}{c +}{hline 35}
                   Total {c |}{res}    238,836      100.00
-{txt}
-{com}. drop if _merge == 2
 {txt}(222,069 observations deleted)
 
-{com}. tab _merge
-
-                 {txt}_merge {c |}      Freq.     Percent        Cum.
+                 _merge {c |}      Freq.     Percent        Cum.
 {hline 24}{c +}{hline 35}
         master only (1) {c |}{res}        224        1.34        1.34
 {txt}            matched (3) {c |}{res}     16,543       98.66      100.00
 {txt}{hline 24}{c +}{hline 35}
                   Total {c |}{res}     16,767      100.00
-{txt}
-{com}. drop _merge 
-{txt}
-{com}. 
-. save "data_cleaned/vacant_lots_cleaned_merge.dta", replace
-{txt}file data_cleaned/vacant_lots_cleaned_merge.dta saved
-
-{com}. 
-. clear
-{txt}
-{com}. 
-. * Towing
-. 
-. use "data_cleaned/dot_towing_cleaned.dta", clear
-{txt}
-{com}. rename towedfromlocation address
-{res}{txt}
-{com}. 
-. replace address = strlower(address)
-{txt}(60,965 real changes made)
-
-{com}. replace address = subinstr(address, ".", "",.) 
-{txt}(1,633 real changes made)
-
-{com}. replace address = strtrim(address)
-{txt}(25,990 real changes made)
-
-{com}. replace address = regexr(address, "street", "st")
-{txt}(8,323 real changes made)
-
-{com}. replace address = subinstr(address, "  ", " ",.)
-{txt}(30,384 real changes made)
-
-{com}. replace address = regexr(address, "place", "pl")
-{txt}(172 real changes made)
-
-{com}. replace address = regexr(address, "avenue", "ave")
-{txt}(80 real changes made)
-
-{com}. replace address = regexr(address, "rd", "road")
-{txt}(8,166 real changes made)
-
-{com}. 
-. merge m:m address using "data_cleaned/address_file.dta"
-{res}
-{txt}{col 5}Result{col 38}# of obs.
-{col 5}{hline 41}
-{col 5}not matched{col 30}{res}         274,379
-{txt}{col 9}from master{col 30}{res}          43,192{txt}  (_merge==1)
-{col 9}from using{col 30}{res}         231,187{txt}  (_merge==2)
-
-{col 5}matched{col 30}{res}          18,135{txt}  (_merge==3)
-{col 5}{hline 41}
-
-{com}. 
-. tab _merge
-
-                 {txt}_merge {c |}      Freq.     Percent        Cum.
-{hline 24}{c +}{hline 35}
-        master only (1) {c |}{res}     43,192       14.77       14.77
-{txt}         using only (2) {c |}{res}    231,187       79.03       93.80
-{txt}            matched (3) {c |}{res}     18,135        6.20      100.00
-{txt}{hline 24}{c +}{hline 35}
-                  Total {c |}{res}    292,514      100.00
-{txt}
-{com}. 
-. *We have a low match rate therefore we are not going to attempt to look at
-. *neighborhood level statistics for towing data. See report for discussion for
-. *future research.
-. 
-. drop _merge
-{txt}
-{com}. drop address dataset
-{txt}
-{com}. 
-. save "data_cleaned/dot_towing_cleaned.dta", replace
-{txt}file data_cleaned/dot_towing_cleaned.dta saved
-
-{com}. clear
-{txt}
-{com}. 
-. * Parking Citations
-. 
-. use "data_cleaned/parking_citations_cleaned.dta", clear
-{txt}
-{com}. 
-. replace address = strlower(address)
-{txt}(3,061,816 real changes made)
-
-{com}. replace address = subinstr(address, ".", "",.) 
-{txt}(48,354 real changes made)
-
-{com}. replace address = strtrim(address)
-{txt}(135 real changes made)
-
-{com}. replace address = regexr(address, "street", "st")
-{txt}(548 real changes made)
-
-{com}. replace address = subinstr(address, "  ", " ",.)
-{txt}(675 real changes made)
-
-{com}. replace address = regexr(address, "place", "pl")
-{txt}(568 real changes made)
-
-{com}. replace address = regexr(address, "avenue", "ave")
-{txt}(4,494 real changes made)
-
-{com}. replace address = regexr(address, "rd", "road")
-{txt}variable {bf}address{sf} was {bf}{res}str30{sf}{txt} now {bf}{res}str32{sf}
-{txt}(480,468 real changes made)
-
-{com}. 
-. merge m:m address using "data_cleaned/address_file.dta"
-{res}{txt}{p 0 7 2}
-(note: variable
-address was 
-str32, now str35 to accommodate using data's values)
-{p_end}
-
-{col 5}Result{col 38}# of obs.
-{col 5}{hline 41}
-{col 5}not matched{col 30}{res}       2,903,245
-{txt}{col 9}from master{col 30}{res}       2,685,707{txt}  (_merge==1)
-{col 9}from using{col 30}{res}         217,538{txt}  (_merge==2)
-
-{col 5}matched{col 30}{res}         376,635{txt}  (_merge==3)
-{col 5}{hline 41}
-
-{com}. 
-. tab _merge
-
-                 {txt}_merge {c |}      Freq.     Percent        Cum.
-{hline 24}{c +}{hline 35}
-        master only (1) {c |}{res}  2,685,707       81.88       81.88
-{txt}         using only (2) {c |}{res}    217,538        6.63       88.52
-{txt}            matched (3) {c |}{res}    376,635       11.48      100.00
-{txt}{hline 24}{c +}{hline 35}
-                  Total {c |}{res}  3,279,880      100.00
-{txt}
-{com}. 
-. *We have a low match rate (11.48%) therefore we are not going to attempt to look at
-. *neighborhood level statistics for towing data. See report for discussion for
-. *future research.
-. 
-. drop _merge
-{txt}
-{com}. drop address neighborhood policedistrict councildistrict location dataset
-{txt}
-{com}. 
-. save "data_cleaned/parking_citations_cleaned.dta", replace
-{txt}file data_cleaned/parking_citations_cleaned.dta saved
-
-{com}. clear
-{txt}
-{com}. 
-. * Arrests
-. 
-. use "data_cleaned/bpd_arrests_cleaned.dta", clear
-{txt}
-{com}. rename arrest_location address
-{res}{txt}
-{com}. 
-. replace address = strlower(address)
-{txt}(0 real changes made)
-
-{com}. replace address = subinstr(address, ".", "",.) 
-{txt}(1,306 real changes made)
-
-{com}. replace address = strtrim(address)
-{txt}(0 real changes made)
-
-{com}. replace address = regexr(address, "street", "st")
-{txt}(90 real changes made)
-
-{com}. replace address = subinstr(address, "  ", " ",.)
-{txt}(27 real changes made)
-
-{com}. replace address = regexr(address, "place", "pl")
-{txt}(15 real changes made)
-
-{com}. replace address = regexr(address, "avenue", "ave")
-{txt}(32 real changes made)
-
-{com}. replace address = regexr(address, "rd", "road")
-{txt}(10,425 real changes made)
-
-{com}. 
-. *drop if missing(address)
-. *We dropped any observation that did not have a location associated with it.
-. 
-. merge m:m address using "data_cleaned/address_file.dta"
+{txt}(16,543 real changes made)
+(16,767 real changes made)
+{res}{txt}file data_cleaned/vacant_lots_cleaned_merge.dta saved
 {res}{txt}{p 0 7 2}
 (note: variable
 address was 
@@ -1462,75 +1478,37 @@ str30, now str35 to accommodate using data's values)
 {col 5}matched{col 30}{res}          82,158{txt}  (_merge==3)
 {col 5}{hline 41}
 
-{com}. tab _merge
-
-                 {txt}_merge {c |}      Freq.     Percent        Cum.
+                 _merge {c |}      Freq.     Percent        Cum.
 {hline 24}{c +}{hline 35}
         master only (1) {c |}{res}     55,861       14.96       14.96
 {txt}         using only (2) {c |}{res}    235,406       63.04       78.00
 {txt}            matched (3) {c |}{res}     82,158       22.00      100.00
 {txt}{hline 24}{c +}{hline 35}
                   Total {c |}{res}    373,425      100.00
-{txt}
-{com}. *We have a low match rate (6.17%) therefore we are not going to attempt to look at
-. *neighborhood level statistics for towing data. See report for discussion for
-. *future research.
-. 
-. drop _merge
-{txt}
-{com}. drop latitude longitude post district address incident_location
-{txt}
-{com}. 
-. save "data_cleaned/bpd_arrests_cleaned.dta", replace
-{txt}file data_cleaned/bpd_arrests_cleaned.dta saved
+{txt}(235,406 observations deleted)
+
+                 _merge {c |}      Freq.     Percent        Cum.
+{hline 24}{c +}{hline 35}
+        master only (1) {c |}{res}     55,861       40.47       40.47
+{txt}            matched (3) {c |}{res}     82,158       59.53      100.00
+{txt}{hline 24}{c +}{hline 35}
+                  Total {c |}{res}    138,019      100.00
+{txt}(82,158 real changes made)
+(138,019 real changes made)
+{res}{txt}file data_cleaned/bpd_arrests_merge.dta saved
 
 {com}. 
-. clear
-{txt}
-{com}. 
 . 
-. *ECB Citations - Has city neighborhood data already included
-. 
-. use "data_cleaned/ecb_citations_cleaned.dta", clear
-{txt}
-{com}. rename neighborhood neighborhoods_city
-{res}{txt}
-{com}. save "data_cleaned/ecb_citations_cleaned_merge.dta", replace
-{txt}file data_cleaned/ecb_citations_cleaned_merge.dta saved
-
-{com}. 
-. clear
-{txt}
-{com}. 
-. *99.79% match rate*
-. 
-. 
-. 
-. ** NOTE: Not enough data on: dot_towing_cleaned, parking_citations_cleaned, bpd_arrests
-. 
-. * Create neighborhood dta file
-. clear
-{txt}
-{com}. import delimited "raw_data/neighborhood_crosswalk.csv", varnames(1) 
-{res}{text}(2 vars, 263 obs)
-
-{com}. 
-. save "data_cleaned/neighborhood_crosswalk.dta", replace
-{txt}file data_cleaned/neighborhood_crosswalk.dta saved
-
-{com}. 
-. clear
-{txt}
-{com}. 
 . * For vacant_lots and ecb_citations use neighborhood designation
 . * from address match derived from property tax data to matched neighbor-
 . * hood (small) to neighborhood (large) to merge with census data. 
 . 
-. foreach dataset in vacant_lots_cleaned_merge ecb_citations_cleaned_merge {c -(}
+. foreach dataset in                                                                                                                              ///
+>         vacant_lots_cleaned_merge ecb_citations_cleaned_merge bpd_arrests_merge {c -(}
 {txt}  2{com}.         use "data_cleaned/`dataset'.dta", clear
-{txt}  3{com}.         drop if neighborhoods_city == ""
+{txt}  3{com}.         drop if neighborhoods_nsa == ""
 {txt}  4{com}.         
-.         merge m:1 neighborhoods_city using "data_cleaned/neighborhood_crosswalk.dta"
+.         merge m:1 neighborhoods_nsa using "data_cleaned/neighborhood_crosswalk.dta"
 {txt}  5{com}.         tab _merge
 {txt}  6{com}.         keep if _merge == 3
 {txt}  7{com}.         drop _merge
@@ -1547,58 +1525,89 @@ str30, now str35 to accommodate using data's values)
 {res}
 {txt}{col 5}Result{col 38}# of obs.
 {col 5}{hline 41}
-{col 5}not matched{col 30}{res}              41
-{txt}{col 9}from master{col 30}{res}               0{txt}  (_merge==1)
-{col 9}from using{col 30}{res}              41{txt}  (_merge==2)
+{col 5}not matched{col 30}{res}             719
+{txt}{col 9}from master{col 30}{res}             654{txt}  (_merge==1)
+{col 9}from using{col 30}{res}              65{txt}  (_merge==2)
 
-{col 5}matched{col 30}{res}          16,538{txt}  (_merge==3)
+{col 5}matched{col 30}{res}          15,884{txt}  (_merge==3)
 {col 5}{hline 41}
 
                  _merge {c |}      Freq.     Percent        Cum.
 {hline 24}{c +}{hline 35}
-         using only (2) {c |}{res}         41        0.25        0.25
-{txt}            matched (3) {c |}{res}     16,538       99.75      100.00
+        master only (1) {c |}{res}        654        3.94        3.94
+{txt}         using only (2) {c |}{res}         65        0.39        4.33
+{txt}            matched (3) {c |}{res}     15,884       95.67      100.00
 {txt}{hline 24}{c +}{hline 35}
-                  Total {c |}{res}     16,579      100.00
-{txt}(41 observations deleted)
+                  Total {c |}{res}     16,603      100.00
+{txt}(719 observations deleted)
 {res}
 {txt}{col 5}Result{col 38}# of obs.
 {col 5}{hline 41}
-{col 5}not matched{col 30}{res}               2
-{txt}{col 9}from master{col 30}{res}               2{txt}  (_merge==1)
-{col 9}from using{col 30}{res}               0{txt}  (_merge==2)
+{col 5}not matched{col 30}{res}             514
+{txt}{col 9}from master{col 30}{res}             509{txt}  (_merge==1)
+{col 9}from using{col 30}{res}               5{txt}  (_merge==2)
 
-{col 5}matched{col 30}{res}          16,536{txt}  (_merge==3)
+{col 5}matched{col 30}{res}          15,375{txt}  (_merge==3)
 {col 5}{hline 41}
 file data_cleaned/vacant_lots_cleaned_merge.dta saved
 (881 observations deleted)
 {res}
 {txt}{col 5}Result{col 38}# of obs.
 {col 5}{hline 41}
-{col 5}not matched{col 30}{res}               2
-{txt}{col 9}from master{col 30}{res}               2{txt}  (_merge==1)
-{col 9}from using{col 30}{res}               0{txt}  (_merge==2)
+{col 5}not matched{col 30}{res}           4,334
+{txt}{col 9}from master{col 30}{res}           4,309{txt}  (_merge==1)
+{col 9}from using{col 30}{res}              25{txt}  (_merge==2)
 
-{col 5}matched{col 30}{res}         130,730{txt}  (_merge==3)
+{col 5}matched{col 30}{res}         126,423{txt}  (_merge==3)
 {col 5}{hline 41}
 
                  _merge {c |}      Freq.     Percent        Cum.
 {hline 24}{c +}{hline 35}
-        master only (1) {c |}{res}          2        0.00        0.00
-{txt}            matched (3) {c |}{res}    130,730      100.00      100.00
+        master only (1) {c |}{res}      4,309        3.30        3.30
+{txt}         using only (2) {c |}{res}         25        0.02        3.31
+{txt}            matched (3) {c |}{res}    126,423       96.69      100.00
 {txt}{hline 24}{c +}{hline 35}
-                  Total {c |}{res}    130,732      100.00
-{txt}(2 observations deleted)
+                  Total {c |}{res}    130,757      100.00
+{txt}(4,334 observations deleted)
 {res}
 {txt}{col 5}Result{col 38}# of obs.
 {col 5}{hline 41}
-{col 5}not matched{col 30}{res}              71
-{txt}{col 9}from master{col 30}{res}              71{txt}  (_merge==1)
-{col 9}from using{col 30}{res}               0{txt}  (_merge==2)
+{col 5}not matched{col 30}{res}           8,733
+{txt}{col 9}from master{col 30}{res}           8,729{txt}  (_merge==1)
+{col 9}from using{col 30}{res}               4{txt}  (_merge==2)
 
-{col 5}matched{col 30}{res}         130,659{txt}  (_merge==3)
+{col 5}matched{col 30}{res}         117,694{txt}  (_merge==3)
 {col 5}{hline 41}
 file data_cleaned/ecb_citations_cleaned_merge.dta saved
+(55,932 observations deleted)
+{res}
+{txt}{col 5}Result{col 38}# of obs.
+{col 5}{hline 41}
+{col 5}not matched{col 30}{res}           1,392
+{txt}{col 9}from master{col 30}{res}           1,355{txt}  (_merge==1)
+{col 9}from using{col 30}{res}              37{txt}  (_merge==2)
+
+{col 5}matched{col 30}{res}          80,732{txt}  (_merge==3)
+{col 5}{hline 41}
+
+                 _merge {c |}      Freq.     Percent        Cum.
+{hline 24}{c +}{hline 35}
+        master only (1) {c |}{res}      1,355        1.65        1.65
+{txt}         using only (2) {c |}{res}         37        0.05        1.69
+{txt}            matched (3) {c |}{res}     80,732       98.31      100.00
+{txt}{hline 24}{c +}{hline 35}
+                  Total {c |}{res}     82,124      100.00
+{txt}(1,392 observations deleted)
+{res}
+{txt}{col 5}Result{col 38}# of obs.
+{col 5}{hline 41}
+{col 5}not matched{col 30}{res}             769
+{txt}{col 9}from master{col 30}{res}             765{txt}  (_merge==1)
+{col 9}from using{col 30}{res}               4{txt}  (_merge==2)
+
+{col 5}matched{col 30}{res}          79,967{txt}  (_merge==3)
+{col 5}{hline 41}
+file data_cleaned/bpd_arrests_merge.dta saved
 
 {com}. 
 . 
@@ -1608,9 +1617,9 @@ file data_cleaned/ecb_citations_cleaned_merge.dta saved
 {com}.  
 . log close 
       {txt}name:  {res}<unnamed>
-       {txt}log:  {res}/Users/johniselin/finesandfees_baltimore/logs/open_data_creation_log.smcl
+       {txt}log:  {res}/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/logs/open_data_creation_log.smcl
   {txt}log type:  {res}smcl
- {txt}closed on:  {res}15 Apr 2019, 18:05:29
+ {txt}closed on:  {res}24 Apr 2019, 17:43:32
 {txt}{.-}
 {smcl}
 {txt}{sf}{ul off}

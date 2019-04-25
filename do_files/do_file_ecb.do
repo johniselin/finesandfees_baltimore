@@ -35,8 +35,6 @@ sum
 de
 
 * Re-format dates
-
-
 gen viol_date = substr(violationdate,1,10)
 gen viol_time = substr(violationdate, 12, 10) 
 gen due_date = substr(duedate,1,10) 

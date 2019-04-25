@@ -1,18 +1,1117 @@
 {smcl}
-{txt}{sf}{ul off}{.-}
+{com}{sf}{ul off}{txt}{.-}
       name:  {res}<unnamed>
-       {txt}log:  {res}/Users/johniselin/finesandfees_baltimore/logs/parking_results_log.smcl
+       {txt}log:  {res}/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/logs/parking_results_log.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res}15 Apr 2019, 18:05:33
+ {txt}opened on:  {res}24 Apr 2019, 17:43:52
 {txt}
 {com}. 
+. use "data_cleaned/parking_citations_cleaned.dta"
+{txt}
+{com}. 
+. sum open_fine_amt
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+open_fine_~t {c |}{res}  3,062,330    24.21725    42.58846          0        502
+{txt}
+{com}. tab description
+
+                            {txt}Description {c |}      Freq.     Percent        Cum.
+{hline 40}{c +}{hline 35}
+                     Abandonded Vehicle {c |}{res}     15,718        0.51        0.51
+{txt}     All Other Parking Meter Violations {c |}{res}    568,695       18.57       19.08
+{txt}All Other Stopping or Parking Violati.. {c |}{res}     77,135        2.52       21.60
+{txt}            Blocking Garage or Driveway {c |}{res}      1,898        0.06       21.66
+{txt}Commercial Veh/Residence over 20,000 .. {c |}{res}      1,286        0.04       21.71
+{txt}Commercial Veh/Residence under 20,000.. {c |}{res}      6,544        0.21       21.92
+{txt}Commercial Vehicle Obstruct/Imped Tra.. {c |}{res}        783        0.03       21.95
+{txt}                     Exceeding 48 Hours {c |}{res}     18,569        0.61       22.55
+{txt}                           Expired Tags {c |}{res}    215,246        7.03       29.58
+{txt}        Fire Lane/Handicapped Violation {c |}{res}      4,544        0.15       29.73
+{txt}                     Fixed Speed Camera {c |}{res}    795,972       25.99       55.72
+{txt}                       In Taxicab Stand {c |}{res}        328        0.01       55.73
+{txt}            Less 30Â from Intersection {c |}{res}        446        0.01       55.75
+{txt}           Less 30â from Intersection {c |}{res}         12        0.00       55.75
+{txt}    Less Than 15 feet from Fire Hydrant {c |}{res}     20,986        0.69       56.43
+{txt}                    Mobile Speed Camera {c |}{res}     56,631        1.85       58.28
+{txt}No Parking/Stand Motor Home/Campr/Tra.. {c |}{res}         33        0.00       58.28
+{txt}      No Parking/Standing In Bike Lanes {c |}{res}        555        0.02       58.30
+{txt}No Parking/Standing In Bus Stop/Bus L.. {c |}{res}      9,795        0.32       58.62
+{txt}    No Parking/Standing In Transit Stop {c |}{res}     30,223        0.99       59.61
+{txt}       No Parking/Standing Vendor Truck {c |}{res}          9        0.00       59.61
+{txt}                  No Stop/Park Handicap {c |}{res}     13,433        0.44       60.05
+{txt}           No Stop/Park Street Cleaning {c |}{res}    263,711        8.61       68.66
+{txt}            No Stop/Stand/Park Cruising {c |}{res}        199        0.01       68.67
+{txt}No Stopping or No Parking Pimlico Event {c |}{res}         86        0.00       68.67
+{txt}No Stopping//Parking Stadium Event Ca.. {c |}{res}     19,415        0.63       69.30
+{txt}No Stopping/Parking Stadium Event Â .. {c |}{res}          1        0.00       69.30
+{txt} No Stopping/Standing Not Tow-Away Zone {c |}{res}    196,217        6.41       75.71
+{txt}     No Stopping/Standing Tow Away Zone {c |}{res}    176,226        5.75       81.46
+{txt}      Obstruct/Impeding Flow of Traffic {c |}{res}     13,046        0.43       81.89
+{txt}Obstruct/Impeding Movement of Pedestr.. {c |}{res}     34,555        1.13       83.02
+{txt}Obstructing or Impeding Traffic in an.. {c |}{res}        767        0.03       83.04
+{txt}Obstructing/Imped Traffic Xwalk/inter.. {c |}{res}      3,205        0.10       83.15
+{txt}                 Old Fixed Speed Camera {c |}{res}      4,921        0.16       83.31
+{txt} Parking or Parking Meter Tow-Away zone {c |}{res}          1        0.00       83.31
+{txt}                 Passenger Loading Zone {c |}{res}     19,261        0.63       83.94
+{txt}                    Red Light Violation {c |}{res}    262,559        8.57       92.51
+{txt}           Res. Park Permit 2nd Offense {c |}{res}         10        0.00       92.51
+{txt}           Res. Park Permit 3rd Offense {c |}{res}          1        0.00       92.51
+{txt}           Res. Park Permit 4th Offense {c |}{res}          5        0.00       92.51
+{txt}        Residential Parking Permit Only {c |}{res}    129,681        4.23       96.75
+{txt}                           Right on Red {c |}{res}     99,513        3.25      100.00
+{txt}         Snow Emergency Route Violation {c |}{res}         99        0.00      100.00
+{txt}Unlawful Dumping/Waste Hauler w/o Per.. {c |}{res}         10        0.00      100.00
+{txt}{hline 40}{c +}{hline 35}
+                                  Total {c |}{res}  3,062,330      100.00
+{txt}
+{com}. 
+. tab viol_fine_amt
+
+   {txt}ViolFine {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+         17 {c |}{res}          1        0.00        0.00
+{txt}         23 {c |}{res}     36,537        1.19        1.19
+{txt}         27 {c |}{res}     58,691        1.92        3.11
+{txt}         32 {c |}{res}  1,002,581       32.74       35.85
+{txt}         40 {c |}{res}    857,524       28.00       63.85
+{txt}         42 {c |}{res}     52,382        1.71       65.56
+{txt}         52 {c |}{res}    527,136       17.21       82.78
+{txt}         72 {c |}{res}         10        0.00       82.78
+{txt}         75 {c |}{res}    362,072       11.82       94.60
+{txt}         77 {c |}{res}     85,658        2.80       97.40
+{txt}        102 {c |}{res}     28,097        0.92       98.31
+{txt}        127 {c |}{res}        767        0.03       98.34
+{txt}        152 {c |}{res}      3,485        0.11       98.45
+{txt}        157 {c |}{res}         20        0.00       98.45
+{txt}        200 {c |}{res}         41        0.00       98.45
+{txt}        202 {c |}{res}        784        0.03       98.48
+{txt}        252 {c |}{res}     20,413        0.67       99.15
+{txt}        302 {c |}{res}     12,459        0.41       99.55
+{txt}        502 {c |}{res}     13,672        0.45      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}  3,062,330      100.00
+{txt}
+{com}. tab open_fine_amt
+
+   {txt}OpenFine {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          0 {c |}{res}  1,552,033       50.68       50.68
+{txt}          1 {c |}{res}         32        0.00       50.68
+{txt}          2 {c |}{res}         94        0.00       50.69
+{txt}          3 {c |}{res}         14        0.00       50.69
+{txt}          4 {c |}{res}         94        0.00       50.69
+{txt}          5 {c |}{res}         50        0.00       50.69
+{txt}          6 {c |}{res}          8        0.00       50.69
+{txt}          7 {c |}{res}         17        0.00       50.69
+{txt}          8 {c |}{res}         51        0.00       50.69
+{txt}          9 {c |}{res}         15        0.00       50.69
+{txt}         10 {c |}{res}         94        0.00       50.70
+{txt}         11 {c |}{res}         13        0.00       50.70
+{txt}         12 {c |}{res}         48        0.00       50.70
+{txt}         13 {c |}{res}         19        0.00       50.70
+{txt}         14 {c |}{res}          7        0.00       50.70
+{txt}         15 {c |}{res}         53        0.00       50.70
+{txt}         16 {c |}{res}        122        0.00       50.71
+{txt}         17 {c |}{res}         55        0.00       50.71
+{txt}         18 {c |}{res}         35        0.00       50.71
+{txt}         19 {c |}{res}         31        0.00       50.71
+{txt}         20 {c |}{res}        162        0.01       50.71
+{txt}         21 {c |}{res}         29        0.00       50.72
+{txt}         22 {c |}{res}         50        0.00       50.72
+{txt}         23 {c |}{res}     36,408        1.19       51.91
+{txt}         24 {c |}{res}         92        0.00       51.91
+{txt}         25 {c |}{res}        598        0.02       51.93
+{txt}         26 {c |}{res}         32        0.00       51.93
+{txt}         27 {c |}{res}     58,340        1.91       53.83
+{txt}         28 {c |}{res}         48        0.00       53.84
+{txt}         29 {c |}{res}         41        0.00       53.84
+{txt}         30 {c |}{res}         85        0.00       53.84
+{txt}         31 {c |}{res}         29        0.00       53.84
+{txt}         32 {c |}{res}    679,914       22.20       76.04
+{txt}         33 {c |}{res}         22        0.00       76.04
+{txt}         34 {c |}{res}         26        0.00       76.05
+{txt}         35 {c |}{res}         84        0.00       76.05
+{txt}         36 {c |}{res}         34        0.00       76.05
+{txt}         37 {c |}{res}         34        0.00       76.05
+{txt}         38 {c |}{res}         23        0.00       76.05
+{txt}         39 {c |}{res}         27        0.00       76.05
+{txt}         40 {c |}{res}    149,917        4.90       80.95
+{txt}         41 {c |}{res}         27        0.00       80.95
+{txt}         42 {c |}{res}     51,738        1.69       82.64
+{txt}         43 {c |}{res}         27        0.00       82.64
+{txt}         44 {c |}{res}         19        0.00       82.64
+{txt}         45 {c |}{res}         33        0.00       82.64
+{txt}         46 {c |}{res}          8        0.00       82.64
+{txt}         47 {c |}{res}         12        0.00       82.64
+{txt}         48 {c |}{res}        239        0.01       82.65
+{txt}         49 {c |}{res}          4        0.00       82.65
+{txt}         50 {c |}{res}         46        0.00       82.65
+{txt}         51 {c |}{res}          6        0.00       82.65
+{txt}         52 {c |}{res}    367,413       12.00       94.65
+{txt}         53 {c |}{res}          3        0.00       94.65
+{txt}         54 {c |}{res}          8        0.00       94.65
+{txt}         55 {c |}{res}         12        0.00       94.65
+{txt}         56 {c |}{res}          2        0.00       94.65
+{txt}         57 {c |}{res}          9        0.00       94.65
+{txt}         58 {c |}{res}          4        0.00       94.65
+{txt}         59 {c |}{res}         10        0.00       94.65
+{txt}         60 {c |}{res}         19        0.00       94.65
+{txt}         61 {c |}{res}          5        0.00       94.65
+{txt}         62 {c |}{res}          1        0.00       94.65
+{txt}         63 {c |}{res}          1        0.00       94.65
+{txt}         64 {c |}{res}         32        0.00       94.65
+{txt}         65 {c |}{res}          7        0.00       94.65
+{txt}         66 {c |}{res}          3        0.00       94.65
+{txt}         67 {c |}{res}          8        0.00       94.65
+{txt}         68 {c |}{res}          5        0.00       94.65
+{txt}         69 {c |}{res}          4        0.00       94.65
+{txt}         70 {c |}{res}         12        0.00       94.65
+{txt}         71 {c |}{res}          4        0.00       94.65
+{txt}         72 {c |}{res}         17        0.00       94.65
+{txt}         73 {c |}{res}          8        0.00       94.65
+{txt}         74 {c |}{res}          4        0.00       94.65
+{txt}         75 {c |}{res}     45,925        1.50       96.15
+{txt}         77 {c |}{res}     57,641        1.88       98.04
+{txt}         78 {c |}{res}          2        0.00       98.04
+{txt}         79 {c |}{res}          3        0.00       98.04
+{txt}         80 {c |}{res}          9        0.00       98.04
+{txt}         82 {c |}{res}          3        0.00       98.04
+{txt}         84 {c |}{res}          5        0.00       98.04
+{txt}         87 {c |}{res}          2        0.00       98.04
+{txt}         88 {c |}{res}          3        0.00       98.04
+{txt}         90 {c |}{res}          1        0.00       98.04
+{txt}         92 {c |}{res}          3        0.00       98.04
+{txt}         93 {c |}{res}          2        0.00       98.04
+{txt}         94 {c |}{res}          1        0.00       98.04
+{txt}         96 {c |}{res}          9        0.00       98.04
+{txt}         97 {c |}{res}          1        0.00       98.04
+{txt}         98 {c |}{res}          1        0.00       98.04
+{txt}         99 {c |}{res}          1        0.00       98.04
+{txt}        100 {c |}{res}         14        0.00       98.04
+{txt}        102 {c |}{res}     18,097        0.59       98.63
+{txt}        104 {c |}{res}          2        0.00       98.63
+{txt}        106 {c |}{res}          1        0.00       98.63
+{txt}        109 {c |}{res}          2        0.00       98.63
+{txt}        110 {c |}{res}          1        0.00       98.63
+{txt}        112 {c |}{res}          1        0.00       98.63
+{txt}        114 {c |}{res}          2        0.00       98.63
+{txt}        117 {c |}{res}          1        0.00       98.63
+{txt}        120 {c |}{res}          1        0.00       98.63
+{txt}        125 {c |}{res}          2        0.00       98.63
+{txt}        127 {c |}{res}        706        0.02       98.65
+{txt}        128 {c |}{res}          1        0.00       98.65
+{txt}        129 {c |}{res}          1        0.00       98.65
+{txt}        130 {c |}{res}          1        0.00       98.65
+{txt}        134 {c |}{res}          1        0.00       98.65
+{txt}        137 {c |}{res}          1        0.00       98.65
+{txt}        138 {c |}{res}          1        0.00       98.65
+{txt}        140 {c |}{res}          1        0.00       98.65
+{txt}        142 {c |}{res}          1        0.00       98.65
+{txt}        144 {c |}{res}          1        0.00       98.65
+{txt}        147 {c |}{res}          1        0.00       98.65
+{txt}        148 {c |}{res}          3        0.00       98.65
+{txt}        149 {c |}{res}          1        0.00       98.65
+{txt}        150 {c |}{res}          5        0.00       98.65
+{txt}        151 {c |}{res}          1        0.00       98.65
+{txt}        152 {c |}{res}      3,444        0.11       98.77
+{txt}        157 {c |}{res}         20        0.00       98.77
+{txt}        160 {c |}{res}          1        0.00       98.77
+{txt}        165 {c |}{res}          1        0.00       98.77
+{txt}        169 {c |}{res}          3        0.00       98.77
+{txt}        170 {c |}{res}          2        0.00       98.77
+{txt}        171 {c |}{res}          1        0.00       98.77
+{txt}        173 {c |}{res}          2        0.00       98.77
+{txt}        175 {c |}{res}          3        0.00       98.77
+{txt}        176 {c |}{res}          1        0.00       98.77
+{txt}        177 {c |}{res}          2        0.00       98.77
+{txt}        179 {c |}{res}          1        0.00       98.77
+{txt}        182 {c |}{res}          2        0.00       98.77
+{txt}        185 {c |}{res}          1        0.00       98.77
+{txt}        187 {c |}{res}          1        0.00       98.77
+{txt}        195 {c |}{res}          1        0.00       98.77
+{txt}        196 {c |}{res}          2        0.00       98.77
+{txt}        197 {c |}{res}          2        0.00       98.77
+{txt}        198 {c |}{res}          1        0.00       98.77
+{txt}        199 {c |}{res}          1        0.00       98.77
+{txt}        200 {c |}{res}         27        0.00       98.77
+{txt}        202 {c |}{res}        738        0.02       98.79
+{txt}        206 {c |}{res}          1        0.00       98.79
+{txt}        207 {c |}{res}          1        0.00       98.79
+{txt}        208 {c |}{res}          4        0.00       98.79
+{txt}        212 {c |}{res}          1        0.00       98.79
+{txt}        217 {c |}{res}          1        0.00       98.79
+{txt}        218 {c |}{res}          1        0.00       98.79
+{txt}        219 {c |}{res}          1        0.00       98.79
+{txt}        220 {c |}{res}          1        0.00       98.79
+{txt}        221 {c |}{res}          1        0.00       98.79
+{txt}        224 {c |}{res}          2        0.00       98.79
+{txt}        228 {c |}{res}          1        0.00       98.79
+{txt}        231 {c |}{res}          1        0.00       98.79
+{txt}        232 {c |}{res}          2        0.00       98.79
+{txt}        234 {c |}{res}          1        0.00       98.79
+{txt}        238 {c |}{res}          1        0.00       98.79
+{txt}        242 {c |}{res}          1        0.00       98.79
+{txt}        246 {c |}{res}          1        0.00       98.79
+{txt}        248 {c |}{res}          1        0.00       98.79
+{txt}        249 {c |}{res}          1        0.00       98.79
+{txt}        250 {c |}{res}          6        0.00       98.79
+{txt}        252 {c |}{res}     16,798        0.55       99.34
+{txt}        254 {c |}{res}          1        0.00       99.34
+{txt}        260 {c |}{res}          4        0.00       99.34
+{txt}        262 {c |}{res}          1        0.00       99.34
+{txt}        267 {c |}{res}          1        0.00       99.34
+{txt}        270 {c |}{res}          3        0.00       99.34
+{txt}        277 {c |}{res}          1        0.00       99.34
+{txt}        282 {c |}{res}          2        0.00       99.34
+{txt}        284 {c |}{res}          1        0.00       99.34
+{txt}        286 {c |}{res}          1        0.00       99.34
+{txt}        291 {c |}{res}          1        0.00       99.34
+{txt}        298 {c |}{res}          3        0.00       99.34
+{txt}        300 {c |}{res}          3        0.00       99.34
+{txt}        302 {c |}{res}     11,115        0.36       99.71
+{txt}        330 {c |}{res}          1        0.00       99.71
+{txt}        332 {c |}{res}          1        0.00       99.71
+{txt}        346 {c |}{res}          1        0.00       99.71
+{txt}        350 {c |}{res}          1        0.00       99.71
+{txt}        353 {c |}{res}          1        0.00       99.71
+{txt}        357 {c |}{res}          1        0.00       99.71
+{txt}        379 {c |}{res}          1        0.00       99.71
+{txt}        382 {c |}{res}          1        0.00       99.71
+{txt}        393 {c |}{res}          1        0.00       99.71
+{txt}        394 {c |}{res}          2        0.00       99.71
+{txt}        398 {c |}{res}          1        0.00       99.71
+{txt}        400 {c |}{res}          1        0.00       99.71
+{txt}        402 {c |}{res}         11        0.00       99.71
+{txt}        413 {c |}{res}          1        0.00       99.71
+{txt}        418 {c |}{res}          1        0.00       99.71
+{txt}        424 {c |}{res}          1        0.00       99.71
+{txt}        425 {c |}{res}          1        0.00       99.71
+{txt}        429 {c |}{res}          2        0.00       99.71
+{txt}        430 {c |}{res}          1        0.00       99.71
+{txt}        434 {c |}{res}          1        0.00       99.71
+{txt}        439 {c |}{res}          1        0.00       99.71
+{txt}        441 {c |}{res}          1        0.00       99.71
+{txt}        445 {c |}{res}          1        0.00       99.71
+{txt}        448 {c |}{res}          1        0.00       99.71
+{txt}        450 {c |}{res}          1        0.00       99.71
+{txt}        452 {c |}{res}          3        0.00       99.71
+{txt}        455 {c |}{res}          1        0.00       99.71
+{txt}        459 {c |}{res}          3        0.00       99.71
+{txt}        461 {c |}{res}          1        0.00       99.71
+{txt}        470 {c |}{res}          3        0.00       99.71
+{txt}        473 {c |}{res}          1        0.00       99.71
+{txt}        475 {c |}{res}          1        0.00       99.71
+{txt}        479 {c |}{res}          1        0.00       99.71
+{txt}        482 {c |}{res}          1        0.00       99.71
+{txt}        484 {c |}{res}          1        0.00       99.71
+{txt}        487 {c |}{res}          2        0.00       99.71
+{txt}        496 {c |}{res}          1        0.00       99.71
+{txt}        497 {c |}{res}          1        0.00       99.71
+{txt}        500 {c |}{res}          2        0.00       99.71
+{txt}        502 {c |}{res}      8,957        0.29      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}  3,062,330      100.00
+{txt}
+{com}. 
+. *trying to understand how much more people are having to pay if they do not pay 
+. *their first fine/how much it escalates
+. tab viol_fine_amt if bal_amt>=502
+
+   {txt}ViolFine {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+         23 {c |}{res}         96        0.14        0.14
+{txt}         27 {c |}{res}        237        0.35        0.50
+{txt}         32 {c |}{res}        170        0.25        0.75
+{txt}         42 {c |}{res}        152        0.23        0.97
+{txt}         52 {c |}{res}     47,759       71.02       71.99
+{txt}         77 {c |}{res}      7,088       10.54       82.53
+{txt}        102 {c |}{res}      2,580        3.84       86.37
+{txt}        152 {c |}{res}         26        0.04       86.40
+{txt}        200 {c |}{res}          5        0.01       86.41
+{txt}        202 {c |}{res}          2        0.00       86.42
+{txt}        252 {c |}{res}      1,037        1.54       87.96
+{txt}        302 {c |}{res}      4,472        6.65       94.61
+{txt}        502 {c |}{res}      3,627        5.39      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}     67,251      100.00
+{txt}
+{com}. tab viol_fine_amt if bal_amt>= viol_fine_amt
+
+   {txt}ViolFine {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+         17 {c |}{res}          1        0.00        0.00
+{txt}         23 {c |}{res}     36,408        3.33        3.33
+{txt}         27 {c |}{res}     58,276        5.34        8.67
+{txt}         32 {c |}{res}    260,803       23.89       32.56
+{txt}         40 {c |}{res}    332,829       30.48       63.04
+{txt}         42 {c |}{res}     51,722        4.74       67.78
+{txt}         52 {c |}{res}    141,444       12.96       80.74
+{txt}         72 {c |}{res}          2        0.00       80.74
+{txt}         75 {c |}{res}    155,805       14.27       95.01
+{txt}         77 {c |}{res}     23,489        2.15       97.16
+{txt}        102 {c |}{res}      7,168        0.66       97.81
+{txt}        127 {c |}{res}        290        0.03       97.84
+{txt}        152 {c |}{res}      3,436        0.31       98.16
+{txt}        157 {c |}{res}         19        0.00       98.16
+{txt}        200 {c |}{res}         18        0.00       98.16
+{txt}        202 {c |}{res}        736        0.07       98.23
+{txt}        252 {c |}{res}      6,816        0.62       98.85
+{txt}        302 {c |}{res}      8,920        0.82       99.67
+{txt}        502 {c |}{res}      3,627        0.33      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}  1,091,809      100.00
+{txt}
+{com}. 
+. generate penalty_cats=recode(open_penalty_amt,0, 10, 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000)
+{txt}
+{com}. tab description if penalty_cats>=200
+
+                            {txt}Description {c |}      Freq.     Percent        Cum.
+{hline 40}{c +}{hline 35}
+                     Abandonded Vehicle {c |}{res}      2,664        1.62        1.62
+{txt}     All Other Parking Meter Violations {c |}{res}     41,659       25.28       26.90
+{txt}All Other Stopping or Parking Violati.. {c |}{res}      5,404        3.28       30.18
+{txt}            Blocking Garage or Driveway {c |}{res}        180        0.11       30.29
+{txt}Commercial Veh/Residence over 20,000 .. {c |}{res}        104        0.06       30.35
+{txt}Commercial Veh/Residence under 20,000.. {c |}{res}        489        0.30       30.65
+{txt}Commercial Vehicle Obstruct/Imped Tra.. {c |}{res}         51        0.03       30.68
+{txt}                     Exceeding 48 Hours {c |}{res}      2,700        1.64       32.32
+{txt}                           Expired Tags {c |}{res}     31,936       19.38       51.70
+{txt}        Fire Lane/Handicapped Violation {c |}{res}        554        0.34       52.04
+{txt}                       In Taxicab Stand {c |}{res}         26        0.02       52.05
+{txt}            Less 30Â from Intersection {c |}{res}        104        0.06       52.12
+{txt}           Less 30â from Intersection {c |}{res}          1        0.00       52.12
+{txt}    Less Than 15 feet from Fire Hydrant {c |}{res}      1,697        1.03       53.15
+{txt}      No Parking/Standing In Bike Lanes {c |}{res}         40        0.02       53.17
+{txt}    No Parking/Standing In Transit Stop {c |}{res}      3,173        1.93       55.10
+{txt}                  No Stop/Park Handicap {c |}{res}        865        0.52       55.62
+{txt}           No Stop/Park Street Cleaning {c |}{res}     30,037       18.23       73.85
+{txt}            No Stop/Stand/Park Cruising {c |}{res}         25        0.02       73.87
+{txt}No Stopping or No Parking Pimlico Event {c |}{res}          7        0.00       73.87
+{txt}No Stopping//Parking Stadium Event Ca.. {c |}{res}      1,531        0.93       74.80
+{txt}No Stopping/Parking Stadium Event Â .. {c |}{res}          1        0.00       74.80
+{txt} No Stopping/Standing Not Tow-Away Zone {c |}{res}     13,984        8.49       83.29
+{txt}     No Stopping/Standing Tow Away Zone {c |}{res}     12,428        7.54       90.83
+{txt}      Obstruct/Impeding Flow of Traffic {c |}{res}      1,210        0.73       91.57
+{txt}Obstruct/Impeding Movement of Pedestr.. {c |}{res}      2,429        1.47       93.04
+{txt}Obstructing/Imped Traffic Xwalk/inter.. {c |}{res}        427        0.26       93.30
+{txt}                 Passenger Loading Zone {c |}{res}      1,666        1.01       94.31
+{txt}        Residential Parking Permit Only {c |}{res}      9,367        5.69      100.00
+{txt}         Snow Emergency Route Violation {c |}{res}          5        0.00      100.00
+{txt}Unlawful Dumping/Waste Hauler w/o Per.. {c |}{res}          2        0.00      100.00
+{txt}{hline 40}{c +}{hline 35}
+                                  Total {c |}{res}    164,766      100.00
+{txt}
+{com}. 
+. tab bal_amt if description=="Residential Parking Permit Only"
+
+    {txt}Balance {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          0 {c |}{res}     97,480       75.17       75.17
+{txt}          1 {c |}{res}          1        0.00       75.17
+{txt}          2 {c |}{res}          6        0.00       75.17
+{txt}          4 {c |}{res}          6        0.00       75.18
+{txt}          6 {c |}{res}          1        0.00       75.18
+{txt}          8 {c |}{res}          1        0.00       75.18
+{txt}          9 {c |}{res}          1        0.00       75.18
+{txt}         10 {c |}{res}          4        0.00       75.18
+{txt}         12 {c |}{res}          2        0.00       75.19
+{txt}         15 {c |}{res}          5        0.00       75.19
+{txt}         16 {c |}{res}         13        0.01       75.20
+{txt}         17 {c |}{res}          3        0.00       75.20
+{txt}         18 {c |}{res}          1        0.00       75.20
+{txt}         19 {c |}{res}          2        0.00       75.20
+{txt}         20 {c |}{res}          7        0.01       75.21
+{txt}         22 {c |}{res}          2        0.00       75.21
+{txt}         24 {c |}{res}          3        0.00       75.21
+{txt}         25 {c |}{res}         17        0.01       75.23
+{txt}         26 {c |}{res}          1        0.00       75.23
+{txt}         27 {c |}{res}          1        0.00       75.23
+{txt}         28 {c |}{res}          1        0.00       75.23
+{txt}         29 {c |}{res}          2        0.00       75.23
+{txt}         30 {c |}{res}          3        0.00       75.23
+{txt}         31 {c |}{res}          4        0.00       75.24
+{txt}         32 {c |}{res}         63        0.05       75.28
+{txt}         33 {c |}{res}          3        0.00       75.29
+{txt}         35 {c |}{res}          2        0.00       75.29
+{txt}         36 {c |}{res}          3        0.00       75.29
+{txt}         37 {c |}{res}          2        0.00       75.29
+{txt}         38 {c |}{res}          1        0.00       75.29
+{txt}         39 {c |}{res}          2        0.00       75.29
+{txt}         40 {c |}{res}          4        0.00       75.30
+{txt}         41 {c |}{res}          2        0.00       75.30
+{txt}         42 {c |}{res}      8,184        6.31       81.61
+{txt}         43 {c |}{res}          1        0.00       81.61
+{txt}         44 {c |}{res}          1        0.00       81.61
+{txt}         48 {c |}{res}         17        0.01       81.62
+{txt}         49 {c |}{res}          2        0.00       81.63
+{txt}         52 {c |}{res}     11,048        8.52       90.15
+{txt}         57 {c |}{res}          1        0.00       90.15
+{txt}         58 {c |}{res}          7        0.01       90.15
+{txt}         61 {c |}{res}          1        0.00       90.15
+{txt}         64 {c |}{res}          5        0.00       90.16
+{txt}         67 {c |}{res}          1        0.00       90.16
+{txt}         68 {c |}{res}        271        0.21       90.37
+{txt}         70 {c |}{res}          1        0.00       90.37
+{txt}         72 {c |}{res}         11        0.01       90.38
+{txt}         73 {c |}{res}          1        0.00       90.38
+{txt}         74 {c |}{res}          4        0.00       90.38
+{txt}         75 {c |}{res}          1        0.00       90.38
+{txt}         77 {c |}{res}          5        0.00       90.38
+{txt}         80 {c |}{res}          2        0.00       90.39
+{txt}         82 {c |}{res}          1        0.00       90.39
+{txt}         84 {c |}{res}        245        0.19       90.58
+{txt}         86 {c |}{res}          1        0.00       90.58
+{txt}         87 {c |}{res}          1        0.00       90.58
+{txt}         90 {c |}{res}          3        0.00       90.58
+{txt}         92 {c |}{res}          1        0.00       90.58
+{txt}         93 {c |}{res}          1        0.00       90.58
+{txt}         96 {c |}{res}          2        0.00       90.58
+{txt}         99 {c |}{res}          1        0.00       90.58
+{txt}        100 {c |}{res}        376        0.29       90.87
+{txt}        101 {c |}{res}          1        0.00       90.87
+{txt}        105 {c |}{res}          1        0.00       90.87
+{txt}        109 {c |}{res}          5        0.00       90.88
+{txt}        112 {c |}{res}          2        0.00       90.88
+{txt}        116 {c |}{res}        246        0.19       91.07
+{txt}        121 {c |}{res}          3        0.00       91.07
+{txt}        125 {c |}{res}         23        0.02       91.09
+{txt}        128 {c |}{res}          1        0.00       91.09
+{txt}        129 {c |}{res}          1        0.00       91.09
+{txt}        132 {c |}{res}        240        0.19       91.28
+{txt}        133 {c |}{res}          1        0.00       91.28
+{txt}        141 {c |}{res}         21        0.02       91.29
+{txt}        144 {c |}{res}          3        0.00       91.30
+{txt}        148 {c |}{res}        198        0.15       91.45
+{txt}        152 {c |}{res}          1        0.00       91.45
+{txt}        153 {c |}{res}          1        0.00       91.45
+{txt}        157 {c |}{res}         18        0.01       91.46
+{txt}        160 {c |}{res}          1        0.00       91.46
+{txt}        162 {c |}{res}          1        0.00       91.47
+{txt}        164 {c |}{res}        222        0.17       91.64
+{txt}        166 {c |}{res}          1        0.00       91.64
+{txt}        171 {c |}{res}          1        0.00       91.64
+{txt}        173 {c |}{res}         22        0.02       91.65
+{txt}        175 {c |}{res}          1        0.00       91.66
+{txt}        176 {c |}{res}          2        0.00       91.66
+{txt}        178 {c |}{res}          1        0.00       91.66
+{txt}        180 {c |}{res}         94        0.07       91.73
+{txt}        185 {c |}{res}          3        0.00       91.73
+{txt}        189 {c |}{res}         52        0.04       91.77
+{txt}        192 {c |}{res}          1        0.00       91.77
+{txt}        196 {c |}{res}        138        0.11       91.88
+{txt}        202 {c |}{res}          1        0.00       91.88
+{txt}        205 {c |}{res}         21        0.02       91.90
+{txt}        207 {c |}{res}          1        0.00       91.90
+{txt}        208 {c |}{res}          6        0.00       91.90
+{txt}        212 {c |}{res}        132        0.10       92.00
+{txt}        214 {c |}{res}          2        0.00       92.01
+{txt}        215 {c |}{res}          1        0.00       92.01
+{txt}        216 {c |}{res}          1        0.00       92.01
+{txt}        217 {c |}{res}          1        0.00       92.01
+{txt}        220 {c |}{res}          1        0.00       92.01
+{txt}        221 {c |}{res}         20        0.02       92.02
+{txt}        224 {c |}{res}          1        0.00       92.03
+{txt}        228 {c |}{res}        181        0.14       92.16
+{txt}        231 {c |}{res}          1        0.00       92.17
+{txt}        233 {c |}{res}          1        0.00       92.17
+{txt}        237 {c |}{res}         43        0.03       92.20
+{txt}        241 {c |}{res}          2        0.00       92.20
+{txt}        244 {c |}{res}         81        0.06       92.26
+{txt}        245 {c |}{res}          1        0.00       92.26
+{txt}        248 {c |}{res}          1        0.00       92.26
+{txt}        249 {c |}{res}          1        0.00       92.27
+{txt}        252 {c |}{res}          1        0.00       92.27
+{txt}        253 {c |}{res}         26        0.02       92.29
+{txt}        259 {c |}{res}          1        0.00       92.29
+{txt}        260 {c |}{res}         61        0.05       92.33
+{txt}        268 {c |}{res}          1        0.00       92.34
+{txt}        269 {c |}{res}         26        0.02       92.36
+{txt}        272 {c |}{res}          3        0.00       92.36
+{txt}        275 {c |}{res}          2        0.00       92.36
+{txt}        276 {c |}{res}         40        0.03       92.39
+{txt}        277 {c |}{res}          2        0.00       92.39
+{txt}        278 {c |}{res}          1        0.00       92.39
+{txt}        281 {c |}{res}          4        0.00       92.40
+{txt}        285 {c |}{res}         31        0.02       92.42
+{txt}        292 {c |}{res}         68        0.05       92.47
+{txt}        297 {c |}{res}          3        0.00       92.47
+{txt}        301 {c |}{res}         27        0.02       92.49
+{txt}        304 {c |}{res}          1        0.00       92.50
+{txt}        307 {c |}{res}          1        0.00       92.50
+{txt}        308 {c |}{res}         53        0.04       92.54
+{txt}        317 {c |}{res}         33        0.03       92.56
+{txt}        319 {c |}{res}          2        0.00       92.56
+{txt}        324 {c |}{res}         73        0.06       92.62
+{txt}        325 {c |}{res}          1        0.00       92.62
+{txt}        327 {c |}{res}          1        0.00       92.62
+{txt}        329 {c |}{res}          1        0.00       92.62
+{txt}        332 {c |}{res}          1        0.00       92.62
+{txt}        333 {c |}{res}         31        0.02       92.65
+{txt}        336 {c |}{res}          3        0.00       92.65
+{txt}        337 {c |}{res}          2        0.00       92.65
+{txt}        338 {c |}{res}          1        0.00       92.65
+{txt}        340 {c |}{res}         65        0.05       92.70
+{txt}        342 {c |}{res}          1        0.00       92.70
+{txt}        349 {c |}{res}         30        0.02       92.73
+{txt}        352 {c |}{res}          1        0.00       92.73
+{txt}        356 {c |}{res}        124        0.10       92.82
+{txt}        360 {c |}{res}          1        0.00       92.82
+{txt}        361 {c |}{res}          2        0.00       92.82
+{txt}        365 {c |}{res}         39        0.03       92.85
+{txt}        368 {c |}{res}          1        0.00       92.86
+{txt}        372 {c |}{res}         94        0.07       92.93
+{txt}        374 {c |}{res}          1        0.00       92.93
+{txt}        375 {c |}{res}          1        0.00       92.93
+{txt}        376 {c |}{res}          1        0.00       92.93
+{txt}        377 {c |}{res}          5        0.00       92.93
+{txt}        378 {c |}{res}          1        0.00       92.93
+{txt}        381 {c |}{res}         76        0.06       92.99
+{txt}        383 {c |}{res}          1        0.00       92.99
+{txt}        384 {c |}{res}          1        0.00       93.00
+{txt}        386 {c |}{res}          1        0.00       93.00
+{txt}        388 {c |}{res}         56        0.04       93.04
+{txt}        390 {c |}{res}          1        0.00       93.04
+{txt}        393 {c |}{res}          4        0.00       93.04
+{txt}        397 {c |}{res}         50        0.04       93.08
+{txt}        400 {c |}{res}          3        0.00       93.08
+{txt}        402 {c |}{res}          3        0.00       93.09
+{txt}        404 {c |}{res}         64        0.05       93.14
+{txt}        406 {c |}{res}          2        0.00       93.14
+{txt}        407 {c |}{res}          1        0.00       93.14
+{txt}        408 {c |}{res}          1        0.00       93.14
+{txt}        409 {c |}{res}          1        0.00       93.14
+{txt}        410 {c |}{res}          1        0.00       93.14
+{txt}        412 {c |}{res}          2        0.00       93.14
+{txt}        413 {c |}{res}         20        0.02       93.16
+{txt}        416 {c |}{res}          4        0.00       93.16
+{txt}        417 {c |}{res}          1        0.00       93.16
+{txt}        420 {c |}{res}         68        0.05       93.21
+{txt}        422 {c |}{res}          1        0.00       93.21
+{txt}        423 {c |}{res}          1        0.00       93.21
+{txt}        424 {c |}{res}          1        0.00       93.22
+{txt}        425 {c |}{res}          4        0.00       93.22
+{txt}        427 {c |}{res}          3        0.00       93.22
+{txt}        429 {c |}{res}         56        0.04       93.26
+{txt}        432 {c |}{res}          4        0.00       93.27
+{txt}        434 {c |}{res}          1        0.00       93.27
+{txt}        436 {c |}{res}         70        0.05       93.32
+{txt}        438 {c |}{res}          1        0.00       93.32
+{txt}        439 {c |}{res}          1        0.00       93.32
+{txt}        441 {c |}{res}          1        0.00       93.32
+{txt}        442 {c |}{res}          2        0.00       93.33
+{txt}        443 {c |}{res}          1        0.00       93.33
+{txt}        445 {c |}{res}         55        0.04       93.37
+{txt}        448 {c |}{res}         10        0.01       93.38
+{txt}        452 {c |}{res}         75        0.06       93.43
+{txt}        454 {c |}{res}          1        0.00       93.44
+{txt}        455 {c |}{res}          1        0.00       93.44
+{txt}        456 {c |}{res}          1        0.00       93.44
+{txt}        457 {c |}{res}          2        0.00       93.44
+{txt}        459 {c |}{res}          1        0.00       93.44
+{txt}        461 {c |}{res}         51        0.04       93.48
+{txt}        462 {c |}{res}          1        0.00       93.48
+{txt}        463 {c |}{res}          2        0.00       93.48
+{txt}        464 {c |}{res}          1        0.00       93.48
+{txt}        467 {c |}{res}          2        0.00       93.48
+{txt}        468 {c |}{res}         55        0.04       93.53
+{txt}        469 {c |}{res}          1        0.00       93.53
+{txt}        470 {c |}{res}          1        0.00       93.53
+{txt}        472 {c |}{res}          2        0.00       93.53
+{txt}        473 {c |}{res}          3        0.00       93.53
+{txt}        474 {c |}{res}          1        0.00       93.53
+{txt}        476 {c |}{res}          2        0.00       93.53
+{txt}        477 {c |}{res}         43        0.03       93.57
+{txt}        480 {c |}{res}          2        0.00       93.57
+{txt}        482 {c |}{res}          1        0.00       93.57
+{txt}        484 {c |}{res}         63        0.05       93.62
+{txt}        487 {c |}{res}          1        0.00       93.62
+{txt}        488 {c |}{res}          2        0.00       93.62
+{txt}        489 {c |}{res}          2        0.00       93.62
+{txt}        492 {c |}{res}          1        0.00       93.62
+{txt}        493 {c |}{res}         41        0.03       93.65
+{txt}        495 {c |}{res}          1        0.00       93.65
+{txt}        497 {c |}{res}          2        0.00       93.66
+{txt}        500 {c |}{res}        132        0.10       93.76
+{txt}        502 {c |}{res}          7        0.01       93.76
+{txt}        504 {c |}{res}          2        0.00       93.76
+{txt}        505 {c |}{res}          3        0.00       93.77
+{txt}        506 {c |}{res}          1        0.00       93.77
+{txt}        509 {c |}{res}         37        0.03       93.80
+{txt}        512 {c |}{res}          6        0.00       93.80
+{txt}        513 {c |}{res}          3        0.00       93.80
+{txt}        514 {c |}{res}          1        0.00       93.80
+{txt}        516 {c |}{res}         65        0.05       93.85
+{txt}        517 {c |}{res}          3        0.00       93.86
+{txt}        520 {c |}{res}          4        0.00       93.86
+{txt}        521 {c |}{res}          2        0.00       93.86
+{txt}        522 {c |}{res}          2        0.00       93.86
+{txt}        523 {c |}{res}          1        0.00       93.86
+{txt}        525 {c |}{res}         99        0.08       93.94
+{txt}        527 {c |}{res}          7        0.01       93.95
+{txt}        529 {c |}{res}          1        0.00       93.95
+{txt}        532 {c |}{res}         95        0.07       94.02
+{txt}        534 {c |}{res}          2        0.00       94.02
+{txt}        536 {c |}{res}          6        0.00       94.03
+{txt}        537 {c |}{res}          7        0.01       94.03
+{txt}        541 {c |}{res}         52        0.04       94.07
+{txt}        542 {c |}{res}          2        0.00       94.07
+{txt}        544 {c |}{res}          1        0.00       94.07
+{txt}        545 {c |}{res}          4        0.00       94.08
+{txt}        548 {c |}{res}         75        0.06       94.13
+{txt}        549 {c |}{res}          1        0.00       94.13
+{txt}        550 {c |}{res}          6        0.00       94.14
+{txt}        552 {c |}{res}      4,882        3.76       97.90
+{txt}        554 {c |}{res}          1        0.00       97.90
+{txt}        556 {c |}{res}          1        0.00       97.91
+{txt}        557 {c |}{res}         38        0.03       97.93
+{txt}        561 {c |}{res}          6        0.00       97.94
+{txt}        573 {c |}{res}         55        0.04       97.98
+{txt}        577 {c |}{res}      2,548        1.96       99.95
+{txt}        582 {c |}{res}          1        0.00       99.95
+{txt}        584 {c |}{res}          1        0.00       99.95
+{txt}        595 {c |}{res}          1        0.00       99.95
+{txt}        600 {c |}{res}          1        0.00       99.95
+{txt}        602 {c |}{res}         42        0.03       99.98
+{txt}        603 {c |}{res}          1        0.00       99.98
+{txt}        607 {c |}{res}          1        0.00       99.98
+{txt}        627 {c |}{res}          2        0.00       99.99
+{txt}        652 {c |}{res}          1        0.00       99.99
+{txt}        664 {c |}{res}          1        0.00       99.99
+{txt}        702 {c |}{res}          1        0.00       99.99
+{txt}        945 {c |}{res}          1        0.00       99.99
+{txt}       1001 {c |}{res}          1        0.00       99.99
+{txt}       1052 {c |}{res}          3        0.00       99.99
+{txt}       1598 {c |}{res}          1        0.00       99.99
+{txt}       1738 {c |}{res}          2        0.00       99.99
+{txt}       1802 {c |}{res}          1        0.00       99.99
+{txt}       2090 {c |}{res}          1        0.00      100.00
+{txt}       2106 {c |}{res}          1        0.00      100.00
+{txt}       2170 {c |}{res}          2        0.00      100.00
+{txt}       2314 {c |}{res}          1        0.00      100.00
+{txt}       2320 {c |}{res}          1        0.00      100.00
+{txt}       2330 {c |}{res}          1        0.00      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}    129,681      100.00
+{txt}
+{com}. tab open_penalty_amt if description=="Residential Parking Permit Only"
+
+{txt}OpenPenalty {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          0 {c |}{res}    118,191       91.14       91.14
+{txt}          4 {c |}{res}          1        0.00       91.14
+{txt}          6 {c |}{res}          1        0.00       91.14
+{txt}         12 {c |}{res}          2        0.00       91.14
+{txt}         16 {c |}{res}        463        0.36       91.50
+{txt}         20 {c |}{res}          1        0.00       91.50
+{txt}         25 {c |}{res}          3        0.00       91.50
+{txt}         30 {c |}{res}          1        0.00       91.50
+{txt}         32 {c |}{res}        493        0.38       91.88
+{txt}         33 {c |}{res}          1        0.00       91.88
+{txt}         38 {c |}{res}          1        0.00       91.89
+{txt}         41 {c |}{res}          1        0.00       91.89
+{txt}         44 {c |}{res}          1        0.00       91.89
+{txt}         48 {c |}{res}        263        0.20       92.09
+{txt}         52 {c |}{res}          1        0.00       92.09
+{txt}         57 {c |}{res}          1        0.00       92.09
+{txt}         59 {c |}{res}          1        0.00       92.09
+{txt}         64 {c |}{res}        436        0.34       92.43
+{txt}         68 {c |}{res}          1        0.00       92.43
+{txt}         71 {c |}{res}          1        0.00       92.43
+{txt}         72 {c |}{res}          1        0.00       92.43
+{txt}         73 {c |}{res}          5        0.00       92.43
+{txt}         76 {c |}{res}          1        0.00       92.44
+{txt}         77 {c |}{res}          1        0.00       92.44
+{txt}         80 {c |}{res}        225        0.17       92.61
+{txt}         88 {c |}{res}          1        0.00       92.61
+{txt}         89 {c |}{res}         17        0.01       92.62
+{txt}         94 {c |}{res}          1        0.00       92.62
+{txt}         96 {c |}{res}        198        0.15       92.78
+{txt}        101 {c |}{res}          1        0.00       92.78
+{txt}        104 {c |}{res}          1        0.00       92.78
+{txt}        105 {c |}{res}         14        0.01       92.79
+{txt}        106 {c |}{res}          1        0.00       92.79
+{txt}        108 {c |}{res}          1        0.00       92.79
+{txt}        110 {c |}{res}          1        0.00       92.79
+{txt}        112 {c |}{res}        143        0.11       92.90
+{txt}        116 {c |}{res}          1        0.00       92.90
+{txt}        121 {c |}{res}         23        0.02       92.92
+{txt}        125 {c |}{res}          1        0.00       92.92
+{txt}        128 {c |}{res}        100        0.08       93.00
+{txt}        130 {c |}{res}          1        0.00       93.00
+{txt}        131 {c |}{res}          1        0.00       93.00
+{txt}        133 {c |}{res}          2        0.00       93.00
+{txt}        137 {c |}{res}         18        0.01       93.02
+{txt}        138 {c |}{res}          1        0.00       93.02
+{txt}        139 {c |}{res}          1        0.00       93.02
+{txt}        143 {c |}{res}          1        0.00       93.02
+{txt}        144 {c |}{res}        106        0.08       93.10
+{txt}        147 {c |}{res}          1        0.00       93.10
+{txt}        148 {c |}{res}          1        0.00       93.10
+{txt}        149 {c |}{res}          1        0.00       93.10
+{txt}        153 {c |}{res}         13        0.01       93.11
+{txt}        155 {c |}{res}          2        0.00       93.11
+{txt}        156 {c |}{res}          3        0.00       93.12
+{txt}        157 {c |}{res}          1        0.00       93.12
+{txt}        160 {c |}{res}        122        0.09       93.21
+{txt}        162 {c |}{res}          1        0.00       93.21
+{txt}        164 {c |}{res}          1        0.00       93.21
+{txt}        166 {c |}{res}          2        0.00       93.21
+{txt}        169 {c |}{res}         25        0.02       93.23
+{txt}        173 {c |}{res}          2        0.00       93.23
+{txt}        176 {c |}{res}        175        0.13       93.37
+{txt}        183 {c |}{res}          1        0.00       93.37
+{txt}        185 {c |}{res}         30        0.02       93.39
+{txt}        189 {c |}{res}          1        0.00       93.39
+{txt}        190 {c |}{res}          1        0.00       93.39
+{txt}        192 {c |}{res}        159        0.12       93.52
+{txt}        193 {c |}{res}          1        0.00       93.52
+{txt}        194 {c |}{res}          1        0.00       93.52
+{txt}        196 {c |}{res}          1        0.00       93.52
+{txt}        197 {c |}{res}          1        0.00       93.52
+{txt}        200 {c |}{res}          1        0.00       93.52
+{txt}        201 {c |}{res}         47        0.04       93.56
+{txt}        208 {c |}{res}         94        0.07       93.63
+{txt}        212 {c |}{res}          1        0.00       93.63
+{txt}        216 {c |}{res}          1        0.00       93.63
+{txt}        217 {c |}{res}         41        0.03       93.66
+{txt}        220 {c |}{res}          2        0.00       93.66
+{txt}        224 {c |}{res}        148        0.11       93.78
+{txt}        225 {c |}{res}          1        0.00       93.78
+{txt}        228 {c |}{res}          3        0.00       93.78
+{txt}        233 {c |}{res}         31        0.02       93.81
+{txt}        236 {c |}{res}          1        0.00       93.81
+{txt}        240 {c |}{res}         74        0.06       93.86
+{txt}        244 {c |}{res}          3        0.00       93.87
+{txt}        245 {c |}{res}          2        0.00       93.87
+{txt}        247 {c |}{res}          1        0.00       93.87
+{txt}        249 {c |}{res}         44        0.03       93.90
+{txt}        252 {c |}{res}          1        0.00       93.90
+{txt}        253 {c |}{res}          1        0.00       93.90
+{txt}        256 {c |}{res}        128        0.10       94.00
+{txt}        257 {c |}{res}          1        0.00       94.00
+{txt}        265 {c |}{res}         29        0.02       94.03
+{txt}        268 {c |}{res}          1        0.00       94.03
+{txt}        269 {c |}{res}          1        0.00       94.03
+{txt}        272 {c |}{res}         97        0.07       94.10
+{txt}        273 {c |}{res}          1        0.00       94.10
+{txt}        275 {c |}{res}          1        0.00       94.10
+{txt}        279 {c |}{res}          1        0.00       94.10
+{txt}        280 {c |}{res}          1        0.00       94.10
+{txt}        281 {c |}{res}         35        0.03       94.13
+{txt}        284 {c |}{res}          2        0.00       94.13
+{txt}        285 {c |}{res}          1        0.00       94.13
+{txt}        286 {c |}{res}          1        0.00       94.13
+{txt}        287 {c |}{res}          1        0.00       94.14
+{txt}        288 {c |}{res}         92        0.07       94.21
+{txt}        289 {c |}{res}          1        0.00       94.21
+{txt}        290 {c |}{res}          1        0.00       94.21
+{txt}        292 {c |}{res}          1        0.00       94.21
+{txt}        293 {c |}{res}          1        0.00       94.21
+{txt}        296 {c |}{res}          2        0.00       94.21
+{txt}        297 {c |}{res}         56        0.04       94.25
+{txt}        300 {c |}{res}          1        0.00       94.26
+{txt}        301 {c |}{res}          1        0.00       94.26
+{txt}        304 {c |}{res}         98        0.08       94.33
+{txt}        305 {c |}{res}          1        0.00       94.33
+{txt}        308 {c |}{res}          2        0.00       94.33
+{txt}        309 {c |}{res}          2        0.00       94.34
+{txt}        310 {c |}{res}          1        0.00       94.34
+{txt}        312 {c |}{res}          1        0.00       94.34
+{txt}        313 {c |}{res}         43        0.03       94.37
+{txt}        316 {c |}{res}          1        0.00       94.37
+{txt}        320 {c |}{res}        129        0.10       94.47
+{txt}        322 {c |}{res}          2        0.00       94.47
+{txt}        324 {c |}{res}          2        0.00       94.47
+{txt}        325 {c |}{res}          3        0.00       94.48
+{txt}        329 {c |}{res}         44        0.03       94.51
+{txt}        331 {c |}{res}          1        0.00       94.51
+{txt}        336 {c |}{res}         64        0.05       94.56
+{txt}        338 {c |}{res}          1        0.00       94.56
+{txt}        340 {c |}{res}          2        0.00       94.56
+{txt}        342 {c |}{res}          2        0.00       94.56
+{txt}        343 {c |}{res}          1        0.00       94.56
+{txt}        345 {c |}{res}         33        0.03       94.59
+{txt}        348 {c |}{res}          2        0.00       94.59
+{txt}        349 {c |}{res}          1        0.00       94.59
+{txt}        350 {c |}{res}          2        0.00       94.59
+{txt}        352 {c |}{res}         36        0.03       94.62
+{txt}        354 {c |}{res}          1        0.00       94.62
+{txt}        355 {c |}{res}          1        0.00       94.62
+{txt}        356 {c |}{res}          6        0.00       94.63
+{txt}        357 {c |}{res}          2        0.00       94.63
+{txt}        359 {c |}{res}          1        0.00       94.63
+{txt}        360 {c |}{res}          2        0.00       94.63
+{txt}        361 {c |}{res}         57        0.04       94.68
+{txt}        363 {c |}{res}          1        0.00       94.68
+{txt}        364 {c |}{res}          1        0.00       94.68
+{txt}        365 {c |}{res}          3        0.00       94.68
+{txt}        368 {c |}{res}         86        0.07       94.75
+{txt}        370 {c |}{res}          1        0.00       94.75
+{txt}        371 {c |}{res}          1        0.00       94.75
+{txt}        372 {c |}{res}          8        0.01       94.75
+{txt}        373 {c |}{res}          1        0.00       94.75
+{txt}        375 {c |}{res}          3        0.00       94.76
+{txt}        377 {c |}{res}         43        0.03       94.79
+{txt}        380 {c |}{res}          2        0.00       94.79
+{txt}        381 {c |}{res}          3        0.00       94.79
+{txt}        382 {c |}{res}          1        0.00       94.79
+{txt}        383 {c |}{res}          1        0.00       94.79
+{txt}        384 {c |}{res}         51        0.04       94.83
+{txt}        386 {c |}{res}          1        0.00       94.84
+{txt}        388 {c |}{res}          6        0.00       94.84
+{txt}        389 {c |}{res}          2        0.00       94.84
+{txt}        390 {c |}{res}          2        0.00       94.84
+{txt}        393 {c |}{res}         44        0.03       94.88
+{txt}        395 {c |}{res}          1        0.00       94.88
+{txt}        396 {c |}{res}          1        0.00       94.88
+{txt}        397 {c |}{res}          1        0.00       94.88
+{txt}        399 {c |}{res}          2        0.00       94.88
+{txt}        400 {c |}{res}        107        0.08       94.96
+{txt}        404 {c |}{res}          5        0.00       94.97
+{txt}        405 {c |}{res}          1        0.00       94.97
+{txt}        408 {c |}{res}          1        0.00       94.97
+{txt}        409 {c |}{res}         48        0.04       95.01
+{txt}        410 {c |}{res}          2        0.00       95.01
+{txt}        413 {c |}{res}          1        0.00       95.01
+{txt}        414 {c |}{res}          2        0.00       95.01
+{txt}        416 {c |}{res}        100        0.08       95.09
+{txt}        417 {c |}{res}          1        0.00       95.09
+{txt}        418 {c |}{res}          1        0.00       95.09
+{txt}        420 {c |}{res}          5        0.00       95.09
+{txt}        421 {c |}{res}          1        0.00       95.09
+{txt}        424 {c |}{res}          1        0.00       95.09
+{txt}        425 {c |}{res}         68        0.05       95.15
+{txt}        428 {c |}{res}          1        0.00       95.15
+{txt}        429 {c |}{res}          2        0.00       95.15
+{txt}        430 {c |}{res}          1        0.00       95.15
+{txt}        432 {c |}{res}         73        0.06       95.21
+{txt}        436 {c |}{res}          5        0.00       95.21
+{txt}        437 {c |}{res}          1        0.00       95.21
+{txt}        440 {c |}{res}          1        0.00       95.21
+{txt}        441 {c |}{res}         54        0.04       95.25
+{txt}        443 {c |}{res}          1        0.00       95.25
+{txt}        444 {c |}{res}          1        0.00       95.25
+{txt}        445 {c |}{res}          4        0.00       95.26
+{txt}        448 {c |}{res}        110        0.08       95.34
+{txt}        450 {c |}{res}          3        0.00       95.34
+{txt}        452 {c |}{res}          9        0.01       95.35
+{txt}        457 {c |}{res}         49        0.04       95.39
+{txt}        460 {c |}{res}          5        0.00       95.39
+{txt}        461 {c |}{res}          2        0.00       95.39
+{txt}        464 {c |}{res}         67        0.05       95.45
+{txt}        466 {c |}{res}          1        0.00       95.45
+{txt}        468 {c |}{res}         10        0.01       95.45
+{txt}        469 {c |}{res}          1        0.00       95.46
+{txt}        470 {c |}{res}          2        0.00       95.46
+{txt}        473 {c |}{res}         65        0.05       95.51
+{txt}        475 {c |}{res}          3        0.00       95.51
+{txt}        477 {c |}{res}          4        0.00       95.51
+{txt}        480 {c |}{res}        109        0.08       95.60
+{txt}        481 {c |}{res}          1        0.00       95.60
+{txt}        482 {c |}{res}          1        0.00       95.60
+{txt}        483 {c |}{res}          1        0.00       95.60
+{txt}        484 {c |}{res}          9        0.01       95.61
+{txt}        485 {c |}{res}          3        0.00       95.61
+{txt}        486 {c |}{res}          1        0.00       95.61
+{txt}        489 {c |}{res}         51        0.04       95.65
+{txt}        490 {c |}{res}          1        0.00       95.65
+{txt}        492 {c |}{res}          1        0.00       95.65
+{txt}        493 {c |}{res}         10        0.01       95.66
+{txt}        495 {c |}{res}          1        0.00       95.66
+{txt}        496 {c |}{res}        130        0.10       95.76
+{txt}        498 {c |}{res}          2        0.00       95.76
+{txt}        500 {c |}{res}      3,842        2.96       98.72
+{txt}        502 {c |}{res}          3        0.00       98.72
+{txt}        505 {c |}{res}         51        0.04       98.76
+{txt}        509 {c |}{res}          2        0.00       98.77
+{txt}        510 {c |}{res}          1        0.00       98.77
+{txt}        516 {c |}{res}          1        0.00       98.77
+{txt}        521 {c |}{res}         37        0.03       98.80
+{txt}        525 {c |}{res}      1,515        1.17       99.96
+{txt}        543 {c |}{res}          1        0.00       99.96
+{txt}        550 {c |}{res}         26        0.02       99.98
+{txt}        575 {c |}{res}          2        0.00       99.99
+{txt}        584 {c |}{res}          1        0.00       99.99
+{txt}        600 {c |}{res}          1        0.00       99.99
+{txt}       1067 {c |}{res}          1        0.00       99.99
+{txt}       1092 {c |}{res}          1        0.00       99.99
+{txt}       1133 {c |}{res}          1        0.00       99.99
+{txt}       1149 {c |}{res}          1        0.00       99.99
+{txt}       1183 {c |}{res}          1        0.00       99.99
+{txt}       1216 {c |}{res}          1        0.00       99.99
+{txt}       1224 {c |}{res}          1        0.00       99.99
+{txt}       1232 {c |}{res}          1        0.00       99.99
+{txt}       1257 {c |}{res}          1        0.00       99.99
+{txt}       1277 {c |}{res}          1        0.00      100.00
+{txt}       1308 {c |}{res}          1        0.00      100.00
+{txt}       1312 {c |}{res}          2        0.00      100.00
+{txt}       1328 {c |}{res}          1        0.00      100.00
+{txt}       1369 {c |}{res}          1        0.00      100.00
+{txt}       1465 {c |}{res}          1        0.00      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}    129,681      100.00
+{txt}
+{com}. tab penalty_cats if description=="Residential Parking Permit Only"
+
+{txt}penalty_cat {c |}
+          s {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          0 {c |}{res}    118,191       91.14       91.14
+{txt}         10 {c |}{res}          2        0.00       91.14
+{txt}         25 {c |}{res}        469        0.36       91.50
+{txt}         50 {c |}{res}        761        0.59       92.09
+{txt}        100 {c |}{res}        891        0.69       92.78
+{txt}        200 {c |}{res}        965        0.74       93.52
+{txt}        300 {c |}{res}        952        0.73       94.26
+{txt}        400 {c |}{res}        918        0.71       94.96
+{txt}        500 {c |}{res}      4,875        3.76       98.72
+{txt}        600 {c |}{res}      1,641        1.27       99.99
+{txt}       1000 {c |}{res}         16        0.01      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}    129,681      100.00
+{txt}
+{com}. 
+. gen year = year(viol_date)
+{txt}(4,530 missing values generated)
+
+{com}. tab state if year == 2018, sort
+
+      {txt}State {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+         MD {c |}{res}    872,888       89.72       89.72
+{txt}         VA {c |}{res}     21,339        2.19       91.92
+{txt}         PA {c |}{res}     18,812        1.93       93.85
+{txt}         NJ {c |}{res}      7,410        0.76       94.61
+{txt}         NY {c |}{res}      5,985        0.62       95.23
+{txt}         NC {c |}{res}      4,729        0.49       95.71
+{txt}         FL {c |}{res}      4,719        0.49       96.20
+{txt}         DE {c |}{res}      3,959        0.41       96.60
+{txt}         TX {c |}{res}      3,871        0.40       97.00
+{txt}         DC {c |}{res}      3,650        0.38       97.38
+{txt}         TN {c |}{res}      2,672        0.27       97.65
+{txt}         GA {c |}{res}      2,654        0.27       97.93
+{txt}         OH {c |}{res}      1,809        0.19       98.11
+{txt}         CA {c |}{res}      1,688        0.17       98.28
+{txt}         SC {c |}{res}      1,665        0.17       98.46
+{txt}         WV {c |}{res}      1,649        0.17       98.63
+{txt}         CT {c |}{res}      1,515        0.16       98.78
+{txt}         MA {c |}{res}      1,497        0.15       98.93
+{txt}         ME {c |}{res}      1,166        0.12       99.05
+{txt}         IL {c |}{res}      1,074        0.11       99.16
+{txt}         MI {c |}{res}      1,019        0.10       99.27
+{txt}         AZ {c |}{res}        709        0.07       99.34
+{txt}         AL {c |}{res}        557        0.06       99.40
+{txt}         IN {c |}{res}        525        0.05       99.45
+{txt}         MO {c |}{res}        451        0.05       99.50
+{txt}         CO {c |}{res}        426        0.04       99.54
+{txt}         LA {c |}{res}        340        0.03       99.58
+{txt}         WA {c |}{res}        332        0.03       99.61
+{txt}         OK {c |}{res}        328        0.03       99.65
+{txt}         MN {c |}{res}        284        0.03       99.68
+{txt}         OR {c |}{res}        284        0.03       99.71
+{txt}         WI {c |}{res}        279        0.03       99.73
+{txt}         KY {c |}{res}        252        0.03       99.76
+{txt}         NH {c |}{res}        221        0.02       99.78
+{txt}         MS {c |}{res}        178        0.02       99.80
+{txt}         RI {c |}{res}        170        0.02       99.82
+{txt}         XX {c |}{res}        146        0.02       99.83
+{txt}         VT {c |}{res}        137        0.01       99.85
+{txt}         AR {c |}{res}        128        0.01       99.86
+{txt}         ON {c |}{res}        128        0.01       99.87
+{txt}         NV {c |}{res}        112        0.01       99.89
+{txt}         IA {c |}{res}        110        0.01       99.90
+{txt}         UT {c |}{res}        109        0.01       99.91
+{txt}         KS {c |}{res}        108        0.01       99.92
+{txt}         GS {c |}{res}         97        0.01       99.93
+{txt}         NE {c |}{res}         93        0.01       99.94
+{txt}         NM {c |}{res}         82        0.01       99.95
+{txt}         MT {c |}{res}         77        0.01       99.95
+{txt}         AK {c |}{res}         71        0.01       99.96
+{txt}         SD {c |}{res}         61        0.01       99.97
+{txt}         ID {c |}{res}         48        0.00       99.97
+{txt}         ND {c |}{res}         42        0.00       99.98
+{txt}         HI {c |}{res}         40        0.00       99.98
+{txt}         OT {c |}{res}         38        0.00       99.99
+{txt}         WY {c |}{res}         34        0.00       99.99
+{txt}         US {c |}{res}         33        0.00       99.99
+{txt}         QC {c |}{res}         27        0.00      100.00
+{txt}         DP {c |}{res}          7        0.00      100.00
+{txt}         AB {c |}{res}          6        0.00      100.00
+{txt}         MM {c |}{res}          6        0.00      100.00
+{txt}         PR {c |}{res}          6        0.00      100.00
+{txt}         BC {c |}{res}          3        0.00      100.00
+{txt}         MB {c |}{res}          3        0.00      100.00
+{txt}         IO {c |}{res}          2        0.00      100.00
+{txt}         IT {c |}{res}          2        0.00      100.00
+{txt}         SK {c |}{res}          2        0.00      100.00
+{txt}         CN {c |}{res}          1        0.00      100.00
+{txt}         DL {c |}{res}          1        0.00      100.00
+{txt}         FO {c |}{res}          1        0.00      100.00
+{txt}         HS {c |}{res}          1        0.00      100.00
+{txt}         NB {c |}{res}          1        0.00      100.00
+{txt}         NL {c |}{res}          1        0.00      100.00
+{txt}         NS {c |}{res}          1        0.00      100.00
+{txt}         ST {c |}{res}          1        0.00      100.00
+{txt}         VI {c |}{res}          1        0.00      100.00
+{txt}         VJ {c |}{res}          1        0.00      100.00
+{txt}         VM {c |}{res}          1        0.00      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}    972,875      100.00
+{txt}
+{com}. 
+. table state if year == 2018 & (state == "MD" | state == "VA" | state == "PA" |  ///
+>                         state == "NJ" | state == "NY" | state == "NC" | state == "FL" |         ///
+>                         state == "DE" | state == "TX" | state == "DC"),                                         ///
+>                 c(n bal_amt sum bal_amt mean bal_amt) format(%12.0fc)   
+
+{txt}{hline 10}{c TT}{hline 41}
+    State {c |}   N(bal_amt)  sum(bal_amt)  mean(bal_~t)
+{hline 10}{c +}{hline 41}
+       DC {c |}        {res}3,650        85,363            23
+       {txt}DE {c |}        {res}3,959       129,581            33
+       {txt}FL {c |}        {res}4,719       106,414            23
+       {txt}MD {c |}      {res}872,888    16,680,738            19
+       {txt}NC {c |}        {res}4,729       142,783            30
+       {txt}NJ {c |}        {res}7,410       122,132            16
+       {txt}NY {c |}        {res}5,985        98,400            16
+       {txt}PA {c |}       {res}18,812       425,369            23
+       {txt}TX {c |}        {res}3,871       149,491            39
+       {txt}VA {c |}       {res}21,339       704,982            33
+{txt}{hline 10}{c BT}{hline 41}
+
+{com}. 
+. table state if year == 2018 & (state == "MD" | state == "VA" | state == "PA" |  ///
+>                         state == "NJ" | state == "NY" | state == "NC" | state == "FL" |         ///
+>                         state == "DE" | state == "TX" | state == "DC"),                                         ///
+>                 c(n open_fine_amt sum open_fine_amt mean open_fine_amt) format(%12.0fc) 
+
+{txt}{hline 10}{c TT}{hline 41}
+    State {c |} N(open_fi~t)  sum(open_~t)  mean(open~t)
+{hline 10}{c +}{hline 41}
+       DC {c |}        {res}3,650        97,353            27
+       {txt}DE {c |}        {res}3,959       106,642            27
+       {txt}FL {c |}        {res}4,719       150,943            32
+       {txt}MD {c |}      {res}872,888    14,288,255            16
+       {txt}NC {c |}        {res}4,729       111,502            24
+       {txt}NJ {c |}        {res}7,410       202,236            27
+       {txt}NY {c |}        {res}5,985       165,239            28
+       {txt}PA {c |}       {res}18,812       435,719            23
+       {txt}TX {c |}        {res}3,871       162,397            42
+       {txt}VA {c |}       {res}21,339       553,121            26
+{txt}{hline 10}{c BT}{hline 41}
+
+{com}. 
+. 
 . clear
 {txt}
 {com}. log close
       {txt}name:  {res}<unnamed>
-       {txt}log:  {res}/Users/johniselin/finesandfees_baltimore/logs/parking_results_log.smcl
+       {txt}log:  {res}/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/logs/parking_results_log.smcl
   {txt}log type:  {res}smcl
- {txt}closed on:  {res}15 Apr 2019, 18:05:33
+ {txt}closed on:  {res}24 Apr 2019, 17:44:17
 {txt}{.-}
 {smcl}
 {txt}{sf}{ul off}

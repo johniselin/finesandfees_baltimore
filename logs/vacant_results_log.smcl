@@ -1,20 +1,203 @@
 {smcl}
-{txt}{sf}{ul off}{.-}
+{com}{sf}{ul off}{txt}{.-}
       name:  {res}<unnamed>
-       {txt}log:  {res}/Users/johniselin/finesandfees_baltimore/logs/vacant_results_log.smcl
+       {txt}log:  {res}/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/logs/vacant_results_log.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res}15 Apr 2019, 18:05:33
+ {txt}opened on:  {res}24 Apr 2019, 17:44:20
 {txt}
 {com}. 
-. 
-. 
+. use "data_cleaned/vacant_lots_cleaned_merge.dta"
+{txt}
+{com}. 
+. gen year = year(notice_date)
+{txt}(5 missing values generated)
+
+{com}. 
+. tab year
+
+       {txt}year {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+       1997 {c |}{res}          3        0.02        0.02
+{txt}       1998 {c |}{res}          2        0.01        0.03
+{txt}       1999 {c |}{res}          2        0.01        0.04
+{txt}       2000 {c |}{res}          1        0.01        0.05
+{txt}       2001 {c |}{res}          3        0.02        0.07
+{txt}       2002 {c |}{res}          4        0.03        0.09
+{txt}       2003 {c |}{res}          6        0.04        0.13
+{txt}       2004 {c |}{res}        164        1.03        1.16
+{txt}       2005 {c |}{res}        416        2.62        3.78
+{txt}       2006 {c |}{res}        583        3.67        7.45
+{txt}       2007 {c |}{res}        960        6.04       13.50
+{txt}       2008 {c |}{res}      1,115        7.02       20.52
+{txt}       2009 {c |}{res}        674        4.24       24.76
+{txt}       2010 {c |}{res}        761        4.79       29.55
+{txt}       2011 {c |}{res}        814        5.12       34.68
+{txt}       2012 {c |}{res}        774        4.87       39.55
+{txt}       2013 {c |}{res}        714        4.50       44.04
+{txt}       2014 {c |}{res}        854        5.38       49.42
+{txt}       2015 {c |}{res}      1,229        7.74       57.16
+{txt}       2016 {c |}{res}      1,512        9.52       66.68
+{txt}       2017 {c |}{res}      2,120       13.35       80.02
+{txt}       2018 {c |}{res}      2,849       17.94       97.96
+{txt}       2019 {c |}{res}        324        2.04      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}     15,884      100.00
+{txt}
+{com}. 
+. tab neighborhoods_csa , sort
+
+                           {txt}ï»¿CSA2010 {c |}      Freq.     Percent        Cum.
+{hline 38}{c +}{hline 35}
+      Sandtown-Winchester/Harlem Park {c |}{res}      2,076       13.07       13.07
+{txt}                  Southwest Baltimore {c |}{res}      2,012       12.66       25.73
+{txt}                        Clifton-Berea {c |}{res}      1,665       10.48       36.21
+{txt}                     Greater Rosemont {c |}{res}      1,081        6.80       43.01
+{txt}                    Midway/Coldstream {c |}{res}        858        5.40       48.41
+{txt}            Pimlico/Arlington/Hilltop {c |}{res}        850        5.35       53.76
+{txt}                      Greenmount East {c |}{res}        753        4.74       58.50
+{txt}                  Upton/Druid Heights {c |}{res}        635        4.00       62.50
+{txt}            Penn North/Reservoir Hill {c |}{res}        569        3.58       66.08
+{txt}                Southern Park Heights {c |}{res}        535        3.37       69.44
+{txt}                     Madison/East End {c |}{res}        531        3.34       72.79
+{txt}                    Greater Mondawmin {c |}{res}        521        3.28       76.07
+{txt}                  Oldtown/Middle East {c |}{res}        393        2.47       78.54
+{txt}     Allendale/Irvington/South Hilton {c |}{res}        334        2.10       80.64
+{txt}    Brooklyn/Curtis Bay/Hawkins Point {c |}{res}        331        2.08       82.72
+{txt}                        Belair-Edison {c |}{res}        251        1.58       84.30
+{txt}          Patterson Park North & East {c |}{res}        210        1.32       85.63
+{txt}           Washington Village/Pigtown {c |}{res}        179        1.13       86.75
+{txt}Poppleton/The Terraces/Hollins Market {c |}{res}        170        1.07       87.82
+{txt}                 Forest Park/Walbrook {c |}{res}        168        1.06       88.88
+{txt}                        The Waverlies {c |}{res}        160        1.01       89.89
+{txt}      Greater Charles Village/Barclay {c |}{res}        155        0.98       90.86
+{txt}                       Greater Govans {c |}{res}        136        0.86       91.72
+{txt}         Westport/Mt. Winans/Lakeland {c |}{res}        128        0.81       92.52
+{txt}                    Edmondson Village {c |}{res}        118        0.74       93.27
+{txt}                 Dorchester/Ashburton {c |}{res}        111        0.70       93.96
+{txt}        Orangeville/East Highlandtown {c |}{res}         81        0.51       94.47
+{txt}                           Lauraville {c |}{res}         73        0.46       94.93
+{txt}           Howard Park/West Arlington {c |}{res}         70        0.44       95.37
+{txt} Medfield/Hampden/Woodberry/Remington {c |}{res}         62        0.39       95.76
+{txt}                          Cherry Hill {c |}{res}         59        0.37       96.14
+{txt}                  Downtown/Seton Hill {c |}{res}         59        0.37       96.51
+{txt}             Morrell Park/Violetville {c |}{res}         57        0.36       96.87
+{txt}                    Cedonia/Frankford {c |}{res}         55        0.35       97.21
+{txt}                              Midtown {c |}{res}         52        0.33       97.54
+{txt}                        Glen-Falstaff {c |}{res}         47        0.30       97.83
+{txt}                          Fells Point {c |}{res}         41        0.26       98.09
+{txt}            Chinquapin Park/Belvedere {c |}{res}         37        0.23       98.33
+{txt}      Beechfield/Ten Hills/West Hills {c |}{res}         36        0.23       98.55
+{txt}            Inner Harbor/Federal Hill {c |}{res}         28        0.18       98.73
+{txt}                         Highlandtown {c |}{res}         23        0.14       98.87
+{txt}                           Loch Raven {c |}{res}         23        0.14       99.02
+{txt}                            Northwood {c |}{res}         23        0.14       99.16
+{txt}                         Southeastern {c |}{res}         23        0.14       99.31
+{txt}             Harbor East/Little Italy {c |}{res}         22        0.14       99.45
+{txt}    North Baltimore/Guilford/Homeland {c |}{res}         22        0.14       99.58
+{txt}                               Canton {c |}{res}         21        0.13       99.72
+{txt}                     Harford/Echodale {c |}{res}         17        0.11       99.82
+{txt}                             Hamilton {c |}{res}         12        0.08       99.90
+{txt}             Dickeyville/Franklintown {c |}{res}          5        0.03       99.93
+{txt}      Greater Roland Park/Poplar Hill {c |}{res}          4        0.03       99.96
+{txt}        Allendale/Irvington/S. Hilton {c |}{res}          1        0.01       99.96
+{txt}                  Claremont/Armistead {c |}{res}          1        0.01       99.97
+{txt}              Cross-Country/Cheswolde {c |}{res}          1        0.01       99.97
+{txt}                       Glen-Fallstaff {c |}{res}          1        0.01       99.98
+{txt}          Mount Washington/Coldspring {c |}{res}          1        0.01       99.99
+{txt}                      South Baltimore {c |}{res}          1        0.01       99.99
+{txt}       Westport/Mount Winans/Lakeland {c |}{res}          1        0.01      100.00
+{txt}{hline 38}{c +}{hline 35}
+                                Total {c |}{res}     15,889      100.00
+{txt}
+{com}. tab quint_poverty  , sort
+
+  {txt}Quintiles by {c |}
+      Share of {c |}
+  Residents in {c |}
+       Poverty {c |}      Freq.     Percent        Cum.
+{hline 15}{c +}{hline 35}
+29.2% to 47.7% {c |}{res}      8,690       56.50       56.50
+{txt}20.3% to 26.3% {c |}{res}      3,570       23.21       79.71
+{txt}15.4% to 19.9% {c |}{res}      2,273       14.78       94.49
+{txt}10.0% to 15.1% {c |}{res}        532        3.46       97.95
+{txt}  0.8% to 8.1% {c |}{res}        315        2.05      100.00
+{txt}{hline 15}{c +}{hline 35}
+         Total {c |}{res}     15,380      100.00
+{txt}
+{com}. tab quint_black , sort
+
+  {txt}Quintiles by {c |}
+Black Share of {c |}
+     Residents {c |}      Freq.     Percent        Cum.
+{hline 15}{c +}{hline 35}
+93.8% to 96.6% {c |}{res}      7,878       51.22       51.22
+{txt}84.9% to 93.5% {c |}{res}      3,526       22.93       74.15
+{txt}63.1% to 84.6% {c |}{res}      2,511       16.33       90.47
+{txt}31.2% to 63.1% {c |}{res}      1,064        6.92       97.39
+{txt} 1.7% to 29.8% {c |}{res}        401        2.61      100.00
+{txt}{hline 15}{c +}{hline 35}
+         Total {c |}{res}     15,380      100.00
+{txt}
+{com}. tab quint_workingage , sort
+
+{txt}5 quantiles {c |}
+         of {c |}
+working_16  {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          2 {c |}{res}      6,121       39.80       39.80
+{txt}          3 {c |}{res}      4,062       26.41       66.21
+{txt}          1 {c |}{res}      2,324       15.11       81.32
+{txt}          4 {c |}{res}      2,175       14.14       95.46
+{txt}          5 {c |}{res}        698        4.54      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}     15,380      100.00
+{txt}
+{com}. tab quint_female_head , sort
+
+{txt}5 quantiles {c |}
+         of {c |}
+female_head {c |}
+       _16  {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          4 {c |}{res}      6,499       42.26       42.26
+{txt}          5 {c |}{res}      6,274       40.79       83.05
+{txt}          3 {c |}{res}      1,279        8.32       91.37
+{txt}          2 {c |}{res}        841        5.47       96.83
+{txt}          1 {c |}{res}        487        3.17      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}     15,380      100.00
+{txt}
+{com}. 
+. collapse (count) zipcodes (mean) perc_black_16 perc_households_below_pov, by(neighborhoods_csa)
+{txt}
+{com}. 
+. rename zipcodes count
+{res}{txt}
+{com}. label variable count "Count of vacant homes"
+{txt}
+{com}. label variable perc_black_16 "Black share of population"
+{txt}
+{com}. label variable perc_households_below_pov  "Share of population in poverty"
+{txt}
+{com}. 
+. twoway scatter count perc_black_16
+{res}{txt}
+{com}. graph export "vacant_by_black_scatter.pdf", replace
+{txt}(file /Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/vacant_by_black_scatter.pdf written in PDF format)
+
+{com}. twoway scatter count perc_households_below_pov
+{res}{txt}
+{com}. graph export "vacant_by_poverty_scatter.pdf", replace
+{txt}(file /Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/vacant_by_poverty_scatter.pdf written in PDF format)
+
+{com}. 
 . clear
 {txt}
 {com}. log close
       {txt}name:  {res}<unnamed>
-       {txt}log:  {res}/Users/johniselin/finesandfees_baltimore/logs/vacant_results_log.smcl
+       {txt}log:  {res}/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/logs/vacant_results_log.smcl
   {txt}log type:  {res}smcl
- {txt}closed on:  {res}15 Apr 2019, 18:05:33
+ {txt}closed on:  {res}24 Apr 2019, 17:44:22
 {txt}{.-}
 {smcl}
 {txt}{sf}{ul off}

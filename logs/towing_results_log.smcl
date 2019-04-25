@@ -1,18 +1,179 @@
 {smcl}
-{txt}{sf}{ul off}{.-}
+{com}{sf}{ul off}{txt}{.-}
       name:  {res}<unnamed>
-       {txt}log:  {res}/Users/johniselin/finesandfees_baltimore/logs/towing_results_log.smcl
+       {txt}log:  {res}/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/logs/towing_results_log.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res}15 Apr 2019, 18:05:33
+ {txt}opened on:  {res}24 Apr 2019, 17:44:17
+{txt}
+{com}. use "data_cleaned/dot_towing_cleaned.dta", clear
+{txt}
+{com}. 
+. generate paid_cats=recode(total_paid_amt,50,150,200,250,300,350,400, 500, 600, 700, 800, 900, 1000)
+{txt}(7 missing values generated)
+
+{com}. 
+. tab paid_cats
+
+  {txt}paid_cats {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+         50 {c |}{res}     15,768       25.72       25.72
+{txt}        150 {c |}{res}      3,676        6.00       31.71
+{txt}        200 {c |}{res}        364        0.59       32.31
+{txt}        250 {c |}{res}      9,454       15.42       47.73
+{txt}        300 {c |}{res}     18,854       30.75       78.48
+{txt}        350 {c |}{res}      3,635        5.93       84.41
+{txt}        400 {c |}{res}      2,048        3.34       87.75
+{txt}        500 {c |}{res}      2,211        3.61       91.36
+{txt}        600 {c |}{res}      1,699        2.77       94.13
+{txt}        700 {c |}{res}      1,016        1.66       95.79
+{txt}        800 {c |}{res}        993        1.62       97.40
+{txt}        900 {c |}{res}        449        0.73       98.14
+{txt}       1000 {c |}{res}      1,142        1.86      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}     61,309      100.00
+{txt}
+{com}. 
+. gen difference_paid=0
+{txt}
+{com}. replace difference_paid= total_paid_amt-tow_chg_amt
+{txt}(57,483 real changes made, 8 to missing)
+
+{com}. generate difference_paid_cats=recode(difference_paid,-150,-100,-50,50,150,200,250,300,350,400,500,600,700,800, 900, 1000)
+{txt}(8 missing values generated)
+
+{com}. tab difference_paid_cats
+
+{txt}difference_ {c |}
+  paid_cats {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+       -150 {c |}{res}        522        0.85        0.85
+{txt}       -100 {c |}{res}     15,192       24.78       25.63
+{txt}        -50 {c |}{res}          8        0.01       25.64
+{txt}         50 {c |}{res}      3,983        6.50       32.14
+{txt}        150 {c |}{res}     27,353       44.62       76.76
+{txt}        200 {c |}{res}      4,172        6.80       83.56
+{txt}        250 {c |}{res}      2,014        3.29       86.85
+{txt}        300 {c |}{res}      1,525        2.49       89.33
+{txt}        350 {c |}{res}      1,069        1.74       91.08
+{txt}        400 {c |}{res}        882        1.44       92.52
+{txt}        500 {c |}{res}      1,430        2.33       94.85
+{txt}        600 {c |}{res}      1,145        1.87       96.72
+{txt}        700 {c |}{res}        632        1.03       97.75
+{txt}        800 {c |}{res}        388        0.63       98.38
+{txt}        900 {c |}{res}        261        0.43       98.81
+{txt}       1000 {c |}{res}        732        1.19      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}     61,308      100.00
+{txt}
+{com}. 
+. tab releasetype paid_cats
+
+                      {txt}{c |}                       paid_cats
+          releaseType {c |}        50        150        200        250        300 {c |}     Total
+{hline 22}{c +}{hline 55}{c +}{hline 10}
+Administrative No C.. {c |}{res}        23          0          0          0          0 {txt}{c |}{res}        23 
+{txt}            Auctioned {c |}{res}     8,974         52          3         54         20 {txt}{c |}{res}     9,200 
+{txt}   Destroyed (No VIN) {c |}{res}        73          0          0          0          0 {txt}{c |}{res}        74 
+{txt}      Hearing Release {c |}{res}        26          0          0          0          0 {txt}{c |}{res}        26 
+{txt}Junked (No Auction .. {c |}{res}        30          0          0          0          0 {txt}{c |}{res}        30 
+{txt}        Miscellaneous {c |}{res}       100          0          0          0          0 {txt}{c |}{res}       100 
+{txt}Police Surplus Auct.. {c |}{res}         0          1          0          0          0 {txt}{c |}{res}         1 
+{txt} Reclaimed by Insurer {c |}{res}         3      1,179        100      2,898      1,996 {txt}{c |}{res}    10,461 
+{txt}Reclaimed by Lien H.. {c |}{res}         0         31          2         56         28 {txt}{c |}{res}       651 
+{txt}   Reclaimed by Owner {c |}{res}         9      2,351        248      6,352      2,502 {txt}{c |}{res}    18,764 
+{txt}     Release to Owner {c |}{res}        13          7          6          6     14,259 {txt}{c |}{res}    15,189 
+{txt}             Relocate {c |}{res}        13          0          0          0          7 {txt}{c |}{res}        20 
+{txt}Taken From Lot - Au.. {c |}{res}        22          1          0          0          0 {txt}{c |}{res}        23 
+{txt}Taken From Lot - Un.. {c |}{res}        15          0          0          0          6 {txt}{c |}{res}        21 
+{txt}Taken from Lot-auth.. {c |}{res}         3          0          0          0          0 {txt}{c |}{res}         3 
+{txt}Transferred to Pula.. {c |}{res}       281          0          0          0          2 {txt}{c |}{res}       283 
+{txt}{hline 22}{c +}{hline 55}{c +}{hline 10}
+                Total {c |}{res}     9,585      3,622        359      9,366     18,820 {txt}{c |}{res}    54,869 
+
+
+                      {txt}{c |}                       paid_cats
+          releaseType {c |}       350        400        500        600        700 {c |}     Total
+{hline 22}{c +}{hline 55}{c +}{hline 10}
+Administrative No C.. {c |}{res}         0          0          0          0          0 {txt}{c |}{res}        23 
+{txt}            Auctioned {c |}{res}        20         18         13         19         10 {txt}{c |}{res}     9,200 
+{txt}   Destroyed (No VIN) {c |}{res}         0          0          0          0          1 {txt}{c |}{res}        74 
+{txt}      Hearing Release {c |}{res}         0          0          0          0          0 {txt}{c |}{res}        26 
+{txt}Junked (No Auction .. {c |}{res}         0          0          0          0          0 {txt}{c |}{res}        30 
+{txt}        Miscellaneous {c |}{res}         0          0          0          0          0 {txt}{c |}{res}       100 
+{txt}Police Surplus Auct.. {c |}{res}         0          0          0          0          0 {txt}{c |}{res}         1 
+{txt} Reclaimed by Insurer {c |}{res}     1,322        965        840        463        245 {txt}{c |}{res}    10,461 
+{txt}Reclaimed by Lien H.. {c |}{res}        33         24         60         73         65 {txt}{c |}{res}       651 
+{txt}   Reclaimed by Owner {c |}{res}     1,507      1,010      1,248      1,112        675 {txt}{c |}{res}    18,764 
+{txt}     Release to Owner {c |}{res}       729         21         40         21         13 {txt}{c |}{res}    15,189 
+{txt}             Relocate {c |}{res}         0          0          0          0          0 {txt}{c |}{res}        20 
+{txt}Taken From Lot - Au.. {c |}{res}         0          0          0          0          0 {txt}{c |}{res}        23 
+{txt}Taken From Lot - Un.. {c |}{res}         0          0          0          0          0 {txt}{c |}{res}        21 
+{txt}Taken from Lot-auth.. {c |}{res}         0          0          0          0          0 {txt}{c |}{res}         3 
+{txt}Transferred to Pula.. {c |}{res}         0          0          0          0          0 {txt}{c |}{res}       283 
+{txt}{hline 22}{c +}{hline 55}{c +}{hline 10}
+                Total {c |}{res}     3,611      2,038      2,201      1,688      1,009 {txt}{c |}{res}    54,869 
+
+
+                      {txt}{c |}            paid_cats
+          releaseType {c |}       800        900       1000 {c |}     Total
+{hline 22}{c +}{hline 33}{c +}{hline 10}
+Administrative No C.. {c |}{res}         0          0          0 {txt}{c |}{res}        23 
+{txt}            Auctioned {c |}{res}         9          3          5 {txt}{c |}{res}     9,200 
+{txt}   Destroyed (No VIN) {c |}{res}         0          0          0 {txt}{c |}{res}        74 
+{txt}      Hearing Release {c |}{res}         0          0          0 {txt}{c |}{res}        26 
+{txt}Junked (No Auction .. {c |}{res}         0          0          0 {txt}{c |}{res}        30 
+{txt}        Miscellaneous {c |}{res}         0          0          0 {txt}{c |}{res}       100 
+{txt}Police Surplus Auct.. {c |}{res}         0          0          0 {txt}{c |}{res}         1 
+{txt} Reclaimed by Insurer {c |}{res}       154         88        208 {txt}{c |}{res}    10,461 
+{txt}Reclaimed by Lien H.. {c |}{res}        54         46        179 {txt}{c |}{res}       651 
+{txt}   Reclaimed by Owner {c |}{res}       717        305        728 {txt}{c |}{res}    18,764 
+{txt}     Release to Owner {c |}{res}        53          5         16 {txt}{c |}{res}    15,189 
+{txt}             Relocate {c |}{res}         0          0          0 {txt}{c |}{res}        20 
+{txt}Taken From Lot - Au.. {c |}{res}         0          0          0 {txt}{c |}{res}        23 
+{txt}Taken From Lot - Un.. {c |}{res}         0          0          0 {txt}{c |}{res}        21 
+{txt}Taken from Lot-auth.. {c |}{res}         0          0          0 {txt}{c |}{res}         3 
+{txt}Transferred to Pula.. {c |}{res}         0          0          0 {txt}{c |}{res}       283 
+{txt}{hline 22}{c +}{hline 33}{c +}{hline 10}
+                Total {c |}{res}       987        447      1,136 {txt}{c |}{res}    54,869 
+{txt}
+{com}. 
+. gen days_held=0
+{txt}
+{com}. replace days_held= release_date-recieve_date
+{txt}(45,941 real changes made, 6,442 to missing)
+
+{com}. 
+. generate days_held_cats=recode(days_held, 1, 14, 28, 42, 56, 100, 200, 300, 400, 500, 600)
+{txt}(6,442 missing values generated)
+
+{com}. 
+. tab days_held_cats
+
+{txt}days_held_c {c |}
+        ats {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          1 {c |}{res}     22,722       41.41       41.41
+{txt}         14 {c |}{res}     18,080       32.95       74.36
+{txt}         28 {c |}{res}      2,821        5.14       79.50
+{txt}         42 {c |}{res}      2,036        3.71       83.21
+{txt}         56 {c |}{res}      3,430        6.25       89.46
+{txt}        100 {c |}{res}      4,216        7.68       97.14
+{txt}        200 {c |}{res}      1,126        2.05       99.19
+{txt}        300 {c |}{res}        257        0.47       99.66
+{txt}        400 {c |}{res}        121        0.22       99.88
+{txt}        500 {c |}{res}         47        0.09       99.97
+{txt}        600 {c |}{res}         18        0.03      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}     54,874      100.00
 {txt}
 {com}. 
 . clear
 {txt}
 {com}. log close
       {txt}name:  {res}<unnamed>
-       {txt}log:  {res}/Users/johniselin/finesandfees_baltimore/logs/towing_results_log.smcl
+       {txt}log:  {res}/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/logs/towing_results_log.smcl
   {txt}log type:  {res}smcl
- {txt}closed on:  {res}15 Apr 2019, 18:05:33
+ {txt}closed on:  {res}24 Apr 2019, 17:44:17
 {txt}{.-}
 {smcl}
 {txt}{sf}{ul off}

@@ -26,7 +26,6 @@ de
 
 * Re-format dates
 
-
 gen viol_date = substr(violdate,1,10) 
 rename noticedate notice_date
 foreach var of varlist ///
@@ -38,9 +37,21 @@ viol_date notice_date {
 	drop test
 }
 
+* Re-format address
+
+replace address = strlower(address)
+replace address = subinstr(address, ".", "",.) 
+replace address = strtrim(address)
+replace address = regexr(address, "street", "st")
+replace address = subinstr(address, "  ", " ",.)
+replace address = regexr(address, "place", "pl")
+replace address = regexr(address, "avenue", "ave")
+replace address = regexr(address, "rd", "road")
+
+
 * Clean Dataset
 
-drop violdate importdate penaltydate 
+drop importdate penaltydate neighborhood policedistrict councildistrict location
 
 rename violcode viol_code
 rename violfine viol_fine_amt

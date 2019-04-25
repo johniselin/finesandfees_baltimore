@@ -23,11 +23,22 @@ import delimited "raw_data/Vacant_Buildings.csv" , varnames(1)
 sum
 de
 
-replace buildingaddress = strtrim(buildingaddress)
-replace buildingaddress = strlower(buildingaddress)
+* Clean Address Var
+
+rename buildingaddress address  
+replace address = strlower(address)
+replace address = subinstr(address, ".", "",.) 
+replace address = strtrim(address)
+replace address = regexr(address, "street", "st")
+replace address = subinstr(address, "  ", " ",.)
+replace address = regexr(address, "place", "pl")
+replace address = regexr(address, "avenue", "ave")
+replace address = regexr(address, "rd", "road")
+
+
+* Clean Date Var
 
 rename noticedate notice_date
-drop censusneighborhoods neighborhood 
 
 foreach var of varlist ///
 notice_date {
@@ -38,7 +49,10 @@ notice_date {
 	drop test
 }
 
+* Other Cleaning
+
 gen dataset = "vacant_lots"
+drop censusneighborhoods  
 
 save "data_cleaned/vacant_lots_cleaned.dta", replace
 clear 
