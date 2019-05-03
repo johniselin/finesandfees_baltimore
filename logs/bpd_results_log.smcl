@@ -3,13 +3,31 @@
       name:  {res}<unnamed>
        {txt}log:  {res}/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/logs/bpd_results_log.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res}24 Apr 2019, 17:44:17
+ {txt}opened on:  {res} 2 May 2019, 16:44:59
 {txt}
 {com}. 
 . use "data_cleaned/bpd_arrests_merge.dta", clear
 {txt}
 {com}. 
 . sort charge_desc
+{txt}
+{com}. 
+. gen year = year(arrest_date)
+{txt}(4 missing values generated)
+
+{com}. tab year race
+
+           {txt}{c |}                          Race
+      year {c |}         A          B          I          U          W {c |}     Total
+{hline 11}{c +}{hline 55}{c +}{hline 10}
+      2014 {c |}{res}        58     16,414         49        389      3,587 {txt}{c |}{res}    20,497 
+{txt}      2015 {c |}{res}        31     12,385         87        285      2,710 {txt}{c |}{res}    15,498 
+{txt}      2016 {c |}{res}        27     11,573         29        296      2,364 {txt}{c |}{res}    14,289 
+{txt}      2017 {c |}{res}        33     12,030         29        247      2,269 {txt}{c |}{res}    14,608 
+{txt}      2018 {c |}{res}        29     11,122         36        270      2,218 {txt}{c |}{res}    13,675 
+{txt}      2019 {c |}{res}         7      1,798          2         49        340 {txt}{c |}{res}     2,196 
+{txt}{hline 11}{c +}{hline 55}{c +}{hline 10}
+     Total {c |}{res}       185     65,322        232      1,536     13,488 {txt}{c |}{res}    80,763 
 {txt}
 {com}. 
 . gen ff_from_chargedesc=0
@@ -99,7 +117,7 @@
 {txt}(4 real changes made)
 
 {com}. replace ff_from_chargedesc=1 if charge_desc=="FAILURE TO APPEAR" 
-{txt}(21,279 real changes made)
+{txt}(21,280 real changes made)
 
 {com}. replace ff_from_chargedesc=1 if charge_desc=="FAILURE TO APPEAR OR PAY FINE"
 {txt}(10 real changes made)
@@ -165,7 +183,7 @@
 {txt}(0 real changes made)
 
 {com}. replace crim_homeles=1 if charge_desc=="TRESPASSING"
-{txt}(233 real changes made)
+{txt}(234 real changes made)
 
 {com}. replace crim_homeles=1 if charge_desc=="TRESPASS: PRIVATE PROPERTY"
 {txt}(84 real changes made)
@@ -289,17 +307,38 @@
 {txt}(1 real change made)
 
 {com}. 
+. tab ff_from_chargedesc year
+
+{txt}ff_from_ch {c |}                               year
+  argedesc {c |}      2014       2015       2016       2017       2018       2019 {c |}     Total
+{hline 11}{c +}{hline 66}{c +}{hline 10}
+         0 {c |}{res}    14,854     11,288     10,589     10,929      9,843      1,572 {txt}{c |}{res}    59,075 
+{txt}         1 {c |}{res}     5,643      4,210      3,700      3,679      3,832        624 {txt}{c |}{res}    21,688 
+{txt}{hline 11}{c +}{hline 66}{c +}{hline 10}
+     Total {c |}{res}    20,497     15,498     14,289     14,608     13,675      2,196 {txt}{c |}{res}    80,763 
+{txt}
+{com}. tab crim_homeless year
+
+{txt}crim_homel {c |}                               year
+       ess {c |}      2014       2015       2016       2017       2018       2019 {c |}     Total
+{hline 11}{c +}{hline 66}{c +}{hline 10}
+         0 {c |}{res}    20,306     15,403     14,190     14,540     13,620      2,182 {txt}{c |}{res}    80,241 
+{txt}         1 {c |}{res}       191         95         99         68         55         14 {txt}{c |}{res}       522 
+{txt}{hline 11}{c +}{hline 66}{c +}{hline 10}
+     Total {c |}{res}    20,497     15,498     14,289     14,608     13,675      2,196 {txt}{c |}{res}    80,763 
+{txt}
+{com}. 
 . tab charge_desc if ff_from_chargedesc==1
 
              {txt}ChargeDescription {c |}      Freq.     Percent        Cum.
 {hline 31}{c +}{hline 35}
      Driving Suspended License {c |}{res}         93        0.43        0.43
-{txt}             FAILURE TO APPEAR {c |}{res}     21,279       98.12       98.55
+{txt}             FAILURE TO APPEAR {c |}{res}     21,280       98.12       98.55
 {txt} FAILURE TO APPEAR OR PAY FINE {c |}{res}         10        0.05       98.59
 {txt}                FAILURE TO PAY {c |}{res}         20        0.09       98.69
 {txt}                           FTA {c |}{res}        285        1.31      100.00
 {txt}{hline 31}{c +}{hline 35}
-                         Total {c |}{res}     21,687      100.00
+                         Total {c |}{res}     21,688      100.00
 {txt}
 {com}. tab charge_desc race if ff_from_chargedesc==1
 
@@ -307,12 +346,12 @@
     ChargeDescription {c |}         A          B          I          U          W {c |}     Total
 {hline 22}{c +}{hline 55}{c +}{hline 10}
 Driving Suspended L.. {c |}{res}         0         83          0          2          8 {txt}{c |}{res}        93 
-{txt}    FAILURE TO APPEAR {c |}{res}        48     16,360         68        400      4,403 {txt}{c |}{res}    21,279 
+{txt}    FAILURE TO APPEAR {c |}{res}        48     16,361         68        400      4,403 {txt}{c |}{res}    21,280 
 {txt}FAILURE TO APPEAR O.. {c |}{res}         0          9          0          0          1 {txt}{c |}{res}        10 
 {txt}       FAILURE TO PAY {c |}{res}         0         18          0          0          2 {txt}{c |}{res}        20 
 {txt}                  FTA {c |}{res}         1        218          3          6         57 {txt}{c |}{res}       285 
 {txt}{hline 22}{c +}{hline 55}{c +}{hline 10}
-                Total {c |}{res}        49     16,688         71        408      4,471 {txt}{c |}{res}    21,687 
+                Total {c |}{res}        49     16,689         71        408      4,471 {txt}{c |}{res}    21,688 
 {txt}
 {com}. table charge_desc race sex if ff_from_chargedesc==1
 
@@ -322,7 +361,7 @@ Driving Suspended L.. {c |}{res}         0         83          0          2     
             ChargeDescription {c |}      A       B       I       U       W
 {hline 30}{c +}{hline 39}
     Driving Suspended License {c |}       {res}      13                        
-            {txt}FAILURE TO APPEAR {c |}     {res}11   3,453      12      64   1,851
+            {txt}FAILURE TO APPEAR {c |}     {res}11   3,454      12      64   1,851
 {txt}FAILURE TO APPEAR OR PAY FINE {c |}       {res}                                
                {txt}FAILURE TO PAY {c |}       {res}                                
                           {txt}FTA {c |}       {res}      41                      15
@@ -347,23 +386,23 @@ Driving Suspended L.. {c |}{res}         0         83          0          2     
 {hline 31}{c +}{hline 35}
             DRINKING IN PUBLIC {c |}{res}          1        0.19        0.19
 {txt}                     LOITERING {c |}{res}         11        2.11        2.30
-{txt}                OPEN CONTAINER {c |}{res}         17        3.26        5.57
-{txt}           PARK RULE VIOLATION {c |}{res}          1        0.19        5.76
-{txt}              PUBLIC URINATION {c |}{res}          5        0.96        6.72
-{txt}              ROGUE & VAGABOND {c |}{res}          7        1.34        8.06
-{txt}            ROGUE AND VAGABOND {c |}{res}         76       14.59       22.65
-{txt}                      TRESPASS {c |}{res}         22        4.22       26.87
-{txt}      TRESPASS POSTED PROPERTY {c |}{res}          1        0.19       27.06
-{txt}    TRESPASS PUB AGNCY DUR HRS {c |}{res}          3        0.58       27.64
-{txt}      TRESPASS-POSTED PROPERTY {c |}{res}         13        2.50       30.13
-{txt}    TRESPASS: PRIVATE PROPERTY {c |}{res}         84       16.12       46.26
-{txt}                   TRESPASSING {c |}{res}        233       44.72       90.98
-{txt}                   TRESSPASING {c |}{res}          1        0.19       91.17
-{txt}                     TRESSPASS {c |}{res}          5        0.96       92.13
-{txt}                  TRESSPASSING {c |}{res}         35        6.72       98.85
+{txt}                OPEN CONTAINER {c |}{res}         17        3.26        5.56
+{txt}           PARK RULE VIOLATION {c |}{res}          1        0.19        5.75
+{txt}              PUBLIC URINATION {c |}{res}          5        0.96        6.70
+{txt}              ROGUE & VAGABOND {c |}{res}          7        1.34        8.05
+{txt}            ROGUE AND VAGABOND {c |}{res}         76       14.56       22.61
+{txt}                      TRESPASS {c |}{res}         22        4.21       26.82
+{txt}      TRESPASS POSTED PROPERTY {c |}{res}          1        0.19       27.01
+{txt}    TRESPASS PUB AGNCY DUR HRS {c |}{res}          3        0.57       27.59
+{txt}      TRESPASS-POSTED PROPERTY {c |}{res}         13        2.49       30.08
+{txt}    TRESPASS: PRIVATE PROPERTY {c |}{res}         84       16.09       46.17
+{txt}                   TRESPASSING {c |}{res}        234       44.83       91.00
+{txt}                   TRESSPASING {c |}{res}          1        0.19       91.19
+{txt}                     TRESSPASS {c |}{res}          5        0.96       92.15
+{txt}                  TRESSPASSING {c |}{res}         35        6.70       98.85
 {txt}           URINATING IN PUBLIC {c |}{res}          6        1.15      100.00
 {txt}{hline 31}{c +}{hline 35}
-                         Total {c |}{res}        521      100.00
+                         Total {c |}{res}        522      100.00
 {txt}
 {com}. tab charge_desc race if crim_homeless==1
 
@@ -382,13 +421,13 @@ Driving Suspended L.. {c |}{res}         0         83          0          2     
 {txt}TRESPASS PUB AGNCY .. {c |}{res}         2          0          0          1 {txt}{c |}{res}         3 
 {txt}TRESPASS-POSTED PRO.. {c |}{res}         9          0          1          3 {txt}{c |}{res}        13 
 {txt}TRESPASS: PRIVATE P.. {c |}{res}        63          1          0         20 {txt}{c |}{res}        84 
-{txt}          TRESPASSING {c |}{res}       186          0          6         41 {txt}{c |}{res}       233 
+{txt}          TRESPASSING {c |}{res}       187          0          6         41 {txt}{c |}{res}       234 
 {txt}          TRESSPASING {c |}{res}         1          0          0          0 {txt}{c |}{res}         1 
 {txt}            TRESSPASS {c |}{res}         4          0          0          1 {txt}{c |}{res}         5 
 {txt}         TRESSPASSING {c |}{res}        32          0          0          3 {txt}{c |}{res}        35 
 {txt}  URINATING IN PUBLIC {c |}{res}         4          0          1          1 {txt}{c |}{res}         6 
 {txt}{hline 22}{c +}{hline 44}{c +}{hline 10}
-                Total {c |}{res}       397          1         12        111 {txt}{c |}{res}       521 
+                Total {c |}{res}       398          1         12        111 {txt}{c |}{res}       522 
 {txt}
 {com}. table charge_desc race sex if crim_homeless==1
 
@@ -409,7 +448,7 @@ Driving Suspended L.. {c |}{res}         0         83          0          2     
 {txt}TRESPASS PUB AGNCY DUR HRS {c |}    {res}1                         1                 1
   {txt}TRESPASS-POSTED PROPERTY {c |}    {res}1                         8           1     3
 {txt}TRESPASS: PRIVATE PROPERTY {c |}   {res}14     1           3      49                17
-               {txt}TRESPASSING {c |}   {res}36                13     150           6    28
+               {txt}TRESPASSING {c |}   {res}36                13     151           6    28
                {txt}TRESSPASING {c |}     {res}                         1                  
                  {txt}TRESSPASS {c |}     {res}                         4                 1
               {txt}TRESSPASSING {c |}    {res}2                        30                 3
@@ -436,7 +475,7 @@ Driving Suspended L.. {c |}{res}         0         83          0          2     
 {txt}       115TRESPASSING {c |}{res}         0        183          1          3         40 {txt}{c |}{res}       227 
 {txt}116PUBLIC URINATION.. {c |}{res}         0          6          0          3          0 {txt}{c |}{res}         9 
 {txt}               117FTO {c |}{res}         0         11          0          0          1 {txt}{c |}{res}        12 
-{txt}118BURGLARY - FOURT.. {c |}{res}         0        167          2          1         64 {txt}{c |}{res}       234 
+{txt}118BURGLARY - FOURT.. {c |}{res}         0        168          2          1         64 {txt}{c |}{res}       235 
 {txt}   119ISSUED IN ERROR {c |}{res}         0         51          0          1          5 {txt}{c |}{res}        57 
 {txt}             1AMURDER {c |}{res}         0         97          0          3          4 {txt}{c |}{res}       104 
 {txt}       1BMANSLAUGHTER {c |}{res}         0          3          0          0          0 {txt}{c |}{res}         3 
@@ -445,7 +484,7 @@ Driving Suspended L.. {c |}{res}         0         83          0          2     
 {txt}         20JTRANSPORT {c |}{res}         0          2          0          0          0 {txt}{c |}{res}         2 
 {txt}   23UNAUTHORIZED USE {c |}{res}         0         47          0          0         13 {txt}{c |}{res}        60 
 {txt}24PTOWED VEHICLE - .. {c |}{res}         0          8          0          0          0 {txt}{c |}{res}         8 
-{txt}      24TOWED VEHICLE {c |}{res}         3        366          0          9         66 {txt}{c |}{res}       444 
+{txt}      24TOWED VEHICLE {c |}{res}         3        367          0          9         66 {txt}{c |}{res}       445 
 {txt}           25CAR STOP {c |}{res}         0          3          0          0          0 {txt}{c |}{res}         3 
 {txt}  26RECOVERED VEHICLE {c |}{res}         0        131          1          0         20 {txt}{c |}{res}       152 
 {txt}29DRIVING WHILE INT.. {c |}{res}         0          6          0          1          1 {txt}{c |}{res}         8 
@@ -492,13 +531,13 @@ Driving Suspended L.. {c |}{res}         0         83          0          2     
 {txt} 49FAMILY DISTURBANCE {c |}{res}         2         84          0          0         11 {txt}{c |}{res}        97 
 {txt}   4AAGG. ASSLT.- GUN {c |}{res}         0        367          0          5         24 {txt}{c |}{res}       396 
 {txt}   4BAGG. ASSLT.- CUT {c |}{res}         0        509          2         27         75 {txt}{c |}{res}       613 
-{txt}  4CAGG. ASSLT.- OTH. {c |}{res}         5        706          1         29        115 {txt}{c |}{res}       856 
+{txt}  4CAGG. ASSLT.- OTH. {c |}{res}         5        704          1         29        115 {txt}{c |}{res}       854 
 {txt}  4DAGG. ASSLT.- HAND {c |}{res}         0        319          1         10         36 {txt}{c |}{res}       366 
-{txt}     4ECOMMON ASSAULT {c |}{res}         7      2,488          6        119        371 {txt}{c |}{res}     2,991 
+{txt}     4ECOMMON ASSAULT {c |}{res}         7      2,494          6        119        370 {txt}{c |}{res}     2,996 
 {txt}  4FASSAULT BY THREAT {c |}{res}         0         44          0          1          2 {txt}{c |}{res}        47 
 {txt}    52AANIMAL CRUELTY {c |}{res}         0          5          0          0          0 {txt}{c |}{res}         5 
-{txt}       54ARMED PERSON {c |}{res}         1        595          0          7         25 {txt}{c |}{res}       628 
-{txt}      55APROSTITUTION {c |}{res}         1        152          1          7        172 {txt}{c |}{res}       333 
+{txt}       54ARMED PERSON {c |}{res}         1        597          0          7         25 {txt}{c |}{res}       630 
+{txt}      55APROSTITUTION {c |}{res}         1        153          1          7        172 {txt}{c |}{res}       334 
 {txt}55BASSISTING / PROM.. {c |}{res}         0          0          0          0          1 {txt}{c |}{res}         1 
 {txt}55CPURCHASING PROST.. {c |}{res}         0          0          0          0          1 {txt}{c |}{res}         1 
 {txt}  55DISORDERLY PERSON {c |}{res}         0        202          0          9         43 {txt}{c |}{res}       254 
@@ -517,17 +556,17 @@ Driving Suspended L.. {c |}{res}         0         83          0          2     
 {txt}67CHILD ABUSE-PHYSI.. {c |}{res}         1         14          0          0          2 {txt}{c |}{res}        17 
 {txt}6ALARCENY- PICKPOCKET {c |}{res}         0          1          0          0          0 {txt}{c |}{res}         1 
 {txt}6BLARCENY- PERSON C.. {c |}{res}         0         11          0          1          2 {txt}{c |}{res}        14 
-{txt}6CLARCENY- SHOPLIFT.. {c |}{res}         0        453          1          8        158 {txt}{c |}{res}       620 
-{txt} 6DLARCENY- FROM AUTO {c |}{res}         0         92          0          1         38 {txt}{c |}{res}       131 
+{txt}6CLARCENY- SHOPLIFT.. {c |}{res}         0        454          1          8        158 {txt}{c |}{res}       621 
+{txt} 6DLARCENY- FROM AUTO {c |}{res}         0         93          0          1         38 {txt}{c |}{res}       132 
 {txt}  6ELARCENY- AUTO ACC {c |}{res}         0         23          0          0          4 {txt}{c |}{res}        27 
-{txt}   6FLARCENY- BICYCLE {c |}{res}         0          5          0          0          4 {txt}{c |}{res}         9 
+{txt}   6FLARCENY- BICYCLE {c |}{res}         0          6          0          0          4 {txt}{c |}{res}        10 
 {txt}6GLARCENY- FROM BLDG. {c |}{res}         1         90          0          0         24 {txt}{c |}{res}       115 
 {txt}6HLARCENY- FROM MAC.. {c |}{res}         0          2          0          0          1 {txt}{c |}{res}         3 
 {txt}     6JLARCENY- OTHER {c |}{res}         0         71          0          5         45 {txt}{c |}{res}       121 
 {txt}6LLARCENY- FROM LOC.. {c |}{res}         0          1          0          0          1 {txt}{c |}{res}         2 
 {txt}71SEX OFFENDER REGI.. {c |}{res}         0         55          1          0         15 {txt}{c |}{res}        71 
 {txt}     73FALSE PRETENSE {c |}{res}         0         15          0          0          2 {txt}{c |}{res}        17 
-{txt}75DESTRUCT. OF PROP.. {c |}{res}         1        244          2         11         35 {txt}{c |}{res}       293 
+{txt}75DESTRUCT. OF PROP.. {c |}{res}         1        245          2         11         35 {txt}{c |}{res}       294 
 {txt} 76CHILD ABUSE-SEXUAL {c |}{res}         0          3          0          2          3 {txt}{c |}{res}         8 
 {txt}           77DOG BITE {c |}{res}         0         10          0          0          0 {txt}{c |}{res}        10 
 {txt}           78GAMBLING {c |}{res}         0         78          0          0          2 {txt}{c |}{res}        80 
@@ -540,8 +579,8 @@ Driving Suspended L.. {c |}{res}         0         83          0          2     
 {txt}  85BEHAVIORAL CRISIS {c |}{res}         0         20          0          0          2 {txt}{c |}{res}        22 
 {txt}     86SPECIAL CURFEW {c |}{res}         0         10          0          0          1 {txt}{c |}{res}        11 
 {txt} 87CNARCOTICS (CIVIL) {c |}{res}         0          2          0          0          0 {txt}{c |}{res}         2 
-{txt}          87NARCOTICS {c |}{res}         5      4,293         13         24        737 {txt}{c |}{res}     5,072 
-{txt}87ONARCOTICS (OUTSI.. {c |}{res}         1        548          0          3         97 {txt}{c |}{res}       649 
+{txt}          87NARCOTICS {c |}{res}         5      4,300         13         24        737 {txt}{c |}{res}     5,079 
+{txt}87ONARCOTICS (OUTSI.. {c |}{res}         1        550          0          3         97 {txt}{c |}{res}       651 
 {txt}87VNARCOTICS (ONVIEW) {c |}{res}         1        167          0          2         31 {txt}{c |}{res}       201 
 {txt}     88UNFOUNDED CALL {c |}{res}         0         25          0          4         11 {txt}{c |}{res}        40 
 {txt}8AOARSON SIN RES ST.. {c |}{res}         0          9          0          0          2 {txt}{c |}{res}        11 
@@ -557,11 +596,11 @@ Driving Suspended L.. {c |}{res}         0         83          0          2     
 {txt} 95EXPARTE/PROT/PEACE {c |}{res}         0         22          0          1          9 {txt}{c |}{res}        32 
 {txt}  96AWEAPONS PAT DOWN {c |}{res}         0          3          0          0          2 {txt}{c |}{res}         5 
 {txt}96BINVESTIGATIVE STOP {c |}{res}         0         14          0          0          3 {txt}{c |}{res}        17 
-{txt}   97SEARCH & SEIZURE {c |}{res}         5      1,054          5          9        144 {txt}{c |}{res}     1,217 
+{txt}   97SEARCH & SEIZURE {c |}{res}         5      1,055          5          9        144 {txt}{c |}{res}     1,218 
 {txt}      98CHILD NEGLECT {c |}{res}         0          7          0          0          5 {txt}{c |}{res}        12 
-{txt}      Unknown Offense {c |}{res}       148     48,539        190      1,170     10,467 {txt}{c |}{res}    60,514 
+{txt}      Unknown Offense {c |}{res}       148     48,549        190      1,170     10,466 {txt}{c |}{res}    60,523 
 {txt}{hline 22}{c +}{hline 55}{c +}{hline 10}
-                Total {c |}{res}       185     65,289        232      1,536     13,490 {txt}{c |}{res}    80,732 
+                Total {c |}{res}       185     65,322        232      1,536     13,488 {txt}{c |}{res}    80,763 
 {txt}
 {com}. *I think that the charge descriptions are more valuable but we can dive 
 . *deeper into this if helpful
@@ -571,13 +610,13 @@ Driving Suspended L.. {c |}{res}         0         83          0          2     
            {txt}{c |}       Quintiles by Share of Residents in Poverty
       Race {c |} 0.8% to 8  10.0% to   15.4% to   20.3% to   29.2% to  {c |}     Total
 {hline 11}{c +}{hline 55}{c +}{hline 10}
-         A {c |}{res}         0         21        148          7          7 {txt}{c |}{res}       183 
-{txt}         B {c |}{res}       935      1,778     54,484      2,976      4,463 {txt}{c |}{res}    64,636 
-{txt}         I {c |}{res}         1          9        202          8          8 {txt}{c |}{res}       228 
-{txt}         U {c |}{res}        48        125      1,185         81         69 {txt}{c |}{res}     1,508 
-{txt}         W {c |}{res}       405        604     11,033        732        638 {txt}{c |}{res}    13,412 
+         A {c |}{res}         0        165          4          7          7 {txt}{c |}{res}       183 
+{txt}         B {c |}{res}       937     52,423      3,840      2,976      4,493 {txt}{c |}{res}    64,669 
+{txt}         I {c |}{res}         1        203          8          8          8 {txt}{c |}{res}       228 
+{txt}         U {c |}{res}        48      1,283         27         81         69 {txt}{c |}{res}     1,508 
+{txt}         W {c |}{res}       404     11,457        179        732        638 {txt}{c |}{res}    13,410 
 {txt}{hline 11}{c +}{hline 55}{c +}{hline 10}
-     Total {c |}{res}     1,389      2,537     67,052      3,804      5,185 {txt}{c |}{res}    79,967 
+     Total {c |}{res}     1,390     65,531      4,058      3,804      5,215 {txt}{c |}{res}    79,998 
 {txt}
 {com}. * because only 81,891 of the 138,000 values had geolocated data, the quantiles
 . * are only reflective of the data able to be matched to neighborhoods
@@ -587,20 +626,20 @@ Driving Suspended L.. {c |}{res}         0         83          0          2     
 {txt}ff_from_ch {c |}       Quintiles by Share of Residents in Poverty
   argedesc {c |} 0.8% to 8  10.0% to   15.4% to   20.3% to   29.2% to  {c |}     Total
 {hline 11}{c +}{hline 55}{c +}{hline 10}
-         0 {c |}{res}     1,389      2,529     45,418      3,796      5,155 {txt}{c |}{res}    58,287 
-{txt}         1 {c |}{res}         1          8     21,635         10         30 {txt}{c |}{res}    21,684 
+         0 {c |}{res}     1,390     43,904      4,042      3,796      5,185 {txt}{c |}{res}    58,317 
+{txt}         1 {c |}{res}         1     21,627         17         10         30 {txt}{c |}{res}    21,685 
 {txt}{hline 11}{c +}{hline 55}{c +}{hline 10}
-     Total {c |}{res}     1,390      2,537     67,053      3,806      5,185 {txt}{c |}{res}    79,971 
+     Total {c |}{res}     1,391     65,531      4,059      3,806      5,215 {txt}{c |}{res}    80,002 
 {txt}
 {com}. tab crim_homeless quint_poverty
 
 {txt}crim_homel {c |}       Quintiles by Share of Residents in Poverty
        ess {c |} 0.8% to 8  10.0% to   15.4% to   20.3% to   29.2% to  {c |}     Total
 {hline 11}{c +}{hline 55}{c +}{hline 10}
-         0 {c |}{res}     1,339      2,488     66,824      3,750      5,069 {txt}{c |}{res}    79,470 
-{txt}         1 {c |}{res}        51         49        229         56        116 {txt}{c |}{res}       501 
+         0 {c |}{res}     1,340     65,303      4,009      3,750      5,098 {txt}{c |}{res}    79,500 
+{txt}         1 {c |}{res}        51        228         50         56        117 {txt}{c |}{res}       502 
 {txt}{hline 11}{c +}{hline 55}{c +}{hline 10}
-     Total {c |}{res}     1,390      2,537     67,053      3,806      5,185 {txt}{c |}{res}    79,971 
+     Total {c |}{res}     1,391     65,531      4,059      3,806      5,215 {txt}{c |}{res}    80,002 
 {txt}
 {com}. table charge_desc quint_poverty if ff_from_chargedesc==1
 
@@ -608,11 +647,11 @@ Driving Suspended L.. {c |}{res}         0         83          0          2     
                               {c |}   Quintiles by Share of Residents in Poverty  
             ChargeDescription {c |}   0.8% to 8.1%  10.0% to 15.1%  15.4% to 19.9%
 {hline 30}{c +}{hline 47}
-    Driving Suspended License {c |}              {res}1               8              46
-            {txt}FAILURE TO APPEAR {c |}               {res}                          21,274
-{txt}FAILURE TO APPEAR OR PAY FINE {c |}               {res}                              10
-               {txt}FAILURE TO PAY {c |}               {res}                              20
-                          {txt}FTA {c |}               {res}                             285
+    Driving Suspended License {c |}              {res}1              39              15
+            {txt}FAILURE TO APPEAR {c |}               {res}          21,273               2
+{txt}FAILURE TO APPEAR OR PAY FINE {c |}               {res}              10                
+               {txt}FAILURE TO PAY {c |}               {res}              20                
+                          {txt}FTA {c |}               {res}             285                
 {txt}{hline 30}{c BT}{hline 47}
 
 {hline 30}{c TT}{hline 31}
@@ -634,22 +673,22 @@ Driving Suspended L.. {c |}{res}         0         83          0          2     
          ChargeDescription {c |}   0.8% to 8.1% 10.0% to 15.1% 15.4% to 19.9% 20.3% to 26.3%
 {hline 27}{c +}{hline 60}
         DRINKING IN PUBLIC {c |}              {res}1                                             
-                 {txt}LOITERING {c |}               {res}                             4              1
+                 {txt}LOITERING {c |}               {res}              1              3              1
             {txt}OPEN CONTAINER {c |}              {res}3              2                             3
        {txt}PARK RULE VIOLATION {c |}              {res}1                                             
           {txt}PUBLIC URINATION {c |}               {res}              2              1               
-          {txt}ROGUE & VAGABOND {c |}              {res}1                             5              1
-        {txt}ROGUE AND VAGABOND {c |}              {res}3              2             70               
+          {txt}ROGUE & VAGABOND {c |}              {res}1              5                             1
+        {txt}ROGUE AND VAGABOND {c |}              {res}3             72                              
                   {txt}TRESPASS {c |}              {res}3              9              1              3
   {txt}TRESPASS POSTED PROPERTY {c |}               {res}                                             
-{txt}TRESPASS PUB AGNCY DUR HRS {c |}               {res}                             3               
-  {txt}TRESPASS-POSTED PROPERTY {c |}               {res}                            13               
-{txt}TRESPASS: PRIVATE PROPERTY {c |}               {res}                            84               
-               {txt}TRESPASSING {c |}             {res}32             28             41             40
+{txt}TRESPASS PUB AGNCY DUR HRS {c |}               {res}              3                              
+  {txt}TRESPASS-POSTED PROPERTY {c |}               {res}             13                              
+{txt}TRESPASS: PRIVATE PROPERTY {c |}               {res}             84                              
+               {txt}TRESPASSING {c |}             {res}32             30             39             40
                {txt}TRESSPASING {c |}               {res}                             1               
                  {txt}TRESSPASS {c |}              {res}3              1                             1
               {txt}TRESSPASSING {c |}              {res}3              4              4              5
-       {txt}URINATING IN PUBLIC {c |}              {res}1              1              2              2
+       {txt}URINATING IN PUBLIC {c |}              {res}1              2              1              2
 {txt}{hline 27}{c BT}{hline 60}
 
 {hline 27}{c TT}{hline 15}
@@ -671,7 +710,7 @@ Driving Suspended L.. {c |}{res}         0         83          0          2     
 {txt}TRESPASS PUB AGNCY DUR HRS {c |}               {res}
   {txt}TRESPASS-POSTED PROPERTY {c |}               {res}
 {txt}TRESPASS: PRIVATE PROPERTY {c |}               {res}
-               {txt}TRESPASSING {c |}             {res}79
+               {txt}TRESPASSING {c |}             {res}80
                {txt}TRESSPASING {c |}               {res}
                  {txt}TRESSPASS {c |}               {res}
               {txt}TRESSPASSING {c |}             {res}16
@@ -680,23 +719,13 @@ Driving Suspended L.. {c |}{res}         0         83          0          2     
 
 {com}. 
 . *Question: MOTOR VEH/UNLAWFUL TAKING?
-. 
-. tab address_match 
-
-          {txt}address_match {c |}      Freq.     Percent        Cum.
-{hline 24}{c +}{hline 35}
-                      0 {c |}{res}     80,732      100.00      100.00
-{txt}{hline 24}{c +}{hline 35}
-                  Total {c |}{res}     80,732      100.00
-{txt}
-{com}. 
 . clear
 {txt}
 {com}. log close
       {txt}name:  {res}<unnamed>
        {txt}log:  {res}/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/logs/bpd_results_log.smcl
   {txt}log type:  {res}smcl
- {txt}closed on:  {res}24 Apr 2019, 17:44:20
+ {txt}closed on:  {res} 2 May 2019, 16:45:04
 {txt}{.-}
 {smcl}
 {txt}{sf}{ul off}

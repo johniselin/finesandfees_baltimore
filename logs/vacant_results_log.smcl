@@ -3,7 +3,7 @@
       name:  {res}<unnamed>
        {txt}log:  {res}/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/logs/vacant_results_log.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res}24 Apr 2019, 17:44:20
+ {txt}opened on:  {res} 2 May 2019, 16:45:04
 {txt}
 {com}. 
 . use "data_cleaned/vacant_lots_cleaned_merge.dta"
@@ -197,7 +197,7 @@ female_head {c |}
       {txt}name:  {res}<unnamed>
        {txt}log:  {res}/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/logs/vacant_results_log.smcl
   {txt}log type:  {res}smcl
- {txt}closed on:  {res}24 Apr 2019, 17:44:22
+ {txt}closed on:  {res} 2 May 2019, 16:45:08
 {txt}{.-}
 {smcl}
 {txt}{sf}{ul off}

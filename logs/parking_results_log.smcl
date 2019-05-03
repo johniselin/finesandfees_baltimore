@@ -3,7 +3,7 @@
       name:  {res}<unnamed>
        {txt}log:  {res}/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/logs/parking_results_log.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res}24 Apr 2019, 17:43:52
+ {txt}opened on:  {res} 2 May 2019, 16:44:20
 {txt}
 {com}. 
 . use "data_cleaned/parking_citations_cleaned.dta"
@@ -1111,7 +1111,7 @@ open_fine_~t {c |}{res}  3,062,330    24.21725    42.58846          0        502
       {txt}name:  {res}<unnamed>
        {txt}log:  {res}/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/logs/parking_results_log.smcl
   {txt}log type:  {res}smcl
- {txt}closed on:  {res}24 Apr 2019, 17:44:17
+ {txt}closed on:  {res} 2 May 2019, 16:44:59
 {txt}{.-}
 {smcl}
 {txt}{sf}{ul off}

@@ -3,7 +3,7 @@
       name:  {res}<unnamed>
        {txt}log:  {res}/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/logs/towing_results_log.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res}24 Apr 2019, 17:44:17
+ {txt}opened on:  {res} 2 May 2019, 16:44:59
 {txt}
 {com}. use "data_cleaned/dot_towing_cleaned.dta", clear
 {txt}
@@ -173,7 +173,7 @@ Administrative No C.. {c |}{res}         0          0          0 {txt}{c |}{res}
       {txt}name:  {res}<unnamed>
        {txt}log:  {res}/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/logs/towing_results_log.smcl
   {txt}log type:  {res}smcl
- {txt}closed on:  {res}24 Apr 2019, 17:44:17
+ {txt}closed on:  {res} 2 May 2019, 16:44:59
 {txt}{.-}
 {smcl}
 {txt}{sf}{ul off}

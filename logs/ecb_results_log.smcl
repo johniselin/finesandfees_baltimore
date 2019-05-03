@@ -3,7 +3,7 @@
       name:  {res}<unnamed>
        {txt}log:  {res}/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/logs/ecb_results_log.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res}24 Apr 2019, 17:43:32
+ {txt}opened on:  {res} 2 May 2019, 16:43:55
 {txt}
 {com}. 
 . use "data_cleaned/ecb_citations_cleaned_merge.dta", clear
@@ -1051,7 +1051,7 @@ ad_16     {c |}            L             N
       {txt}name:  {res}<unnamed>
        {txt}log:  {res}/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/logs/ecb_results_log.smcl
   {txt}log type:  {res}smcl
- {txt}closed on:  {res}24 Apr 2019, 17:43:52
+ {txt}closed on:  {res} 2 May 2019, 16:44:20
 {txt}{.-}
 {smcl}
 {txt}{sf}{ul off}

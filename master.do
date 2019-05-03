@@ -244,13 +244,15 @@ tab days_held_cats
 
 clear
 log close
-
 ** Data analysis - BPD
 log using "logs/bpd_results_log", replace 
 
 use "data_cleaned/bpd_arrests_merge.dta", clear
 
 sort charge_desc
+
+gen year = year(arrest_date)
+tab year race
 
 gen ff_from_chargedesc=0
 replace ff_from_chargedesc=1 if charge_desc=="DRI ON SUSP LIC"
@@ -349,6 +351,9 @@ replace charge_desc="Driving Suspended License" if charge_desc=="DRIVINGONSUSPEN
 replace charge_desc="Driving Suspended License" if charge_desc=="SUSPENDED LICENCE"
 replace charge_desc="Driving Suspended License" if charge_desc=="SUSPENDEDLIC"
 
+tab ff_from_chargedesc year
+tab crim_homeless year
+
 tab charge_desc if ff_from_chargedesc==1
 tab charge_desc race if ff_from_chargedesc==1
 table charge_desc race sex if ff_from_chargedesc==1
@@ -371,9 +376,6 @@ table charge_desc quint_poverty if ff_from_chargedesc==1
 table charge_desc quint_poverty if crim_homeless==1
 
 *Question: MOTOR VEH/UNLAWFUL TAKING?
-
-tab address_match 
-
 clear
 log close
 
