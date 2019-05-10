@@ -254,6 +254,7 @@ sort charge_desc
 gen year = year(arrest_date)
 tab year race
 
+
 gen ff_from_chargedesc=0
 replace ff_from_chargedesc=1 if charge_desc=="DRI ON SUSP LIC"
 replace ff_from_chargedesc=1 if charge_desc=="DRIV ON SUS LIC"
@@ -351,6 +352,9 @@ replace charge_desc="Driving Suspended License" if charge_desc=="DRIVINGONSUSPEN
 replace charge_desc="Driving Suspended License" if charge_desc=="SUSPENDED LICENCE"
 replace charge_desc="Driving Suspended License" if charge_desc=="SUSPENDEDLIC"
 
+tab year quint_black 
+tab year quint_poverty 
+
 tab ff_from_chargedesc year
 tab crim_homeless year
 
@@ -369,6 +373,10 @@ tab incident_offense race
 tab race quint_poverty
 * because only 81,891 of the 138,000 values had geolocated data, the quantiles
 * are only reflective of the data able to be matched to neighborhoods
+
+tab year quint_black if ff_from_chargedesc == 1
+tab year quint_poverty if ff_from_chargedesc == 1
+
 
 tab ff_from_chargedesc quint_poverty
 tab crim_homeless quint_poverty
