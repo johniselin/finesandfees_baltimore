@@ -2,11 +2,17 @@
 
 ## Introduction 
 
-This repository holds the stata code used to analyze data from the City of Baltimore on data related to fines. 
+This repository holds the stata code used to analyze data from the City of Baltimore on data related to fines. It also holds various materials related to our analysis of fines and fees in Baltimore. 
 
-## File Structure 
+## File Structure - Materials
 
-The repository should have the following folders:
+This repository has the following folders containing non-data materials collected or constructed during our analysis. 
+
+#### interview_materials
+
+## File Structure - Data Analysis
+
+The repository should have the following folders related to the data processs:
 
 #### raw_data
 This folder should hold all of the raw data used in the analysis in csv form. The version on this repository holds the crosswalk between nsa and csa neighborhood groups, but the rest of the data should be downloaded by the user. 
