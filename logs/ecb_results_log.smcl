@@ -1,24 +1,23 @@
 {smcl}
 {com}{sf}{ul off}{txt}{.-}
       name:  {res}<unnamed>
-       {txt}log:  {res}/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/logs/ecb_results_log.smcl
+       {txt}log:  {res}/Users/johniselin/finesandfees_baltimore/logs/ecb_results_log.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res} 2 May 2019, 16:43:55
+ {txt}opened on:  {res}15 May 2019, 13:19:38
 {txt}
 {com}. 
 . use "data_cleaned/ecb_citations_cleaned_merge.dta", clear
 {txt}
 {com}. 
 . gen year = year(viol_date)
-{txt}(4 missing values generated)
-
+{txt}
 {com}. bysort description year : gen freq = _N
 {txt}
 {com}. gen common = 1 if freq > 1000
-{txt}(73,372 missing values generated)
+{txt}(74,063 missing values generated)
 
 {com}. replace common = 0 if common == .
-{txt}(73,372 real changes made)
+{txt}(74,063 real changes made)
 
 {com}. drop freq 
 {txt}
@@ -26,33 +25,33 @@
 . rename hearingstatus hearing_status
 {res}{txt}
 {com}. replace hearing_status = "NA" if hearing_status == "  "
-{txt}(113,014 real changes made)
+{txt}(115,861 real changes made)
 
 {com}. replace hearing_status = "Hearing Scheduled" if hearing_status == "HR"
 {txt}variable {bf}hearing_status{sf} was {bf}{res}str2{sf}{txt} now {bf}{res}str17{sf}
-{txt}(1,155 real changes made)
+{txt}(1,172 real changes made)
 
 {com}. replace hearing_status = "Guilty" if hearing_status == "GU"
-{txt}(445 real changes made)
+{txt}(459 real changes made)
 
 {com}. replace hearing_status = "Guilty Reduced" if hearing_status == "GR"
-{txt}(6,329 real changes made)
+{txt}(6,459 real changes made)
 
 {com}. replace hearing_status = "Default, No Show" if hearing_status == "DF"
-{txt}(4,063 real changes made)
+{txt}(4,141 real changes made)
 
 {com}. replace hearing_status = "Default, Behavior" if hearing_status == "DB"
-{txt}(20 real changes made)
+{txt}(21 real changes made)
 
 {com}. replace hearing_status = "Dismissed" if hearing_status == "DI"
-{txt}(653 real changes made)
+{txt}(664 real changes made)
 
 {com}. replace hearing_status = "Default, Abated" if hearing_status == "DA"
-{txt}(720 real changes made)
+{txt}(731 real changes made)
 
 {com}. 
 . gen fine_abated_share = total_abated_amt / bal_amt
-{txt}(62 missing values generated)
+{txt}(58 missing values generated)
 
 {com}. 
 . bysort year description: egen sum_fine = total(fine_amt)
@@ -60,8 +59,7 @@
 {com}. bysort year description: egen sum_paid = total(total_paid_amt) 
 {txt}
 {com}. gen total_paid_share = sum_paid/ sum_fine
-{txt}(4 missing values generated)
-
+{txt}
 {com}. drop sum_fine sum_paid
 {txt}
 {com}. 
@@ -69,97 +67,97 @@
 
                             {txt}Description {c |}      Freq.     Percent        Cum.
 {hline 40}{c +}{hline 35}
-HIGH GRASS AND WEEDS                 .. {c |}{res}      6,744       20.23       20.23
-{txt}TRASH ACCUMULATION                   .. {c |}{res}      5,822       17.46       37.69
-{txt}FAILURE TO FILE A COMPLETED ANNUAL RE.. {c |}{res}      3,043        9.13       46.82
-{txt}BULK TRASH                           .. {c |}{res}      2,818        8.45       55.28
-{txt}FAILED TO ABATE VIOLATION NOTICE AND .. {c |}{res}      2,014        6.04       61.32
-{txt}CONSTRUCTION AND MAINTENANCE OF STORA.. {c |}{res}      1,539        4.62       65.93
-{txt}UNREGISTERED OR INOPERABLE VEHICLE   .. {c |}{res}      1,449        4.35       70.28
-{txt}EXTERIOR SANITARY MAINTENANCE - GENER.. {c |}{res}      1,156        3.47       73.75
-{txt}FAILED TO ABATE UNSAFE STRUCTURE NOTI.. {c |}{res}      1,121        3.36       77.11
-{txt}FAILURE TO FILE ANNUAL VACANT BUILDIN.. {c |}{res}        988        2.96       80.08
-{txt}FAILURE TO KEEP STORAGE RECEPTACLE IN.. {c |}{res}        806        2.42       82.49
-{txt}IMPROPER SURFACE FOR PARKING OR STORA.. {c |}{res}        696        2.09       84.58
-{txt}FAILURE TO PROVIDE SUFFICIENT NUMBER .. {c |}{res}        653        1.96       86.54
-{txt}DUMPING UNDER 25 LBS OF WASTE ON PUBL.. {c |}{res}        603        1.81       88.35
-{txt}WORK WITHOUT OR BEYOND THE SCOPE OF P.. {c |}{res}        437        1.31       89.66
-{txt}PROHIBITED POSTING OF SIGNS ON PUBLIC.. {c |}{res}        396        1.19       90.85
-{txt}TREES AND SHRUBS - FAILURE TO PREVENT.. {c |}{res}        312        0.94       91.78
-{txt}PLACEMENT FOR COLLECTION STORAGE ON N.. {c |}{res}        285        0.85       92.64
-{txt}VIOLATION OF ZONING CODE             .. {c |}{res}        239        0.72       93.36
-{txt}DUMPING UNDER 25 LBS OF WASTE ON PRIV.. {c |}{res}        176        0.53       93.88
-{txt}ANIMAL WASTE - FAILURE TO CLEAN UP AF.. {c |}{res}        136        0.41       94.29
-{txt}EXTERIOR SANITARY MAINTENANCE - TRASH.. {c |}{res}        136        0.41       94.70
-{txt}UNLAWFUL DISTRIBUTION OF TOBACCO TO M.. {c |}{res}        132        0.40       95.10
-{txt}UNLICENSED OR MISUSE OF LICENSE FOR D.. {c |}{res}        129        0.39       95.48
-{txt}HUMANE CARE REQUIRED - FOOD/SHELTER/V.. {c |}{res}        117        0.35       95.83
-{txt}OUTDOOR STORAGE - FAILURE TO KEEP MAT.. {c |}{res}        107        0.32       96.15
-{txt}FAILURE TO VACCINATE OR PROVIDE CERTI.. {c |}{res}        100        0.30       96.45
-{txt}PARKING WHERE PROHIBITED             .. {c |}{res}         74        0.22       96.68
-{txt}DUMPING OVER 25 LBS OF WASTE ON PUBLI.. {c |}{res}         72        0.22       96.89
-{txt}RESTRAINTS REQUIRED OR RESTRAINTS IMP.. {c |}{res}         65        0.19       97.09
-{txt}ALARM MONITOR FAILED TO COMP. TWO CAL.. {c |}{res}         59        0.18       97.26
-{txt}PLACING/AFFIXING ADVERTISING CIRCULAR.. {c |}{res}         55        0.16       97.43
-{txt}COMPLIANCE WITH HEALTH LAWS REQUIRED .. {c |}{res}         49        0.15       97.58
-{txt}MARYLAND FRESHWATER SPORTFISHING REGS.. {c |}{res}         47        0.14       97.72
-{txt}SWIMMING PROHIBITED                  .. {c |}{res}         43        0.13       97.85
-{txt}FAILURE TO KEEP FREE OF NUISANCE/HAZA.. {c |}{res}         41        0.12       97.97
-{txt}DUMPING OVER 25 LBS OF WASTE ON PRIVA.. {c |}{res}         39        0.12       98.09
-{txt}FAILED TO OBTAIN LICENSE TO OPERATE A.. {c |}{res}         39        0.12       98.20
-{txt}EXTERIOR PEST CONTROL                .. {c |}{res}         38        0.11       98.32
-{txt}INOPERABLE VEHICLE                   .. {c |}{res}         36        0.11       98.43
-{txt}UNSAFE CONDITIONS                    .. {c |}{res}         34        0.10       98.53
-{txt}FAILURE TO PAY FALSE ALARM FEE.      .. {c |}{res}         33        0.10       98.63
-{txt}VALETED VEHICLE PARKED/STOPPED OR LEF.. {c |}{res}         32        0.10       98.72
-{txt}NEGLECT OF ANIMAL                    .. {c |}{res}         24        0.07       98.79
-{txt}OPERATING OUTSIDE OF APPROVED VALET P.. {c |}{res}         21        0.06       98.86
-{txt}USER FAILED TO REGISTER BURGLAR ALARM.. {c |}{res}         21        0.06       98.92
-{txt}SANITARY MAINTENANCE - EXTERIOR, MORE.. {c |}{res}         20        0.06       98.98
-{txt}SMOKING INDOORS, PROHIBITED          .. {c |}{res}         17        0.05       99.03
-{txt}ALARM MONITOR FAILED TO REPORT ACTIVA.. {c |}{res}         16        0.05       99.08
-{txt}FAILURE TO RAT PROOF                 .. {c |}{res}         16        0.05       99.13
-{txt}SANITARY MAINTENANCE - OCCUPANT  EXTE.. {c |}{res}         16        0.05       99.18
-{txt}VALET PARKING SERVICES ENDANGERING PU.. {c |}{res}         16        0.05       99.22
-{txt}PERMITS REQUIRED                     .. {c |}{res}         15        0.04       99.27
-{txt}SANITARY MAINTENANCE - WHEN PROPERTY .. {c |}{res}         14        0.04       99.31
-{txt}FAILURE TO REMOVE OR ABATE ALL NUISAN.. {c |}{res}         13        0.04       99.35
-{txt}SANITARY MAINTENANCE - OCCUPANT TRASH.. {c |}{res}         12        0.04       99.39
-{txt}TRESPASSING SUNSET TO SUNRISE        .. {c |}{res}         12        0.04       99.42
-{txt}REMOVAL OF HEALTH DEPARTMENT CLOSURE .. {c |}{res}         11        0.03       99.45
-{txt}DISCHARGE UNDER 25 LBS OF OFFENSIVE L.. {c |}{res}          9        0.03       99.48
-{txt}EGRESS DOORS - OPEN ABLE             .. {c |}{res}          9        0.03       99.51
-{txt}HAULING SOLID WASTE WITHOUT PROPER LI.. {c |}{res}          9        0.03       99.54
-{txt}SNOW - FAILURE TO REMOVE SNOW AND ICE.. {c |}{res}          9        0.03       99.56
-{txt}USE/POSSESSION OF ALOHOLIC BEVERAGES .. {c |}{res}          9        0.03       99.59
-{txt}FAILURE TO COOPERATE WITH HEALTH INSP.. {c |}{res}          8        0.02       99.61
-{txt}PERMITS - FOOD OPERATION WITHOUT PERM.. {c |}{res}          8        0.02       99.64
-{txt}INTERIOR SANITARY MAINTENANCE        .. {c |}{res}          7        0.02       99.66
-{txt}VIOLATION OF CORRECTIVE ACTIONS      .. {c |}{res}          7        0.02       99.68
+HIGH GRASS AND WEEDS                 .. {c |}{res}      6,924       20.28       20.28
+{txt}TRASH ACCUMULATION                   .. {c |}{res}      5,934       17.38       37.67
+{txt}FAILURE TO FILE A COMPLETED ANNUAL RE.. {c |}{res}      3,119        9.14       46.80
+{txt}BULK TRASH                           .. {c |}{res}      2,911        8.53       55.33
+{txt}FAILED TO ABATE VIOLATION NOTICE AND .. {c |}{res}      2,057        6.03       61.36
+{txt}CONSTRUCTION AND MAINTENANCE OF STORA.. {c |}{res}      1,574        4.61       65.97
+{txt}UNREGISTERED OR INOPERABLE VEHICLE   .. {c |}{res}      1,472        4.31       70.28
+{txt}EXTERIOR SANITARY MAINTENANCE - GENER.. {c |}{res}      1,216        3.56       73.84
+{txt}FAILED TO ABATE UNSAFE STRUCTURE NOTI.. {c |}{res}      1,148        3.36       77.21
+{txt}FAILURE TO FILE ANNUAL VACANT BUILDIN.. {c |}{res}      1,045        3.06       80.27
+{txt}FAILURE TO KEEP STORAGE RECEPTACLE IN.. {c |}{res}        808        2.37       82.63
+{txt}IMPROPER SURFACE FOR PARKING OR STORA.. {c |}{res}        712        2.09       84.72
+{txt}FAILURE TO PROVIDE SUFFICIENT NUMBER .. {c |}{res}        678        1.99       86.71
+{txt}DUMPING UNDER 25 LBS OF WASTE ON PUBL.. {c |}{res}        604        1.77       88.48
+{txt}WORK WITHOUT OR BEYOND THE SCOPE OF P.. {c |}{res}        451        1.32       89.80
+{txt}PROHIBITED POSTING OF SIGNS ON PUBLIC.. {c |}{res}        396        1.16       90.96
+{txt}TREES AND SHRUBS - FAILURE TO PREVENT.. {c |}{res}        322        0.94       91.90
+{txt}PLACEMENT FOR COLLECTION STORAGE ON N.. {c |}{res}        287        0.84       92.74
+{txt}VIOLATION OF ZONING CODE             .. {c |}{res}        249        0.73       93.47
+{txt}DUMPING UNDER 25 LBS OF WASTE ON PRIV.. {c |}{res}        179        0.52       93.99
+{txt}EXTERIOR SANITARY MAINTENANCE - TRASH.. {c |}{res}        137        0.40       94.40
+{txt}ANIMAL WASTE - FAILURE TO CLEAN UP AF.. {c |}{res}        136        0.40       94.79
+{txt}UNLAWFUL DISTRIBUTION OF TOBACCO TO M.. {c |}{res}        133        0.39       95.18
+{txt}UNLICENSED OR MISUSE OF LICENSE FOR D.. {c |}{res}        130        0.38       95.56
+{txt}HUMANE CARE REQUIRED - FOOD/SHELTER/V.. {c |}{res}        119        0.35       95.91
+{txt}OUTDOOR STORAGE - FAILURE TO KEEP MAT.. {c |}{res}        107        0.31       96.23
+{txt}FAILURE TO VACCINATE OR PROVIDE CERTI.. {c |}{res}        101        0.30       96.52
+{txt}PARKING WHERE PROHIBITED             .. {c |}{res}         74        0.22       96.74
+{txt}DUMPING OVER 25 LBS OF WASTE ON PUBLI.. {c |}{res}         72        0.21       96.95
+{txt}RESTRAINTS REQUIRED OR RESTRAINTS IMP.. {c |}{res}         65        0.19       97.14
+{txt}ALARM MONITOR FAILED TO COMP. TWO CAL.. {c |}{res}         59        0.17       97.31
+{txt}PLACING/AFFIXING ADVERTISING CIRCULAR.. {c |}{res}         55        0.16       97.47
+{txt}COMPLIANCE WITH HEALTH LAWS REQUIRED .. {c |}{res}         49        0.14       97.62
+{txt}MARYLAND FRESHWATER SPORTFISHING REGS.. {c |}{res}         47        0.14       97.76
+{txt}SWIMMING PROHIBITED                  .. {c |}{res}         43        0.13       97.88
+{txt}FAILURE TO KEEP FREE OF NUISANCE/HAZA.. {c |}{res}         42        0.12       98.01
+{txt}FAILED TO OBTAIN LICENSE TO OPERATE A.. {c |}{res}         40        0.12       98.12
+{txt}DUMPING OVER 25 LBS OF WASTE ON PRIVA.. {c |}{res}         39        0.11       98.24
+{txt}EXTERIOR PEST CONTROL                .. {c |}{res}         38        0.11       98.35
+{txt}INOPERABLE VEHICLE                   .. {c |}{res}         37        0.11       98.46
+{txt}UNSAFE CONDITIONS                    .. {c |}{res}         34        0.10       98.56
+{txt}FAILURE TO PAY FALSE ALARM FEE.      .. {c |}{res}         33        0.10       98.65
+{txt}VALETED VEHICLE PARKED/STOPPED OR LEF.. {c |}{res}         32        0.09       98.75
+{txt}NEGLECT OF ANIMAL                    .. {c |}{res}         24        0.07       98.82
+{txt}USER FAILED TO REGISTER BURGLAR ALARM.. {c |}{res}         22        0.06       98.88
+{txt}OPERATING OUTSIDE OF APPROVED VALET P.. {c |}{res}         21        0.06       98.94
+{txt}SANITARY MAINTENANCE - EXTERIOR, MORE.. {c |}{res}         20        0.06       99.00
+{txt}ALARM MONITOR FAILED TO REPORT ACTIVA.. {c |}{res}         17        0.05       99.05
+{txt}SMOKING INDOORS, PROHIBITED          .. {c |}{res}         17        0.05       99.10
+{txt}FAILURE TO RAT PROOF                 .. {c |}{res}         16        0.05       99.15
+{txt}SANITARY MAINTENANCE - OCCUPANT  EXTE.. {c |}{res}         16        0.05       99.19
+{txt}VALET PARKING SERVICES ENDANGERING PU.. {c |}{res}         16        0.05       99.24
+{txt}PERMITS REQUIRED                     .. {c |}{res}         15        0.04       99.29
+{txt}SANITARY MAINTENANCE - WHEN PROPERTY .. {c |}{res}         14        0.04       99.33
+{txt}FAILURE TO REMOVE OR ABATE ALL NUISAN.. {c |}{res}         13        0.04       99.36
+{txt}SANITARY MAINTENANCE - OCCUPANT TRASH.. {c |}{res}         12        0.04       99.40
+{txt}TRESPASSING SUNSET TO SUNRISE        .. {c |}{res}         12        0.04       99.43
+{txt}REMOVAL OF HEALTH DEPARTMENT CLOSURE .. {c |}{res}         11        0.03       99.47
+{txt}DISCHARGE UNDER 25 LBS OF OFFENSIVE L.. {c |}{res}          9        0.03       99.49
+{txt}EGRESS DOORS - OPEN ABLE             .. {c |}{res}          9        0.03       99.52
+{txt}HAULING SOLID WASTE WITHOUT PROPER LI.. {c |}{res}          9        0.03       99.55
+{txt}SNOW - FAILURE TO REMOVE SNOW AND ICE.. {c |}{res}          9        0.03       99.57
+{txt}USE/POSSESSION OF ALOHOLIC BEVERAGES .. {c |}{res}          9        0.03       99.60
+{txt}FAILURE TO COOPERATE WITH HEALTH INSP.. {c |}{res}          8        0.02       99.62
+{txt}PERMITS - FOOD OPERATION WITHOUT PERM.. {c |}{res}          8        0.02       99.65
+{txt}INTERIOR SANITARY MAINTENANCE        .. {c |}{res}          7        0.02       99.67
+{txt}VIOLATION OF CORRECTIVE ACTIONS      .. {c |}{res}          7        0.02       99.69
 {txt}BOAT PERMIT VIOLATION                .. {c |}{res}          6        0.02       99.70
 {txt}OBSTRUCTING DEPARTMENTAL PERSONNEL   .. {c |}{res}          6        0.02       99.72
-{txt}PERSON IN CHARGE ALLOWING VIOLATION O.. {c |}{res}          6        0.02       99.73
+{txt}PERSON IN CHARGE ALLOWING VIOLATION O.. {c |}{res}          6        0.02       99.74
 {txt}COMPLIANCE WITH PARK RULES           .. {c |}{res}          5        0.01       99.75
-{txt}FAILURE TO COMPLY                    .. {c |}{res}          5        0.01       99.76
+{txt}FAILURE TO COMPLY                    .. {c |}{res}          5        0.01       99.77
 {txt}FISHING BY ROD, HOOK, LINE ONLY      .. {c |}{res}          5        0.01       99.78
-{txt}WADING PROHIBITED                    .. {c |}{res}          5        0.01       99.79
+{txt}WADING PROHIBITED                    .. {c |}{res}          5        0.01       99.80
 {txt}EXCESSIVE NOISE                      .. {c |}{res}          4        0.01       99.81
 {txt}OWNER TO PREVENT ANIMAL NUISANCE     .. {c |}{res}          4        0.01       99.82
 {txt}ABANDONMENT OF ANIMAL                .. {c |}{res}          3        0.01       99.83
 {txt}ABUSE OF ANIMAL                      .. {c |}{res}          3        0.01       99.84
-{txt}CONTRACTOR FAILED TO REGISTER BURGLAR.. {c |}{res}          3        0.01       99.84
-{txt}FIRE VIOLATION                       .. {c |}{res}          3        0.01       99.85
-{txt}LITTERING                            .. {c |}{res}          3        0.01       99.86
+{txt}CONTRACTOR FAILED TO REGISTER BURGLAR.. {c |}{res}          3        0.01       99.85
+{txt}FIRE VIOLATION                       .. {c |}{res}          3        0.01       99.86
+{txt}LITTERING                            .. {c |}{res}          3        0.01       99.87
 {txt}MOTORIZED VECHICLE OFF ROADWAY VIOLAT.. {c |}{res}          3        0.01       99.87
 {txt}TRESPASSING IN RESTRICTED AREA       .. {c |}{res}          3        0.01       99.88
 {txt}UNCLEAN INTERIOR - PEST CONTROL      .. {c |}{res}          3        0.01       99.89
 {txt}VALETED VEHICLE PARKED, STOPPED OR LE.. {c |}{res}          3        0.01       99.90
-{txt}CAMPING OR ERECTING TENTS            .. {c |}{res}          2        0.01       99.90
+{txt}CAMPING OR ERECTING TENTS            .. {c |}{res}          2        0.01       99.91
 {txt}CONTRACTED OR HIRED UNLICENSED HAULER.. {c |}{res}          2        0.01       99.91
 {txt}LICENSE REQUIRED FOR ANIMAL CLINIC/SH.. {c |}{res}          2        0.01       99.92
 {txt}MOBILE VENDING ZONES VIOLATION       .. {c |}{res}          2        0.01       99.92
 {txt}NO PERSON MAY DISTRIBUTE A PSYCHOACTI.. {c |}{res}          2        0.01       99.93
-{txt}OCCUPANCY PROHIBITED BEFORE APPROVAL .. {c |}{res}          2        0.01       99.93
+{txt}OCCUPANCY PROHIBITED BEFORE APPROVAL .. {c |}{res}          2        0.01       99.94
 {txt}OVERCROWDING CONDITIONS - GENERAL    .. {c |}{res}          2        0.01       99.94
 {txt}SANITARY MAINTENANCE - OCCUPANT  INTE.. {c |}{res}          2        0.01       99.95
 {txt}UNLAWFUL ACTS                        .. {c |}{res}          2        0.01       99.95
@@ -179,7 +177,7 @@ HIGH GRASS AND WEEDS                 .. {c |}{res}      6,744       20.23       
 {txt}STREET VENDORS/TRASH RECEPTACLES REQU.. {c |}{res}          1        0.00      100.00
 {txt}UNSAFE BUILING                       .. {c |}{res}          1        0.00      100.00
 {txt}{hline 40}{c +}{hline 35}
-                                  Total {c |}{res}     33,336      100.00
+                                  Total {c |}{res}     34,136      100.00
 {txt}
 {com}. table description if year == 2018, c(sum fine_amt mean fine_amt n fine_amt)     ///
 > format(%12.2fc)
@@ -190,54 +188,54 @@ HIGH GRASS AND WEEDS                 .. {c |}{res}      6,744       20.23       
 ABANDONMENT OF ANIMAL                    {c |}     {res}3,000.00      1,000.00             3
 {txt}ABUSE OF ANIMAL                          {c |}     {res}3,000.00      1,000.00             3
 {txt}ALARM MONITOR FAILED TO COMP. TWO CALL V {c |}    {res}29,500.00        500.00            59
-{txt}ALARM MONITOR FAILED TO REPORT ACTIVATIO {c |}     {res}8,000.00        500.00            16
+{txt}ALARM MONITOR FAILED TO REPORT ACTIVATIO {c |}     {res}8,500.00        500.00            17
 {txt}ANIMAL WASTE - FAILURE TO CLEAN UP AFTER {c |}    {res}27,200.00        200.00           136
 {txt}BOAT PERMIT VIOLATION                    {c |}       {res}360.00         60.00             6
-{txt}BULK TRASH                               {c |}   {res}151,200.00         53.66         2,818
+{txt}BULK TRASH                               {c |}   {res}156,250.00         53.68         2,911
 {txt}CAMPING OR ERECTING TENTS                {c |}       {res}200.00        100.00             2
 {txt}COMPLIANCE WITH HEALTH LAWS REQUIRED     {c |}     {res}5,500.00        112.24            49
 {txt}COMPLIANCE WITH PARK RULES               {c |}     {res}1,250.00        250.00             5
-{txt}CONSTRUCTION AND MAINTENANCE OF STORAGE  {c |}    {res}86,600.00         56.27         1,539
+{txt}CONSTRUCTION AND MAINTENANCE OF STORAGE  {c |}    {res}88,400.00         56.16         1,574
 {txt}CONTRACTED OR HIRED UNLICENSED HAULER    {c |}       {res}200.00        100.00             2
 {txt}CONTRACTOR FAILED TO REGISTER BURGLAR AL {c |}     {res}1,500.00        500.00             3
 {txt}DANGEROUS ANIMALS                        {c |}       {res}250.00        250.00             1
 {txt}DISCHARGE UNDER 25 LBS OF OFFENSIVE LIQU {c |}     {res}5,000.00        555.56             9
 {txt}DUMPING OVER 25 LBS OF WASTE ON PRIVATE  {c |}    {res}39,000.00      1,000.00            39
 {txt}DUMPING OVER 25 LBS OF WASTE ON PUBLIC P {c |}    {res}72,000.00      1,000.00            72
-{txt}DUMPING UNDER 25 LBS OF WASTE ON PRIVATE {c |}    {res}88,000.00        500.00           176
-{txt}DUMPING UNDER 25 LBS OF WASTE ON PUBLIC  {c |}   {res}301,500.00        500.00           603
+{txt}DUMPING UNDER 25 LBS OF WASTE ON PRIVATE {c |}    {res}89,500.00        500.00           179
+{txt}DUMPING UNDER 25 LBS OF WASTE ON PUBLIC  {c |}   {res}302,000.00        500.00           604
 {txt}EGRESS DOORS - OPEN ABLE                 {c |}     {res}3,500.00        388.89             9
 {txt}EXCESSIVE NOISE                          {c |}       {res}400.00        100.00             4
 {txt}EXTERIOR PEST CONTROL                    {c |}     {res}2,150.00         56.58            38
-{txt}EXTERIOR SANITARY MAINTENANCE - GENERAL  {c |}    {res}69,850.00         60.42         1,156
-{txt}EXTERIOR SANITARY MAINTENANCE - TRASH, G {c |}     {res}7,250.00         53.31           136
+{txt}EXTERIOR SANITARY MAINTENANCE - GENERAL  {c |}    {res}73,050.00         60.07         1,216
+{txt}EXTERIOR SANITARY MAINTENANCE - TRASH, G {c |}     {res}7,300.00         53.28           137
 {txt}FAIL TO OBEY A LAWFUL ORDER              {c |}       {res}100.00        100.00             1
 {txt}FAIL TO PROPERLY DISPOSE OF ALL BOTTLES, {c |}       {res}500.00        500.00             1
-{txt}FAILED TO ABATE UNSAFE STRUCTURE NOTICE  {c |} {res}1,008,900.00        900.00         1,121
-{txt}FAILED TO ABATE VIOLATION NOTICE AND ORD {c |}   {res}504,250.00        250.37         2,014
-{txt}FAILED TO OBTAIN LICENSE TO OPERATE A MU {c |}    {res}19,500.00        500.00            39
+{txt}FAILED TO ABATE UNSAFE STRUCTURE NOTICE  {c |} {res}1,033,200.00        900.00         1,148
+{txt}FAILED TO ABATE VIOLATION NOTICE AND ORD {c |}   {res}515,000.00        250.36         2,057
+{txt}FAILED TO OBTAIN LICENSE TO OPERATE A MU {c |}    {res}20,000.00        500.00            40
 {txt}FAILURE TO COMPLY                        {c |}     {res}1,600.00        320.00             5
 {txt}FAILURE TO COOPERATE WITH HEALTH INSPECT {c |}     {res}3,700.00        462.50             8
-{txt}FAILURE TO FILE A COMPLETED ANNUAL REGIS {c |}   {res}304,400.00        100.03         3,043
-{txt}FAILURE TO FILE ANNUAL VACANT BUILDING R {c |}   {res}494,000.00        500.00           988
-{txt}FAILURE TO KEEP FREE OF NUISANCE/HAZARDO {c |}     {res}2,450.00         59.76            41
-{txt}FAILURE TO KEEP STORAGE RECEPTACLE IN ON {c |}    {res}42,900.00         53.23           806
+{txt}FAILURE TO FILE A COMPLETED ANNUAL REGIS {c |}   {res}312,000.00        100.03         3,119
+{txt}FAILURE TO FILE ANNUAL VACANT BUILDING R {c |}   {res}522,500.00        500.00         1,045
+{txt}FAILURE TO KEEP FREE OF NUISANCE/HAZARDO {c |}     {res}2,550.00         60.71            42
+{txt}FAILURE TO KEEP STORAGE RECEPTACLE IN ON {c |}    {res}43,000.00         53.22           808
 {txt}FAILURE TO PAY FALSE ALARM FEE.          {c |}    {res}14,500.00        439.39            33
 {txt}FAILURE TO POST PUBLIC NOTICE OF SUSPENS {c |}       {res}100.00        100.00             1
-{txt}FAILURE TO PROVIDE SUFFICIENT NUMBER OF  {c |}    {res}39,250.00         60.11           653
+{txt}FAILURE TO PROVIDE SUFFICIENT NUMBER OF  {c |}    {res}40,800.00         60.18           678
 {txt}FAILURE TO RAT PROOF                     {c |}       {res}800.00         50.00            16
 {txt}FAILURE TO REMOVE OR ABATE ALL NUISANCES {c |}     {res}1,700.00        130.77            13
-{txt}FAILURE TO VACCINATE OR PROVIDE CERTIFIC {c |}    {res}25,000.00        250.00           100
+{txt}FAILURE TO VACCINATE OR PROVIDE CERTIFIC {c |}    {res}25,250.00        250.00           101
 {txt}FEEDING WILDLIFE                         {c |}        {res}50.00         50.00             1
 {txt}FENCE OR WALL REQUIRED                   {c |}       {res}100.00        100.00             1
 {txt}FIRE VIOLATION                           {c |}       {res}180.00         60.00             3
 {txt}FIREARMS VIOLATION                       {c |}       {res}100.00        100.00             1
 {txt}FISHING BY ROD, HOOK, LINE ONLY          {c |}       {res}300.00         60.00             5
 {txt}HAULING SOLID WASTE WITHOUT PROPER LICEN {c |}       {res}900.00        100.00             9
-{txt}HIGH GRASS AND WEEDS                     {c |}   {res}351,500.00         52.12         6,744
-{txt}HUMANE CARE REQUIRED - FOOD/SHELTER/VET  {c |}    {res}58,500.00        500.00           117
-{txt}IMPROPER SURFACE FOR PARKING OR STORAGE  {c |}    {res}35,500.00         51.01           696
-{txt}INOPERABLE VEHICLE                       {c |}     {res}1,900.00         52.78            36
+{txt}HIGH GRASS AND WEEDS                     {c |}   {res}360,850.00         52.12         6,924
+{txt}HUMANE CARE REQUIRED - FOOD/SHELTER/VET  {c |}    {res}59,500.00        500.00           119
+{txt}IMPROPER SURFACE FOR PARKING OR STORAGE  {c |}    {res}36,800.00         51.69           712
+{txt}INOPERABLE VEHICLE                       {c |}     {res}1,950.00         52.70            37
 {txt}INTERIOR SANITARY MAINTENANCE            {c |}       {res}400.00         57.14             7
 {txt}LICENSE REQUIRED FOR ANIMAL CLINIC/SHELT {c |}       {res}350.00        175.00             2
 {txt}LITTERING                                {c |}     {res}1,500.00        500.00             3
@@ -260,7 +258,7 @@ ABANDONMENT OF ANIMAL                    {c |}     {res}3,000.00      1,000.00  
 {txt}PERMITS - FOOD OPERATION WITHOUT PERMIT  {c |}     {res}2,400.00        300.00             8
 {txt}PERMITS REQUIRED                         {c |}     {res}6,050.00        403.33            15
 {txt}PERSON IN CHARGE ALLOWING VIOLATION OF I {c |}     {res}4,500.00        750.00             6
-{txt}PLACEMENT FOR COLLECTION STORAGE ON NON- {c |}    {res}16,750.00         58.77           285
+{txt}PLACEMENT FOR COLLECTION STORAGE ON NON- {c |}    {res}16,850.00         58.71           287
 {txt}PLACING/AFFIXING ADVERTISING CIRCULARS O {c |}     {res}5,600.00        101.82            55
 {txt}PORTABLE GASOLINE-POWERED GENERATORS.USE {c |}       {res}500.00        500.00             1
 {txt}PROHIBITED POSTING OF SIGNS ON PUBLIC PR {c |}   {res}199,000.00        502.53           396
@@ -275,27 +273,27 @@ ABANDONMENT OF ANIMAL                    {c |}     {res}3,000.00      1,000.00  
 {txt}SNOW - FAILURE TO REMOVE SNOW AND ICE    {c |}       {res}550.00         61.11             9
 {txt}STREET VENDORS/TRASH RECEPTACLES REQUIRE {c |}       {res}500.00        500.00             1
 {txt}SWIMMING PROHIBITED                      {c |}     {res}4,300.00        100.00            43
-{txt}TRASH ACCUMULATION                       {c |}   {res}320,550.00         55.06         5,822
-{txt}TREES AND SHRUBS - FAILURE TO PREVENT HA {c |}    {res}16,350.00         52.40           312
+{txt}TRASH ACCUMULATION                       {c |}   {res}326,600.00         55.04         5,934
+{txt}TREES AND SHRUBS - FAILURE TO PREVENT HA {c |}    {res}16,850.00         52.33           322
 {txt}TRESPASSING IN RESTRICTED AREA           {c |}       {res}450.00        150.00             3
 {txt}TRESPASSING SUNSET TO SUNRISE            {c |}     {res}1,600.00        133.33            12
 {txt}UNCLEAN INTERIOR - PEST CONTROL          {c |}       {res}150.00         50.00             3
 {txt}UNLAWFUL ACTS                            {c |}     {res}2,000.00      1,000.00             2
-{txt}UNLAWFUL DISTRIBUTION OF TOBACCO TO MINO {c |}    {res}66,000.00        500.00           132
-{txt}UNLICENSED OR MISUSE OF LICENSE FOR DOGS {c |}    {res}13,200.00        102.33           129
-{txt}UNREGISTERED OR INOPERABLE VEHICLE       {c |}    {res}76,450.00         52.76         1,449
+{txt}UNLAWFUL DISTRIBUTION OF TOBACCO TO MINO {c |}    {res}66,500.00        500.00           133
+{txt}UNLICENSED OR MISUSE OF LICENSE FOR DOGS {c |}    {res}13,300.00        102.31           130
+{txt}UNREGISTERED OR INOPERABLE VEHICLE       {c |}    {res}77,600.00         52.72         1,472
 {txt}UNSAFE BUILING                           {c |}       {res}250.00        250.00             1
 {txt}UNSAFE CONDITIONS                        {c |}    {res}13,650.00        401.47            34
 {txt}UNSAFE CONDITIONS - ACCUMULATION OF DEBR {c |}       {res}600.00        300.00             2
 {txt}USE/POSSESSION OF ALOHOLIC BEVERAGES     {c |}       {res}900.00        100.00             9
-{txt}USER FAILED TO REGISTER BURGLAR ALARM    {c |}     {res}5,700.00        271.43            21
+{txt}USER FAILED TO REGISTER BURGLAR ALARM    {c |}     {res}6,200.00        281.82            22
 {txt}VALET PARKING SERVICES ENDANGERING PUBLI {c |}    {res}15,000.00        937.50            16
 {txt}VALETED VEHICLE PARKED, STOPPED OR LEFT  {c |}     {res}1,500.00        500.00             3
 {txt}VALETED VEHICLE PARKED/STOPPED OR LEFT I {c |}    {res}15,250.00        476.56            32
 {txt}VIOLATION OF CORRECTIVE ACTIONS          {c |}     {res}7,000.00      1,000.00             7
-{txt}VIOLATION OF ZONING CODE                 {c |}   {res}121,000.00        506.28           239
+{txt}VIOLATION OF ZONING CODE                 {c |}   {res}126,000.00        506.02           249
 {txt}WADING PROHIBITED                        {c |}       {res}500.00        100.00             5
-{txt}WORK WITHOUT OR BEYOND THE SCOPE OF PERM {c |}   {res}218,500.00        500.00           437
+{txt}WORK WITHOUT OR BEYOND THE SCOPE OF PERM {c |}   {res}225,500.00        500.00           451
 {txt}{hline 41}{c BT}{hline 41}
 
 {com}. 
@@ -308,54 +306,54 @@ ABANDONMENT OF ANIMAL                    {c |}     {res}3,000.00      1,000.00  
 ABANDONMENT OF ANIMAL                    {c |}     {res}3,000.00          0.00          0.00
 {txt}ABUSE OF ANIMAL                          {c |}     {res}3,000.00          0.00          0.00
 {txt}ALARM MONITOR FAILED TO COMP. TWO CALL V {c |}    {res}29,500.00     21,300.00          0.72
-{txt}ALARM MONITOR FAILED TO REPORT ACTIVATIO {c |}     {res}8,000.00      6,500.00          0.81
+{txt}ALARM MONITOR FAILED TO REPORT ACTIVATIO {c |}     {res}8,500.00      7,000.00          0.82
 {txt}ANIMAL WASTE - FAILURE TO CLEAN UP AFTER {c |}    {res}27,200.00      6,680.00          0.25
 {txt}BOAT PERMIT VIOLATION                    {c |}       {res}360.00        390.00          1.08
-{txt}BULK TRASH                               {c |}   {res}151,200.00    100,212.64          0.66
+{txt}BULK TRASH                               {c |}   {res}156,250.00    104,412.64          0.67
 {txt}CAMPING OR ERECTING TENTS                {c |}       {res}200.00        300.00          1.50
 {txt}COMPLIANCE WITH HEALTH LAWS REQUIRED     {c |}     {res}5,500.00      4,100.00          0.75
 {txt}COMPLIANCE WITH PARK RULES               {c |}     {res}1,250.00        590.00          0.47
-{txt}CONSTRUCTION AND MAINTENANCE OF STORAGE  {c |}    {res}86,600.00     55,875.00          0.65
+{txt}CONSTRUCTION AND MAINTENANCE OF STORAGE  {c |}    {res}88,400.00     57,175.00          0.65
 {txt}CONTRACTED OR HIRED UNLICENSED HAULER    {c |}       {res}200.00          0.00          0.00
 {txt}CONTRACTOR FAILED TO REGISTER BURGLAR AL {c |}     {res}1,500.00      1,000.00          0.67
 {txt}DANGEROUS ANIMALS                        {c |}       {res}250.00        250.00          1.00
 {txt}DISCHARGE UNDER 25 LBS OF OFFENSIVE LIQU {c |}     {res}5,000.00        230.00          0.05
 {txt}DUMPING OVER 25 LBS OF WASTE ON PRIVATE  {c |}    {res}39,000.00      3,880.00          0.10
 {txt}DUMPING OVER 25 LBS OF WASTE ON PUBLIC P {c |}    {res}72,000.00      2,465.00          0.03
-{txt}DUMPING UNDER 25 LBS OF WASTE ON PRIVATE {c |}    {res}88,000.00     11,975.00          0.14
-{txt}DUMPING UNDER 25 LBS OF WASTE ON PUBLIC  {c |}   {res}301,500.00     21,145.00          0.07
+{txt}DUMPING UNDER 25 LBS OF WASTE ON PRIVATE {c |}    {res}89,500.00     11,975.00          0.13
+{txt}DUMPING UNDER 25 LBS OF WASTE ON PUBLIC  {c |}   {res}302,000.00     21,145.00          0.07
 {txt}EGRESS DOORS - OPEN ABLE                 {c |}     {res}3,500.00        215.00          0.06
 {txt}EXCESSIVE NOISE                          {c |}       {res}400.00        300.00          0.75
 {txt}EXTERIOR PEST CONTROL                    {c |}     {res}2,150.00      1,310.00          0.61
-{txt}EXTERIOR SANITARY MAINTENANCE - GENERAL  {c |}    {res}69,850.00     51,850.00          0.74
-{txt}EXTERIOR SANITARY MAINTENANCE - TRASH, G {c |}     {res}7,250.00      3,890.00          0.54
+{txt}EXTERIOR SANITARY MAINTENANCE - GENERAL  {c |}    {res}73,050.00     54,510.00          0.75
+{txt}EXTERIOR SANITARY MAINTENANCE - TRASH, G {c |}     {res}7,300.00      3,900.00          0.53
 {txt}FAIL TO OBEY A LAWFUL ORDER              {c |}       {res}100.00        100.00          1.00
 {txt}FAIL TO PROPERLY DISPOSE OF ALL BOTTLES, {c |}       {res}500.00          0.00          0.00
-{txt}FAILED TO ABATE UNSAFE STRUCTURE NOTICE  {c |} {res}1,008,900.00    268,686.00          0.27
-{txt}FAILED TO ABATE VIOLATION NOTICE AND ORD {c |}   {res}504,250.00    212,013.60          0.42
-{txt}FAILED TO OBTAIN LICENSE TO OPERATE A MU {c |}    {res}19,500.00     10,175.00          0.52
+{txt}FAILED TO ABATE UNSAFE STRUCTURE NOTICE  {c |} {res}1,033,200.00    274,666.00          0.27
+{txt}FAILED TO ABATE VIOLATION NOTICE AND ORD {c |}   {res}515,000.00    215,258.60          0.42
+{txt}FAILED TO OBTAIN LICENSE TO OPERATE A MU {c |}    {res}20,000.00     11,675.00          0.58
 {txt}FAILURE TO COMPLY                        {c |}     {res}1,600.00        700.00          0.44
 {txt}FAILURE TO COOPERATE WITH HEALTH INSPECT {c |}     {res}3,700.00      2,330.00          0.63
-{txt}FAILURE TO FILE A COMPLETED ANNUAL REGIS {c |}   {res}304,400.00    222,657.64          0.73
-{txt}FAILURE TO FILE ANNUAL VACANT BUILDING R {c |}   {res}494,000.00    223,496.00          0.45
-{txt}FAILURE TO KEEP FREE OF NUISANCE/HAZARDO {c |}     {res}2,450.00      1,765.00          0.72
-{txt}FAILURE TO KEEP STORAGE RECEPTACLE IN ON {c |}    {res}42,900.00     30,520.00          0.71
+{txt}FAILURE TO FILE A COMPLETED ANNUAL REGIS {c |}   {res}312,000.00    226,952.64          0.73
+{txt}FAILURE TO FILE ANNUAL VACANT BUILDING R {c |}   {res}522,500.00    238,406.00          0.46
+{txt}FAILURE TO KEEP FREE OF NUISANCE/HAZARDO {c |}     {res}2,550.00      1,965.00          0.77
+{txt}FAILURE TO KEEP STORAGE RECEPTACLE IN ON {c |}    {res}43,000.00     30,570.00          0.71
 {txt}FAILURE TO PAY FALSE ALARM FEE.          {c |}    {res}14,500.00      4,410.00          0.30
 {txt}FAILURE TO POST PUBLIC NOTICE OF SUSPENS {c |}       {res}100.00        100.00          1.00
-{txt}FAILURE TO PROVIDE SUFFICIENT NUMBER OF  {c |}    {res}39,250.00     29,140.00          0.74
+{txt}FAILURE TO PROVIDE SUFFICIENT NUMBER OF  {c |}    {res}40,800.00     30,505.00          0.75
 {txt}FAILURE TO RAT PROOF                     {c |}       {res}800.00        320.00          0.40
 {txt}FAILURE TO REMOVE OR ABATE ALL NUISANCES {c |}     {res}1,700.00      1,545.00          0.91
-{txt}FAILURE TO VACCINATE OR PROVIDE CERTIFIC {c |}    {res}25,000.00        475.00          0.02
+{txt}FAILURE TO VACCINATE OR PROVIDE CERTIFIC {c |}    {res}25,250.00        475.00          0.02
 {txt}FEEDING WILDLIFE                         {c |}        {res}50.00         50.00          1.00
 {txt}FENCE OR WALL REQUIRED                   {c |}       {res}100.00        300.00          3.00
 {txt}FIRE VIOLATION                           {c |}       {res}180.00        180.00          1.00
 {txt}FIREARMS VIOLATION                       {c |}       {res}100.00        100.00          1.00
 {txt}FISHING BY ROD, HOOK, LINE ONLY          {c |}       {res}300.00        240.00          0.80
 {txt}HAULING SOLID WASTE WITHOUT PROPER LICEN {c |}       {res}900.00        350.00          0.39
-{txt}HIGH GRASS AND WEEDS                     {c |}   {res}351,500.00    238,230.48          0.68
-{txt}HUMANE CARE REQUIRED - FOOD/SHELTER/VET  {c |}    {res}58,500.00      1,885.00          0.03
-{txt}IMPROPER SURFACE FOR PARKING OR STORAGE  {c |}    {res}35,500.00     18,681.00          0.53
-{txt}INOPERABLE VEHICLE                       {c |}     {res}1,900.00        845.00          0.44
+{txt}HIGH GRASS AND WEEDS                     {c |}   {res}360,850.00    245,498.88          0.68
+{txt}HUMANE CARE REQUIRED - FOOD/SHELTER/VET  {c |}    {res}59,500.00      1,885.00          0.03
+{txt}IMPROPER SURFACE FOR PARKING OR STORAGE  {c |}    {res}36,800.00     19,781.00          0.54
+{txt}INOPERABLE VEHICLE                       {c |}     {res}1,950.00        895.00          0.46
 {txt}INTERIOR SANITARY MAINTENANCE            {c |}       {res}400.00        210.00          0.52
 {txt}LICENSE REQUIRED FOR ANIMAL CLINIC/SHELT {c |}       {res}350.00          0.00          0.00
 {txt}LITTERING                                {c |}     {res}1,500.00          0.00          0.00
@@ -378,7 +376,7 @@ ABANDONMENT OF ANIMAL                    {c |}     {res}3,000.00          0.00  
 {txt}PERMITS - FOOD OPERATION WITHOUT PERMIT  {c |}     {res}2,400.00      1,510.00          0.63
 {txt}PERMITS REQUIRED                         {c |}     {res}6,050.00        780.00          0.13
 {txt}PERSON IN CHARGE ALLOWING VIOLATION OF I {c |}     {res}4,500.00        965.00          0.21
-{txt}PLACEMENT FOR COLLECTION STORAGE ON NON- {c |}    {res}16,750.00     12,614.00          0.75
+{txt}PLACEMENT FOR COLLECTION STORAGE ON NON- {c |}    {res}16,850.00     12,664.00          0.75
 {txt}PLACING/AFFIXING ADVERTISING CIRCULARS O {c |}     {res}5,600.00      3,015.00          0.54
 {txt}PORTABLE GASOLINE-POWERED GENERATORS.USE {c |}       {res}500.00          0.00          0.00
 {txt}PROHIBITED POSTING OF SIGNS ON PUBLIC PR {c |}   {res}199,000.00     16,535.00          0.08
@@ -393,42 +391,160 @@ ABANDONMENT OF ANIMAL                    {c |}     {res}3,000.00          0.00  
 {txt}SNOW - FAILURE TO REMOVE SNOW AND ICE    {c |}       {res}550.00        500.00          0.91
 {txt}STREET VENDORS/TRASH RECEPTACLES REQUIRE {c |}       {res}500.00        500.00          1.00
 {txt}SWIMMING PROHIBITED                      {c |}     {res}4,300.00      4,100.00          0.95
-{txt}TRASH ACCUMULATION                       {c |}   {res}320,550.00    218,817.54          0.68
-{txt}TREES AND SHRUBS - FAILURE TO PREVENT HA {c |}    {res}16,350.00     10,620.00          0.65
+{txt}TRASH ACCUMULATION                       {c |}   {res}326,600.00    222,437.54          0.68
+{txt}TREES AND SHRUBS - FAILURE TO PREVENT HA {c |}    {res}16,850.00     11,040.00          0.66
 {txt}TRESPASSING IN RESTRICTED AREA           {c |}       {res}450.00        450.00          1.00
 {txt}TRESPASSING SUNSET TO SUNRISE            {c |}     {res}1,600.00      1,300.00          0.81
 {txt}UNCLEAN INTERIOR - PEST CONTROL          {c |}       {res}150.00         70.00          0.47
 {txt}UNLAWFUL ACTS                            {c |}     {res}2,000.00          0.00          0.00
-{txt}UNLAWFUL DISTRIBUTION OF TOBACCO TO MINO {c |}    {res}66,000.00     51,485.00          0.78
-{txt}UNLICENSED OR MISUSE OF LICENSE FOR DOGS {c |}    {res}13,200.00      1,180.00          0.09
-{txt}UNREGISTERED OR INOPERABLE VEHICLE       {c |}    {res}76,450.00     40,238.00          0.53
+{txt}UNLAWFUL DISTRIBUTION OF TOBACCO TO MINO {c |}    {res}66,500.00     51,985.00          0.78
+{txt}UNLICENSED OR MISUSE OF LICENSE FOR DOGS {c |}    {res}13,300.00      1,180.00          0.09
+{txt}UNREGISTERED OR INOPERABLE VEHICLE       {c |}    {res}77,600.00     40,908.00          0.53
 {txt}UNSAFE BUILING                           {c |}       {res}250.00         90.00          0.36
 {txt}UNSAFE CONDITIONS                        {c |}    {res}13,650.00      3,110.00          0.23
 {txt}UNSAFE CONDITIONS - ACCUMULATION OF DEBR {c |}       {res}600.00        300.00          0.50
 {txt}USE/POSSESSION OF ALOHOLIC BEVERAGES     {c |}       {res}900.00        300.00          0.33
-{txt}USER FAILED TO REGISTER BURGLAR ALARM    {c |}     {res}5,700.00      1,370.00          0.24
+{txt}USER FAILED TO REGISTER BURGLAR ALARM    {c |}     {res}6,200.00      1,485.00          0.24
 {txt}VALET PARKING SERVICES ENDANGERING PUBLI {c |}    {res}15,000.00      7,095.00          0.47
 {txt}VALETED VEHICLE PARKED, STOPPED OR LEFT  {c |}     {res}1,500.00        755.00          0.50
 {txt}VALETED VEHICLE PARKED/STOPPED OR LEFT I {c |}    {res}15,250.00      9,625.00          0.63
 {txt}VIOLATION OF CORRECTIVE ACTIONS          {c |}     {res}7,000.00        560.00          0.08
-{txt}VIOLATION OF ZONING CODE                 {c |}   {res}121,000.00     37,340.00          0.31
+{txt}VIOLATION OF ZONING CODE                 {c |}   {res}126,000.00     37,555.00          0.30
 {txt}WADING PROHIBITED                        {c |}       {res}500.00        500.00          1.00
-{txt}WORK WITHOUT OR BEYOND THE SCOPE OF PERM {c |}   {res}218,500.00    111,520.00          0.51
+{txt}WORK WITHOUT OR BEYOND THE SCOPE OF PERM {c |}   {res}225,500.00    113,435.00          0.50
 {txt}{hline 41}{c BT}{hline 41}
 
 {com}. 
+. table description if year == 2018, c(sum fine_amt sum total_voided_amt                  ///
+>         sum total_abated_amt) format(%12.2fc)
+
+{txt}{hline 41}{c TT}{hline 41}
+                             Description {c |} sum(fine_~t)  sum(total~t)  sum(total~t)
+{hline 41}{c +}{hline 41}
+ABANDONMENT OF ANIMAL                    {c |}     {res}3,000.00          0.00          0.00
+{txt}ABUSE OF ANIMAL                          {c |}     {res}3,000.00          0.00      1,015.00
+{txt}ALARM MONITOR FAILED TO COMP. TWO CALL V {c |}    {res}29,500.00      4,000.00      4,205.00
+{txt}ALARM MONITOR FAILED TO REPORT ACTIVATIO {c |}     {res}8,500.00      1,500.00        465.00
+{txt}ANIMAL WASTE - FAILURE TO CLEAN UP AFTER {c |}    {res}27,200.00      1,330.00      7,260.00
+{txt}BOAT PERMIT VIOLATION                    {c |}       {res}360.00          0.00          0.00
+{txt}BULK TRASH                               {c |}   {res}156,250.00      4,760.00     14,650.00
+{txt}CAMPING OR ERECTING TENTS                {c |}       {res}200.00          0.00         50.00
+{txt}COMPLIANCE WITH HEALTH LAWS REQUIRED     {c |}     {res}5,500.00          0.00          0.00
+{txt}COMPLIANCE WITH PARK RULES               {c |}     {res}1,250.00          0.00        565.00
+{txt}CONSTRUCTION AND MAINTENANCE OF STORAGE  {c |}    {res}88,400.00      1,640.00      8,850.00
+{txt}CONTRACTED OR HIRED UNLICENSED HAULER    {c |}       {res}200.00          0.00        100.00
+{txt}CONTRACTOR FAILED TO REGISTER BURGLAR AL {c |}     {res}1,500.00          0.00        500.00
+{txt}DANGEROUS ANIMALS                        {c |}       {res}250.00          0.00          0.00
+{txt}DISCHARGE UNDER 25 LBS OF OFFENSIVE LIQU {c |}     {res}5,000.00          0.00      3,845.00
+{txt}DUMPING OVER 25 LBS OF WASTE ON PRIVATE  {c |}    {res}39,000.00      6,500.00     14,910.00
+{txt}DUMPING OVER 25 LBS OF WASTE ON PUBLIC P {c |}    {res}72,000.00      4,015.00     36,970.00
+{txt}DUMPING UNDER 25 LBS OF WASTE ON PRIVATE {c |}    {res}89,500.00      2,500.00     40,830.00
+{txt}DUMPING UNDER 25 LBS OF WASTE ON PUBLIC  {c |}   {res}302,000.00     14,105.00    110,515.00
+{txt}EGRESS DOORS - OPEN ABLE                 {c |}     {res}3,500.00          0.00      1,440.00
+{txt}EXCESSIVE NOISE                          {c |}       {res}400.00          0.00         80.00
+{txt}EXTERIOR PEST CONTROL                    {c |}     {res}2,150.00          0.00        210.00
+{txt}EXTERIOR SANITARY MAINTENANCE - GENERAL  {c |}    {res}73,050.00      1,280.00      7,260.00
+{txt}EXTERIOR SANITARY MAINTENANCE - TRASH, G {c |}     {res}7,300.00        465.00      1,090.00
+{txt}FAIL TO OBEY A LAWFUL ORDER              {c |}       {res}100.00          0.00          0.00
+{txt}FAIL TO PROPERLY DISPOSE OF ALL BOTTLES, {c |}       {res}500.00        515.00          0.00
+{txt}FAILED TO ABATE UNSAFE STRUCTURE NOTICE  {c |} {res}1,033,200.00     63,195.00    244,445.00
+{txt}FAILED TO ABATE VIOLATION NOTICE AND ORD {c |}   {res}515,000.00     18,295.00     92,025.00
+{txt}FAILED TO OBTAIN LICENSE TO OPERATE A MU {c |}    {res}20,000.00          0.00      4,305.00
+{txt}FAILURE TO COMPLY                        {c |}     {res}1,600.00          0.00        350.00
+{txt}FAILURE TO COOPERATE WITH HEALTH INSPECT {c |}     {res}3,700.00          0.00        815.00
+{txt}FAILURE TO FILE A COMPLETED ANNUAL REGIS {c |}   {res}312,000.00     20,445.00     74,800.00
+{txt}FAILURE TO FILE ANNUAL VACANT BUILDING R {c |}   {res}522,500.00     54,620.00    158,730.00
+{txt}FAILURE TO KEEP FREE OF NUISANCE/HAZARDO {c |}     {res}2,550.00        150.00        255.00
+{txt}FAILURE TO KEEP STORAGE RECEPTACLE IN ON {c |}    {res}43,000.00      3,650.00      7,330.00
+{txt}FAILURE TO PAY FALSE ALARM FEE.          {c |}    {res}14,500.00      2,015.00      4,045.00
+{txt}FAILURE TO POST PUBLIC NOTICE OF SUSPENS {c |}       {res}100.00          0.00          0.00
+{txt}FAILURE TO PROVIDE SUFFICIENT NUMBER OF  {c |}    {res}40,800.00        850.00      5,565.00
+{txt}FAILURE TO RAT PROOF                     {c |}       {res}800.00         50.00        190.00
+{txt}FAILURE TO REMOVE OR ABATE ALL NUISANCES {c |}     {res}1,700.00          0.00        265.00
+{txt}FAILURE TO VACCINATE OR PROVIDE CERTIFIC {c |}    {res}25,250.00      2,500.00      7,405.00
+{txt}FEEDING WILDLIFE                         {c |}        {res}50.00          0.00          0.00
+{txt}FENCE OR WALL REQUIRED                   {c |}       {res}100.00          0.00          0.00
+{txt}FIRE VIOLATION                           {c |}       {res}180.00          0.00          0.00
+{txt}FIREARMS VIOLATION                       {c |}       {res}100.00          0.00          0.00
+{txt}FISHING BY ROD, HOOK, LINE ONLY          {c |}       {res}300.00          0.00          0.00
+{txt}HAULING SOLID WASTE WITHOUT PROPER LICEN {c |}       {res}900.00          0.00        455.00
+{txt}HIGH GRASS AND WEEDS                     {c |}   {res}360,850.00      6,965.00     20,269.00
+{txt}HUMANE CARE REQUIRED - FOOD/SHELTER/VET  {c |}    {res}59,500.00      4,000.00     16,790.00
+{txt}IMPROPER SURFACE FOR PARKING OR STORAGE  {c |}    {res}36,800.00      2,240.00      6,019.00
+{txt}INOPERABLE VEHICLE                       {c |}     {res}1,950.00          0.00        370.00
+{txt}INTERIOR SANITARY MAINTENANCE            {c |}       {res}400.00          0.00        255.00
+{txt}LICENSE REQUIRED FOR ANIMAL CLINIC/SHELT {c |}       {res}350.00          0.00        200.00
+{txt}LITTERING                                {c |}     {res}1,500.00          0.00          0.00
+{txt}MARYLAND FRESHWATER SPORTFISHING REGS VI {c |}     {res}2,860.00          0.00         40.00
+{txt}MOBILE VENDING ZONES VIOLATION           {c |}     {res}1,000.00          0.00        485.00
+{txt}MOTORIZED VECHICLE OFF ROADWAY VIOLATION {c |}       {res}450.00          0.00        115.00
+{txt}NEGLECT OF ANIMAL                        {c |}    {res}24,000.00          0.00      3,660.00
+{txt}NO PERSON MAY DISTRIBUTE A PSYCHOACTIVE  {c |}     {res}2,000.00          0.00          0.00
+{txt}OBSTRUCTING DEPARTMENTAL PERSONNEL       {c |}     {res}3,000.00          0.00      2,220.00
+{txt}OCCUPANCY PROHIBITED BEFORE APPROVAL     {c |}       {res}750.00          0.00          0.00
+{txt}OPERATING A MOTOR VEHICLE THAT IS NOT CO {c |}        {res}50.00          0.00          0.00
+{txt}OPERATING OUTSIDE OF APPROVED VALET PARK {c |}     {res}8,000.00          0.00      5,935.00
+{txt}OPERATING WITHOUT VALID VALET PARKING PE {c |}       {res}400.00          0.00        415.00
+{txt}OUTDOOR STORAGE - FAILURE TO KEEP MATERI {c |}     {res}5,550.00        100.00        525.00
+{txt}OVERCROWDING 200 OR MORE PEOPLE          {c |}       {res}500.00          0.00          0.00
+{txt}OVERCROWDING CONDITIONS - GENERAL        {c |}     {res}1,500.00          0.00      2,400.00
+{txt}OWNER TO PREVENT ANIMAL NUISANCE         {c |}       {res}800.00        415.00        200.00
+{txt}OWNER TO PREVENT ANIMAL NUISANCE, BARKIN {c |}       {res}200.00          0.00          0.00
+{txt}PARKING WHERE PROHIBITED                 {c |}     {res}3,700.00         50.00        250.00
+{txt}PERMITS - FOOD OPERATION WITHOUT PERMIT  {c |}     {res}2,400.00          0.00      1,150.00
+{txt}PERMITS REQUIRED                         {c |}     {res}6,050.00          0.00      5,015.00
+{txt}PERSON IN CHARGE ALLOWING VIOLATION OF I {c |}     {res}4,500.00          0.00      1,050.00
+{txt}PLACEMENT FOR COLLECTION STORAGE ON NON- {c |}    {res}16,850.00        781.00      2,300.00
+{txt}PLACING/AFFIXING ADVERTISING CIRCULARS O {c |}     {res}5,600.00         50.00      2,035.00
+{txt}PORTABLE GASOLINE-POWERED GENERATORS.USE {c |}       {res}500.00          0.00          0.00
+{txt}PROHIBITED POSTING OF SIGNS ON PUBLIC PR {c |}   {res}199,000.00      1,000.00    127,205.00
+{txt}REMOVAL OF HEALTH DEPARTMENT CLOSURE SIG {c |}     {res}1,600.00          0.00          0.00
+{txt}RESTRAINTS REQUIRED OR RESTRAINTS IMPROP {c |}    {res}13,400.00      2,145.00      4,245.00
+{txt}SANITARY MAINTENANCE - EXTERIOR, MORE TH {c |}     {res}1,250.00          0.00         80.00
+{txt}SANITARY MAINTENANCE - OCCUPANT  EXTERIO {c |}       {res}800.00        200.00        215.00
+{txt}SANITARY MAINTENANCE - OCCUPANT  INTERIO {c |}       {res}100.00          0.00          0.00
+{txt}SANITARY MAINTENANCE - OCCUPANT TRASH DI {c |}       {res}600.00          0.00         45.00
+{txt}SANITARY MAINTENANCE - WHEN PROPERTY IS  {c |}       {res}700.00          0.00          0.00
+{txt}SMOKING INDOORS, PROHIBITED              {c |}    {res}11,250.00          0.00      3,830.00
+{txt}SNOW - FAILURE TO REMOVE SNOW AND ICE    {c |}       {res}550.00          0.00        215.00
+{txt}STREET VENDORS/TRASH RECEPTACLES REQUIRE {c |}       {res}500.00          0.00          0.00
+{txt}SWIMMING PROHIBITED                      {c |}     {res}4,300.00        100.00          0.00
+{txt}TRASH ACCUMULATION                       {c |}   {res}326,600.00      7,030.00     26,805.00
+{txt}TREES AND SHRUBS - FAILURE TO PREVENT HA {c |}    {res}16,850.00        215.00      1,405.00
+{txt}TRESPASSING IN RESTRICTED AREA           {c |}       {res}450.00          0.00          0.00
+{txt}TRESPASSING SUNSET TO SUNRISE            {c |}     {res}1,600.00          0.00        330.00
+{txt}UNCLEAN INTERIOR - PEST CONTROL          {c |}       {res}150.00          0.00         30.00
+{txt}UNLAWFUL ACTS                            {c |}     {res}2,000.00          0.00      4,000.00
+{txt}UNLAWFUL DISTRIBUTION OF TOBACCO TO MINO {c |}    {res}66,500.00      2,000.00     20,825.00
+{txt}UNLICENSED OR MISUSE OF LICENSE FOR DOGS {c |}    {res}13,300.00      1,700.00      3,960.00
+{txt}UNREGISTERED OR INOPERABLE VEHICLE       {c |}    {res}77,600.00      2,880.00     11,899.00
+{txt}UNSAFE BUILING                           {c |}       {res}250.00          0.00        175.00
+{txt}UNSAFE CONDITIONS                        {c |}    {res}13,650.00          0.00     10,685.00
+{txt}UNSAFE CONDITIONS - ACCUMULATION OF DEBR {c |}       {res}600.00          0.00        375.00
+{txt}USE/POSSESSION OF ALOHOLIC BEVERAGES     {c |}       {res}900.00          0.00          0.00
+{txt}USER FAILED TO REGISTER BURGLAR ALARM    {c |}     {res}6,200.00          0.00      3,620.00
+{txt}VALET PARKING SERVICES ENDANGERING PUBLI {c |}    {res}15,000.00          0.00      7,695.00
+{txt}VALETED VEHICLE PARKED, STOPPED OR LEFT  {c |}     {res}1,500.00          0.00      1,260.00
+{txt}VALETED VEHICLE PARKED/STOPPED OR LEFT I {c |}    {res}15,250.00          0.00     10,630.00
+{txt}VIOLATION OF CORRECTIVE ACTIONS          {c |}     {res}7,000.00          0.00      5,500.00
+{txt}VIOLATION OF ZONING CODE                 {c |}   {res}126,000.00      6,545.00     65,395.00
+{txt}WADING PROHIBITED                        {c |}       {res}500.00          0.00          0.00
+{txt}WORK WITHOUT OR BEYOND THE SCOPE OF PERM {c |}   {res}225,500.00     16,265.00     68,025.00
+{txt}{hline 41}{c BT}{hline 41}
+
+{com}.         
 . tab neighborhoods_csa if year == 2018, sort plot
 
                            {txt}ï»¿CSA2010 {c |}      Freq.
 {hline 38}{c +}{hline 12}{c +}{hline 27}
                         Clifton-Berea {c |}{res}      2,954 {txt}{c |}***************************
                         Belair-Edison {c |}{res}      2,217 {txt}{c |}********************
-     Allendale/Irvington/South Hilton {c |}{res}      1,528 {txt}{c |}**************
+        Allendale/Irvington/S. Hilton {c |}{res}      1,528 {txt}{c |}**************
+                  Southwest Baltimore {c |}{res}      1,504 {txt}{c |}**************
                     Midway/Coldstream {c |}{res}      1,257 {txt}{c |}***********
-                  Southwest Baltimore {c |}{res}      1,169 {txt}{c |}***********
         Orangeville/East Highlandtown {c |}{res}      1,088 {txt}{c |}**********
+                     Greater Rosemont {c |}{res}      1,048 {txt}{c |}**********
             Pimlico/Arlington/Hilltop {c |}{res}        979 {txt}{c |}*********
-                     Greater Rosemont {c |}{res}        956 {txt}{c |}*********
     Brooklyn/Curtis Bay/Hawkins Point {c |}{res}        850 {txt}{c |}********
                         The Waverlies {c |}{res}        848 {txt}{c |}********
              Morrell Park/Violetville {c |}{res}        840 {txt}{c |}********
@@ -444,17 +560,18 @@ ABANDONMENT OF ANIMAL                    {c |}     {res}3,000.00          0.00  
             Penn North/Reservoir Hill {c |}{res}        648 {txt}{c |}******
                 Southern Park Heights {c |}{res}        641 {txt}{c |}******
                     Edmondson Village {c |}{res}        625 {txt}{c |}******
-                        Glen-Falstaff {c |}{res}        624 {txt}{c |}******
+                       Glen-Fallstaff {c |}{res}        624 {txt}{c |}******
                        Greater Govans {c |}{res}        611 {txt}{c |}******
                            Lauraville {c |}{res}        610 {txt}{c |}******
                            Loch Raven {c |}{res}        562 {txt}{c |}*****
       Beechfield/Ten Hills/West Hills {c |}{res}        525 {txt}{c |}*****
                  Forest Park/Walbrook {c |}{res}        520 {txt}{c |}*****
+       Westport/Mount Winans/Lakeland {c |}{res}        501 {txt}{c |}*****
             Inner Harbor/Federal Hill {c |}{res}        498 {txt}{c |}*****
+           Washington Village/Pigtown {c |}{res}        479 {txt}{c |}****
                  Dorchester/Ashburton {c |}{res}        472 {txt}{c |}****
-           Washington Village/Pigtown {c |}{res}        466 {txt}{c |}****
-         Westport/Mt. Winans/Lakeland {c |}{res}        444 {txt}{c |}****
                                Canton {c |}{res}        406 {txt}{c |}****
+                             Hamilton {c |}{res}        400 {txt}{c |}****
                   Upton/Druid Heights {c |}{res}        398 {txt}{c |}****
             Chinquapin Park/Belvedere {c |}{res}        381 {txt}{c |}***
                               Midtown {c |}{res}        381 {txt}{c |}***
@@ -467,24 +584,23 @@ ABANDONMENT OF ANIMAL                    {c |}     {res}3,000.00          0.00  
 Poppleton/The Terraces/Hollins Market {c |}{res}        196 {txt}{c |}**
                          Highlandtown {c |}{res}        175 {txt}{c |}**
     North Baltimore/Guilford/Homeland {c |}{res}        164 {txt}{c |}*
-                             Hamilton {c |}{res}        134 {txt}{c |}*
                           Cherry Hill {c |}{res}        110 {txt}{c |}*
-                  Downtown/Seton Hill {c |}{res}         98 {txt}{c |}*
+                  Downtown/Seton Hill {c |}{res}        110 {txt}{c |}*
       Greater Roland Park/Poplar Hill {c |}{res}         66 {txt}{c |}*
                       South Baltimore {c |}{res}         62 {txt}{c |}*
              Dickeyville/Franklintown {c |}{res}         55 {txt}{c |}*
+          Mount Washington/Coldspring {c |}{res}         43 {txt}{c |}
               Cross-Country/Cheswolde {c |}{res}         42 {txt}{c |}
-            Mt. Washington/Coldspring {c |}{res}         18 {txt}{c |}
                   Claremont/Armistead {c |}{res}         17 {txt}{c |}
 {hline 38}{c +}{hline 12}{c +}{hline 27}
-                                Total {c |}{res}     33,336 
+                                Total {c |}{res}     34,136 
 {txt}
 {com}. tab neighborhoods_csa if year == 2018, summarize(fine_amt)   
 
                                   {txt}{c |}        Summary of FineAmount
                        ï»¿CSA2010 {c |}        Mean   Std. Dev.       Freq.
 {hline 34}{c +}{hline 36}
- Allendale/Irvington/South Hilton {c |}  {res} 107.42801   171.35806       1,528
+    Allendale/Irvington/S. Hilton {c |}  {res} 107.42801   171.35806       1,528
 {txt}  Beechfield/Ten Hills/West Hills {c |}  {res} 94.380952   137.35453         525
 {txt}                    Belair-Edison {c |}  {res} 125.39468   197.14831       2,217
 {txt}Brooklyn/Curtis Bay/Hawkins Point {c |}  {res} 96.588235   128.29913         850
@@ -497,18 +613,18 @@ Poppleton/The Terraces/Hollins Market {c |}{res}        196 {txt}{c |}**
 {txt}          Cross-Country/Cheswolde {c |}  {res} 157.14286   228.61498          42
 {txt}         Dickeyville/Franklintown {c |}  {res} 126.36364   160.39723          55
 {txt}             Dorchester/Ashburton {c |}  {res} 188.77119   252.00044         472
-{txt}              Downtown/Seton Hill {c |}  {res} 209.18367   213.26463          98
+{txt}              Downtown/Seton Hill {c |}  {res} 218.18182   211.77789         110
 {txt}                Edmondson Village {c |}  {res}     161.6   245.38497         625
 {txt}                      Fells Point {c |}  {res} 96.060606   131.55021         825
 {txt}             Forest Park/Walbrook {c |}  {res} 189.23077   253.01531         520
-{txt}                    Glen-Falstaff {c |}  {res} 114.34295   194.75107         624
+{txt}                   Glen-Fallstaff {c |}  {res} 114.34295   194.75107         624
 {txt}  Greater Charles Village/Barclay {c |}  {res} 143.85135   179.26902         740
 {txt}                   Greater Govans {c |}  {res}  149.7545   222.62393         611
 {txt}                Greater Mondawmin {c |}  {res} 180.35714    250.0535         812
 {txt}  Greater Roland Park/Poplar Hill {c |}  {res}  153.0303   121.49036          66
-{txt}                 Greater Rosemont {c |}  {res} 159.46653   209.07883         956
+{txt}                 Greater Rosemont {c |}  {res} 155.58206   205.60402       1,048
 {txt}                  Greenmount East {c |}  {res} 161.33144   204.14507         353
-{txt}                         Hamilton {c |}  {res} 128.35821   167.62917         134
+{txt}                         Hamilton {c |}  {res}   133.625   200.68956         400
 {txt}         Harbor East/Little Italy {c |}  {res} 94.366197   113.54576         213
 {txt}                 Harford/Echodale {c |}  {res}  92.66055   135.31423         218
 {txt}                     Highlandtown {c |}  {res} 193.71429   242.62792         175
@@ -521,7 +637,7 @@ Poppleton/The Terraces/Hollins Market {c |}{res}        196 {txt}{c |}**
 {txt}                          Midtown {c |}  {res} 162.46719   157.34876         381
 {txt}                Midway/Coldstream {c |}  {res} 156.16547   208.06723       1,257
 {txt}         Morrell Park/Violetville {c |}  {res} 118.15476    202.4158         840
-{txt}        Mt. Washington/Coldspring {c |}  {res} 94.444444   112.31375          18
+{txt}      Mount Washington/Coldspring {c |}  {res} 101.16279   147.79666          43
 {txt}North Baltimore/Guilford/Homeland {c |}  {res} 190.54878   221.50975         164
 {txt}                        Northwood {c |}  {res} 78.986587   97.687523         671
 {txt}              Oldtown/Middle East {c |}  {res} 175.15625   211.05788         320
@@ -534,28 +650,28 @@ Poppleton/The Terraces/Hollins Market {c |}{res}        196 {txt}{c |}**
 {txt}                  South Baltimore {c |}  {res} 134.67742   200.73404          62
 {txt}                     Southeastern {c |}  {res} 95.988539   149.51439         349
 {txt}            Southern Park Heights {c |}  {res}  132.6053   201.51205         641
-{txt}              Southwest Baltimore {c |}  {res} 154.61933   182.54305       1,169
+{txt}              Southwest Baltimore {c |}  {res} 158.94282   187.73472       1,504
 {txt}                    The Waverlies {c |}  {res}  144.2217   221.15583         848
 {txt}              Upton/Druid Heights {c |}  {res} 166.83417   175.13731         398
-{txt}       Washington Village/Pigtown {c |}  {res}  136.0515   182.57027         466
-{txt}     Westport/Mt. Winans/Lakeland {c |}  {res} 117.79279   190.78333         444
+{txt}       Washington Village/Pigtown {c |}  {res} 139.14405   183.94531         479
+{txt}   Westport/Mount Winans/Lakeland {c |}  {res} 112.97405    184.9901         501
 {txt}{hline 34}{c +}{hline 36}
-                            Total {c |}  {res}  151.2644    206.6656      33,336
+                            Total {c |}  {res} 151.20108   206.52862      34,136
 {txt}
 {com}. 
 . tab hearing_status if year == 2018
 
     {txt}HearingStatus {c |}      Freq.     Percent        Cum.
 {hline 18}{c +}{hline 35}
-  Default, Abated {c |}{res}        669        2.01        2.01
-{txt} Default, No Show {c |}{res}        575        1.72        3.73
-{txt}        Dismissed {c |}{res}        422        1.27        5.00
-{txt}           Guilty {c |}{res}         22        0.07        5.06
-{txt}   Guilty Reduced {c |}{res}      2,718        8.15       13.22
-{txt}Hearing Scheduled {c |}{res}        365        1.09       14.31
-{txt}               NA {c |}{res}     28,565       85.69      100.00
+  Default, Abated {c |}{res}        678        1.99        1.99
+{txt} Default, No Show {c |}{res}        590        1.73        3.71
+{txt}        Dismissed {c |}{res}        431        1.26        4.98
+{txt}           Guilty {c |}{res}         22        0.06        5.04
+{txt}   Guilty Reduced {c |}{res}      2,784        8.16       13.20
+{txt}Hearing Scheduled {c |}{res}        371        1.09       14.28
+{txt}               NA {c |}{res}     29,260       85.72      100.00
 {txt}{hline 18}{c +}{hline 35}
-            Total {c |}{res}     33,336      100.00
+            Total {c |}{res}     34,136      100.00
 {txt}
 {com}. 
 . tab quint_black if year == 2018 & hearing_status == "NA"
@@ -564,13 +680,13 @@ Poppleton/The Terraces/Hollins Market {c |}{res}        196 {txt}{c |}**
 Black Share of {c |}
      Residents {c |}      Freq.     Percent        Cum.
 {hline 15}{c +}{hline 35}
- 1.7% to 29.8% {c |}{res}      4,454       16.96       16.96
-{txt}31.2% to 63.1% {c |}{res}      3,924       14.95       31.91
-{txt}63.1% to 84.6% {c |}{res}      4,181       15.92       47.83
-{txt}84.9% to 93.5% {c |}{res}      6,331       24.11       71.95
-{txt}93.8% to 96.6% {c |}{res}      7,366       28.05      100.00
+ 1.7% to 29.8% {c |}{res}      4,507       15.40       15.40
+{txt}31.2% to 63.1% {c |}{res}      4,498       15.37       30.78
+{txt}63.1% to 84.6% {c |}{res}      5,124       17.51       48.29
+{txt}84.9% to 93.5% {c |}{res}      7,682       26.25       74.54
+{txt}93.8% to 96.6% {c |}{res}      7,449       25.46      100.00
 {txt}{hline 15}{c +}{hline 35}
-         Total {c |}{res}     26,256      100.00
+         Total {c |}{res}     29,260      100.00
 {txt}
 {com}. 
 . table lien_code if year == 2018, c(n fine_amt sum fine_amt sum total_paid_amt)  ///
@@ -579,8 +695,8 @@ Black Share of {c |}
 {txt}{hline 10}{c TT}{hline 41}
  LienCode {c |}  N(fine_amt)  sum(fine_~t)  sum(total~t)
 {hline 10}{c +}{hline 41}
-        L {c |}       {res}27,418  3,730,900.00  1,838,391.90
-        {txt}N {c |}        {res}5,918  1,311,650.00    295,680.00
+        L {c |}       {res}28,131  3,840,000.00  1,890,585.30
+        {txt}N {c |}        {res}6,005  1,321,400.00    299,625.00
 {txt}{hline 10}{c BT}{hline 41}
 
 {com}. 
@@ -619,11 +735,15 @@ Black Share of {c |}
 {txt} 15{com}. 
 . table hearing_status `quint'  if year == 2018 & hearing_status != "NA"          ///
 >         , c(mean fine_abated_share ) format(%12.2fc)    
-{txt} 16{com}. 
-. di "Collection Share by lien presence"
+{txt} 16{com}.         
+. di "Share of citations with hearings by `quint'"
 {txt} 17{com}. 
+. tab  `quint' if hearing_status != "NA" & year == 2018
+{txt} 18{com}. 
+. di "Collection Share by lien presence"
+{txt} 19{com}. 
 . table `quint'  lien_code if year == 2018 , c(mean fine_abated_share) format(%12.2fc)
-{txt} 18{com}.         
+{txt} 20{com}.         
 . {c )-}
 Count of citations and sum/mean fine amount for 2018
 
@@ -633,11 +753,11 @@ Share of       {c |}
 Residents in   {c |}
 Poverty        {c |} N(citatio~d)  sum(fine_~t)  mean(fine~t)
 {hline 15}{c +}{hline 41}
-  0.8% to 8.1% {c |}        {res}3,924       428,250           109
-{txt}10.0% to 15.1% {c |}        {res}5,982       681,250           114
-{txt}15.4% to 19.9% {c |}        {res}6,891     1,053,650           153
-{txt}20.3% to 26.3% {c |}        {res}5,400       760,450           141
-{txt}29.2% to 47.7% {c |}        {res}8,525     1,829,450           215
+  0.8% to 8.1% {c |}        {res}3,979       436,100           110
+{txt}10.0% to 15.1% {c |}        {res}6,248       717,500           115
+{txt}15.4% to 19.9% {c |}        {res}7,392     1,110,250           150
+{txt}20.3% to 26.3% {c |}        {res}7,657     1,009,800           132
+{txt}29.2% to 47.7% {c |}        {res}8,860     1,887,750           213
 {txt}{hline 15}{c BT}{hline 41}
 Count of citations and sum/mean voided amount for 2018
 
@@ -649,9 +769,9 @@ Poverty        {c |} N(citatio~d)  sum(total~t)  mean(tota~t)
 {hline 15}{c +}{hline 41}
   0.8% to 8.1% {c |}          {res}145        27,911           192
 {txt}10.0% to 15.1% {c |}          {res}134        27,435           205
-{txt}15.4% to 19.9% {c |}          {res}163        61,885           380
-{txt}20.3% to 26.3% {c |}          {res}123        38,920           316
-{txt}29.2% to 47.7% {c |}          {res}193        89,555           464
+{txt}15.4% to 19.9% {c |}          {res}175        65,565           375
+{txt}20.3% to 26.3% {c |}          {res}177        51,430           291
+{txt}29.2% to 47.7% {c |}          {res}197        90,720           461
 {txt}{hline 15}{c BT}{hline 41}
 Count of citations and sum/mean abated amount for 2018
 
@@ -661,11 +781,11 @@ Share of       {c |}
 Residents in   {c |}
 Poverty        {c |} N(citatio~d)  sum(total~t)  mean(tota~t)
 {hline 15}{c +}{hline 41}
-  0.8% to 8.1% {c |}          {res}506        83,230           164
-{txt}10.0% to 15.1% {c |}          {res}655       122,535           187
-{txt}15.4% to 19.9% {c |}          {res}850       227,504           268
-{txt}20.3% to 26.3% {c |}          {res}767       186,075           243
-{txt}29.2% to 47.7% {c |}        {res}1,685       611,683           363
+  0.8% to 8.1% {c |}          {res}509        83,370           164
+{txt}10.0% to 15.1% {c |}          {res}689       130,155           189
+{txt}15.4% to 19.9% {c |}          {res}918       243,029           265
+{txt}20.3% to 26.3% {c |}          {res}999       227,925           228
+{txt}29.2% to 47.7% {c |}        {res}1,741       621,458           357
 {txt}{hline 15}{c BT}{hline 41}
 Count common citation types for 2018
 
@@ -674,15 +794,16 @@ Count common citation types for 2018
                                          {c |}                 Poverty                 
                              Description {c |} 0.8% to 8.1%  10.0% to 15.  15.4% to 19.
 {hline 41}{c +}{hline 41}
-BULK TRASH                               {c |}          {res}329           704           517
-{txt}CONSTRUCTION AND MAINTENANCE OF STORAGE  {c |}          {res}184           346           334
-{txt}EXTERIOR SANITARY MAINTENANCE - GENERAL  {c |}           {res}87           202           304
-{txt}FAILED TO ABATE UNSAFE STRUCTURE NOTICE  {c |}           {res}38           198           442
-{txt}FAILED TO ABATE VIOLATION NOTICE AND ORD {c |}          {res}307           274           529
-{txt}FAILURE TO FILE A COMPLETED ANNUAL REGIS {c |}          {res}390           347           566
-{txt}HIGH GRASS AND WEEDS                     {c |}          {res}784         1,507         1,613
-{txt}TRASH ACCUMULATION                       {c |}          {res}603         1,083         1,207
-{txt}UNREGISTERED OR INOPERABLE VEHICLE       {c |}           {res}74           392           463
+BULK TRASH                               {c |}          {res}329           739           600
+{txt}CONSTRUCTION AND MAINTENANCE OF STORAGE  {c |}          {res}184           354           354
+{txt}EXTERIOR SANITARY MAINTENANCE - GENERAL  {c |}           {res}90           233           335
+{txt}FAILED TO ABATE UNSAFE STRUCTURE NOTICE  {c |}           {res}39           214           460
+{txt}FAILED TO ABATE VIOLATION NOTICE AND ORD {c |}          {res}311           290           548
+{txt}FAILURE TO FILE A COMPLETED ANNUAL REGIS {c |}          {res}395           361           593
+{txt}FAILURE TO FILE ANNUAL VACANT BUILDING R {c |}           {res}13            61           176
+{txt}HIGH GRASS AND WEEDS                     {c |}          {res}801         1,598         1,725
+{txt}TRASH ACCUMULATION                       {c |}          {res}613         1,092         1,281
+{txt}UNREGISTERED OR INOPERABLE VEHICLE       {c |}           {res}76           405           494
 {txt}{hline 41}{c BT}{hline 41}
 
 {hline 41}{c TT}{hline 27}
@@ -690,15 +811,16 @@ BULK TRASH                               {c |}          {res}329           704  
                                          {c |}    Residents in Poverty   
                              Description {c |} 20.3% to 26.  29.2% to 47.
 {hline 41}{c +}{hline 27}
-BULK TRASH                               {c |}          {res}453           466
-{txt}CONSTRUCTION AND MAINTENANCE OF STORAGE  {c |}          {res}192           273
-{txt}EXTERIOR SANITARY MAINTENANCE - GENERAL  {c |}          {res}244           244
-{txt}FAILED TO ABATE UNSAFE STRUCTURE NOTICE  {c |}          {res}161           186
-{txt}FAILED TO ABATE VIOLATION NOTICE AND ORD {c |}          {res}340           465
-{txt}FAILURE TO FILE A COMPLETED ANNUAL REGIS {c |}          {res}642           939
-{txt}HIGH GRASS AND WEEDS                     {c |}        {res}1,064         1,164
-{txt}TRASH ACCUMULATION                       {c |}        {res}1,128         1,287
-{txt}UNREGISTERED OR INOPERABLE VEHICLE       {c |}          {res}192           168
+BULK TRASH                               {c |}          {res}739           504
+{txt}CONSTRUCTION AND MAINTENANCE OF STORAGE  {c |}          {res}392           290
+{txt}EXTERIOR SANITARY MAINTENANCE - GENERAL  {c |}          {res}293           265
+{txt}FAILED TO ABATE UNSAFE STRUCTURE NOTICE  {c |}          {res}242           193
+{txt}FAILED TO ABATE VIOLATION NOTICE AND ORD {c |}          {res}425           483
+{txt}FAILURE TO FILE A COMPLETED ANNUAL REGIS {c |}          {res}794           976
+{txt}FAILURE TO FILE ANNUAL VACANT BUILDING R {c |}          {res}285           510
+{txt}HIGH GRASS AND WEEDS                     {c |}        {res}1,601         1,199
+{txt}TRASH ACCUMULATION                       {c |}        {res}1,594         1,354
+{txt}UNREGISTERED OR INOPERABLE VEHICLE       {c |}          {res}326           171
 {txt}{hline 41}{c BT}{hline 27}
 Count by hearing status and quint_poverty common citation types for 2018
 
@@ -706,12 +828,12 @@ Count by hearing status and quint_poverty common citation types for 2018
                   {c |}              Quintiles by Share of Residents in Poverty             
     HearingStatus {c |} 0.8% to 8.1%  10.0% to 15.  15.4% to 19.  20.3% to 26.  29.2% to 47.
 {hline 18}{c +}{hline 69}
-  Default, Abated {c |}          {res}109            86            98           105           239
- {txt}Default, No Show {c |}           {res}67            75           103            95           171
-        {txt}Dismissed {c |}           {res}60            53            72            46           166
-           {txt}Guilty {c |}            {res}2             2             1             5            11
-   {txt}Guilty Reduced {c |}          {res}219           375           480           461         1,019
-{txt}Hearing Scheduled {c |}           {res}39            40           123            49            95
+  Default, Abated {c |}          {res}109            89           106           130           244
+ {txt}Default, No Show {c |}           {res}68            78           111           152           181
+        {txt}Dismissed {c |}           {res}60            55            78            66           172
+           {txt}Guilty {c |}            {res}2             2             2             5            11
+   {txt}Guilty Reduced {c |}          {res}220           396           525           591         1,052
+{txt}Hearing Scheduled {c |}           {res}39            41           125            66           100
 {txt}{hline 18}{c BT}{hline 69}
 Sum of fines by hearing status and quint_poverty common citation types for 2018
 
@@ -719,12 +841,12 @@ Sum of fines by hearing status and quint_poverty common citation types for 2018
                   {c |}              Quintiles by Share of Residents in Poverty             
     HearingStatus {c |} 0.8% to 8.1%  10.0% to 15.  15.4% to 19.  20.3% to 26.  29.2% to 47.
 {hline 18}{c +}{hline 69}
-  Default, Abated {c |}       {res}13,600        15,150        20,850        22,450        86,300
- {txt}Default, No Show {c |}       {res}11,000        16,600        23,700        22,950        52,800
-        {txt}Dismissed {c |}        {res}8,600         8,450        21,850        11,900        72,900
-           {txt}Guilty {c |}          {res}300           100            50         2,200         5,600
-   {txt}Guilty Reduced {c |}       {res}53,300        88,700       150,600       121,350       372,000
-{txt}Hearing Scheduled {c |}        {res}7,400         8,300        18,900        14,550        30,700
+  Default, Abated {c |}       {res}13,600        15,750        22,950        25,800        86,550
+ {txt}Default, No Show {c |}       {res}11,050        16,750        25,800        31,300        55,250
+        {txt}Dismissed {c |}        {res}8,600         8,550        25,150        13,750        73,400
+           {txt}Guilty {c |}          {res}300           100           100         2,200         5,600
+   {txt}Guilty Reduced {c |}       {res}53,400        94,250       159,600       152,150       380,300
+{txt}Hearing Scheduled {c |}        {res}7,400         8,350        19,250        17,300        31,500
 {txt}{hline 18}{c BT}{hline 69}
 Mean of fines by hearing status and quint_poverty common citation types for 2018
 
@@ -732,16 +854,30 @@ Mean of fines by hearing status and quint_poverty common citation types for 2018
                   {c |}              Quintiles by Share of Residents in Poverty             
     HearingStatus {c |} 0.8% to 8.1%  10.0% to 15.  15.4% to 19.  20.3% to 26.  29.2% to 47.
 {hline 18}{c +}{hline 69}
-  Default, Abated {c |}         {res}1.27          1.25          1.24          1.17          1.13
- {txt}Default, No Show {c |}         {res}0.27          0.13          0.29          0.22          0.33
-        {txt}Dismissed {c |}         {res}1.04          1.05          1.05          1.10          1.08
+  Default, Abated {c |}         {res}1.27          1.24          1.23          1.19          1.13
+ {txt}Default, No Show {c |}         {res}0.26          0.12          0.27          0.18          0.32
+        {txt}Dismissed {c |}         {res}1.04          1.09          1.05          1.07          1.07
            {txt}Guilty {c |}         {res}0.00          0.00          0.00          0.01          0.55
-   {txt}Guilty Reduced {c |}         {res}0.84          0.88          0.85          0.88          0.90
-{txt}Hearing Scheduled {c |}         {res}0.13          0.15          0.20          0.20          0.23
+   {txt}Guilty Reduced {c |}         {res}0.84          0.88          0.85          0.89          0.89
+{txt}Hearing Scheduled {c |}         {res}0.13          0.16          0.20          0.19          0.23
 {txt}{hline 18}{c BT}{hline 69}
+Share of citations with hearings by quint_poverty
+
+  Quintiles by {c |}
+      Share of {c |}
+  Residents in {c |}
+       Poverty {c |}      Freq.     Percent        Cum.
+{hline 15}{c +}{hline 35}
+  0.8% to 8.1% {c |}{res}        498       10.21       10.21
+{txt}10.0% to 15.1% {c |}{res}        661       13.56       23.77
+{txt}15.4% to 19.9% {c |}{res}        947       19.42       43.19
+{txt}20.3% to 26.3% {c |}{res}      1,010       20.71       63.90
+{txt}29.2% to 47.7% {c |}{res}      1,760       36.10      100.00
+{txt}{hline 15}{c +}{hline 35}
+         Total {c |}{res}      4,876      100.00
 Collection Share by lien presence
 
-{hline 15}{c TT}{hline 27}
+{txt}{hline 15}{c TT}{hline 27}
 Quintiles by   {c |}
 Share of       {c |}
 Residents in   {c |}          LienCode         
@@ -749,8 +885,8 @@ Poverty        {c |}            L             N
 {hline 15}{c +}{hline 27}
   0.8% to 8.1% {c |}         {res}0.13          0.15
 {txt}10.0% to 15.1% {c |}         {res}0.11          0.09
-{txt}15.4% to 19.9% {c |}         {res}0.13          0.12
-{txt}20.3% to 26.3% {c |}         {res}0.15          0.12
+{txt}15.4% to 19.9% {c |}         {res}0.13          0.13
+{txt}20.3% to 26.3% {c |}         {res}0.14          0.11
 {txt}29.2% to 47.7% {c |}         {res}0.15          0.32
 {txt}{hline 15}{c BT}{hline 27}
 Count of citations and sum/mean fine amount for 2018
@@ -760,11 +896,11 @@ Quintiles by   {c |}
 Black Share of {c |}
 Residents      {c |} N(citatio~d)  sum(fine_~t)  mean(fine~t)
 {hline 15}{c +}{hline 41}
- 1.7% to 29.8% {c |}        {res}4,975       550,800           111
-{txt}31.2% to 63.1% {c |}        {res}4,605       566,350           123
-{txt}63.1% to 84.6% {c |}        {res}4,803       593,200           124
-{txt}84.9% to 93.5% {c |}        {res}7,258     1,029,750           142
-{txt}93.8% to 96.6% {c |}        {res}9,081     2,012,950           222
+ 1.7% to 29.8% {c |}        {res}5,030       558,650           111
+{txt}31.2% to 63.1% {c |}        {res}5,242       640,950           122
+{txt}63.1% to 84.6% {c |}        {res}5,905       744,350           126
+{txt}84.9% to 93.5% {c |}        {res}8,786     1,193,900           136
+{txt}93.8% to 96.6% {c |}        {res}9,173     2,023,550           221
 {txt}{hline 15}{c BT}{hline 41}
 Count of citations and sum/mean voided amount for 2018
 
@@ -774,10 +910,10 @@ Black Share of {c |}
 Residents      {c |} N(citatio~d)  sum(total~t)  mean(tota~t)
 {hline 15}{c +}{hline 41}
  1.7% to 29.8% {c |}          {res}163        32,861           202
-{txt}31.2% to 63.1% {c |}          {res}142        32,140           226
-{txt}63.1% to 84.6% {c |}          {res}101        30,995           307
-{txt}84.9% to 93.5% {c |}          {res}121        38,530           318
-{txt}93.8% to 96.6% {c |}          {res}231       111,180           481
+{txt}31.2% to 63.1% {c |}          {res}164        37,390           228
+{txt}63.1% to 84.6% {c |}          {res}117        35,840           306
+{txt}84.9% to 93.5% {c |}          {res}152        45,415           299
+{txt}93.8% to 96.6% {c |}          {res}232       111,555           481
 {txt}{hline 15}{c BT}{hline 41}
 Count of citations and sum/mean abated amount for 2018
 
@@ -786,11 +922,11 @@ Quintiles by   {c |}
 Black Share of {c |}
 Residents      {c |} N(citatio~d)  sum(total~t)  mean(tota~t)
 {hline 15}{c +}{hline 41}
- 1.7% to 29.8% {c |}          {res}533        99,665           187
-{txt}31.2% to 63.1% {c |}          {res}684       140,770           206
-{txt}63.1% to 84.6% {c |}          {res}604       121,970           202
-{txt}84.9% to 93.5% {c |}          {res}961       236,094           246
-{txt}93.8% to 96.6% {c |}        {res}1,681       632,528           376
+ 1.7% to 29.8% {c |}          {res}536        99,805           186
+{txt}31.2% to 63.1% {c |}          {res}743       154,445           208
+{txt}63.1% to 84.6% {c |}          {res}762       154,890           203
+{txt}84.9% to 93.5% {c |}        {res}1,125       261,979           233
+{txt}93.8% to 96.6% {c |}        {res}1,690       634,818           376
 {txt}{hline 15}{c BT}{hline 41}
 Count common citation types for 2018
 
@@ -798,15 +934,16 @@ Count common citation types for 2018
                                          {c |}  Quintiles by Black Share of Residents  
                              Description {c |} 1.7% to 29.8  31.2% to 63.  63.1% to 84.
 {hline 41}{c +}{hline 41}
-BULK TRASH                               {c |}          {res}534           408           516
-{txt}CONSTRUCTION AND MAINTENANCE OF STORAGE  {c |}          {res}259           175           277
-{txt}EXTERIOR SANITARY MAINTENANCE - GENERAL  {c |}           {res}65           231           270
-{txt}FAILED TO ABATE UNSAFE STRUCTURE NOTICE  {c |}          {res}111            99           118
-{txt}FAILED TO ABATE VIOLATION NOTICE AND ORD {c |}          {res}254           266           330
-{txt}FAILURE TO FILE A COMPLETED ANNUAL REGIS {c |}          {res}411           462           432
-{txt}HIGH GRASS AND WEEDS                     {c |}        {res}1,151           917         1,059
-{txt}TRASH ACCUMULATION                       {c |}          {res}868           945           680
-{txt}UNREGISTERED OR INOPERABLE VEHICLE       {c |}          {res}110           207           285
+BULK TRASH                               {c |}          {res}534           488           672
+{txt}CONSTRUCTION AND MAINTENANCE OF STORAGE  {c |}          {res}259           208           322
+{txt}EXTERIOR SANITARY MAINTENANCE - GENERAL  {c |}           {res}68           259           353
+{txt}FAILED TO ABATE UNSAFE STRUCTURE NOTICE  {c |}          {res}112           128           159
+{txt}FAILED TO ABATE VIOLATION NOTICE AND ORD {c |}          {res}258           279           383
+{txt}FAILURE TO FILE A COMPLETED ANNUAL REGIS {c |}          {res}416           500           510
+{txt}FAILURE TO FILE ANNUAL VACANT BUILDING R {c |}           {res}32            91           191
+{txt}HIGH GRASS AND WEEDS                     {c |}        {res}1,168         1,031         1,297
+{txt}TRASH ACCUMULATION                       {c |}          {res}878         1,076           830
+{txt}UNREGISTERED OR INOPERABLE VEHICLE       {c |}          {res}112           285           332
 {txt}{hline 41}{c BT}{hline 41}
 
 {hline 41}{c TT}{hline 27}
@@ -814,15 +951,16 @@ BULK TRASH                               {c |}          {res}534           408  
                                          {c |}         Residents         
                              Description {c |} 84.9% to 93.  93.8% to 96.
 {hline 41}{c +}{hline 27}
-BULK TRASH                               {c |}          {res}546           465
-{txt}CONSTRUCTION AND MAINTENANCE OF STORAGE  {c |}          {res}360           258
-{txt}EXTERIOR SANITARY MAINTENANCE - GENERAL  {c |}          {res}293           222
-{txt}FAILED TO ABATE UNSAFE STRUCTURE NOTICE  {c |}          {res}280           417
-{txt}FAILED TO ABATE VIOLATION NOTICE AND ORD {c |}          {res}525           540
-{txt}FAILURE TO FILE A COMPLETED ANNUAL REGIS {c |}          {res}720           859
-{txt}HIGH GRASS AND WEEDS                     {c |}        {res}1,553         1,452
-{txt}TRASH ACCUMULATION                       {c |}        {res}1,479         1,336
-{txt}UNREGISTERED OR INOPERABLE VEHICLE       {c |}          {res}290           397
+BULK TRASH                               {c |}          {res}746           471
+{txt}CONSTRUCTION AND MAINTENANCE OF STORAGE  {c |}          {res}520           265
+{txt}EXTERIOR SANITARY MAINTENANCE - GENERAL  {c |}          {res}311           225
+{txt}FAILED TO ABATE UNSAFE STRUCTURE NOTICE  {c |}          {res}330           419
+{txt}FAILED TO ABATE VIOLATION NOTICE AND ORD {c |}          {res}591           546
+{txt}FAILURE TO FILE A COMPLETED ANNUAL REGIS {c |}          {res}817           876
+{txt}FAILURE TO FILE ANNUAL VACANT BUILDING R {c |}          {res}342           389
+{txt}HIGH GRASS AND WEEDS                     {c |}        {res}1,951         1,477
+{txt}TRASH ACCUMULATION                       {c |}        {res}1,796         1,354
+{txt}UNREGISTERED OR INOPERABLE VEHICLE       {c |}          {res}344           399
 {txt}{hline 41}{c BT}{hline 27}
 Count by hearing status and quint_black common citation types for 2018
 
@@ -830,12 +968,12 @@ Count by hearing status and quint_black common citation types for 2018
                   {c |}                Quintiles by Black Share of Residents                
     HearingStatus {c |} 1.7% to 29.8  31.2% to 63.  63.1% to 84.  84.9% to 93.  93.8% to 96.
 {hline 18}{c +}{hline 69}
-  Default, Abated {c |}           {res}98           111            78           112           238
- {txt}Default, No Show {c |}           {res}67            73            65           126           180
-        {txt}Dismissed {c |}           {res}50            57            48            80           162
-           {txt}Guilty {c |}            {res}2             1             4             4            10
-   {txt}Guilty Reduced {c |}          {res}254           394           341           548         1,017
-{txt}Hearing Scheduled {c |}           {res}50            45            86            57           108
+  Default, Abated {c |}           {res}98           121            94           126           239
+ {txt}Default, No Show {c |}           {res}68            86            86           168           182
+        {txt}Dismissed {c |}           {res}50            63            62            94           162
+           {txt}Guilty {c |}            {res}2             1             5             4            10
+   {txt}Guilty Reduced {c |}          {res}255           423           440           643         1,023
+{txt}Hearing Scheduled {c |}           {res}50            50            94            69           108
 {txt}{hline 18}{c BT}{hline 69}
 Sum of fines by hearing status and quint_black common citation types for 2018
 
@@ -843,12 +981,12 @@ Sum of fines by hearing status and quint_black common citation types for 2018
                   {c |}                Quintiles by Black Share of Residents                
     HearingStatus {c |} 1.7% to 29.8  31.2% to 63.  63.1% to 84.  84.9% to 93.  93.8% to 96.
 {hline 18}{c +}{hline 69}
-  Default, Abated {c |}       {res}15,250        21,950        11,450        15,550        94,150
- {txt}Default, No Show {c |}       {res}10,550        15,800         9,950        30,350        60,400
-        {txt}Dismissed {c |}        {res}8,300        11,650         7,550        21,150        75,050
-           {txt}Guilty {c |}          {res}300           900         2,100         1,100         3,850
-   {txt}Guilty Reduced {c |}       {res}70,950        84,750        80,700       152,550       397,000
-{txt}Hearing Scheduled {c |}        {res}9,600        12,900         9,500        11,800        36,050
+  Default, Abated {c |}       {res}15,250        23,550        14,400        16,800        94,650
+ {txt}Default, No Show {c |}       {res}10,600        17,350        14,650        37,050        60,500
+        {txt}Dismissed {c |}        {res}8,300        11,950        11,450        22,700        75,050
+           {txt}Guilty {c |}          {res}300           900         2,150         1,100         3,850
+   {txt}Guilty Reduced {c |}       {res}71,050        94,550       103,550       172,950       397,600
+{txt}Hearing Scheduled {c |}        {res}9,600        13,200        10,700        14,250        36,050
 {txt}{hline 18}{c BT}{hline 69}
 Mean of fines by hearing status and quint_black common citation types for 2018
 
@@ -856,24 +994,37 @@ Mean of fines by hearing status and quint_black common citation types for 2018
                   {c |}                Quintiles by Black Share of Residents                
     HearingStatus {c |} 1.7% to 29.8  31.2% to 63.  63.1% to 84.  84.9% to 93.  93.8% to 96.
 {hline 18}{c +}{hline 69}
-  Default, Abated {c |}         {res}1.22          1.17          1.31          1.25          1.13
- {txt}Default, No Show {c |}         {res}0.19          0.19          0.33          0.23          0.32
-        {txt}Dismissed {c |}         {res}1.05          1.05          1.07          1.06          1.08
+  Default, Abated {c |}         {res}1.22          1.19          1.28          1.22          1.14
+ {txt}Default, No Show {c |}         {res}0.19          0.16          0.27          0.20          0.33
+        {txt}Dismissed {c |}         {res}1.05          1.05          1.09          1.05          1.08
            {txt}Guilty {c |}         {res}0.00          0.02          0.00          0.00          0.61
-   {txt}Guilty Reduced {c |}         {res}0.86          0.90          0.94          0.88          0.85
-{txt}Hearing Scheduled {c |}         {res}0.11          0.06          0.10          0.21          0.35
+   {txt}Guilty Reduced {c |}         {res}0.86          0.90          0.91          0.88          0.86
+{txt}Hearing Scheduled {c |}         {res}0.11          0.08          0.11          0.20          0.35
 {txt}{hline 18}{c BT}{hline 69}
+Share of citations with hearings by quint_black
+
+  Quintiles by {c |}
+Black Share of {c |}
+     Residents {c |}      Freq.     Percent        Cum.
+{hline 15}{c +}{hline 35}
+ 1.7% to 29.8% {c |}{res}        523       10.73       10.73
+{txt}31.2% to 63.1% {c |}{res}        744       15.26       25.98
+{txt}63.1% to 84.6% {c |}{res}        781       16.02       42.00
+{txt}84.9% to 93.5% {c |}{res}      1,104       22.64       64.64
+{txt}93.8% to 96.6% {c |}{res}      1,724       35.36      100.00
+{txt}{hline 15}{c +}{hline 35}
+         Total {c |}{res}      4,876      100.00
 Collection Share by lien presence
 
-{hline 15}{c TT}{hline 27}
+{txt}{hline 15}{c TT}{hline 27}
 Quintiles by   {c |}
 Black Share of {c |}          LienCode         
 Residents      {c |}            L             N
 {hline 15}{c +}{hline 27}
  1.7% to 29.8% {c |}         {res}0.11          0.10
-{txt}31.2% to 63.1% {c |}         {res}0.16          0.15
-{txt}63.1% to 84.6% {c |}         {res}0.13          0.14
-{txt}84.9% to 93.5% {c |}         {res}0.14          0.12
+{txt}31.2% to 63.1% {c |}         {res}0.15          0.15
+{txt}63.1% to 84.6% {c |}         {res}0.14          0.13
+{txt}84.9% to 93.5% {c |}         {res}0.14          0.11
 {txt}93.8% to 96.6% {c |}         {res}0.14          0.31
 {txt}{hline 15}{c BT}{hline 27}
 Count of citations and sum/mean fine amount for 2018
@@ -885,10 +1036,10 @@ of        {c |}
 female_he {c |}
 ad_16     {c |} N(citatio~d)  sum(fine_~t)  mean(fine~t)
 {hline 10}{c +}{hline 41}
-        1 {c |}        {res}4,320       502,300           116
+        1 {c |}        {res}4,363       506,650           116
         {txt}2 {c |}        {res}5,667       669,250           118
-        {txt}3 {c |}        {res}4,728       576,050           122
-        {txt}4 {c |}        {res}8,549     1,878,900           220
+        {txt}3 {c |}        {res}5,618       683,650           122
+        {txt}4 {c |}       {res}11,030     2,175,300           197
         {txt}5 {c |}        {res}7,458     1,126,550           151
 {txt}{hline 10}{c BT}{hline 41}
 Count of citations and sum/mean voided amount for 2018
@@ -902,8 +1053,8 @@ ad_16     {c |} N(citatio~d)  sum(total~t)  mean(tota~t)
 {hline 10}{c +}{hline 41}
         1 {c |}          {res}146        32,186           220
         {txt}2 {c |}          {res}158        36,880           233
-        {txt}3 {c |}           {res}96        26,270           274
-        {txt}4 {c |}          {res}205        94,895           463
+        {txt}3 {c |}          {res}118        31,520           267
+        {txt}4 {c |}          {res}253       107,000           423
         {txt}5 {c |}          {res}153        55,475           363
 {txt}{hline 10}{c BT}{hline 41}
 Count of citations and sum/mean abated amount for 2018
@@ -915,10 +1066,10 @@ of        {c |}
 female_he {c |}
 ad_16     {c |} N(citatio~d)  sum(total~t)  mean(tota~t)
 {hline 10}{c +}{hline 41}
-        1 {c |}          {res}551       110,755           201
+        1 {c |}          {res}553       110,805           200
         {txt}2 {c |}          {res}700       130,880           187
-        {txt}3 {c |}          {res}525       119,784           228
-        {txt}4 {c |}        {res}1,630       603,733           370
+        {txt}3 {c |}          {res}613       138,669           226
+        {txt}4 {c |}        {res}1,933       659,708           341
         {txt}5 {c |}        {res}1,057       265,875           252
 {txt}{hline 10}{c BT}{hline 41}
 Count common citation types for 2018
@@ -927,15 +1078,16 @@ Count common citation types for 2018
                                          {c |}      5 quantiles of female_head_16      
                              Description {c |}            1             2             3
 {hline 41}{c +}{hline 41}
-BULK TRASH                               {c |}          {res}371           640           500
-{txt}CONSTRUCTION AND MAINTENANCE OF STORAGE  {c |}          {res}144           312           233
-{txt}EXTERIOR SANITARY MAINTENANCE - GENERAL  {c |}           {res}46           311           160
-{txt}FAILED TO ABATE UNSAFE STRUCTURE NOTICE  {c |}           {res}93           152           186
-{txt}FAILED TO ABATE VIOLATION NOTICE AND ORD {c |}          {res}254           330           271
-{txt}FAILURE TO FILE A COMPLETED ANNUAL REGIS {c |}          {res}501           370           319
-{txt}HIGH GRASS AND WEEDS                     {c |}          {res}882         1,292         1,182
-{txt}TRASH ACCUMULATION                       {c |}          {res}765         1,024           863
-{txt}UNREGISTERED OR INOPERABLE VEHICLE       {c |}           {res}91           363           309
+BULK TRASH                               {c |}          {res}371           640           614
+{txt}CONSTRUCTION AND MAINTENANCE OF STORAGE  {c |}          {res}144           312           274
+{txt}EXTERIOR SANITARY MAINTENANCE - GENERAL  {c |}           {res}49           311           217
+{txt}FAILED TO ABATE UNSAFE STRUCTURE NOTICE  {c |}           {res}94           152           231
+{txt}FAILED TO ABATE VIOLATION NOTICE AND ORD {c |}          {res}256           330           300
+{txt}FAILURE TO FILE A COMPLETED ANNUAL REGIS {c |}          {res}505           370           371
+{txt}FAILURE TO FILE ANNUAL VACANT BUILDING R {c |}           {res}44            63           100
+{txt}HIGH GRASS AND WEEDS                     {c |}          {res}899         1,292         1,384
+{txt}TRASH ACCUMULATION                       {c |}          {res}772         1,024         1,001
+{txt}UNREGISTERED OR INOPERABLE VEHICLE       {c |}           {res}93           363           400
 {txt}{hline 41}{c BT}{hline 41}
 
 {hline 41}{c TT}{hline 27}
@@ -943,15 +1095,16 @@ BULK TRASH                               {c |}          {res}371           640  
                                          {c |}       female_head_16      
                              Description {c |}            4             5
 {hline 41}{c +}{hline 27}
-BULK TRASH                               {c |}          {res}432           526
-{txt}CONSTRUCTION AND MAINTENANCE OF STORAGE  {c |}          {res}279           361
-{txt}EXTERIOR SANITARY MAINTENANCE - GENERAL  {c |}          {res}302           262
-{txt}FAILED TO ABATE UNSAFE STRUCTURE NOTICE  {c |}          {res}279           315
-{txt}FAILED TO ABATE VIOLATION NOTICE AND ORD {c |}          {res}524           536
-{txt}FAILURE TO FILE A COMPLETED ANNUAL REGIS {c |}          {res}867           827
-{txt}HIGH GRASS AND WEEDS                     {c |}        {res}1,275         1,501
-{txt}TRASH ACCUMULATION                       {c |}        {res}1,144         1,512
-{txt}UNREGISTERED OR INOPERABLE VEHICLE       {c |}          {res}269           257
+BULK TRASH                               {c |}          {res}760           526
+{txt}CONSTRUCTION AND MAINTENANCE OF STORAGE  {c |}          {res}483           361
+{txt}EXTERIOR SANITARY MAINTENANCE - GENERAL  {c |}          {res}377           262
+{txt}FAILED TO ABATE UNSAFE STRUCTURE NOTICE  {c |}          {res}356           315
+{txt}FAILED TO ABATE VIOLATION NOTICE AND ORD {c |}          {res}635           536
+{txt}FAILURE TO FILE A COMPLETED ANNUAL REGIS {c |}        {res}1,046           827
+{txt}FAILURE TO FILE ANNUAL VACANT BUILDING R {c |}          {res}460           378
+{txt}HIGH GRASS AND WEEDS                     {c |}        {res}1,848         1,501
+{txt}TRASH ACCUMULATION                       {c |}        {res}1,625         1,512
+{txt}UNREGISTERED OR INOPERABLE VEHICLE       {c |}          {res}359           257
 {txt}{hline 41}{c BT}{hline 27}
 Count by hearing status and quint_female_head common citation types for 2018
 
@@ -959,12 +1112,12 @@ Count by hearing status and quint_female_head common citation types for 2018
                   {c |}                    5 quantiles of female_head_16                    
     HearingStatus {c |}            1             2             3             4             5
 {hline 18}{c +}{hline 69}
-  Default, Abated {c |}          {res}101            91            78           243           124
- {txt}Default, No Show {c |}           {res}65            79            55           166           146
-        {txt}Dismissed {c |}           {res}46            59            44           154            94
-           {txt}Guilty {c |}            {res}3                                        14             4
-   {txt}Guilty Reduced {c |}          {res}278           417           287           988           584
-{txt}Hearing Scheduled {c |}           {res}34            49            57           101           105
+  Default, Abated {c |}          {res}101            91            91           271           124
+ {txt}Default, No Show {c |}           {res}66            79            71           228           146
+        {txt}Dismissed {c |}           {res}46            59            52           180            94
+           {txt}Guilty {c |}            {res}3                                        15             4
+   {txt}Guilty Reduced {c |}          {res}278           417           333         1,172           584
+{txt}Hearing Scheduled {c |}           {res}34            49            63           120           105
 {txt}{hline 18}{c BT}{hline 69}
 Sum of fines by hearing status and quint_female_head common citation types for 2018
 
@@ -972,12 +1125,12 @@ Sum of fines by hearing status and quint_female_head common citation types for 2
                   {c |}                    5 quantiles of female_head_16                    
     HearingStatus {c |}            1             2             3             4             5
 {hline 18}{c +}{hline 69}
-  Default, Abated {c |}       {res}17,650        15,900        14,400        86,200        24,200
- {txt}Default, No Show {c |}       {res}13,900        14,500         9,300        56,900        32,450
-        {txt}Dismissed {c |}        {res}7,350        10,900         9,200        69,150        27,100
-           {txt}Guilty {c |}        {res}1,200                                     5,950         1,100
-   {txt}Guilty Reduced {c |}       {res}72,150        92,300        75,600       375,900       170,000
-{txt}Hearing Scheduled {c |}        {res}7,600         8,900        10,700        35,150        17,500
+  Default, Abated {c |}       {res}17,650        15,900        16,600        90,300        24,200
+ {txt}Default, No Show {c |}       {res}13,950        14,500        11,000        68,250        32,450
+        {txt}Dismissed {c |}        {res}7,350        10,900         9,600        74,500        27,100
+           {txt}Guilty {c |}        {res}1,200                                     6,000         1,100
+   {txt}Guilty Reduced {c |}       {res}72,150        92,300        89,400       415,850       170,000
+{txt}Hearing Scheduled {c |}        {res}7,600         8,900        11,050        38,750        17,500
 {txt}{hline 18}{c BT}{hline 69}
 Mean of fines by hearing status and quint_female_head common citation types for 2018
 
@@ -985,16 +1138,30 @@ Mean of fines by hearing status and quint_female_head common citation types for 
                   {c |}                    5 quantiles of female_head_16                    
     HearingStatus {c |}            1             2             3             4             5
 {hline 18}{c +}{hline 69}
-  Default, Abated {c |}         {res}1.24          1.11          1.43          1.15          1.16
- {txt}Default, No Show {c |}         {res}0.24          0.18          0.25          0.34          0.24
-        {txt}Dismissed {c |}         {res}1.05          1.04          1.13          1.06          1.06
-           {txt}Guilty {c |}         {res}0.01                                      0.44          0.00
-   {txt}Guilty Reduced {c |}         {res}0.93          0.85          0.86          0.89          0.86
-{txt}Hearing Scheduled {c |}         {res}0.14          0.04          0.25          0.33          0.12
+  Default, Abated {c |}         {res}1.24          1.11          1.41          1.15          1.16
+ {txt}Default, No Show {c |}         {res}0.23          0.18          0.20          0.28          0.24
+        {txt}Dismissed {c |}         {res}1.05          1.04          1.15          1.06          1.06
+           {txt}Guilty {c |}         {res}0.01                                      0.41          0.00
+   {txt}Guilty Reduced {c |}         {res}0.93          0.85          0.85          0.89          0.86
+{txt}Hearing Scheduled {c |}         {res}0.14          0.04          0.25          0.31          0.12
 {txt}{hline 18}{c BT}{hline 69}
+Share of citations with hearings by quint_female_head
+
+5 quantiles {c |}
+         of {c |}
+female_head {c |}
+       _16  {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          1 {c |}{res}        528       10.83       10.83
+{txt}          2 {c |}{res}        695       14.25       25.08
+{txt}          3 {c |}{res}        610       12.51       37.59
+{txt}          4 {c |}{res}      1,986       40.73       78.32
+{txt}          5 {c |}{res}      1,057       21.68      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}      4,876      100.00
 Collection Share by lien presence
 
-{hline 10}{c TT}{hline 27}
+{txt}{hline 10}{c TT}{hline 27}
 5         {c |}
 quantiles {c |}
 of        {c |}
@@ -1003,8 +1170,8 @@ ad_16     {c |}            L             N
 {hline 10}{c +}{hline 27}
         1 {c |}         {res}0.13          0.16
         {txt}2 {c |}         {res}0.13          0.09
-        {txt}3 {c |}         {res}0.12          0.10
-        {txt}4 {c |}         {res}0.14          0.32
+        {txt}3 {c |}         {res}0.12          0.09
+        {txt}4 {c |}         {res}0.14          0.30
         {txt}5 {c |}         {res}0.15          0.14
 {txt}{hline 10}{c BT}{hline 27}
 
@@ -1017,19 +1184,19 @@ ad_16     {c |}            L             N
 >         title("2018 ECB Citations by Share-Black Quintile") 
 {res}{txt}
 {com}. graph export "ecb_blackquint_count.pdf", replace
-{txt}(file /Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/ecb_blackquint_count.pdf written in PDF format)
+{txt}(file /Users/johniselin/finesandfees_baltimore/ecb_blackquint_count.pdf written in PDF format)
 
 {com}. 
 . * Figure showing 2018 ECB Citation total by Share-Black Quintile
 . graph hbar (sum) fine_amt (sum) total_paid_amt if year == 2018,                                                 ///
->         over(quint_black) blabel(bar, format(%12.0fc))                                                          ///
+>         over(quint_black)                                                       ///blabel(bar, format(%12.0fc))         
 >         ylabel(, format(%12.0fc))                                                                                                       ///
 >         ytitle(Sum)                                                                                                                             ///             
 >         legend(lab(1 "ECB Fine Amount") lab(2 "ECB Amount Paid"))                                                                                       ///                                                                                             
 >         title("2018 ECB Citations by Share-Black Quintile") 
 {res}{txt}
 {com}. graph export "ecb_blackquint_sum.pdf", replace
-{txt}(file /Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/ecb_blackquint_sum.pdf written in PDF format)
+{txt}(file /Users/johniselin/finesandfees_baltimore/ecb_blackquint_sum.pdf written in PDF format)
 
 {com}. 
 . * Figure showing 2018 ECB Citation mean by Share-Black Quintile
@@ -1041,7 +1208,7 @@ ad_16     {c |}            L             N
 >         title("2018 ECB Citations by Share-Black Quintile") 
 {res}{txt}
 {com}. graph export "ecb_blackquint_mean.pdf", replace
-{txt}(file /Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/ecb_blackquint_mean.pdf written in PDF format)
+{txt}(file /Users/johniselin/finesandfees_baltimore/ecb_blackquint_mean.pdf written in PDF format)
 
 {com}. 
 . clear
@@ -1049,9 +1216,9 @@ ad_16     {c |}            L             N
 {com}. 
 . log close
       {txt}name:  {res}<unnamed>
-       {txt}log:  {res}/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/logs/ecb_results_log.smcl
+       {txt}log:  {res}/Users/johniselin/finesandfees_baltimore/logs/ecb_results_log.smcl
   {txt}log type:  {res}smcl
- {txt}closed on:  {res} 2 May 2019, 16:44:20
+ {txt}closed on:  {res}15 May 2019, 13:19:59
 {txt}{.-}
 {smcl}
 {txt}{sf}{ul off}

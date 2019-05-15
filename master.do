@@ -27,7 +27,7 @@ capture log close
 clear matrix
 clear all
 set more off
-local directory "/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/"
+local directory "/Users/johniselin/finesandfees_baltimore/"
 
 cd "`directory'"
 log using "logs/open_data_creation_log", replace 
@@ -58,8 +58,6 @@ do "do_files/do_file_propertytaxes.do"
 do "do_files/do_file_address_merge.do"
  
 log close 
- 
- local directory "/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/"
 
 cd "`directory'" 
 ** Data analysis - ECB
@@ -97,6 +95,9 @@ format(%12.2fc)
 table description if year == 2018, c(sum fine_amt sum total_paid_amt 			///
 	max total_paid_share) format(%12.2fc)
 
+table description if year == 2018, c(sum fine_amt sum total_voided_amt 			///
+	sum total_abated_amt) format(%12.2fc)
+	
 tab neighborhoods_csa if year == 2018, sort plot
 tab neighborhoods_csa if year == 2018, summarize(fine_amt)   
 
@@ -142,6 +143,10 @@ di "Mean of fines by hearing status and `quint' common citation types for 2018"
 
 table hearing_status `quint'  if year == 2018 & hearing_status != "NA"		///
 	, c(mean fine_abated_share ) format(%12.2fc)	
+	
+di "Share of citations with hearings by `quint'"
+
+tab  `quint' if hearing_status != "NA" & year == 2018
 
 di "Collection Share by lien presence"
 
@@ -159,7 +164,7 @@ graph export "ecb_blackquint_count.pdf", replace
 
 * Figure showing 2018 ECB Citation total by Share-Black Quintile
 graph hbar (sum) fine_amt (sum) total_paid_amt if year == 2018, 						///
-	over(quint_black) blabel(bar, format(%12.0fc)) 								///
+	over(quint_black) 							///blabel(bar, format(%12.0fc)) 	
 	ylabel(, format(%12.0fc)) 													///
 	ytitle(Sum)  																///		
 	legend(lab(1 "ECB Fine Amount") lab(2 "ECB Amount Paid")) 											///												
@@ -247,13 +252,12 @@ log close
 ** Data analysis - BPD
 log using "logs/bpd_results_log", replace 
 
-use "data_cleaned/bpd_arrests_merge.dta", clear
+use "data_cleaned/bpd_arrests.dta", clear
 
 sort charge_desc
 
 gen year = year(arrest_date)
 tab year race
-
 
 gen ff_from_chargedesc=0
 replace ff_from_chargedesc=1 if charge_desc=="DRI ON SUSP LIC"
@@ -352,9 +356,6 @@ replace charge_desc="Driving Suspended License" if charge_desc=="DRIVINGONSUSPEN
 replace charge_desc="Driving Suspended License" if charge_desc=="SUSPENDED LICENCE"
 replace charge_desc="Driving Suspended License" if charge_desc=="SUSPENDEDLIC"
 
-tab year quint_black 
-tab year quint_poverty 
-
 tab ff_from_chargedesc year
 tab crim_homeless year
 
@@ -369,20 +370,21 @@ table charge_desc race sex if crim_homeless==1
 tab incident_offense race
 *I think that the charge descriptions are more valuable but we can dive 
 *deeper into this if helpful
-
+/*
 tab race quint_poverty
 * because only 81,891 of the 138,000 values had geolocated data, the quantiles
 * are only reflective of the data able to be matched to neighborhoods
 
-tab year quint_black if ff_from_chargedesc == 1
-tab year quint_poverty if ff_from_chargedesc == 1
-
+tab ff_from_chargedesc quint_black
+tab crim_homeless quint_black
+table charge_desc quint_black if ff_from_chargedesc==1
+table charge_desc quint_black if crim_homeless==1
 
 tab ff_from_chargedesc quint_poverty
 tab crim_homeless quint_poverty
 table charge_desc quint_poverty if ff_from_chargedesc==1
 table charge_desc quint_poverty if crim_homeless==1
-
+*/
 *Question: MOTOR VEH/UNLAWFUL TAKING?
 clear
 log close

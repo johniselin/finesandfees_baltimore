@@ -35,6 +35,7 @@ replace address = regexr(address, "place", "pl")
 replace address = regexr(address, "avenue", "ave")
 replace address = regexr(address, "rd", "road")
 
+drop if address == ""
 drop lotsize lot block statetax
 
 rename citytax city_tax_amt

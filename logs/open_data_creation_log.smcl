@@ -1,9 +1,9 @@
 {smcl}
 {com}{sf}{ul off}{txt}{.-}
       name:  {res}<unnamed>
-       {txt}log:  {res}/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/logs/open_data_creation_log.smcl
+       {txt}log:  {res}/Users/johniselin/finesandfees_baltimore/logs/open_data_creation_log.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res} 2 May 2019, 16:41:12
+ {txt}opened on:  {res}15 May 2019, 13:17:00
 {txt}
 {com}. 
 . 
@@ -1326,7 +1326,10 @@ Sorted by:
 {txt}(10,579 real changes made)
 
 {com}. 
-. drop lotsize lot block statetax
+. drop if address == ""
+{txt}(5 observations deleted)
+
+{com}. drop lotsize lot block statetax
 {txt}
 {com}. 
 . rename citytax city_tax_amt
@@ -1401,7 +1404,9 @@ Sorted by:
 {txt}
 {com}. rename neighborhood neighborhoods_nsa
 {res}{txt}
-{com}. save "data_cleaned/ecb_citations_cleaned_merge.dta", replace
+{com}.  
+. 
+. save "data_cleaned/ecb_citations_cleaned_merge.dta", replace
 {txt}file data_cleaned/ecb_citations_cleaned_merge.dta saved
 
 {com}. 
@@ -1413,15 +1418,15 @@ Sorted by:
 . 
 . foreach dataset in vacant_lots_cleaned bpd_arrests {c -(}
 {txt}  2{com}.         use "data_cleaned/`dataset'.dta", clear
-{txt}  3{com}.         
+{txt}  3{com}. 
 .         merge m:m address using "data_cleaned/address_file.dta"
-{txt}  4{com}. 
+{txt}  4{com}.         
 .         tab _merge
 {txt}  5{com}.         drop if _merge == 2
 {txt}  6{com}.         tab _merge
 {txt}  7{com}.         rename _merge address_match
-{txt}  8{com}.         replace address_match = 1 if address_match == 3
-{txt}  9{com}.         replace address_match = 0 if address_match == 1
+{txt}  8{com}.         replace address_match = 0 if address_match == 1
+{txt}  9{com}.         replace address_match = 1 if address_match == 3
 {txt} 10{com}.         
 .         rename neighborhoods_city neighborhoods_nsa
 {txt} 11{com}. 
@@ -1438,30 +1443,30 @@ str28, now str35 to accommodate using data's values)
 
 {col 5}Result{col 38}# of obs.
 {col 5}{hline 41}
-{col 5}not matched{col 30}{res}         222,293
-{txt}{col 9}from master{col 30}{res}             224{txt}  (_merge==1)
+{col 5}not matched{col 30}{res}         222,294
+{txt}{col 9}from master{col 30}{res}             225{txt}  (_merge==1)
 {col 9}from using{col 30}{res}         222,069{txt}  (_merge==2)
 
-{col 5}matched{col 30}{res}          16,543{txt}  (_merge==3)
+{col 5}matched{col 30}{res}          16,538{txt}  (_merge==3)
 {col 5}{hline 41}
 
                  _merge {c |}      Freq.     Percent        Cum.
 {hline 24}{c +}{hline 35}
-        master only (1) {c |}{res}        224        0.09        0.09
-{txt}         using only (2) {c |}{res}    222,069       92.98       93.07
-{txt}            matched (3) {c |}{res}     16,543        6.93      100.00
+        master only (1) {c |}{res}        225        0.09        0.09
+{txt}         using only (2) {c |}{res}    222,069       92.98       93.08
+{txt}            matched (3) {c |}{res}     16,538        6.92      100.00
 {txt}{hline 24}{c +}{hline 35}
-                  Total {c |}{res}    238,836      100.00
+                  Total {c |}{res}    238,832      100.00
 {txt}(222,069 observations deleted)
 
                  _merge {c |}      Freq.     Percent        Cum.
 {hline 24}{c +}{hline 35}
-        master only (1) {c |}{res}        224        1.34        1.34
-{txt}            matched (3) {c |}{res}     16,543       98.66      100.00
+        master only (1) {c |}{res}        225        1.34        1.34
+{txt}            matched (3) {c |}{res}     16,538       98.66      100.00
 {txt}{hline 24}{c +}{hline 35}
-                  Total {c |}{res}     16,767      100.00
-{txt}(16,543 real changes made)
-(16,767 real changes made)
+                  Total {c |}{res}     16,763      100.00
+{txt}(225 real changes made)
+(16,538 real changes made)
 {res}{txt}file data_cleaned/vacant_lots_cleaned_merge.dta saved
 {res}{txt}{p 0 7 2}
 (note: variable
@@ -1471,30 +1476,30 @@ str30, now str35 to accommodate using data's values)
 
 {col 5}Result{col 38}# of obs.
 {col 5}{hline 41}
-{col 5}not matched{col 30}{res}         291,267
-{txt}{col 9}from master{col 30}{res}          55,861{txt}  (_merge==1)
+{col 5}not matched{col 30}{res}         354,266
+{txt}{col 9}from master{col 30}{res}         118,860{txt}  (_merge==1)
 {col 9}from using{col 30}{res}         235,406{txt}  (_merge==2)
 
-{col 5}matched{col 30}{res}          82,158{txt}  (_merge==3)
+{col 5}matched{col 30}{res}          19,159{txt}  (_merge==3)
 {col 5}{hline 41}
 
                  _merge {c |}      Freq.     Percent        Cum.
 {hline 24}{c +}{hline 35}
-        master only (1) {c |}{res}     55,861       14.96       14.96
-{txt}         using only (2) {c |}{res}    235,406       63.04       78.00
-{txt}            matched (3) {c |}{res}     82,158       22.00      100.00
+        master only (1) {c |}{res}    118,860       31.83       31.83
+{txt}         using only (2) {c |}{res}    235,406       63.04       94.87
+{txt}            matched (3) {c |}{res}     19,159        5.13      100.00
 {txt}{hline 24}{c +}{hline 35}
                   Total {c |}{res}    373,425      100.00
 {txt}(235,406 observations deleted)
 
                  _merge {c |}      Freq.     Percent        Cum.
 {hline 24}{c +}{hline 35}
-        master only (1) {c |}{res}     55,861       40.47       40.47
-{txt}            matched (3) {c |}{res}     82,158       59.53      100.00
+        master only (1) {c |}{res}    118,860       86.12       86.12
+{txt}            matched (3) {c |}{res}     19,159       13.88      100.00
 {txt}{hline 24}{c +}{hline 35}
                   Total {c |}{res}    138,019      100.00
-{txt}(82,158 real changes made)
-(138,019 real changes made)
+{txt}(118,860 real changes made)
+(19,159 real changes made)
 {res}{txt}file data_cleaned/bpd_arrests_merge.dta saved
 
 {com}. 
@@ -1508,104 +1513,169 @@ str30, now str35 to accommodate using data's values)
 {txt}  2{com}.         use "data_cleaned/`dataset'.dta", clear
 {txt}  3{com}.         drop if neighborhoods_nsa == ""
 {txt}  4{com}.         
-.         merge m:1 neighborhoods_nsa using "data_cleaned/neighborhood_crosswalk.dta"
-{txt}  5{com}.         tab _merge
-{txt}  6{com}.         keep if _merge == 3
-{txt}  7{com}.         drop _merge
-{txt}  8{com}.         
-.         merge m:1 neighborhoods_csa using "data_cleaned/census_data_cleaned.dta"
-{txt}  9{com}.         drop _merge
-{txt} 10{com}. 
-.         save "data_cleaned/`dataset'.dta", replace
-{txt} 11{com}.         clear
+.         replace neighborhoods_nsa = "Booth-Boyd" if                                                             ///
+>                         neighborhoods_nsa =="Boyd-Booth"
+{txt}  5{com}.                         
+.         replace neighborhoods_nsa = "Caroll-Camden Industrial Area" if                          ///
+>                         neighborhoods_nsa =="Carroll - Camden Industrial Area"
+{txt}  6{com}.                         
+.         replace neighborhoods_nsa = "Glenham-Belford" if                                                        ///
+>                         neighborhoods_nsa =="Glenham-Belhar"            
+{txt}  7{com}.                         
+.         replace neighborhoods_nsa = "Mt. Washington" if                                                         ///
+>                         neighborhoods_nsa =="Mount Washington"  
+{txt}  8{com}.                         
+.         replace neighborhoods_nsa = "Mt. Winans" if                                                             ///
+>                         neighborhoods_nsa =="Mount Winans"      
+{txt}  9{com}.                         
+.         replace neighborhoods_nsa = "New Southwest/Mt. Clare" if                                        ///
+>                         neighborhoods_nsa =="New Southwest/Mount Clare" 
+{txt} 10{com}.                         
+.         replace neighborhoods_nsa = "Rosemont Homewoners/Tenants" if                            ///
+>                         neighborhoods_nsa =="Rosemont Homeowners/Tenants"       
+{txt} 11{com}.                         
+.         replace neighborhoods_nsa = "University of Maryland" if                                         ///
+>                         neighborhoods_nsa =="University Of Maryland"    
 {txt} 12{com}.         
+.         
+.         merge m:1 neighborhoods_nsa using "data_cleaned/neighborhood_crosswalk.dta"
+{txt} 13{com}.         tab _merge
+{txt} 14{com}.         keep if _merge == 3
+{txt} 15{com}.         drop _merge
+{txt} 16{com}.         
+.         replace neighborhoods_csa = "Allendale/Irvington/S. Hilton" if                          ///
+>                 neighborhoods_csa == "Allendale/Irvington/South Hilton"
+{txt} 17{com}.         replace neighborhoods_csa = "Westport/Mount Winans/Lakeland" if                         ///
+>                 neighborhoods_csa == "Westport/Mt. Winans/Lakeland"
+{txt} 18{com}.         replace neighborhoods_csa = "Glen-Fallstaff" if                                                         ///
+>                 neighborhoods_csa == "Glen-Falstaff"
+{txt} 19{com}.         replace neighborhoods_csa = "Mount Washington/Coldspring" if                                                    ///
+>                 neighborhoods_csa == "Mt. Washington/Coldspring"
+{txt} 20{com}. 
+.         
+.         merge m:1 neighborhoods_csa using "data_cleaned/census_data_cleaned.dta"
+{txt} 21{com}.         drop _merge
+{txt} 22{com}. 
+.         save "data_cleaned/`dataset'.dta", replace
+{txt} 23{com}.         clear
+{txt} 24{com}.         
 . 
 . {c )-}
 {txt}(229 observations deleted)
+(182 real changes made)
+(0 real changes made)
+(25 real changes made)
+(4 real changes made)
+(14 real changes made)
+(301 real changes made)
+(98 real changes made)
+(3 real changes made)
 {res}
 {txt}{col 5}Result{col 38}# of obs.
 {col 5}{hline 41}
-{col 5}not matched{col 30}{res}             719
-{txt}{col 9}from master{col 30}{res}             654{txt}  (_merge==1)
-{col 9}from using{col 30}{res}              65{txt}  (_merge==2)
+{col 5}not matched{col 30}{res}              83
+{txt}{col 9}from master{col 30}{res}              25{txt}  (_merge==1)
+{col 9}from using{col 30}{res}              58{txt}  (_merge==2)
 
-{col 5}matched{col 30}{res}          15,884{txt}  (_merge==3)
+{col 5}matched{col 30}{res}          16,509{txt}  (_merge==3)
 {col 5}{hline 41}
 
                  _merge {c |}      Freq.     Percent        Cum.
 {hline 24}{c +}{hline 35}
-        master only (1) {c |}{res}        654        3.94        3.94
-{txt}         using only (2) {c |}{res}         65        0.39        4.33
-{txt}            matched (3) {c |}{res}     15,884       95.67      100.00
+        master only (1) {c |}{res}         25        0.15        0.15
+{txt}         using only (2) {c |}{res}         58        0.35        0.50
+{txt}            matched (3) {c |}{res}     16,509       99.50      100.00
 {txt}{hline 24}{c +}{hline 35}
-                  Total {c |}{res}     16,603      100.00
-{txt}(719 observations deleted)
+                  Total {c |}{res}     16,592      100.00
+{txt}(83 observations deleted)
+(334 real changes made)
+(142 real changes made)
+(47 real changes made)
+(4 real changes made)
 {res}
 {txt}{col 5}Result{col 38}# of obs.
 {col 5}{hline 41}
-{col 5}not matched{col 30}{res}             514
-{txt}{col 9}from master{col 30}{res}             509{txt}  (_merge==1)
-{col 9}from using{col 30}{res}               5{txt}  (_merge==2)
+{col 5}not matched{col 30}{res}               1
+{txt}{col 9}from master{col 30}{res}               0{txt}  (_merge==1)
+{col 9}from using{col 30}{res}               1{txt}  (_merge==2)
 
-{col 5}matched{col 30}{res}          15,375{txt}  (_merge==3)
+{col 5}matched{col 30}{res}          16,509{txt}  (_merge==3)
 {col 5}{hline 41}
 file data_cleaned/vacant_lots_cleaned_merge.dta saved
 (881 observations deleted)
+(410 real changes made)
+(24 real changes made)
+(773 real changes made)
+(46 real changes made)
+(162 real changes made)
+(1,060 real changes made)
+(594 real changes made)
+(40 real changes made)
 {res}
 {txt}{col 5}Result{col 38}# of obs.
 {col 5}{hline 41}
-{col 5}not matched{col 30}{res}           4,334
-{txt}{col 9}from master{col 30}{res}           4,309{txt}  (_merge==1)
-{col 9}from using{col 30}{res}              25{txt}  (_merge==2)
+{col 5}not matched{col 30}{res}           1,217
+{txt}{col 9}from master{col 30}{res}           1,200{txt}  (_merge==1)
+{col 9}from using{col 30}{res}              17{txt}  (_merge==2)
 
-{col 5}matched{col 30}{res}         126,423{txt}  (_merge==3)
+{col 5}matched{col 30}{res}         129,532{txt}  (_merge==3)
 {col 5}{hline 41}
 
                  _merge {c |}      Freq.     Percent        Cum.
 {hline 24}{c +}{hline 35}
-        master only (1) {c |}{res}      4,309        3.30        3.30
-{txt}         using only (2) {c |}{res}         25        0.02        3.31
-{txt}            matched (3) {c |}{res}    126,423       96.69      100.00
+        master only (1) {c |}{res}      1,200        0.92        0.92
+{txt}         using only (2) {c |}{res}         17        0.01        0.93
+{txt}            matched (3) {c |}{res}    129,532       99.07      100.00
 {txt}{hline 24}{c +}{hline 35}
-                  Total {c |}{res}    130,757      100.00
-{txt}(4,334 observations deleted)
+                  Total {c |}{res}    130,749      100.00
+{txt}(1,217 observations deleted)
+(4,938 real changes made)
+(1,839 real changes made)
+(2,084 real changes made)
+(76 real changes made)
 {res}
 {txt}{col 5}Result{col 38}# of obs.
 {col 5}{hline 41}
-{col 5}not matched{col 30}{res}           8,733
-{txt}{col 9}from master{col 30}{res}           8,729{txt}  (_merge==1)
-{col 9}from using{col 30}{res}               4{txt}  (_merge==2)
-
-{col 5}matched{col 30}{res}         117,694{txt}  (_merge==3)
+{col 5}not matched{col 30}{res}               0
+{txt}{col 5}matched{col 30}{res}         129,532{txt}  (_merge==3)
 {col 5}{hline 41}
 file data_cleaned/ecb_citations_cleaned_merge.dta saved
-(55,901 observations deleted)
+(118,929 observations deleted)
+(273 real changes made)
+(445 real changes made)
+(143 real changes made)
+(4 real changes made)
+(22 real changes made)
+(174 real changes made)
+(53 real changes made)
+(4 real changes made)
 {res}
 {txt}{col 5}Result{col 38}# of obs.
 {col 5}{hline 41}
-{col 5}not matched{col 30}{res}           1,392
-{txt}{col 9}from master{col 30}{res}           1,355{txt}  (_merge==1)
-{col 9}from using{col 30}{res}              37{txt}  (_merge==2)
+{col 5}not matched{col 30}{res}             264
+{txt}{col 9}from master{col 30}{res}             235{txt}  (_merge==1)
+{col 9}from using{col 30}{res}              29{txt}  (_merge==2)
 
-{col 5}matched{col 30}{res}          80,763{txt}  (_merge==3)
+{col 5}matched{col 30}{res}          18,855{txt}  (_merge==3)
 {col 5}{hline 41}
 
                  _merge {c |}      Freq.     Percent        Cum.
 {hline 24}{c +}{hline 35}
-        master only (1) {c |}{res}      1,355        1.65        1.65
-{txt}         using only (2) {c |}{res}         37        0.05        1.69
-{txt}            matched (3) {c |}{res}     80,763       98.31      100.00
+        master only (1) {c |}{res}        235        1.23        1.23
+{txt}         using only (2) {c |}{res}         29        0.15        1.38
+{txt}            matched (3) {c |}{res}     18,855       98.62      100.00
 {txt}{hline 24}{c +}{hline 35}
-                  Total {c |}{res}     82,155      100.00
-{txt}(1,392 observations deleted)
+                  Total {c |}{res}     19,119      100.00
+{txt}(264 observations deleted)
+(319 real changes made)
+(256 real changes made)
+(209 real changes made)
+(7 real changes made)
 {res}
 {txt}{col 5}Result{col 38}# of obs.
 {col 5}{hline 41}
-{col 5}not matched{col 30}{res}             769
-{txt}{col 9}from master{col 30}{res}             765{txt}  (_merge==1)
-{col 9}from using{col 30}{res}               4{txt}  (_merge==2)
-
-{col 5}matched{col 30}{res}          79,998{txt}  (_merge==3)
+{col 5}not matched{col 30}{res}               0
+{txt}{col 5}matched{col 30}{res}          18,855{txt}  (_merge==3)
 {col 5}{hline 41}
 file data_cleaned/bpd_arrests_merge.dta saved
 
@@ -1617,9 +1687,9 @@ file data_cleaned/bpd_arrests_merge.dta saved
 {com}.  
 . log close 
       {txt}name:  {res}<unnamed>
-       {txt}log:  {res}/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/logs/open_data_creation_log.smcl
+       {txt}log:  {res}/Users/johniselin/finesandfees_baltimore/logs/open_data_creation_log.smcl
   {txt}log type:  {res}smcl
- {txt}closed on:  {res} 2 May 2019, 16:43:55
+ {txt}closed on:  {res}15 May 2019, 13:19:38
 {txt}{.-}
 {smcl}
 {txt}{sf}{ul off}

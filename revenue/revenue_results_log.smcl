@@ -1,0 +1,348 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/Revenue/revenue_results_log.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res} 5 May 2019, 16:04:19
+{txt}
+{com}.         
+. ** General Fund Summary Stats
+. 
+. table fiscal_year fund_number,                                          ///
+>         c(sum amount) format(%14.0fc) col row
+
+{txt}{hline 6}{c TT}{hline 95}
+fisca {c |}
+l_yea {c |}                                              Fund                                             
+r     {c |}           A001            B022            B024            B070            B071            B072
+{hline 6}{c +}{hline 95}
+ 2003 {c |}  {res}1,202,799,200       4,637,000       3,654,176     125,884,863      91,305,775               0
+ {txt}2004 {c |}  {res}1,252,693,556       4,546,874       1,817,276     133,642,807     100,408,354               0
+ {txt}2005 {c |}  {res}1,337,882,808       5,170,454       7,160,238     140,152,966     105,073,906               0
+ {txt}2006 {c |}  {res}1,477,054,160       3,626,087       8,065,258     142,836,698     107,989,518               0
+ {txt}2007 {c |}  {res}1,518,819,996       4,642,466       9,218,185     149,724,680     115,759,373               0
+ {txt}2008 {c |}  {res}1,553,702,326       4,516,290       8,064,571     158,958,939     123,585,444               0
+ {txt}2009 {c |}  {res}1,532,891,622       4,463,061       9,314,155     185,236,806     135,812,184               0
+ {txt}2010 {c |}  {res}1,515,924,238       4,344,317      10,304,760     170,205,005     130,615,295               0
+ {txt}2011 {c |}  {res}1,551,338,552       4,654,131      12,882,478     177,588,943     132,797,021               0
+ {txt}2012 {c |}  {res}1,592,013,569       4,654,771      11,893,091     173,810,305     140,930,307               0
+ {txt}2013 {c |}  {res}1,605,988,598       4,546,582      13,778,726     183,647,339     152,416,573               0
+ {txt}2014 {c |}  {res}1,677,165,438       4,559,888      15,040,105     206,206,859     165,543,489      23,434,071
+ {txt}2015 {c |}  {res}1,690,244,442       5,967,883      12,408,395     207,355,299     175,794,913      29,023,049
+ {txt}2016 {c |}  {res}1,863,975,671       4,517,359      37,972,092     244,685,868     195,162,117      28,101,591
+ {txt}2017 {c |}  {res}1,817,095,131       2,472,881      14,765,503     212,454,813     156,876,989      31,001,450
+ {txt}2018 {c |}  {res}1,886,703,657       4,580,088      28,551,174     265,575,375     201,851,872      30,227,615
+      {txt}{c |} 
+Total {c |} {res}25,076,292,964      71,900,132     204,890,183   2,877,967,565   2,231,923,131     141,787,776
+{txt}{hline 6}{c BT}{hline 95}
+
+{hline 6}{c TT}{hline 79}
+fisca {c |}
+l_yea {c |}                                      Fund                                     
+r     {c |}           B073            B075            B076            C001           Total
+{hline 6}{c +}{hline 79}
+ 2003 {c |}      {res}3,229,981      19,396,383       9,012,987     200,492,768   1,660,413,133
+ {txt}2004 {c |}      {res}3,508,126      24,200,000       9,534,364     191,316,593   1,721,667,950
+ {txt}2005 {c |}      {res}3,172,030      23,751,383      10,135,898     222,207,595   1,854,707,278
+ {txt}2006 {c |}      {res}2,084,561      27,271,958      11,352,115     241,551,307   2,021,831,662
+ {txt}2007 {c |}      {res}4,119,890      29,794,064      12,836,430     248,273,228   2,093,188,312
+ {txt}2008 {c |}      {res}5,886,760      42,493,025      14,205,820     245,826,734   2,157,239,909
+ {txt}2009 {c |}      {res}1,631,144      30,869,164      14,668,485     231,065,958   2,145,952,579
+ {txt}2010 {c |}      {res}3,721,256      28,394,362      15,757,843     210,549,786   2,089,816,862
+ {txt}2011 {c |}      {res}3,791,013      27,637,875      15,700,157     160,282,289   2,086,672,459
+ {txt}2012 {c |}      {res}1,286,846      34,374,705      17,721,319     163,509,328   2,140,194,241
+ {txt}2013 {c |}      {res}4,382,557      39,740,284      17,534,190         -25,701   2,022,009,148
+ {txt}2014 {c |}      {res}6,784,495      30,605,343      19,578,058               0   2,148,917,746
+ {txt}2015 {c |}      {res}3,490,202      31,269,939      24,266,776               0   2,179,820,898
+ {txt}2016 {c |}        {res}547,587      24,068,119      23,449,325               0   2,422,479,729
+ {txt}2017 {c |}        {res}558,617      34,616,956      22,872,972               0   2,292,715,313
+ {txt}2018 {c |}              {res}0      33,902,008      26,371,514               0   2,477,763,304
+      {txt}{c |} 
+Total {c |}     {res}48,195,065     482,385,568     264,998,253   2,115,049,885  33,515,390,522
+{txt}{hline 6}{c BT}{hline 79}
+
+{com}. 
+. * General fund revenue by year and fine / fee tag
+. table fiscal_year fine_fee_tag if fund_number == "A001",                                                ///
+>         c(sum amount) format(%14.0fc)
+
+{txt}{hline 10}{c TT}{hline 47}
+fiscal_ye {c |}                  fine_fee_tag                 
+ar        {c |}        Neither             Fee            Fine
+{hline 10}{c +}{hline 47}
+     2003 {c |}  {res}1,133,741,041      58,131,080      10,927,079
+     {txt}2004 {c |}  {res}1,172,308,251      64,905,513      15,479,792
+     {txt}2005 {c |}  {res}1,263,088,009      65,882,751       8,912,048
+     {txt}2006 {c |}  {res}1,395,569,269      72,078,074       9,406,817
+     {txt}2007 {c |}  {res}1,435,342,082      75,698,483       7,779,431
+     {txt}2008 {c |}  {res}1,464,162,169      76,147,937      13,392,220
+     {txt}2009 {c |}  {res}1,446,200,447      71,788,214      14,902,961
+     {txt}2010 {c |}  {res}1,426,768,124      69,961,632      19,194,482
+     {txt}2011 {c |}  {res}1,450,622,171      67,683,721      33,032,660
+     {txt}2012 {c |}  {res}1,483,938,671      70,539,323      37,535,575
+     {txt}2013 {c |}  {res}1,503,538,970      73,000,150      29,449,478
+     {txt}2014 {c |}  {res}1,583,720,123      78,769,097      14,676,218
+     {txt}2015 {c |}  {res}1,598,436,617      76,587,678      15,220,147
+     {txt}2016 {c |}  {res}1,776,300,492      79,289,736       8,385,443
+     {txt}2017 {c |}  {res}1,723,719,331      83,313,870      10,061,930
+     {txt}2018 {c |}  {res}1,781,321,635      80,823,996      24,558,027
+{txt}{hline 10}{c BT}{hline 47}
+
+{com}.         
+. * General fund revenue share by year and fine / fee tag
+. table fiscal_year fine_fee_tag if fund_number == "A001",                                                ///
+>         c(sum fund_share) format(%14.0fc)
+
+{txt}{hline 10}{c TT}{hline 47}
+fiscal_ye {c |}                  fine_fee_tag                 
+ar        {c |}        Neither             Fee            Fine
+{hline 10}{c +}{hline 47}
+     2003 {c |}             {res}94               5               1
+     {txt}2004 {c |}             {res}94               5               1
+     {txt}2005 {c |}             {res}94               5               1
+     {txt}2006 {c |}             {res}94               5               1
+     {txt}2007 {c |}             {res}95               5               1
+     {txt}2008 {c |}             {res}94               5               1
+     {txt}2009 {c |}             {res}94               5               1
+     {txt}2010 {c |}             {res}94               5               1
+     {txt}2011 {c |}             {res}94               4               2
+     {txt}2012 {c |}             {res}93               4               2
+     {txt}2013 {c |}             {res}94               5               2
+     {txt}2014 {c |}             {res}94               5               1
+     {txt}2015 {c |}             {res}95               5               1
+     {txt}2016 {c |}             {res}95               4               0
+     {txt}2017 {c |}             {res}95               5               1
+     {txt}2018 {c |}             {res}94               4               1
+{txt}{hline 10}{c BT}{hline 47}
+
+{com}. 
+. * General fund revenue type by fine / fee tag IF over 0.5% of gen fund revenue
+. table revenue_account_disc fine_fee_tag if fund_number == "A001" &                              ///
+>                                                                                   fund_share > 0.5 &                                    ///
+>                                                                                   fiscal_year == 2018,                                  ///
+>         c(sum fund_share) format(%14.2fc)
+
+{txt}{hline 41}{c TT}{hline 47}
+                                         {c |}                  fine_fee_tag                 
+                        Revenue Accounts {c |}        Neither             Fee            Fine
+{hline 41}{c +}{hline 47}
+       Charges for Central City Services {c |}               {res}            0.76                
+                       {txt}Convention Center {c |}           {res}0.53                                
+                             {txt}Electricity {c |}           {res}1.42                                
+            {txt}From Parking Management Fund {c |}           {res}1.78                                
+                                     {txt}Gas {c |}           {res}0.75                                
+    {txt}Hotel Tax (transferred from CC Fund) {c |}           {res}1.51                                
+            {txt}Income Tax - State Collected {c |}          {res}17.54                                
+                       {txt}Personal Property {c |}           {res}1.39                                
+{txt}Personal Property - Ordinary Business Co {c |}           {res}3.39                                
+    {txt}Personal Property - Public Utilities {c |}           {res}2.92                                
+                 {txt}Prior Year Fund Balance {c |}           {res}0.85                                
+                       {txt}Property Transfer {c |}           {res}2.49                                
+                           {txt}Real Property {c |}          {res}45.14                                
+                             {txt}Recordation {c |}           {res}2.24                                
+                           {txt}Speed Cameras {c |}               {res}                            0.51
+              {txt}State Highway User Revenue {c |}           {res}7.75                                
+     {txt}Targeted Aid (Income Tax Disparity) {c |}           {res}4.19                                
+       {txt}Tax Increment Financing Districts {c |}           {res}0.64                                
+  {txt}Teachers Retirement Supplemental Grant {c |}           {res}0.53                                
+                               {txt}Telephone {c |}           {res}1.74                                
+       {txt}Unallocated Withholding - Regular {c |}           {res}0.55                                
+                 {txt}Video Lottery Terminals {c |}           {res}0.60                                
+{txt}{hline 41}{c BT}{hline 47}
+
+{com}.         
+. * Non-general fund revenue type by fine / fee tag IF over 0.5% of fund revenue
+.         
+. table revenue_account_disc fine_fee_tag if fund_number != "A001" &                              ///
+>                                                                                   fund_share > 0.5 &                                    ///
+>                                                                                   fiscal_year == 2018,                                  ///
+>         c(sum amount) format(%14.2fc)
+
+{txt}{hline 40}{c TT}{hline 47}
+                                        {c |}                  fine_fee_tag                 
+                       Revenue Accounts {c |}        Neither             Fee            Fine
+{hline 40}{c +}{hline 47}
+                            Booting Fee {c |}               {res}      665,673.68                
+                         {txt}Conduit Rental {c |}  {res}28,551,174.32                                
+               {txt}Developer Agreement Fees {c |}               {res}            0.00                
+                {txt}Earnings on Investments {c |}           {res}0.00                                
+            {txt}Expressway Air Space Leases {c |}           {res}0.00                                
+          {txt}Fallsway Private Tow - Rebate {c |}           {res}0.00                                
+        {txt}From (To) Fleet Operations Fund {c |}           {res}0.00                                
+                 {txt}From (To) Fund Balance {c |}           {res}0.00                                
+                 {txt}From (To) General Fund {c |}           {res}0.00                                
+           {txt}From Parking Enterprise Fund {c |}  {res}52,923,480.02                                
+                          {txt}Garage Income {c |}  {res}27,638,690.63                                
+               {txt}General Revenue Highways {c |}           {res}0.00                                
+                              {txt}Hotel Tax {c |}  {res}32,985,925.29                                
+                        {txt}Impounding Cars {c |}               {res}            0.00                
+      {txt}Industrial Waste Surcharge - City {c |}   {res}5,851,673.51                                
+                      {txt}Interest on Loans {c |}           {res}0.00                                
+              {txt}MTA Bus Shelter Agreement {c |}           {res}0.00                                
+       {txt}Metered Water - Baltimore County {c |}  {res}64,927,947.79                                
+                   {txt}Metered Water - City {c |} {res}113,663,901.43                                
+          {txt}Metered Water - Howard County {c |}  {res}23,595,697.81                                
+                  {txt}Miscellaneous Revenue {c |}           {res}0.00                                
+                {txt}Open Air Garage Permits {c |}     {res}826,214.30                                
+                 {txt}Overhead Reimbursement {c |}           {res}0.00                                
+                          {txt}Parking Fines {c |}  {res}13,471,457.94                                
+                        {txt}Parking Garages {c |}               {res}    5,346,311.96                
+           {txt}Parking Garages and Lots Tax {c |}  {res}31,860,653.51                                
+                         {txt}Parking Meters {c |}  {res}14,537,289.60                                
+                              {txt}Penalties {c |}   {res}3,406,216.51                                
+             {txt}Penalties on Parking Fines {c |}               {res}                    4,863,312.74
+{txt}Permits and Inspection - Private Paving {c |}           {res}0.00                                
+                     {txt}Prior Year Reserve {c |}           {res}0.00                                
+        {txt}Private Fire Protection Service {c |}   {res}1,338,857.13                                
+           {txt}Pulaski Private Tow - Rebate {c |}           {res}0.00                                
+                        {txt}Red Light Fines {c |}               {res}                            0.00
+                     {txt}Rental of Property {c |}           {res}0.00                                
+            {txt}Residential Parking Permits {c |}     {res}608,688.40                                
+                {txt}Right Turn On Red Fines {c |}               {res}                            0.00
+ {txt}Sanitation and Waste Removal - General {c |}   {res}1,449,225.83                                
+                {txt}Sewerage Charges - City {c |} {res}200,046,842.94                                
+            {txt}Sewerage Charges - Counties {c |}  {res}63,361,160.21                                
+                          {txt}Speed Cameras {c |}               {res}            0.00                
+            {txt}State Highway User Revenues {c |}           {res}0.00                                
+                         {txt}Stormwater Fee {c |}               {res}   29,499,905.66                
+   {txt}Stormwater and Sediment Control Fees {c |}           {res}0.00                                
+{txt}Stormwater and Sediment Control Penalty {c |}               {res}                            0.00
+                       {txt}Street Cut Fines {c |}               {res}                            0.00
+                 {txt}Street Cut Permit Fees {c |}               {res}            0.00                
+                 {txt}Temporary Parking Lots {c |}     {res}171,842.70                                
+                    {txt}Traffic Engineering {c |}           {res}0.00                                
+{txt}{hline 40}{c BT}{hline 47}
+
+{com}. 
+.         
+. * Top ten largest fines + top ten larges fees in 2018 
+. 
+. table revenue_account_disc fine_fee_tag if fine_fee_tag != 0 &                                  ///
+>                                                                                   fund_number == "A001" &                               ///
+>                                                                                   type_rank < 11 &                                              ///
+>                                                                                   fiscal_year == 2018,                                  ///
+>         c(sum amount) format(%14.2fc)   
+
+{txt}{hline 37}{c TT}{hline 31}
+                                     {c |}          fine_fee_tag         
+                    Revenue Accounts {c |}            Fee            Fine
+{hline 37}{c +}{hline 31}
+                    Bad Check Charge {c |}               {res}       43,221.31
+       {txt}Building Construction Permits {c |}   {res}3,340,241.50                
+              {txt}Cable TV Franchise Fee {c |}   {res}6,770,210.20                
+   {txt}Charges for Central City Services {c |}  {res}14,257,675.93                
+                     {txt}Civil Citations {c |}               {res}       11,539.00
+   {txt}Environmental Control Board Fines {c |}               {res}    6,009,976.49
+      {txt}Filing Fees - Building Permits {c |}   {res}4,224,263.49                
+{txt}Forfeitures Drug/Gambling Contraband {c |}               {res}    1,816,276.41
+           {txt}Impounding Cars - Storage {c |}   {res}5,992,640.83                
+            {txt}Impounding Cars - Towing {c |}   {res}2,786,766.00                
+      {txt}Landfill Disposal Tipping Fees {c |}   {res}7,000,037.07                
+                       {txt}Library Fines {c |}               {res}      172,019.39
+                  {txt}Liquor Board Fines {c |}               {res}      235,149.91
+             {txt}Minimum Wage Violations {c |}               {res}      141,647.50
+                     {txt}Red Light Fines {c |}               {res}    6,311,599.84
+       {txt}Rental Property Registrations {c |}   {res}5,118,428.91                
+    {txt}Sheriff - District Court Service {c |}   {res}5,279,715.94                
+                     {txt}Sheriff Revenue {c |}               {res}      168,628.88
+               {txt}Solid Waste Surcharge {c |}   {res}2,536,283.24                
+                       {txt}Speed Cameras {c |}               {res}    9,626,108.56
+{txt}{hline 37}{c BT}{hline 31}
+
+{com}.         
+. * Table showing the drop in speeding camera revenue in 2014 through 2017
+. 
+. table fiscal_year if revenue_account_disc == "Speed Cameras" &                                  ///
+>         fund_number == "A001", c(sum amount sum fund_share) format(%14.2fc) 
+
+{txt}{hline 10}{c TT}{hline 31}
+fiscal_ye {c |}
+ar        {c |}    sum(amount)  sum(fund_sh~e)
+{hline 10}{c +}{hline 31}
+     2003 {c |}           {res}0.00            0.00
+     {txt}2004 {c |}           {res}0.00            0.00
+     {txt}2005 {c |}           {res}0.00            0.00
+     {txt}2006 {c |}           {res}0.00            0.00
+     {txt}2007 {c |}           {res}0.00            0.00
+     {txt}2008 {c |}           {res}0.00            0.00
+     {txt}2009 {c |}           {res}0.00            0.00
+     {txt}2010 {c |}   {res}2,449,194.00            0.16
+     {txt}2011 {c |}  {res}16,701,607.00            1.08
+     {txt}2012 {c |}  {res}20,242,940.00            1.27
+     {txt}2013 {c |}  {res}13,468,494.00            0.84
+     {txt}2014 {c |}   {res}1,271,392.00            0.08
+     {txt}2015 {c |}     {res}325,458.00            0.02
+     {txt}2016 {c |}      {res}80,786.00            0.00
+     {txt}2017 {c |}      {res}75,771.70            0.00
+     {txt}2018 {c |}   {res}9,626,108.56            0.51
+{txt}{hline 10}{c BT}{hline 31}
+
+{com}. 
+.         
+. * Figure showing revenue by source for 2018
+. graph bar (sum) amount_mil if fund_number == "A001" & fiscal_year == 2018,              ///
+>         over(fine_fee_tag) blabel(bar, format(%14.0fc))                                                         ///
+>         ylabel(, format(%14.0fc))                                                                                                       ///
+>         ytitle(Revenue in Millions)                                                                                             ///                                                                                             
+>         title("2018 General Fund Revenue") 
+{res}{txt}
+{com}. graph export "revenue_generalfund_bysource.pdf", replace
+{txt}(file /Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/Revenue/revenue_generalfund_bysource.pdf written in PDF format)
+
+{com}. 
+. 
+. * Figure showing revenue by source for 2018
+. graph bar (sum) amount if fiscal_year > 2007 &                                                          ///
+>         revenue_account_disc == "Environmental Control Board Fines" ,                           ///
+>         over(fiscal_year)                                       ///
+>         ylabel(, format(%14.0fc))                                                                                                       ///
+>         ytitle(General Fund Revenue)                                                                                            ///                                                                                             
+>         title("Environmental Control Board Fines") 
+{res}{txt}
+{com}. graph export "ECB_revenue.pdf", replace
+{txt}(file /Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/Revenue/ECB_revenue.pdf written in PDF format)
+
+{com}. 
+. * Table showing library fine amounts over time. 
+. 
+. table fiscal_year if revenue_account_disc == "Library Fines",                                   ///
+>         c(sum amount sum fund_share) format(%14.2fc) 
+
+{txt}{hline 10}{c TT}{hline 31}
+fiscal_ye {c |}
+ar        {c |}    sum(amount)  sum(fund_sh~e)
+{hline 10}{c +}{hline 31}
+     2003 {c |}     {res}208,017.00            0.02
+     {txt}2004 {c |}     {res}168,825.00            0.01
+     {txt}2005 {c |}     {res}325,339.00            0.02
+     {txt}2006 {c |}     {res}259,028.00            0.02
+     {txt}2007 {c |}     {res}246,390.00            0.02
+     {txt}2008 {c |}     {res}235,454.00            0.02
+     {txt}2009 {c |}     {res}261,868.00            0.02
+     {txt}2010 {c |}     {res}215,789.00            0.01
+     {txt}2011 {c |}     {res}217,798.00            0.01
+     {txt}2012 {c |}     {res}188,074.00            0.01
+     {txt}2013 {c |}     {res}152,876.00            0.01
+     {txt}2014 {c |}     {res}249,248.00            0.01
+     {txt}2015 {c |}     {res}183,111.00            0.01
+     {txt}2016 {c |}     {res}206,802.00            0.01
+     {txt}2017 {c |}     {res}230,956.40            0.01
+     {txt}2018 {c |}     {res}172,019.39            0.01
+{txt}{hline 10}{c BT}{hline 31}
+
+{com}.         
+. graph export 2018_revenue_bar.pdf, replace
+{txt}(file /Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/Revenue/2018_revenue_bar.pdf written in PDF format)
+
+{com}. 
+. clear
+{txt}
+{com}. 
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/Revenue/revenue_results_log.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res} 5 May 2019, 16:04:24
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

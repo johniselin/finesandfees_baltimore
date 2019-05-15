@@ -1,9 +1,9 @@
 {smcl}
 {com}{sf}{ul off}{txt}{.-}
       name:  {res}<unnamed>
-       {txt}log:  {res}/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/logs/parking_results_log.smcl
+       {txt}log:  {res}/Users/johniselin/finesandfees_baltimore/logs/parking_results_log.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res} 2 May 2019, 16:44:20
+ {txt}opened on:  {res}15 May 2019, 13:20:00
 {txt}
 {com}. 
 . use "data_cleaned/parking_citations_cleaned.dta"
@@ -1109,9 +1109,9 @@ open_fine_~t {c |}{res}  3,062,330    24.21725    42.58846          0        502
 {txt}
 {com}. log close
       {txt}name:  {res}<unnamed>
-       {txt}log:  {res}/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/open_data/logs/parking_results_log.smcl
+       {txt}log:  {res}/Users/johniselin/finesandfees_baltimore/logs/parking_results_log.smcl
   {txt}log type:  {res}smcl
- {txt}closed on:  {res} 2 May 2019, 16:44:59
+ {txt}closed on:  {res}15 May 2019, 13:20:25
 {txt}{.-}
 {smcl}
 {txt}{sf}{ul off}

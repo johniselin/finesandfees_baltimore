@@ -1,0 +1,529 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/Revenue/revenue_setup_log.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res} 5 May 2019, 16:04:18
+{txt}
+{com}.  
+. 
+. import excel "Actual Revenue by Account (FY 2003-FY2018).xlsx", /// 
+>         sheet("Actuals Data") cellrange(A2:S364) firstrow
+{res}{txt}
+{com}. 
+. sum
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 8}Fund {c |}{res}          0
+{txt}{space 6}Legacy {c |}{res}          0
+{txt}RevenueAcc~s {c |}{res}          0
+{txt}{space 6}FY2003 {c |}{res}        343     4840855    2.84e+07  -3.20e+07   4.14e+08
+{txt}{space 6}FY2004 {c |}{res}        343     5019440    2.92e+07  -3.15e+07   4.28e+08
+{txt}{hline 13}{c +}{hline 57}
+{space 6}FY2005 {c |}{res}        343     5407310    3.16e+07  -3.58e+07   4.50e+08
+{txt}{space 6}FY2006 {c |}{res}        349     5793214    3.40e+07  -3.68e+07   4.83e+08
+{txt}{space 6}FY2007 {c |}{res}        348     6014909    3.63e+07  -3.69e+07   5.24e+08
+{txt}{space 6}FY2008 {c |}{res}        348     6198965    3.94e+07  -6.70e+07   5.94e+08
+{txt}{space 6}FY2009 {c |}{res}        348     6166530    4.36e+07  -1.09e+08   6.99e+08
+{txt}{hline 13}{c +}{hline 57}
+{space 6}FY2010 {c |}{res}        348     6005221    4.66e+07  -1.47e+08   7.87e+08
+{txt}{space 6}FY2011 {c |}{res}        348     5996185    4.81e+07  -1.43e+08   8.15e+08
+{txt}{space 6}FY2012 {c |}{res}        353     6062873    4.67e+07  -1.18e+08   7.90e+08
+{txt}{space 6}FY2013 {c |}{res}        353     5728071    4.47e+07  -9.33e+07   7.55e+08
+{txt}{space 6}FY2014 {c |}{res}        353     6087586    4.46e+07  -6.58e+07   7.43e+08
+{txt}{hline 13}{c +}{hline 57}
+{space 6}FY2015 {c |}{res}        353     6175130    4.52e+07  -5.52e+07   7.51e+08
+{txt}{space 6}FY2016 {c |}{res}        359     6747854    4.75e+07  -6.44e+07   7.81e+08
+{txt}{space 6}FY2017 {c |}{res}        361     6351012    4.85e+07  -4.91e+07   8.16e+08
+{txt}{space 6}FY2018 {c |}{res}        362     6844650    5.11e+07  -5.29e+07   8.52e+08
+{txt}
+{com}. de
+
+{txt}Contains data
+  obs:{res}           362                          
+{txt} vars:{res}            19                          
+{txt} size:{res}        49,594                          
+{txt}{hline}
+              storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:Fund           }{txt}{bind: str4    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}Fund{p_end}
+{p 0 48}{bind:Legacy         }{txt}{bind: str8    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}Legacy{p_end}
+{p 0 48}{bind:RevenueAccounts}{txt}{bind: str53   }{bind:{txt}%53s      }{space 1}{bind:         }{bind:  }{res}{res}Revenue Accounts{p_end}
+{p 0 48}{bind:FY2003         }{txt}{bind: long    }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}FY 2003{p_end}
+{p 0 48}{bind:FY2004         }{txt}{bind: long    }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}FY 2004{p_end}
+{p 0 48}{bind:FY2005         }{txt}{bind: long    }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}FY 2005{p_end}
+{p 0 48}{bind:FY2006         }{txt}{bind: long    }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}FY 2006{p_end}
+{p 0 48}{bind:FY2007         }{txt}{bind: long    }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}FY 2007{p_end}
+{p 0 48}{bind:FY2008         }{txt}{bind: long    }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}FY 2008{p_end}
+{p 0 48}{bind:FY2009         }{txt}{bind: long    }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}FY 2009{p_end}
+{p 0 48}{bind:FY2010         }{txt}{bind: long    }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}FY 2010{p_end}
+{p 0 48}{bind:FY2011         }{txt}{bind: long    }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}FY 2011{p_end}
+{p 0 48}{bind:FY2012         }{txt}{bind: long    }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}FY 2012{p_end}
+{p 0 48}{bind:FY2013         }{txt}{bind: long    }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}FY 2013{p_end}
+{p 0 48}{bind:FY2014         }{txt}{bind: long    }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}FY 2014{p_end}
+{p 0 48}{bind:FY2015         }{txt}{bind: long    }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}FY 2015{p_end}
+{p 0 48}{bind:FY2016         }{txt}{bind: long    }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}FY 2016{p_end}
+{p 0 48}{bind:FY2017         }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}FY 2017{p_end}
+{p 0 48}{bind:FY2018         }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}FY 2018{p_end}
+{txt}{hline}
+Sorted by: 
+{res}     Note: Dataset has changed since last saved.
+{txt}
+{com}. 
+. ** Convert fully to long format
+. 
+. gen id = _n
+{txt}
+{com}. 
+. reshape long FY, i(id) j(fiscal_year)
+{txt}(note: j = 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018)
+
+Data{col 36}wide{col 43}->{col 48}long
+{hline 77}
+Number of obs.                 {res}     362   {txt}->{res}    5792
+{txt}Number of variables            {res}      20   {txt}->{res}       6
+{txt}j variable (16 values)                    ->   {res}fiscal_year
+{txt}xij variables:
+               {res}FY2003 FY2004 ... FY2018   {txt}->   {res}FY
+{txt}{hline 77}
+
+{com}. 
+. 
+. ** Clean 
+. 
+. rename Fund fund_number
+{res}{txt}
+{com}. rename Legacy legacy_number 
+{res}{txt}
+{com}. rename RevenueAccounts revenue_account_disc 
+{res}{txt}
+{com}. rename FY amount
+{res}{txt}
+{com}. 
+. gen fund_disc = ""
+{txt}(5,792 missing values generated)
+
+{com}. replace fund_disc = "General Fund" if fund_number == "A001"
+{txt}variable {bf}fund_disc{sf} was {bf}{res}str1{sf}{txt} now {bf}{res}str12{sf}
+{txt}(4,208 real changes made)
+
+{com}. replace fund_disc = "Convention Center Bond Fund" if fund_number == "B022" 
+{txt}variable {bf}fund_disc{sf} was {bf}{res}str12{sf}{txt} now {bf}{res}str27{sf}
+{txt}(32 real changes made)
+
+{com}. replace fund_disc = "Conduit Enterprise Fund" if fund_number == "B024" 
+{txt}(80 real changes made)
+
+{com}. replace fund_disc = "Waste Water Utility Fund" if fund_number == "B070" 
+{txt}(224 real changes made)
+
+{com}. replace fund_disc = "Water Utility Fund" if fund_number == "B071"  
+{txt}(304 real changes made)
+
+{com}. replace fund_disc = "Stormwater Utility Fund" if fund_number == "B072"  
+{txt}(112 real changes made)
+
+{com}. replace fund_disc = "Unknown" if fund_number == "B073" 
+{txt}(112 real changes made)
+
+{com}. replace fund_disc = "Parking Enterprise Fund" if fund_number == "B075" 
+{txt}(160 real changes made)
+
+{com}. replace fund_disc = "Parking Management Fund" if fund_number == "B076" 
+{txt}(160 real changes made)
+
+{com}. replace fund_disc = "Unknown" if fund_number == "C001" 
+{txt}(400 real changes made)
+
+{com}. 
+. gen amount_missing = 1 if amount == .
+{txt}(5,612 missing values generated)
+
+{com}. replace amount_missing = 0 if amount != .
+{txt}(5,612 real changes made)
+
+{com}. replace amount = 0 if amount == .
+{txt}(180 real changes made)
+
+{com}. 
+. gen fine_fee_tag = 0
+{txt}
+{com}. 
+. ** Fine or fee related legacy_numb
+.         
+. replace fine_fee_tag = 1 if legacy_number == "A001-120" /*      City/State Business */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-122" /*      Alcoholic Beverage */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-123" /*      Marriage */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-127" /*      Cable TV Franchise Fee */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-128" /*      Fire Prevention - Fire Code */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-129" /*  Rental Property Registrations */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-130" /*  Multiple Family Dwelling Permits */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-131" /*      Miscellaneous Building Inspection Revenue */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-132" /*      Building Construction Permits */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-133" /*      Electrical Installation Permits */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-134" /*      Mechanical Equipment Permits */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-135" /*      Plumbing Permits */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-136" /*      Elevator Permits */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-137" /*      Filing Fees - Building Permits */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-138" /*      Alarm System Registration Permits */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-139" /*      Public Assembly Permits */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-140" /*      Professional and Occupational Licenses */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-141" /*      Vacant Structure Fee */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-143" /*      Amusement Device Licenses */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-145" /*      Dog Licenses and Kennel Permits */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-146" /*      Special Police Appointment Fees */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-149" /*      Vacant Lot Registration Fees */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-150" /*      Trades Licenses */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-151" /*      Food Dealer Permits */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-152" /*      Swimming Pool Licenses */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-154" /*      Solid Waste Collection Permits */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-163" /*      Minor Privilege Permits */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-164" /*      Public Utility Pole Permits */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-166" /*      Telephone Conduit Franchise */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-169" /*      Permits and Inspections - Private Paving */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-170" /*      Development Agreement Fee */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-171" /*      Street Cut Permits */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-173" /*      Special Events Permits */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 2 if legacy_number == "A001-177" /*      Court-Ordered Restitution and Misc Fines */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 2 if legacy_number == "A001-178" /*      Civil Citations */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 2 if legacy_number == "A001-179" /*      Sheriff Revenue */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 2 if legacy_number == "A001-180" /*      Forfeitures Drug/Gambling Contraband */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 2 if legacy_number == "A001-181" /*      Minimum Wage Violations */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 2 if legacy_number == "A001-182" /*      Environmental Control Board Fines */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 2 if legacy_number == "A001-185" /*      Bad Check Charge */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 2 if legacy_number == "A001-186" /*      District Court Housing Fines */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 2 if legacy_number == "A001-187" /*      Liquor Board Fines */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 2 if legacy_number == "A001-188" /*      Library Fines */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 2 if legacy_number == "A001-189" /*      Stormwater and Sediment Control Penalties */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 2 if legacy_number == "A001-190" /*      Street Cut Fines */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 2 if legacy_number == "A001-191" /*      Red Light Fines */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 2 if legacy_number == "A001-192" /*      Right Turn on Red Fines */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 2 if legacy_number == "A001-193" /*      Speed Cameras */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 2 if legacy_number == "A001-194" /*      Commercial Truck Enforcement */
+{txt}(0 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-617" /*      Emergency Repairs - Contractors' Fees */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-618" /*      Transcriber Service Charges */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-620" /*      RBDL Administration Fee */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-621" /*      Bill Drafting Service */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-623" /*      Zoning Appeal Fees */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-624" /*      Rehab Loan Application Fees */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-628" /*      Civil Marriage Ceremonies */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-632" /*      Lien Reports */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-633" /*      Election Filing Fees */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-634" /*      Surveys Sales of Maps and Records */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-635" /*      Telephone Commissions */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-636" /*      3rd Party Disability Recoveries */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-637" /*      Open Enrollment Expense Reimbursement */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-638" /*      Semi - Annual Tax Payment Fee */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-639" /*      Tax Roll Service Charge */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-640" /*      Audit Fees - Comptroller's Office */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-643" /*      Reimbursable Billing Costs */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-648" /*      Sub-division Plat Charges */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-649" /*      Vending Machine Commissions */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-651" /*      Reimbursement for Use of City Vehicles */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-654" /*      Charges for Central City Services */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-656" /*      Animal Shelter Sales and Charges */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-657" /*      Liquor Board Advertising Fees */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-659" /*      Sale of Accident and Incident Reports */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-660" /*      Stadium Security Service Charges */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-661" /*      Port Fire Protection (MPA) */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-662" /*      Sheriff - District Court Service */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-663" /*      False Alarm Fees */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-664" /*      Fire Dept - Sales of Reports */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-665" /*      Fire Ambulance Stadium Services */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-666" /*      Child Support Enforcement */
+{txt}(0 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-667" /*      Fire Department Employment Application Fee */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-668" /*      Deputy Sheriff Enforcement */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-669" /*      Federal Marshall Service */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-670" /*      Police Sporting Events Fee */
+{txt}(0 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-680" /*      Miscellaneous Environmental Fees */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-681" /*      Air Quality Fees (1989, Ordinance #323) */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-754" /*      Waxter Center Memberships */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-773" /*      Video Rental and Other Charges */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-777" /*      Swimming Pool Passes */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-778" /*      General Recreation and Culture Charges */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-785" /*      Impounding Cars - Storage */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-787" /*      Impounding Cars - Towing */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-790" /*      Stormwater and Sediment Control Fees */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-795" /*      Landfill Disposal Tipping Fees */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-797" /*      Solid Waste Surcharge */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-800" /*      Bulk Trash Collection */
+{txt}(0 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "A001-865" /*      Vacat Struct & Boarding Fees */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 2 if legacy_number == "B070-838" /*      Non - Compliance Fines   */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "B072-790" /*      Stormwater Management Fee */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "B072-825" /*      Stormwater Fee */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 2 if legacy_number == "B075-182" /*      Penalties on Parking Fines */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "B076-760" /*      Parking Garages */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "B076-866" /*      Booting Fee */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "C001-170" /*      Developer Agreement Fees */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "C001-171" /*      Street Cut Permit Fees */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 2 if legacy_number == "C001-175" /*      Stormwater and Sediment Control Penalty */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 2 if legacy_number == "C001-176" /*      Street Cut Fines */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 2 if legacy_number == "C001-180" /*      Red Light Fines */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 2 if legacy_number == "C001-181" /*      Right Turn On Red Fines */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "C001-182" /*      Speed Cameras */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 2 if legacy_number == "C001-652" /*      Impounding Cars */
+{txt}(16 real changes made)
+
+{com}. replace fine_fee_tag = 1 if legacy_number == "C001-652" /*      Stormwater and Sediment Control Fees */
+{txt}(16 real changes made)
+
+{com}. 
+.         
+. sort fiscal_year fund_number    
+{txt}
+{com}. by fiscal_year fund_number : egen rank = rank(-amount)
+{txt}
+{com}. by fiscal_year fund_number: egen total = total(amount)
+{txt}
+{com}. gen fund_share = amount / total * 100
+{txt}(209 missing values generated)
+
+{com}. drop total
+{txt}
+{com}. 
+. sort fiscal_year fund_number fine_fee_tag 
+{txt}
+{com}. by fiscal_year fund_number fine_fee_tag : egen type_rank = rank(-amount)
+{txt}
+{com}. 
+. gen amount_mil = amount / 1000000       
+{txt}
+{com}. 
+. label define finefee 0 "Neither" 1 "Fee" 2 "Fine"
+{txt}
+{com}. label values fine_fee_tag finefee
+{txt}
+{com}. 
+. save fy03_to_fy18_historic_rev.dta, replace
+{txt}file fy03_to_fy18_historic_rev.dta saved
+
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}/Users/johniselin/Google Drive/IPA Fines and Fees Group Folder/Resources/Data/Revenue/revenue_setup_log.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res} 5 May 2019, 16:04:19
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}
