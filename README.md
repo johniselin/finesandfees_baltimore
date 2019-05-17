@@ -2,7 +2,7 @@
 
 ## Introduction 
 
-This repository holds the stata code used to analyze data from the City of Baltimore on data related to fines. 
+This repository holds the instructions and Stata code used to analyze the effects of fines and fees on Baltimore residents.
 
 Cities and counties across the country have found that fines and fees criminalize poverty and reinforce racial and socioeconomic inequities in their communities. In this report, we outline findings from Baltimore City departments that interact with fines and fees, as well as community partners on the impact of fines and fees in Baltimore. We conclude that:
 * Fines and fees in Baltimore have a disproportionate impact on Black communities.
